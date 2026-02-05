@@ -4,7 +4,7 @@
 Define the conversion funnel and backend contracts: apply flow, Stripe checkout, referral codes, and admin tooling.
 
 ## Inputs
-- Phase 3a/3b offer + pricing decisions.
+- `docs/phase-3/offer-brief.md` + `docs/phase-3/ia-copy-spec.md` (offer + pricing decisions).
 - Referral program details in `Plans/plan.md`.
 
 ## Locked Decisions (from RED TEAM)
@@ -14,6 +14,10 @@ Define the conversion funnel and backend contracts: apply flow, Stripe checkout,
 | Funnel model | **Apply → $500 deposit → remainder at check-in** |
 | Currency | **USD** |
 | Refund policy | **Full refund if unsatisfied, no questions asked** |
+| Backend | **Supabase Postgres + Prisma ORM** |
+| Admin gating | **Basic auth (server-only DB access)** |
+| Referral payouts | **None for pilot (discount only)** |
+| Remainder capture | **Authorize at check-in, capture after event for Day 1 attendees** |
 
 ### Pricing Structure
 - List price: **$1,500 USD**
@@ -47,8 +51,25 @@ Define the conversion funnel and backend contracts: apply flow, Stripe checkout,
    - Basic auth; list seats; track deposit/remainder status; export CSV; referral stats.
 
 ## Output
-- End-to-end funnel spec with field list and webhook sequence.
+- `docs/phase-3/funnel-spec.md` end-to-end funnel spec with field list and webhook sequence.
 
 ## Handoff
-Pass to Phase 3e (ops assets) and Phase 3f (QA/deploy).
+Pass `docs/phase-3/funnel-spec.md` to Phase 3e (ops assets) and Phase 3f (QA/deploy).
 
+## Validation (RED TEAM)
+- Field list includes deposit + remainder status, refund status, referral attribution, and seat status.
+- Webhook sequence includes idempotency keys and refund handling.
+- Admin access is explicitly gated (basic auth or allowlist).
+
+## Assumptions / Open Questions (RED TEAM)
+None currently.
+
+## Progress This Turn (Terminus Maximus)
+- Work done:
+  - Drafted `docs/phase-3/funnel-spec.md` with apply flow, Stripe deposit + manual capture remainder, Prisma data model, and admin surfaces.
+- Commands run:
+  - `cat <<'EOF' > docs/phase-3/funnel-spec.md` — pass
+- Blockers:
+  - None.
+- Next concrete steps:
+  - Begin Phase 3e to produce ops + GTM asset pack.

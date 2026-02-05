@@ -5,6 +5,7 @@ Cover the operational deliverables required to run and scale the pilot, as speci
 
 ## Inputs
 - `Plans/plan.md` (agenda/run-of-show, prework, referral program, outreach, content capture, post-event loop).
+- `docs/phase-3/offer-brief.md` (tone + pricing + guardrails).
 
 ## Work
 1. **Agenda / run‑of‑show**
@@ -23,8 +24,21 @@ Cover the operational deliverables required to run and scale the pilot, as speci
    - Survey, testimonial harvesting, and LinkedIn post request.
 
 ## Output
-- A minimal but complete ops asset pack ready to produce.
+- `docs/phase-3/ops-gtm-assets.md` minimal ops asset pack ready to produce.
 
 ## Handoff
-Pass to Phase 3f for QA/deploy alignment and ensure assets map back to site copy.
+Pass `docs/phase-3/ops-gtm-assets.md` to Phase 3f for QA/deploy alignment and ensure assets map back to site copy.
 
+## Validation (RED TEAM)
+- Asset pack includes agenda, prework, pod workflow, referral copy, outreach sequence, content capture, and post-event loop.
+- Copy tone matches premium/no-hype guardrails from the offer brief.
+
+## Progress This Turn (Terminus Maximus)
+- Work done:
+  - Drafted `docs/phase-3/ops-gtm-assets.md` with agenda, prework, referral copy, outreach, content capture, and post-event loop.
+- Commands run:
+  - `cat <<'EOF' > docs/phase-3/ops-gtm-assets.md` — pass
+- Blockers:
+  - None.
+- Next concrete steps:
+  - Begin Phase 3f to produce QA + deployment checklist.

@@ -28,8 +28,31 @@ Reduce `Plans/plan.md` into a single canonical offer brief the site and funnel a
    - 2‑day format (~12 hours total), pods of 3–4, no alcohol, hands‑on build blocks.
 
 ## Output
-- A canonical offer brief (structured outline) with any “TBD” explicitly marked and owner assigned.
+- `docs/phase-3/offer-brief.md` canonical offer brief (structured outline) with all TBDs explicitly marked and owners assigned.
 
 ## Handoff
-Pass the offer brief to Phase 3b for IA + copy.
+Pass `docs/phase-3/offer-brief.md` to Phase 3b for IA + copy.
 
+## Validation
+- Confirm `docs/phase-3/offer-brief.md` includes the locked decisions (name, dates, currency) and marks all open items as TBD with owners.
+
+## Progress This Turn (Terminus Maximus)
+- Work done:
+  - Drafted canonical offer brief in `docs/phase-3/offer-brief.md` using Phase 3 locked decisions + `Plans/plan.md` constraints.
+- Commands run:
+  - `mkdir -p docs/phase-3` — pass
+  - `cat <<'EOF' > docs/phase-3/offer-brief.md` — pass
+- Blockers:
+  - None.
+- Next concrete steps:
+  - Begin Phase 3b by deriving the anchor map + section specs from the offer brief.
+
+## Progress This Turn (Terminus Maximus)
+- Work done:
+  - Locked seat cap to 50 and added location/instructor details in `docs/phase-3/offer-brief.md`.
+- Commands run:
+  - `apply_patch` — pass
+- Blockers:
+  - None.
+- Next concrete steps:
+  - Update any landing copy sections that referenced seat cap or instructor as TBD (Phase 3b).

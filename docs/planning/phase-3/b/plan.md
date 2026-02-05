@@ -4,7 +4,7 @@
 Define the `/` page structure and all copy/asset requirements with direct mapping to the canonical offer brief.
 
 ## Inputs
-- Phase 3a offer brief.
+- `docs/phase-3/offer-brief.md` (Phase 3a output).
 - `Plans/plan.md` (landing page wireframe + objections).
 
 ## Work
@@ -20,8 +20,31 @@ Define the `/` page structure and all copy/asset requirements with direct mappin
    - Subtle mention near pricing/apply if desired; no “coupon vibes.”
 
 ## Output
-- IA + copy/asset spec mapped to components.
+- `docs/phase-3/ia-copy-spec.md` IA + copy/asset spec mapped to components.
 
 ## Handoff
-Pass to Phase 3c for design/motion alignment.
+Pass `docs/phase-3/ia-copy-spec.md` to Phase 3c for design/motion alignment.
 
+## Validation (RED TEAM)
+- Every anchor section lists: headline, subhead, bullets, CTA, supporting media, proof placeholders.
+- Pricing + refund language matches `docs/phase-3/offer-brief.md` without overpromising.
+
+## Progress This Turn (Terminus Maximus)
+- Work done:
+  - Drafted `docs/phase-3/ia-copy-spec.md` with full anchor map, section copy, pricing mechanics, and FAQ aligned to the offer brief.
+- Commands run:
+  - `cat <<'EOF' > docs/phase-3/ia-copy-spec.md` — pass
+- Blockers:
+  - None.
+- Next concrete steps:
+  - Begin Phase 3c to define design tokens and motion rules using the IA spec.
+
+## Progress This Turn (Terminus Maximus)
+- Work done:
+  - Updated `docs/phase-3/ia-copy-spec.md` with seat cap (50), location visibility copy, and instructor bio quote.
+- Commands run:
+  - `apply_patch` — pass
+- Blockers:
+  - None.
+- Next concrete steps:
+  - Ensure funnel and QA docs reflect the finalized env var list and seat cap (Phase 3d/3f).

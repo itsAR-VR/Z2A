@@ -5,6 +5,7 @@ Define test coverage and deployment steps for a stable v1 launch.
 
 ## Inputs
 - Implemented site + funnel (post Phase 3b–3e).
+- `docs/phase-3/funnel-spec.md` + `docs/phase-3/ops-gtm-assets.md`.
 
 ## Work
 1. **Playwright checks**
@@ -21,9 +22,22 @@ Define test coverage and deployment steps for a stable v1 launch.
    - keyboard nav and focus states verified
 4. **Deploy checklist**
    - Vercel env vars
-   - Supabase schema + RLS (if used) or Prisma migration
+   - Supabase Postgres + Prisma schema/migrations
    - Stripe webhook secret + product/price setup
 
 ## Output
-- A runnable QA plan + deployment checklist for v1 launch.
+- `docs/phase-3/qa-deploy-checklist.md` runnable QA plan + deployment checklist for v1 launch.
 
+## Validation (RED TEAM)
+- Checklist includes Playwright + Stripe CLI smoke tests and required env vars.
+- Screenshot + motion review steps are explicit and reproducible.
+
+## Progress This Turn (Terminus Maximus)
+- Work done:
+  - Drafted `docs/phase-3/qa-deploy-checklist.md` with QA, Stripe CLI, and deploy requirements.
+- Commands run:
+  - `cat <<'EOF' > docs/phase-3/qa-deploy-checklist.md` — pass
+- Blockers:
+  - None.
+- Next concrete steps:
+  - Run Phase 3 review (lint/build/db:push) once implementation begins.
