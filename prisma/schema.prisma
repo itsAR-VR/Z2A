@@ -1,0 +1,118 @@
+generator client {
+  provider = "prisma-client"
+  // Prisma ORM v7 requires an explicit output path (client is no longer generated into node_modules).
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Persona {
+  PM_ADVANCED
+}
+
+enum ApplicationStatus {
+  submitted
+  approved
+  declined
+}
+
+enum SeatStatus {
+  reserved
+  attended_day1
+  attended_day2
+  no_show
+}
+
+enum DepositStatus {
+  unpaid
+  paid
+  refunded
+}
+
+enum RemainderStatus {
+  none
+  authorized
+  captured
+  canceled
+  refunded
+}
+
+enum ReferralCodeType {
+  network
+}
+
+model Attendee {
+  id        String   @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  firstName  String @map("first_name")
+  lastName   String @map("last_name")
+  email      String
+  roleTitle  String @map("role_title")
+  company    String?
+  linkedinUrl String? @map("linkedin_url")
+  useCase    String @db.Text @map("use_case")
+
+  persona     Persona @default(PM_ADVANCED)
+  networkCode String? @map("network_code")
+
+  applicationStatus ApplicationStatus @default(approved) @map("application_status")
+  seatStatus        SeatStatus        @default(reserved) @map("seat_status")
+
+  /// Amounts are stored as integer cents in the smallest currency unit (USD cents).
+  depositAmount  Int    @map("deposit_amount")
+  depositCurrency String @default("usd") @map("deposit_currency")
+  depositStatus  DepositStatus @default(unpaid) @map("deposit_status")
+  depositPaymentIntentId String? @map("deposit_payment_intent_id")
+  checkoutSessionId      String? @map("checkout_session_id")
+
+  remainderAmount  Int    @map("remainder_amount")
+  remainderCurrency String @default("usd") @map("remainder_currency")
+  remainderStatus  RemainderStatus @default(none) @map("remainder_status")
+  remainderPaymentIntentId String? @map("remainder_payment_intent_id")
+  remainderAuthorizedAt    DateTime? @map("remainder_authorized_at")
+  remainderCapturedAt      DateTime? @map("remainder_captured_at")
+
+  referralAttribution String? @map("referral_attribution")
+  internalNotes      String? @db.Text @map("internal_notes")
+
+  @@unique([email])
+  @@map("attendees")
+}
+
+model ReferralCode {
+  id        String   @id @default(uuid()) @db.Uuid
+  code      String   @unique
+  type      ReferralCodeType @default(network)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  auditLogs ReferralCodeAuditLog[]
+
+  @@map("referral_codes")
+}
+
+model ReferralCodeAuditLog {
+  id             String       @id @default(uuid()) @db.Uuid
+  referralCodeId String       @db.Uuid @map("referral_code_id")
+  referralCode   ReferralCode @relation(fields: [referralCodeId], references: [id], onDelete: Cascade)
+  action         String       // e.g. "created", "activated", "deactivated"
+  actor          String       // basic auth username
+  reason         String?      @db.Text
+  metadata       String?      @db.Text // JSON string for extra context
+  createdAt      DateTime     @default(now()) @map("created_at")
+
+  @@map("referral_code_audit_logs")
+}
+
+model StripeEvent {
+  id            String   @id @default(uuid()) @db.Uuid
+  stripeEventId String   @unique @map("stripe_event_id")
+  eventType     String   @map("event_type")
+  receivedAt    DateTime @default(now()) @map("received_at")
+
+  @@map("stripe_events")
+}

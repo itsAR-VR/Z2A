@@ -61,17 +61,23 @@ Type scale (mobile):
 
 ## Motion System
 
-### Global Rules
-- Use GSAP + Lenis for smooth scroll and reveal sequencing.
+### Global Rules (Phase 5 — Robust Stack)
+- **Lenis:** Desktop smooth scroll only. Disabled on mobile and reduced-motion.
+- **GSAP + ScrollTrigger:** Scroll-driven animations only (hero parallax, timeline progress, nav scroll spy).
+- **CSS + IntersectionObserver:** All reveals, hovers, menu, accordion transitions.
 - Default easing: `power3.out`
 - Base duration: 0.6s (text), 0.8s (cards), 1.2s (hero media)
 - Stagger: 0.08–0.12s for list/card groups
 
 ### Reduced Motion
-- Respect `prefers-reduced-motion`:
-  - Disable parallax, marquee, and scroll-triggered transforms.
-  - Keep simple opacity fades or no animation at all.
-  - Reduce durations to 0–0.15s.
+- Respect `prefers-reduced-motion` (non-negotiable):
+  - Lenis OFF — native browser scroll.
+  - ScrollTrigger OFF — elements at final state immediately.
+  - Parallax OFF.
+  - Marquee OFF or static.
+  - Reveals instant (opacity: 1 immediately) or minimal opacity fade only.
+  - Hover effects allowed (user-initiated).
+  - Accordion/menu transitions: instant.
 
 ### Performance Guardrails
 - No more than 2 simultaneous section-level animations.
@@ -88,6 +94,11 @@ Type scale (mobile):
 ### Why / Outcomes
 - Card group staggered reveal on scroll enter.
 - Icons scale from 0.98 → 1.0 for subtle pop.
+
+### Speakers (Phase 5 addition)
+- Speaker cards staggered reveal on scroll enter (0.1s delay between cards).
+- Card hover: subtle lift (translateY -4px) + shadow.
+- LinkedIn link underline expand on hover.
 
 ### How / Agenda
 - Timeline steps slide-in (x: -10px → 0).
@@ -111,3 +122,7 @@ Type scale (mobile):
 - `/tmp/site-analysis/` captures reviewed and palette adjusted if needed.
 - Reduced-motion works: no parallax, no marquee, no scroll transforms.
 - Motion never blocks interaction or delays CTA visibility.
+
+## Implementation Playbook
+- For a detailed, step-by-step execution checklist and micro-animation inventory, see:
+  - `docs/phase-3/ui-motion-implementation-playbook.md`

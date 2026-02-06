@@ -9,15 +9,16 @@
 - Tone: premium, practical, calm; no hype; no job/income guarantees.
 - Voice pattern: concrete verbs, in-person advantage, "designed to" language for outcomes.
 - Primary CTA label: "Apply / Reserve Seat".
-- Pricing language must match: $1,500 list / $1,000 network code; $500 deposit; remainder authorized at check-in and captured after event for Day 1 attendees; full refund if unsatisfied by end of Day 2.
+- Pricing language must match: $1,500 list / $1,000 network code; $100 deposit; remainder authorized at check-in and captured after event for Day 1 attendees; full refund if unsatisfied by end of Day 2.
 - Referral program: discount only; no cash payouts for pilot.
 - Seat cap: 50 attendees.
 - Location policy: exact location shared after registration.
-- Anchor nav: #top, #why, #outcomes, #how, #agenda, #pricing, #faq, #apply.
+- Anchor nav: #top, #why, #speakers, #outcomes, #how, #agenda, #pricing, #faq, #apply.
 
 ## Anchor Map
 - `#top` — Hero + primary CTA
 - `#why` — Why in-person + anti-hype rationale
+- `#speakers` — Instructor + guest speaker cards (Phase 5 addition)
 - `#outcomes` — What you leave with (designed to)
 - `#how` — Process overview (apply → deposit → prework → weekend → remainder capture)
 - `#agenda` — 2-day structure overview
@@ -43,7 +44,7 @@ Zero-to-Agent Toronto Pilot. Two days of hands-on build time in pods of 3–4, d
 **Secondary CTA:** Have a network code?
 
 **Support line (small):**
-Feb 28 - Mar 1, 2026 · Toronto · 50 seats · Deposit $500 to reserve a seat
+Feb 28 - Mar 1, 2026 · Toronto · 50 seats · Deposit $100 to reserve a seat
 
 **Location note (small):**
 Please register to see the exact location of this event.
@@ -70,11 +71,35 @@ The hard part isn’t knowing — it’s finishing.
 - Pods of 3–4 to keep momentum and accountability
 - Clear scope designed for a working demo in ~12 hours
 
-**Proof placeholder:**
-- “Most attendees leave with a demoable agent” (TBD — must be verified before use)
+**Proof line (Phase 5 update):**
+- "Attendees leave knowing how to build a production-ready enterprise-grade workflow that leverages AI agents to repeatably automate work."
 
 **Supporting media:**
 - Photo grid of pods + instructor feedback
+
+---
+
+### 2b) `#speakers` — Speakers (Phase 5 addition)
+**Goal:** Establish credibility through instructor and guest speaker credentials.
+
+**Headline:**
+Learn from builders, not lecturers.
+
+**Speaker Card 1 — Aadil Kazmi:**
+- **Label:** Instructor · Zero-to-Agent
+- **Bio:** Forbes 30 Under 30 Honoree. With experience spanning the founding of a Shopify-backed startup to leading AI deployments for Fortune 100 companies, including managing large-scale data pipelines at Amazon, he brings significant expertise across AI and supply chain execution.
+- **LinkedIn:** (profile link)
+- **Asset:** `/public/speakers/aadil-headshot.jpg`
+
+**Speaker Card 2 — Abdur:**
+- **Label:** Guest Speaker · Zero Risk Growth (cold2close.ai)
+- **Bio bullets:**
+  - 20 years old, high school dropout
+  - Started first AI startup at 16
+  - OpenAI award recipient: "Honored for passing 100 Billion Tokens"
+- **Content description:** Shares insights on scaling AI agent businesses from zero.
+- **LinkedIn:** (profile link)
+- **Assets:** `/public/speakers/abdur-headshot.jpg`, `/public/speakers/cold2close-logo.png`
 
 ---
 
@@ -104,7 +129,7 @@ Designed for hands-on builders who want a real system — not a slide deck.
 How the weekend works
 
 **Steps:**
-1) Apply and reserve your seat with a $500 deposit
+1) Apply and reserve your seat with a $100 deposit
 2) Complete short prework to pick your use case
 3) Build in pods with guided support
 4) Check in on Day 1 and authorize the remainder
@@ -144,11 +169,11 @@ Reserve with a deposit. Pay the remainder after the weekend.
 
 **Pricing cards:**
 - List price: $1,500 USD
-  - Deposit today: $500
-  - Remainder: $1,000 (authorized at check-in, captured after event for Day 1 attendees)
+  - Deposit today: $100
+  - Remainder: $1,400 (authorized at check-in, captured after event for Day 1 attendees)
 - Network code price: $1,000 USD
-  - Deposit today: $500
-  - Remainder: $500 (authorized at check-in, captured after event for Day 1 attendees)
+  - Deposit today: $100
+  - Remainder: $900 (authorized at check-in, captured after event for Day 1 attendees)
 
 **Refund copy:**
 Full refund if unsatisfied by end of Day 2, no questions asked. Refunds issued within 7 days.

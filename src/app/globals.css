@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+/* ─── Design Tokens ─── */
+@theme {
+  --font-heading: "Sora", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --color-bg-900: #0B0B0B;
+  --color-bg-850: #111111;
+  --color-bg-800: #171717;
+  --color-text-100: #F5F5F0;
+  --color-text-300: #CFCFC9;
+  --color-text-500: #9A9A94;
+  --color-accent-500: #21E27C;
+  --color-accent-600: #1BC96A;
+  --color-border-700: #2A2A2A;
+  --color-error: #EF4444;
+}
+
+/* ─── Base Resets ─── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg-900);
+  color: var(--color-text-100);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Reduced motion: instant scroll, no transitions */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Typography Utilities ─── */
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* ─── Section Layout ─── */
+.section-padding {
+  padding-top: 96px;
+  padding-bottom: 96px;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+}
+
+.container-content {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+@media (max-width: 768px) {
+  .container-content {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* ─── Scrollbar Styling ─── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-900);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-700);
+  border-radius: 3px;
+}
+
+/* ─── Selection ─── */
+::selection {
+  background: var(--color-accent-500);
+  color: var(--color-bg-900);
+}
