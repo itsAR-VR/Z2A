@@ -1,7 +1,7 @@
 # Zero-to-Agent — Apply + Payment Funnel Spec (Phase 3d)
 
 ## Decisions (Locked)
-- Funnel: Apply → $500 deposit → remainder authorized at check-in → capture after event for Day 1 attendees.
+- Funnel: Apply → $100 deposit → remainder authorized at check-in → capture after event for Day 1 attendees.
 - Backend: Supabase Postgres with Prisma ORM.
 - Admin gating: basic auth (server-only DB access).
 - Referral payouts: none for pilot (discount only via network code).
@@ -15,12 +15,12 @@
 - `DATABASE_URL` (Prisma pooled/primary connection string)
 - `DIRECT_URL` (Prisma direct connection string)
 - `ADMIN_BASIC_AUTH_USER`
-- `ADMIN_BASIC_AUTH_PASS`
+- `ADMIN_BASIC_AUTH_PASS` (or `ADMIN_BASIC_AUTH_PASSWORD`)
 
 ## User Flow (Happy Path)
 1) Visitor reads landing page and clicks **Apply / Reserve Seat**.
 2) Application form collects basic info + use case intent.
-3) After form submission, user proceeds to Stripe Checkout to pay the $500 deposit.
+3) After form submission, user proceeds to Stripe Checkout to pay the $100 deposit.
 4) On successful checkout, user lands on confirmation screen and receives email receipt.
 5) On Day 1 check-in, staff creates/initiates a remainder PaymentIntent (manual capture) for the remaining balance.
 6) After the event, remainder is captured for Day 1 attendees.
@@ -38,14 +38,14 @@
 ## Pricing Rules
 - List price: $1,500 USD
 - Network code price: $1,000 USD
-- Deposit: $500 USD
-- Remainder: $1,000 (list) or $500 (network)
-- Deposit is always $500 USD (no discount applied to deposit)
+- Deposit: $100 USD
+- Remainder: $1,400 (list) or $900 (network)
+- Deposit is always $100 USD (no discount applied to deposit)
 - Network code applies only to the remainder
 
 ## Stripe Setup
 - Product: `Zero-to-Agent Toronto Pilot`
-- Price (deposit): $500 USD
+- Price (deposit): $100 USD
 - Checkout mode: `payment`
 - Success URL: `/apply/success`
 - Cancel URL: `/apply`

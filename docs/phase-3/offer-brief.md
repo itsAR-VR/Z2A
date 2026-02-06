@@ -31,8 +31,8 @@
 ## Pricing & Payment
 - List price: $1,500 USD
 - Network code price: $1,000 USD (list minus $500)
-- Deposit at checkout: $500 USD
-- Remainder due at check-in: $1,000 USD (list) or $500 USD (network)
+- Deposit at checkout: $100 USD
+- Remainder due at check-in: $1,400 USD (list) or $900 USD (network)
 - Invoice/receipt available for professional reimbursement language
 - Remainder collection: authorize at check-in, capture after event for Day 1 attendees
 

@@ -40,7 +40,7 @@
   - `DATABASE_URL` (Prisma pooled/primary connection string)
   - `DIRECT_URL` (Prisma direct connection string)
   - `ADMIN_BASIC_AUTH_USER`
-  - `ADMIN_BASIC_AUTH_PASS`
+  - `ADMIN_BASIC_AUTH_PASS` (or `ADMIN_BASIC_AUTH_PASSWORD`)
 - Supabase Postgres reachable; Prisma connection validated
 - Webhook endpoint configured in Stripe
 - Basic auth protecting `/admin`

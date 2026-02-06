@@ -48,3 +48,13 @@ Pass `docs/phase-3/ia-copy-spec.md` to Phase 3c for design/motion alignment.
   - None.
 - Next concrete steps:
   - Ensure funnel and QA docs reflect the finalized env var list and seat cap (Phase 3d/3f).
+
+## Progress This Turn (Terminus Maximus)
+- Work done:
+  - Updated `docs/phase-3/ia-copy-spec.md` deposit to $100 and adjusted remainder amounts.
+- Commands run:
+  - `apply_patch` — pass
+- Blockers:
+  - None.
+- Next concrete steps:
+  - Ensure ops referral copy matches the updated deposit.

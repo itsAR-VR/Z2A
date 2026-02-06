@@ -42,3 +42,13 @@ Pass `docs/phase-3/ops-gtm-assets.md` to Phase 3f for QA/deploy alignment and en
   - None.
 - Next concrete steps:
   - Begin Phase 3f to produce QA + deployment checklist.
+
+## Progress This Turn (Terminus Maximus)
+- Work done:
+  - Updated referral copy in `docs/phase-3/ops-gtm-assets.md` to reflect $100 deposit.
+- Commands run:
+  - `apply_patch` — pass
+- Blockers:
+  - None.
+- Next concrete steps:
+  - None.

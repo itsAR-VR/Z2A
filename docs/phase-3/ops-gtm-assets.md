@@ -48,10 +48,10 @@
 ## 4) Referral Program Copy (Pilot)
 
 **Referrer DM Template**
-"I’m inviting a small group to the Zero-to-Agent Toronto Pilot (Feb 28–Mar 1). It’s a 2‑day, hands‑on weekend where you build a working agent with a deployment path and evaluation loop. If you want the network code price ($1,000 instead of $1,500), use code: <CODE>. Deposit is $500 to reserve a seat. Want the link?"
+"I’m inviting a small group to the Zero-to-Agent Toronto Pilot (Feb 28–Mar 1). It’s a 2‑day, hands‑on weekend where you build a working agent with a deployment path and evaluation loop. If you want the network code price ($1,000 instead of $1,500), use code: <CODE>. Deposit is $100 to reserve a seat. Want the link?"
 
 **Referred Attendee Message**
-"Here’s the link for the Zero-to-Agent Toronto Pilot. It’s in‑person, two days, hands‑on. Use code <CODE> for the network price. Deposit is $500 to reserve a seat; remainder is authorized at check‑in and captured after the event for Day 1 attendees. Full refund if unsatisfied by end of Day 2."
+"Here’s the link for the Zero-to-Agent Toronto Pilot. It’s in‑person, two days, hands‑on. Use code <CODE> for the network price. Deposit is $100 to reserve a seat; remainder is authorized at check‑in and captured after the event for Day 1 attendees. Full refund if unsatisfied by end of Day 2."
 
 ---
 

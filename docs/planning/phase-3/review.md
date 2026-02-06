@@ -2,9 +2,11 @@
 
 ## Summary
 - Shipped Phase 3 artifacts (offer, IA/copy, design/motion, funnel spec, ops assets, QA checklist).
-- Quality gates could not run: `npm run lint` and `npm run build` scripts are missing.
+- Added Next.js + Prisma ORM v7 + Stripe/admin scaffolding (UI intentionally deferred).
+- Quality gates now run and pass on the scaffold (`lint`, `typecheck`, `build`).
 - `/tmp/site-analysis/` captures regenerated for final motion alignment.
 - Seat cap locked at 50; instructor bio and location policy incorporated into offer + IA specs.
+- Deposit updated to $100; remainder amounts adjusted accordingly across offer/copy/funnel/ops docs.
 
 ## What Shipped
 - `docs/phase-3/offer-brief.md`
@@ -13,16 +15,22 @@
 - `docs/phase-3/funnel-spec.md`
 - `docs/phase-3/ops-gtm-assets.md`
 - `docs/phase-3/qa-deploy-checklist.md`
+- `docs/phase-3/ui-motion-implementation-playbook.md`
+- App scaffold:
+  - `src/`, `prisma/`, `prisma.config.ts`, `package.json`
 
 ## Verification
 
 ### Commands
-- `npm run lint` — fail (2026-02-04 00:30 EST)
-- `npm run build` — fail (2026-02-04 00:30 EST)
-- `npm run db:push` — skip (no Prisma schema changes)
+- `npm run lint` — pass (2026-02-06)
+- `npm run typecheck` — pass (2026-02-06)
+- `npm run build` — pass (2026-02-06)
+- `npm run db:push` — pass (2026-02-06)
 
 ### Notes
-- `npm run lint` and `npm run build` failed because scripts are missing from `package.json`.
+- Build warnings observed:
+  - Next inferred a workspace root due to lockfiles outside this repo
+  - Next warned `middleware.ts` convention is deprecated (see logs); functionality works but should be monitored
 
 ## Success Criteria → Evidence
 
@@ -49,4 +57,7 @@
 - If captures become stale, refresh `/tmp/site-analysis/` before design implementation.
 
 ## Follow-ups
-- Add `lint` and `build` scripts or confirm they are unnecessary for this repo.
+- Run Stripe CLI webhook smoke tests for:
+  - `checkout.session.completed`
+  - `charge.refunded`
+- Implement the public landing/apply/admin UI using `docs/phase-3/ui-motion-implementation-playbook.md`.

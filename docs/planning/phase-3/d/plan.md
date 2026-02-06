@@ -11,7 +11,7 @@ Define the conversion funnel and backend contracts: apply flow, Stripe checkout,
 
 | Item | Value |
 |------|-------|
-| Funnel model | **Apply → $500 deposit → remainder at check-in** |
+| Funnel model | **Apply → $100 deposit → remainder at check-in** |
 | Currency | **USD** |
 | Refund policy | **Full refund if unsatisfied, no questions asked** |
 | Backend | **Supabase Postgres + Prisma ORM** |
@@ -22,9 +22,9 @@ Define the conversion funnel and backend contracts: apply flow, Stripe checkout,
 ### Pricing Structure
 - List price: **$1,500 USD**
 - Network code price: **$1,000 USD** ($500 off)
-- Deposit: **$500 USD** (due at checkout)
-- Remainder (list): **$1,000 USD** (due at check-in)
-- Remainder (network): **$500 USD** (due at check-in)
+- Deposit: **$100 USD** (due at checkout)
+- Remainder (list): **$1,400 USD** (due at check-in)
+- Remainder (network): **$900 USD** (due at check-in)
 
 ### Refund Terms
 - Window: until end of Day 2
@@ -32,12 +32,12 @@ Define the conversion funnel and backend contracts: apply flow, Stripe checkout,
 - No questions asked — maximum trust signal
 
 ## Work
-1. **Funnel decision** — **LOCKED: Apply → $500 deposit → remainder at check-in**
+1. **Funnel decision** — **LOCKED: Apply → $100 deposit → remainder at check-in**
    - Deposit collected via Stripe at checkout
    - Remainder collected at venue check-in (manual or second Stripe link)
 2. **Stripe pricing + codes**
    - Product: "Zero-to-Agent Toronto Pilot"
-   - Price (deposit): $500 USD
+   - Price (deposit): $100 USD
    - Promo code for network discount applies to remainder, not deposit
 3. **Referral logic**
    - Unique codes per referrer; qualified referrals based on deposit paid AND no refund requested
@@ -73,3 +73,13 @@ None currently.
   - None.
 - Next concrete steps:
   - Begin Phase 3e to produce ops + GTM asset pack.
+
+## Progress This Turn (Terminus Maximus)
+- Work done:
+  - Updated deposit to $100 and adjusted remainder amounts across Phase 3d specs.
+- Commands run:
+  - `apply_patch` — pass
+- Blockers:
+  - None.
+- Next concrete steps:
+  - None (Phase 3 docs remain decision complete).

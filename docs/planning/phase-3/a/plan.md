@@ -56,3 +56,13 @@ Pass `docs/phase-3/offer-brief.md` to Phase 3b for IA + copy.
   - None.
 - Next concrete steps:
   - Update any landing copy sections that referenced seat cap or instructor as TBD (Phase 3b).
+
+## Progress This Turn (Terminus Maximus)
+- Work done:
+  - Updated deposit to $100 and adjusted remainder amounts in `docs/phase-3/offer-brief.md`.
+- Commands run:
+  - `apply_patch` — pass
+- Blockers:
+  - None.
+- Next concrete steps:
+  - Ensure pricing copy stays consistent across IA + funnel specs.
