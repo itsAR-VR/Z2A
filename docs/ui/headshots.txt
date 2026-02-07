@@ -1,0 +1,16 @@
+# Headshots (Source + Processed)
+
+Source files (raw exports, can be HEIC/HEIF, any aspect ratio):
+- assets/headshots-source/aadil-headshot.jpg
+- assets/headshots-source/abdur-headshot.jpg
+
+Processed files (used by the website):
+- public/speakers/aadil-headshot.jpg
+- public/speakers/abdur-headshot.jpg
+
+Guidelines for processed files:
+- Format: JPG (sRGB)
+- Crop: centered face, tight but not claustrophobic
+- Size: >= 400x400 (square is ideal; we currently render circular avatars)
+- File size: keep <= ~200KB if possible (optimize/compress)
+

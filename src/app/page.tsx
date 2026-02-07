@@ -1,5 +1,6 @@
 import { Nav } from "@/components/Nav";
 import { LenisProvider } from "@/components/motion/LenisProvider";
+import { StickyApplyBar } from "@/components/StickyApplyBar";
 import { Hero } from "@/components/sections/Hero";
 import { Why } from "@/components/sections/Why";
 import { Speakers } from "@/components/sections/Speakers";
@@ -14,6 +15,7 @@ export default function Home() {
   return (
     <LenisProvider>
       <Nav />
+      <StickyApplyBar />
       <main>
         <Hero />
         <Why />

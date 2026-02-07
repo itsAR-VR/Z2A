@@ -63,11 +63,11 @@ const faqItems = [
 
 export function FAQ() {
   return (
-    <SectionWrapper id="faq">
+    <SectionWrapper id="faq" alt>
       <RevealOnScroll>
-        <h2 className="font-heading font-semibold text-[28px] leading-[34px] md:text-[40px] md:leading-[48px] mb-12">
+        <h2 className="font-heading font-semibold tracking-tight text-[clamp(28px,3.2vw,44px)] leading-[1.05] mb-8 text-[var(--color-text)]">
           Frequently asked{" "}
-          <span className="text-[var(--color-accent-500)]">questions</span>
+          <span className="text-[var(--color-accent)]">questions</span>
         </h2>
       </RevealOnScroll>
 

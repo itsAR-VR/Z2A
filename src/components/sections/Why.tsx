@@ -1,61 +1,88 @@
 "use client";
 
 import { SectionWrapper } from "@/components/SectionWrapper";
-import { Card } from "@/components/Card";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 
 const reasons = [
   {
-    icon: "⚡",
-    title: "Live support to unblock quickly",
+    eyebrow: "01",
+    title: "Live support when you’re stuck",
     description:
-      "When you get stuck, an instructor is right there — no waiting for forum replies or scheduling calls.",
+      "No forum delays, no calendar ping-pong. Get unblocked in minutes and keep shipping.",
   },
   {
-    icon: "👥",
+    eyebrow: "02",
     title: "Pods of 3–4 for momentum",
     description:
-      "Small groups keep you accountable and moving. You'll build alongside people solving similar problems.",
+      "Small groups keep scope honest and progress visible. You’ll build alongside people solving similar problems.",
   },
   {
-    icon: "🎯",
-    title: "Clear scope for a working demo",
+    eyebrow: "03",
+    title: "A scope designed to finish",
     description:
-      "Designed for a working demo in ~12 hours. You won't leave with just notes — you'll leave with a system.",
+      "A weekend-sized build that leaves you with something real: running code, not notes.",
   },
 ];
 
 export function Why() {
   return (
-    <SectionWrapper id="why">
-      <RevealOnScroll>
-        <h2 className="font-heading font-semibold text-[28px] leading-[34px] md:text-[40px] md:leading-[48px] mb-4">
-          The hard part isn&apos;t knowing{" "}
-          <span className="text-[var(--color-accent-500)]">— it&apos;s finishing.</span>
-        </h2>
-      </RevealOnScroll>
-
-      <RevealOnScroll delay={100}>
-        <p className="text-[var(--color-text-300)] text-base md:text-lg max-w-2xl mb-12">
-          Attendees leave knowing how to build a production-ready enterprise-grade
-          workflow that leverages AI agents to repeatably automate work.
-        </p>
-      </RevealOnScroll>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {reasons.map((reason, i) => (
-          <RevealOnScroll key={reason.title} delay={i * 100}>
-            <Card className="h-full">
-              <div className="text-3xl mb-4">{reason.icon}</div>
-              <h3 className="font-heading font-semibold text-lg mb-2 text-[var(--color-text-100)]">
-                {reason.title}
-              </h3>
-              <p className="text-[var(--color-text-300)] text-sm leading-relaxed">
-                {reason.description}
-              </p>
-            </Card>
+    <SectionWrapper id="why" alt>
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-start">
+        <div className="md:col-span-5">
+          <RevealOnScroll>
+            <h2 className="font-heading font-semibold tracking-tight text-[clamp(28px,3.2vw,44px)] leading-[1.05] mb-4 text-[var(--color-text)]">
+              The hard part isn&apos;t knowing.{" "}
+              <span className="text-[var(--color-accent)]">It&apos;s finishing.</span>
+            </h2>
           </RevealOnScroll>
-        ))}
+
+          <RevealOnScroll delay={80}>
+            <p className="text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed mb-6">
+              Attendees leave knowing how to scope and ship an agent that automates a
+              real workflow, plus a deployment path and evaluation loop they can reuse.
+            </p>
+          </RevealOnScroll>
+
+          <RevealOnScroll delay={140}>
+            <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] p-5">
+              <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
+                Translation
+              </p>
+              <p className="mt-2 text-sm text-[var(--color-text-muted)]">
+                You bring a real workflow. We help you ship a working agent, a deployment
+                path, and an evaluation loop. In two days.
+              </p>
+            </div>
+          </RevealOnScroll>
+        </div>
+
+        <div className="md:col-span-7">
+          <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] overflow-hidden">
+            <ol>
+              {reasons.map((reason, i) => (
+                <li key={reason.title} className="border-t border-[var(--color-border)] first:border-t-0">
+                  <RevealOnScroll delay={i * 80}>
+                    <div className="px-6 py-5 md:py-6 flex gap-6">
+                      <div className="shrink-0">
+                        <div className="h-9 w-9 rounded-full border border-[color-mix(in_oklch,var(--color-accent)_30%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-accent)_8%,var(--color-surface))] flex items-center justify-center font-mono text-[11px] tracking-[0.14em] text-[var(--color-accent)]">
+                          {reason.eyebrow}
+                        </div>
+                      </div>
+                      <div>
+                        <h3 className="font-heading font-semibold text-base md:text-lg text-[var(--color-text)]">
+                          {reason.title}
+                        </h3>
+                        <p className="mt-1 text-sm md:text-[15px] leading-relaxed text-[var(--color-text-muted)]">
+                          {reason.description}
+                        </p>
+                      </div>
+                    </div>
+                  </RevealOnScroll>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
       </div>
     </SectionWrapper>
   );

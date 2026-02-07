@@ -16,7 +16,9 @@ export function SectionWrapper({
     <section
       id={id}
       className={`section-padding ${
-        alt ? "bg-[var(--color-bg-850)]" : ""
+        alt
+          ? "bg-[color-mix(in_oklch,var(--color-accent)_3%,var(--color-bg))]"
+          : ""
       } ${className}`}
     >
       <div className="container-content">{children}</div>

@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 type ButtonVariant = "primary" | "secondary" | "ghost";
@@ -14,11 +16,11 @@ interface ButtonProps {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "bg-[var(--color-accent-500)] text-[var(--color-bg-900)] hover:bg-[var(--color-accent-600)] hover:shadow-[0_0_24px_rgba(33,226,124,0.25)] hover:-translate-y-0.5",
+    "bg-[var(--color-accent)] text-[var(--color-accent-ink)] shadow-[var(--shadow-sm)] hover:bg-[var(--color-accent-600)] hover:shadow-[var(--shadow-md)] hover:-translate-y-0.5 active:translate-y-0 active:shadow-[var(--shadow-sm)]",
   secondary:
-    "border border-[var(--color-border-700)] text-[var(--color-text-100)] hover:border-[var(--color-accent-500)] hover:text-[var(--color-accent-500)]",
+    "bg-[var(--color-surface)] border border-[var(--color-border-strong)] text-[var(--color-text)] shadow-[var(--shadow-sm)] hover:border-[color-mix(in_oklch,var(--color-accent)_42%,var(--color-border-strong))] hover:shadow-[var(--shadow-md)] hover:-translate-y-0.5 active:translate-y-0 active:shadow-[var(--shadow-sm)]",
   ghost:
-    "text-[var(--color-text-300)] hover:text-[var(--color-accent-500)]",
+    "text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[color-mix(in_oklch,var(--color-accent)_10%,transparent)]",
 };
 
 export function Button({
@@ -31,11 +33,23 @@ export function Button({
   onClick,
 }: ButtonProps) {
   const base =
-    "inline-flex items-center justify-center gap-2 font-heading font-semibold text-sm px-6 py-3 rounded-lg transition-all duration-200 ease-out cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed";
+    "inline-flex items-center justify-center gap-2 font-heading font-semibold text-[15px] leading-none px-5 py-3 rounded-full transition-[transform,box-shadow,background-color,border-color,color] duration-200 ease-out cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] disabled:opacity-50 disabled:cursor-not-allowed";
 
   if (href) {
     return (
-      <Link href={href} className={`${base} ${variantStyles[variant]} ${className}`}>
+      <Link
+        href={href}
+        className={`${base} ${variantStyles[variant]} ${disabled ? "pointer-events-none opacity-50" : ""} ${className}`}
+        aria-disabled={disabled}
+        tabIndex={disabled ? -1 : undefined}
+        onClick={(e) => {
+          if (disabled) {
+            e.preventDefault();
+            return;
+          }
+          onClick?.();
+        }}
+      >
         {children}
       </Link>
     );

@@ -74,9 +74,9 @@ export function AuditLogViewer({ referralCodeId, onClose }: AuditLogViewerProps)
                     className={`text-xs font-medium px-1.5 py-0.5 rounded ${
                       log.action === "created"
                         ? "text-blue-400 bg-blue-400/10"
-                        : log.action === "activated"
+                        : log.action === "activated" || log.action === "reactivated"
                           ? "text-green-400 bg-green-400/10"
-                          : "text-red-400 bg-red-400/10"
+                        : "text-red-400 bg-red-400/10"
                     }`}
                   >
                     {log.action}

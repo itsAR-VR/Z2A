@@ -1,0 +1,42 @@
+name: Playwright Tests
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+    - name: Install dependencies
+      run: npm ci
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+    - name: Run Playwright tests
+      env:
+        # Minimal env required for the Next.js app to start (validated in `src/lib/env.ts`).
+        # Use dummy values for CI smoke tests; E2E tests mock Stripe/apply where needed.
+        APP_URL: http://localhost:3000
+        STRIPE_SECRET_KEY: sk_test_dummy
+        STRIPE_WEBHOOK_SECRET: whsec_dummy
+        STRIPE_DEPOSIT_PRICE_ID: price_dummy
+        DATABASE_URL: postgresql://dummy:dummy@localhost:5432/dummy
+        DIRECT_URL: postgresql://dummy:dummy@localhost:5432/dummy
+        ADMIN_BASIC_AUTH_USER: admin
+        ADMIN_BASIC_AUTH_PASS: admin
+
+        # Start the dev server from Playwright config (local CI run, not against production).
+        PLAYWRIGHT_WEB_SERVER: "1"
+        PLAYWRIGHT_BASE_URL: http://localhost:3000
+      run: npm run test:e2e
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30

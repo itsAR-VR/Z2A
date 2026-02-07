@@ -59,6 +59,43 @@ Phases 3 and 4 overlap entirely with this scope and are superseded by Phase 5.
   - Stripe webhook + idempotency works in test mode (Stripe CLI smoke).
   - Playwright smoke covers: landing anchors, reduced-motion, apply redirect (mock or test env), admin auth gate.
 
+## Repo Reality Check (RED TEAM)
+
+- What exists today:
+  - Public site UI and motion stack are implemented under `src/components/` (Hero/Why/Speakers/Outcomes/HowItWorks/Agenda/Pricing/FAQ/CTAFooter).
+  - Speakers are clickable with an accessible modal (`src/components/Dialog.tsx`).
+  - Playwright CLI smoke tests exist under `z2a/*.spec.ts` and are wired via `npm run test:e2e`.
+  - Stripe webhook route exists at `src/app/api/stripe/webhook/route.ts`.
+- What the plan assumes:
+  - Local QA can run Playwright + Stripe CLI against a locally running server.
+  - Speaker bios are conservative unless the team provides final copy.
+- Verified touch points:
+  - `docs/planning/phase-5/handoff.md`
+  - `src/components/sections/Speakers.tsx`
+  - `src/components/StickyApplyBar.tsx`
+  - `playwright.config.ts`
+  - `z2a/*.spec.ts`
+
+## RED TEAM Findings (Gaps / Weak Spots)
+
+### Highest-risk failure modes
+- Playwright MCP is blocked in this environment by a Chrome profile lock (“Opening in existing browser session”). → Mitigation: use Playwright CLI (`npm run test:e2e`) in a normal environment.
+- Stripe CLI webhook smoke is blocked in this environment (port binding + outbound network). → Mitigation: run `docs/planning/phase-5/stripe-cli.md` locally/CI.
+
+### Missing or ambiguous requirements
+- Speaker bios: LinkedIn blocks automated retrieval; only Aadil has non-LinkedIn public sources that are easy to cite. → Mitigation: keep claims conservative unless the team provides final bios.
+
+### Testing / validation
+- In some restricted environments, local QA can be blocked by:
+  - dev server port binding (`EPERM`)
+  - DNS/network access (`ENOTFOUND`)
+  - missing Playwright browsers (requires `npx playwright install`)
+  → Mitigation: run `npm run test:e2e` + Stripe CLI smoke on a normal local machine or in CI, using `docs/planning/phase-5/playwright-cli.md` and `docs/planning/phase-5/stripe-cli.md`.
+
+## Open Questions (Need Human Input)
+
+- None (currently closed).
+
 ## Subphase Index
 * a — Master handoff doc (single doc consolidating Phase 3 + 4 into execution plan)
 * b — Spec deltas (IA/copy + motion playbook updates: `#speakers`, proof line, admin motion)
@@ -67,3 +104,7 @@ Phases 3 and 4 overlap entirely with this scope and are superseded by Phase 5.
 * e — UI implementation checklist (public + admin: file-level tasks and component inventory)
 * f — QA + launch readiness (Stripe CLI + Playwright smoke + perf/a11y gates)
 
+## Phase Summary (running)
+- 2026-02-06 — QA gates passing (`npm run lint`, `npm run typecheck`, `npm run build`), speakers are now clickable with an accessible modal, and referral code toggle semantics were aligned (files: `src/components/sections/Speakers.tsx`, `src/components/Dialog.tsx`, `src/components/SpeakerAvatar.tsx`, `src/app/api/admin/referral-codes/[id]/route.ts`, `src/components/admin/ReferralCodeTable.tsx`, `docs/planning/phase-5/review.md`).
+- 2026-02-07 — Added a TKS-inspired sticky “Admissions open” apply bar, fixed the How-it-Works “vertical line on empty section” artifact, added speaker headshots and Abdur’s award plaque, and documented Playwright/Stripe CLI smoke steps (files: `src/components/StickyApplyBar.tsx`, `src/components/sections/HowItWorks.tsx`, `src/components/sections/Speakers.tsx`, `public/speakers/*`, `next.config.ts`, `docs/planning/phase-5/review.md`).
+- 2026-02-07 — Closed the QA loop: Playwright smoke now runs deterministically against localhost (webpack webServer + localhost guard) and reduced-motion marquee assertion is stable; Stripe webhook smoke passes via Stripe CLI forward+triggers; review/runbooks updated (files: `playwright.config.ts`, `src/components/sections/Hero.tsx`, `z2a/reduced-motion.spec.ts`, `docs/planning/phase-5/review.md`, `docs/planning/phase-5/playwright-cli.md`, `docs/planning/phase-5/stripe-cli.md`).

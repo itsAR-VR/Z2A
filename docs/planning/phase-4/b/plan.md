@@ -18,7 +18,7 @@ Specify the minimum database and API additions required to support a full ops ad
      - referralCodeId (FK)
      - action enum: created/updated/deactivated/reactivated
      - actor (basic auth username)
-     - reason (required for deactivate/reactivate)
+     - reason (required for deactivate; optional for reactivate)
      - metadata JSON (optional)
      - createdAt timestamp
 2. Admin API deltas (all basic-auth protected):
@@ -28,7 +28,7 @@ Specify the minimum database and API additions required to support a full ops ad
    - Referral code CRUD:
      - `GET /api/admin/referral-codes`
      - `POST /api/admin/referral-codes`
-     - `PATCH /api/admin/referral-codes/{id}` (active toggle + reason)
+     - `PATCH /api/admin/referral-codes/{id}` (active toggle + optional reason; required on deactivation)
      - `GET /api/admin/referral-codes/{id}/audit`
 3. Audit behavior:
    - Every referral code mutation writes an audit log row.
@@ -36,7 +36,7 @@ Specify the minimum database and API additions required to support a full ops ad
 4. API contract documentation:
    - Request/response JSON examples for each route.
    - Validation rules (Zod schemas).
-   - Error codes for common failures (duplicate code, missing reason, etc.).
+   - Error codes for common failures (duplicate code, missing reason on deactivation, etc.).
 
 ## Output
 - A decision-complete admin API + data spec that a follow-on implementer can apply directly.
@@ -44,4 +44,3 @@ Specify the minimum database and API additions required to support a full ops ad
 
 ## Handoff
 Phase 4e (Admin UI checklist) depends on these API shapes and field names.
-

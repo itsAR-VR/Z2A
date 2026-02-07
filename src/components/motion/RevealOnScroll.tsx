@@ -24,9 +24,9 @@ export function RevealOnScroll({
   const { ref, isVisible } = useReveal<HTMLDivElement>();
 
   const translateMap = {
-    up: "translateY(24px)",
-    left: "translateX(-24px)",
-    right: "translateX(24px)",
+    up: "translate3d(0, 18px, 0)",
+    left: "translate3d(-18px, 0, 0)",
+    right: "translate3d(18px, 0, 0)",
     none: "none",
   };
 
@@ -36,8 +36,9 @@ export function RevealOnScroll({
       className={className}
       style={{
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "none" : translateMap[direction],
-        transition: `opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+        transform: isVisible ? "translate3d(0, 0, 0)" : translateMap[direction],
+        willChange: "transform, opacity",
+        transition: `opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 0.72s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
       }}
     >
       {children}

@@ -20,6 +20,7 @@ export function ReferralCodeTable() {
   const [createError, setCreateError] = useState<string | null>(null);
   const [toggleTarget, setToggleTarget] = useState<ReferralCode | null>(null);
   const [toggleReason, setToggleReason] = useState("");
+  const [toggleError, setToggleError] = useState<string | null>(null);
   const [toggling, setToggling] = useState(false);
   const [auditCodeId, setAuditCodeId] = useState<string | null>(null);
 
@@ -66,23 +67,41 @@ export function ReferralCodeTable() {
   }
 
   async function handleToggle() {
-    if (!toggleTarget || !toggleReason.trim()) return;
+    if (!toggleTarget) return;
+    const nextActive = !toggleTarget.active;
+    const reason = toggleReason.trim();
+
+    // Require a reason for deactivation; activation reason is optional.
+    if (toggleTarget.active && !reason) {
+      setToggleError("Reason is required to deactivate a code");
+      return;
+    }
     setToggling(true);
+    setToggleError(null);
 
     try {
-      await fetch(`/api/admin/referral-codes/${toggleTarget.id}`, {
+      const payload: { active: boolean; reason?: string } = { active: nextActive };
+      if (reason) payload.reason = reason;
+
+      const res = await fetch(`/api/admin/referral-codes/${toggleTarget.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          active: !toggleTarget.active,
-          reason: toggleReason.trim(),
-        }),
+        body: JSON.stringify(payload),
       });
+      const data = await res.json().catch(() => null);
+      if (!res.ok) {
+        const reasonError =
+          data?.details?.fieldErrors?.reason?.[0] ?? data?.details?.reason?.[0];
+        setToggleError(reasonError || data?.error || "Failed to update code");
+        return;
+      }
+
       setToggleTarget(null);
       setToggleReason("");
+      setToggleError(null);
       fetchCodes();
     } catch {
-      // Handle error silently
+      setToggleError("Network error");
     } finally {
       setToggling(false);
     }
@@ -172,6 +191,7 @@ export function ReferralCodeTable() {
                       onClick={() => {
                         setToggleTarget(code);
                         setToggleReason("");
+                        setToggleError(null);
                       }}
                       className={`text-sm font-medium cursor-pointer ${
                         code.active
@@ -198,19 +218,33 @@ export function ReferralCodeTable() {
               <span className="font-mono">{toggleTarget.code}</span>
             </h3>
             <p className="text-sm text-[var(--color-text-300)] mb-4">
-              Please provide a reason for this change (required for audit log).
+              {toggleTarget.active
+                ? "Please provide a reason for deactivation (required for audit log)."
+                : "Optional: add a reason for activation (will appear in the audit log)."}
             </p>
+            {toggleError && (
+              <p className="text-sm text-[var(--color-error)] mb-4">
+                {toggleError}
+              </p>
+            )}
             <textarea
               rows={2}
               value={toggleReason}
               onChange={(e) => setToggleReason(e.target.value)}
-              placeholder="Reason for change..."
+              placeholder={
+                toggleTarget.active
+                  ? "Reason for deactivation..."
+                  : "Reason for activation (optional)..."
+              }
               className="w-full rounded-lg border border-[var(--color-border-700)] bg-[var(--color-bg-800)] px-3 py-2 text-sm text-[var(--color-text-100)] placeholder:text-[var(--color-text-500)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-500)]/50 mb-4"
             />
             <div className="flex gap-3 justify-end">
               <button
                 type="button"
-                onClick={() => setToggleTarget(null)}
+                onClick={() => {
+                  setToggleTarget(null);
+                  setToggleError(null);
+                }}
                 className="px-4 py-2 text-sm rounded-lg border border-[var(--color-border-700)] text-[var(--color-text-300)] hover:text-[var(--color-text-100)] cursor-pointer"
               >
                 Cancel
@@ -218,7 +252,7 @@ export function ReferralCodeTable() {
               <button
                 type="button"
                 onClick={handleToggle}
-                disabled={toggling || !toggleReason.trim()}
+                disabled={toggling || (toggleTarget.active && !toggleReason.trim())}
                 className="px-4 py-2 text-sm font-medium rounded-lg bg-[var(--color-accent-500)] text-[var(--color-bg-900)] hover:bg-[var(--color-accent-600)] disabled:opacity-50 cursor-pointer"
               >
                 {toggling ? "Saving..." : "Confirm"}

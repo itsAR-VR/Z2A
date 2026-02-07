@@ -113,157 +113,265 @@ function ApplyForm() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg-900)]">
-      <div className="container-content py-20 md:py-28 max-w-xl">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-sm text-[var(--color-text-500)] hover:text-[var(--color-accent-500)] transition-colors mb-8"
-        >
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-          </svg>
-          Back to home
-        </Link>
-
-        <h1 className="font-heading font-bold text-[28px] md:text-[40px] leading-tight mb-3">
-          Apply / Reserve Seat
-        </h1>
-        <p className="text-[var(--color-text-300)] mb-8">
-          Submit your application and pay a $100 deposit to reserve your spot.
-          Limited to 50 seats.
-        </p>
-
-        {canceled && (
-          <div className="mb-6 p-4 rounded-lg border border-yellow-500/30 bg-yellow-500/5 text-yellow-200 text-sm">
-            Payment was canceled. Your application is saved — you can try again.
-          </div>
-        )}
-
-        {serverError && (
-          <div className="mb-6 p-4 rounded-lg border border-[var(--color-error)]/30 bg-[var(--color-error)]/5 text-red-300 text-sm">
-            {serverError}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <Field
-              label="First name"
-              name="firstName"
-              value={form.firstName}
-              onChange={handleChange}
-              error={errors.firstName}
-              required
-            />
-            <Field
-              label="Last name"
-              name="lastName"
-              value={form.lastName}
-              onChange={handleChange}
-              error={errors.lastName}
-              required
-            />
-          </div>
-
-          <Field
-            label="Email"
-            name="email"
-            type="email"
-            value={form.email}
-            onChange={handleChange}
-            error={errors.email}
-            required
-          />
-
-          <Field
-            label="Role / Title"
-            name="roleTitle"
-            value={form.roleTitle}
-            onChange={handleChange}
-            error={errors.roleTitle}
-            required
-          />
-
-          <Field
-            label="Company"
-            name="company"
-            value={form.company}
-            onChange={handleChange}
-            error={errors.company}
-          />
-
-          <Field
-            label="LinkedIn URL"
-            name="linkedinUrl"
-            type="url"
-            value={form.linkedinUrl}
-            onChange={handleChange}
-            error={errors.linkedinUrl}
-            placeholder="https://linkedin.com/in/..."
-          />
-
-          <div>
-            <label
-              htmlFor="useCase"
-              className="block text-sm font-medium text-[var(--color-text-300)] mb-1.5"
-            >
-              Use case <span className="text-[var(--color-error)]">*</span>
-            </label>
-            <textarea
-              id="useCase"
-              name="useCase"
-              rows={4}
-              value={form.useCase}
-              onChange={handleChange}
-              className={`w-full rounded-lg border bg-[var(--color-bg-800)] px-4 py-3 text-sm text-[var(--color-text-100)] placeholder:text-[var(--color-text-500)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-500)]/50 transition-all ${
-                errors.useCase
-                  ? "border-[var(--color-error)]"
-                  : "border-[var(--color-border-700)]"
-              }`}
-              placeholder="Describe the workflow or use case you want to automate with an AI agent..."
-            />
-            {errors.useCase && (
-              <p className="mt-1 text-xs text-[var(--color-error)]">
-                {errors.useCase}
-              </p>
-            )}
-          </div>
-
-          {/* Network code toggle */}
-          <div>
-            {!showNetworkCode ? (
-              <button
-                type="button"
-                onClick={() => setShowNetworkCode(true)}
-                className="text-sm text-[var(--color-accent-500)] hover:underline cursor-pointer"
-              >
-                Have a network code?
-              </button>
-            ) : (
-              <Field
-                label="Network Code"
-                name="networkCode"
-                value={form.networkCode}
-                onChange={handleChange}
-                error={errors.networkCode}
-                placeholder="Enter your code for the $1,000 price"
-              />
-            )}
-          </div>
-
-          <Button
-            type="submit"
-            disabled={submitting}
-            className="w-full mt-2"
+    <div className="min-h-screen">
+      <div className="container-content pt-28 pb-20">
+        <div className="flex items-center justify-between gap-4">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-2 text-[13px] font-medium text-[var(--color-text)] shadow-[var(--shadow-sm)] transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
           >
-            {submitting ? "Redirecting to payment..." : "Continue to deposit ($100)"}
-          </Button>
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            Back
+          </Link>
 
-          <p className="text-xs text-[var(--color-text-500)] text-center">
-            You&apos;ll be redirected to Stripe to pay the $100 deposit. Full
-            refund if unsatisfied by end of Day 2.
-          </p>
-        </form>
+          <Link
+            href="/"
+            className="font-heading font-bold text-[15px] tracking-tight text-[var(--color-text)] hover:text-[color-mix(in_oklch,var(--color-accent)_70%,var(--color-text))] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] rounded-full px-3 py-2"
+          >
+            Zero-to-Agent
+          </Link>
+        </div>
+
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+          <div className="md:col-span-7">
+            <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
+              Application
+            </p>
+            <h1 className="mt-3 font-heading font-bold tracking-tight text-[clamp(30px,3.2vw,44px)] leading-[1.05] text-[var(--color-text)]">
+              Apply to reserve a seat
+            </h1>
+            <p className="mt-3 text-[15px] md:text-lg leading-relaxed text-[var(--color-text-muted)] max-w-[60ch]">
+              Takes about 2–3 minutes. After you submit, you&apos;ll be redirected to Stripe
+              for the $100 deposit.
+            </p>
+
+            <div className="mt-6 rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] p-5">
+              <div className="grid grid-cols-3 gap-3">
+                {[
+                  { label: "1. Application", active: true },
+                  { label: "2. Deposit", active: false },
+                  { label: "3. Confirmed", active: false },
+                ].map((s) => (
+                  <div
+                    key={s.label}
+                    className={`rounded-[var(--radius-md)] border px-3 py-3 text-[12px] font-medium ${
+                      s.active
+                        ? "border-[color-mix(in_oklch,var(--color-accent)_35%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-accent)_8%,var(--color-surface))] text-[var(--color-text)]"
+                        : "border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-bg)_45%,var(--color-surface))] text-[var(--color-text-faint)]"
+                    }`}
+                  >
+                    {s.label}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {canceled && (
+              <div className="mt-6 rounded-[var(--radius-xl)] border border-[color-mix(in_oklch,var(--color-warning)_40%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-warning)_10%,var(--color-surface))] p-5 text-sm text-[var(--color-text)] shadow-[var(--shadow-sm)]">
+                Payment was canceled. Your application is saved. You can try again when you&apos;re ready.
+              </div>
+            )}
+
+            {serverError && (
+              <div className="mt-6 rounded-[var(--radius-xl)] border border-[color-mix(in_oklch,var(--color-error)_45%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-error)_10%,var(--color-surface))] p-5 text-sm text-[var(--color-text)] shadow-[var(--shadow-sm)]">
+                {serverError}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+              <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] p-6 md:p-7">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <Field
+                    label="First name"
+                    name="firstName"
+                    value={form.firstName}
+                    onChange={handleChange}
+                    error={errors.firstName}
+                    required
+                    autoComplete="given-name"
+                  />
+                  <Field
+                    label="Last name"
+                    name="lastName"
+                    value={form.lastName}
+                    onChange={handleChange}
+                    error={errors.lastName}
+                    required
+                    autoComplete="family-name"
+                  />
+                </div>
+
+                <div className="mt-5 space-y-5">
+                  <Field
+                    label="Email"
+                    name="email"
+                    type="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    error={errors.email}
+                    required
+                    autoComplete="email"
+                    placeholder="name@company.com"
+                  />
+
+                  <Field
+                    label="Role / title"
+                    name="roleTitle"
+                    value={form.roleTitle}
+                    onChange={handleChange}
+                    error={errors.roleTitle}
+                    required
+                    autoComplete="organization-title"
+                    placeholder="e.g., Product Manager"
+                  />
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <Field
+                      label="Company (optional)"
+                      name="company"
+                      value={form.company}
+                      onChange={handleChange}
+                      error={errors.company}
+                      autoComplete="organization"
+                    />
+
+                    <Field
+                      label="LinkedIn (optional)"
+                      name="linkedinUrl"
+                      type="url"
+                      value={form.linkedinUrl}
+                      onChange={handleChange}
+                      error={errors.linkedinUrl}
+                      placeholder="https://linkedin.com/in/..."
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="useCase"
+                      className="block text-[13px] font-medium text-[var(--color-text)] mb-1.5"
+                    >
+                      What do you want to automate?{" "}
+                      <span className="text-[var(--color-error)]">*</span>
+                    </label>
+                    <textarea
+                      id="useCase"
+                      name="useCase"
+                      rows={4}
+                      value={form.useCase}
+                      onChange={handleChange}
+                      aria-invalid={Boolean(errors.useCase)}
+                      aria-describedby={errors.useCase ? "useCase-error" : undefined}
+                      className={`w-full rounded-[var(--radius-md)] border bg-[color-mix(in_oklch,var(--color-bg)_45%,var(--color-surface))] px-4 py-3 text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-faint)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface)] transition-colors ${
+                        errors.useCase
+                          ? "border-[color-mix(in_oklch,var(--color-error)_55%,var(--color-border))]"
+                          : "border-[var(--color-border)]"
+                      }`}
+                      placeholder="Example: triage inbound support tickets, route them, and draft responses with guardrails."
+                    />
+                    {errors.useCase ? (
+                      <p id="useCase-error" className="mt-1.5 text-xs text-[var(--color-error)]">
+                        {errors.useCase}
+                      </p>
+                    ) : (
+                      <p className="mt-1.5 text-xs text-[var(--color-text-faint)]">
+                        Keep it short. A few sentences is enough.
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="pt-1">
+                    {!showNetworkCode ? (
+                      <button
+                        type="button"
+                        onClick={() => setShowNetworkCode(true)}
+                        className="inline-flex items-center gap-2 text-[13px] font-medium text-[var(--color-accent)] hover:text-[color-mix(in_oklch,var(--color-accent)_80%,black)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface)] rounded-full px-2 py-1"
+                      >
+                        Add a network code (optional)
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                        </svg>
+                      </button>
+                    ) : (
+                      <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-accent)_6%,var(--color-surface))] p-4">
+                        <Field
+                          label="Network code"
+                          name="networkCode"
+                          value={form.networkCode}
+                          onChange={handleChange}
+                          error={errors.networkCode}
+                          placeholder="Enter your code"
+                        />
+                        <p className="mt-2 text-xs text-[var(--color-text-faint)]">
+                          Network codes discount the remainder only. The deposit stays $100.
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="mt-7">
+                  <Button type="submit" disabled={submitting} className="w-full justify-center">
+                    {submitting ? "Redirecting to payment..." : "Continue to deposit ($100)"}
+                  </Button>
+                  <p className="mt-3 text-xs text-[var(--color-text-faint)] text-center">
+                    You&apos;ll be redirected to Stripe to pay the $100 deposit. Full refund if
+                    unsatisfied by end of Day 2.
+                  </p>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <aside className="md:col-span-5 md:sticky md:top-28">
+            <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-surface)_70%,transparent)] backdrop-blur-md shadow-[var(--shadow-lg)] p-6">
+              <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
+                What happens next
+              </p>
+              <ol className="mt-4 space-y-4">
+                {[
+                  {
+                    t: "Submit your application",
+                    d: "Basic details + a short description of what you want to automate.",
+                  },
+                  {
+                    t: "Pay the $100 deposit via Stripe",
+                    d: "Secure checkout. The deposit reserves your seat.",
+                  },
+                  {
+                    t: "Get confirmation + prework",
+                    d: "You’ll receive next steps (what to bring, setup guidance, and prework).",
+                  },
+                ].map((s, idx) => (
+                  <li key={s.t} className="flex gap-3">
+                    <div className="mt-0.5 h-6 w-6 shrink-0 rounded-full border border-[color-mix(in_oklch,var(--color-accent)_30%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-accent)_8%,var(--color-surface))] flex items-center justify-center font-mono text-[11px] text-[var(--color-accent)]">
+                      {idx + 1}
+                    </div>
+                    <div>
+                      <p className="font-heading font-semibold text-[15px] text-[var(--color-text)]">
+                        {s.t}
+                      </p>
+                      <p className="mt-1 text-sm text-[var(--color-text-muted)]">
+                        {s.d}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+
+              <div className="mt-6 pt-6 border-t border-[var(--color-border)]">
+                <p className="font-heading font-semibold text-sm text-[var(--color-text)]">
+                  Refund policy
+                </p>
+                <p className="mt-2 text-sm text-[var(--color-text-muted)]">
+                  Full refund if unsatisfied by end of Day 2. Refunds issued within 7 days.
+                </p>
+              </div>
+            </div>
+          </aside>
+        </div>
       </div>
     </div>
   );
@@ -278,6 +386,7 @@ function Field({
   error,
   required,
   placeholder,
+  autoComplete,
 }: {
   label: string;
   name: string;
@@ -287,12 +396,15 @@ function Field({
   error?: string;
   required?: boolean;
   placeholder?: string;
+  autoComplete?: string;
 }) {
+  const errorId = `${name}-error`;
+  const describedBy = error ? errorId : undefined;
   return (
     <div>
       <label
         htmlFor={name}
-        className="block text-sm font-medium text-[var(--color-text-300)] mb-1.5"
+        className="block text-[13px] font-medium text-[var(--color-text)] mb-1.5"
       >
         {label}
         {required && (
@@ -305,15 +417,18 @@ function Field({
         type={type}
         value={value}
         onChange={onChange}
+        autoComplete={autoComplete}
         placeholder={placeholder}
-        className={`w-full rounded-lg border bg-[var(--color-bg-800)] px-4 py-3 text-sm text-[var(--color-text-100)] placeholder:text-[var(--color-text-500)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-500)]/50 transition-all ${
+        aria-invalid={Boolean(error)}
+        aria-describedby={describedBy}
+        className={`w-full rounded-[var(--radius-md)] border bg-[color-mix(in_oklch,var(--color-bg)_45%,var(--color-surface))] px-4 py-3 text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-faint)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface)] transition-colors ${
           error
-            ? "border-[var(--color-error)]"
-            : "border-[var(--color-border-700)]"
+            ? "border-[color-mix(in_oklch,var(--color-error)_55%,var(--color-border))]"
+            : "border-[var(--color-border)]"
         }`}
       />
       {error && (
-        <p className="mt-1 text-xs text-[var(--color-error)]">{error}</p>
+        <p id={errorId} className="mt-1.5 text-xs text-[var(--color-error)]">{error}</p>
       )}
     </div>
   );

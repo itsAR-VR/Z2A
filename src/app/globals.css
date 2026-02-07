@@ -1,28 +1,59 @@
 @import "tailwindcss";
 
-/* ─── Design Tokens ─── */
+/* ─── Design Tokens (Light-First) ─── */
 @theme {
-  --font-heading: "Sora", system-ui, sans-serif;
+  --font-heading: "Space Grotesk", system-ui, sans-serif;
   --font-body: "IBM Plex Sans", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
-  --color-bg-900: #0B0B0B;
-  --color-bg-850: #111111;
-  --color-bg-800: #171717;
-  --color-text-100: #F5F5F0;
-  --color-text-300: #CFCFC9;
-  --color-text-500: #9A9A94;
-  --color-accent-500: #21E27C;
-  --color-accent-600: #1BC96A;
-  --color-border-700: #2A2A2A;
-  --color-error: #EF4444;
+  /* Tailwind v4 spacing unit (required for p-/m-/gap- utilities). */
+  --spacing: 0.25rem;
+
+  /* Palette: tinted neutrals + indigo accent (Refunnel-inspired) */
+  --color-bg: oklch(98% 0.01 280);
+  --color-bg-2: oklch(99% 0.015 75);
+  --color-surface: oklch(100% 0.01 280);
+  --color-surface-2: oklch(97% 0.015 280);
+
+  --color-text: oklch(22% 0.03 280);
+  --color-text-muted: oklch(45% 0.03 280);
+  --color-text-faint: oklch(60% 0.02 280);
+
+  --color-border: oklch(88% 0.02 280);
+  --color-border-strong: oklch(80% 0.03 280);
+
+  --color-accent: oklch(55% 0.22 280);
+  --color-accent-2: oklch(60% 0.19 250);
+  --color-accent-ink: oklch(99% 0.01 280);
+  --color-focus: oklch(63% 0.22 280);
+
+  --color-error: oklch(58% 0.22 25);
+  --color-warning: oklch(80% 0.17 85);
+
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+
+  --shadow-sm: 0 1px 2px rgba(12, 12, 20, 0.06);
+  --shadow-md: 0 10px 30px rgba(12, 12, 20, 0.10);
+  --shadow-lg: 0 24px 80px rgba(12, 12, 20, 0.12);
+
+  /* Back-compat aliases (legacy token names used throughout the codebase). */
+  --color-bg-900: var(--color-bg);
+  --color-bg-850: var(--color-surface-2);
+  --color-bg-800: var(--color-surface);
+  --color-text-100: var(--color-text);
+  --color-text-300: var(--color-text-muted);
+  --color-text-500: var(--color-text-faint);
+  --color-border-700: var(--color-border);
+  --color-accent-500: var(--color-accent);
+  --color-accent-600: color-mix(in oklch, var(--color-accent) 86%, black);
 }
 
 /* ─── Base Resets ─── */
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 html {
@@ -33,10 +64,13 @@ html {
 
 body {
   font-family: var(--font-body);
-  background-color: var(--color-bg-900);
-  color: var(--color-text-100);
+  background:
+    radial-gradient(1100px 700px at 10% -20%, color-mix(in oklch, var(--color-accent) 14%, transparent) 0%, transparent 60%),
+    radial-gradient(900px 600px at 92% 12%, color-mix(in oklch, var(--color-accent-2) 12%, transparent) 0%, transparent 55%),
+    linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-2) 55%, var(--color-bg) 100%);
+  color: var(--color-text);
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Reduced motion: instant scroll, no transitions */
@@ -66,30 +100,19 @@ body {
 
 /* ─── Section Layout ─── */
 .section-padding {
-  padding-top: 96px;
-  padding-bottom: 96px;
-}
-
-@media (max-width: 768px) {
-  .section-padding {
-    padding-top: 64px;
-    padding-bottom: 64px;
-  }
+  padding-block: clamp(72px, 7vw, 124px);
 }
 
 .container-content {
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-inline: clamp(16px, 3vw, 28px);
 }
 
-@media (max-width: 768px) {
-  .container-content {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
+/* Anchor navigation should land below the sticky nav. */
+section[id] {
+  scroll-margin-top: 96px;
 }
 
 /* ─── Scrollbar Styling ─── */
@@ -98,16 +121,22 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-bg-900);
+  background: color-mix(in oklch, var(--color-bg) 82%, white);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border-700);
+  background: color-mix(in oklch, var(--color-border-strong) 60%, var(--color-bg));
   border-radius: 3px;
 }
 
 /* ─── Selection ─── */
 ::selection {
-  background: var(--color-accent-500);
-  color: var(--color-bg-900);
+  background: color-mix(in oklch, var(--color-accent) 24%, white);
+  color: var(--color-text);
+}
+
+/* ─── Keyframes ─── */
+@keyframes z2a-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }

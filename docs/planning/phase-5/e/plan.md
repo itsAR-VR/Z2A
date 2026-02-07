@@ -27,6 +27,11 @@ Provide a file-level implementation checklist for the follow-on agent to build:
 ## Output
 - A checklist that makes UI implementation executable without further clarification.
 
+## Validation (RED TEAM)
+
+- `npm run lint` / `npm run typecheck` / `npm run build`
+- `npm run test:e2e` (Playwright CLI smoke) using `docs/planning/phase-5/playwright-cli.md`
+- Manual: keyboard nav for `Nav` overlay, speaker modal focus trap/restore, accordion controls.
+
 ## Handoff
 Phase 5f runs QA and confirms acceptance criteria.
-

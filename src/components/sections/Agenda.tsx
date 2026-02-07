@@ -33,16 +33,16 @@ const days = [
 
 export function Agenda() {
   return (
-    <SectionWrapper id="agenda">
+    <SectionWrapper id="agenda" alt>
       <RevealOnScroll>
-        <h2 className="font-heading font-semibold text-[28px] leading-[34px] md:text-[40px] md:leading-[48px] mb-4">
+        <h2 className="font-heading font-semibold tracking-tight text-[clamp(28px,3.2vw,44px)] leading-[1.05] mb-4 text-[var(--color-text)]">
           Two days, structured for{" "}
-          <span className="text-[var(--color-accent-500)]">shipping.</span>
+          <span className="text-[var(--color-accent)]">shipping.</span>
         </h2>
       </RevealOnScroll>
 
       <RevealOnScroll delay={100}>
-        <p className="text-[var(--color-text-300)] text-base md:text-lg max-w-2xl mb-12">
+        <p className="text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed max-w-2xl mb-12">
           Short instruction blocks, long build blocks, clear checkpoints.
         </p>
       </RevealOnScroll>
@@ -52,10 +52,10 @@ export function Agenda() {
           <RevealOnScroll key={day.day} delay={i * 150}>
             <Card hoverable={false} className="h-full">
               <div className="flex items-baseline gap-3 mb-6">
-                <h3 className="font-heading font-bold text-xl text-[var(--color-accent-500)]">
+                <h3 className="font-heading font-bold text-xl text-[var(--color-accent)]">
                   {day.day}
                 </h3>
-                <span className="font-mono text-xs text-[var(--color-text-500)]">
+                <span className="font-mono text-xs tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
                   {day.date}
                 </span>
               </div>
@@ -63,12 +63,12 @@ export function Agenda() {
                 {day.blocks.map((block) => (
                   <div
                     key={block.time}
-                    className="flex gap-4 items-baseline py-2 border-b border-[var(--color-border-700)] last:border-0"
+                    className="flex gap-4 items-baseline py-2 border-b border-[var(--color-border)] last:border-0"
                   >
-                    <span className="font-mono text-sm text-[var(--color-text-500)] w-14 shrink-0">
+                    <span className="font-mono text-[12px] tracking-[0.14em] uppercase text-[var(--color-text-faint)] w-16 shrink-0">
                       {block.time}
                     </span>
-                    <span className="text-sm text-[var(--color-text-300)]">
+                    <span className="text-sm text-[var(--color-text-muted)]">
                       {block.label}
                     </span>
                   </div>

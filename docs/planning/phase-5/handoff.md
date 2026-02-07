@@ -19,11 +19,11 @@ Build a high-quality single-page landing experience for a 2-day, in-person AI-ag
 
 ## 2. Current Repo State
 
-### Already built (backend scaffold):
+### Already built (core functionality):
 | Artifact | Path | Status |
 |----------|------|--------|
 | Next.js 16 + App Router | `src/app/` | Working |
-| Prisma 7 schema | `prisma/schema.prisma` | 3 models (Attendee, ReferralCode, StripeEvent) |
+| Prisma 7 schema | `prisma/schema.prisma` | 4 models + enums (Attendee, ReferralCode, ReferralCodeAuditLog, StripeEvent) |
 | Apply API | `src/app/api/apply/route.ts` | POST → creates attendee + Stripe checkout |
 | Stripe webhook | `src/app/api/stripe/webhook/route.ts` | Idempotent handler |
 | Admin attendees API | `src/app/api/admin/attendees/route.ts` | GET with search |
@@ -31,15 +31,18 @@ Build a high-quality single-page landing experience for a 2-day, in-person AI-ag
 | Basic auth middleware | `src/middleware.ts` | Protects `/admin/*` and `/api/admin/*` |
 | Lib modules | `src/lib/{config,db,env,stripe}.ts` | Config, Prisma client, env validation, Stripe client |
 | Tailwind CSS v4 | `postcss.config.mjs` + `globals.css` | Configured |
+| Public UI (anchored IA) | `src/components/sections/*` + `src/app/page.tsx` | Implemented |
+| Speakers modal | `src/components/sections/Speakers.tsx` + `src/components/Dialog.tsx` | Implemented |
+| Apply pages | `src/app/apply/*` | Implemented |
+| Admin UI | `src/app/admin/*` + `src/components/admin/*` | Implemented |
+| Playwright smoke | `playwright.config.ts` + `z2a/*.spec.ts` | Implemented (CLI) |
 
-### Not yet built (this phase):
-- All UI pages (currently placeholder text)
-- Motion system (Lenis, GSAP/ScrollTrigger, CSS reveals)
-- Admin UI (attendees table, referral code CRUD, audit logs)
-- `Attendee.internalNotes` field
-- `ReferralCodeAuditLog` model
-- Admin PATCH endpoints (attendee status, referral code toggle)
-- Speaker section content and assets
+### Remaining (to fully “close the loop”):
+- Run Playwright smoke in an environment that can start a dev server and reach the internet:
+  - `docs/planning/phase-5/playwright-cli.md`
+- Run Stripe CLI webhook smoke locally/CI:
+  - `docs/planning/phase-5/stripe-cli.md`
+- Optional: capture fresh competitive screenshots (Refunnel / TKS / Z2A) using `scripts/snapshot-sites.mjs` from a non-restricted machine.
 
 ---
 
@@ -110,9 +113,9 @@ Build a high-quality single-page landing experience for a 2-day, in-person AI-ag
 - **Referral Codes tab:**
   - Table listing all codes with active/inactive status
   - Create new code form
-  - Toggle active/inactive (requires reason text)
+  - Toggle active/inactive (reason required to deactivate; optional to activate)
   - Click row → audit log viewer
-- All mutations logged to `ReferralCodeAuditLog`
+  - All mutations logged to `ReferralCodeAuditLog`
 
 ---
 
@@ -151,7 +154,7 @@ POST /api/admin/referral-codes
   Response: { referralCode: {...} }
 
 PATCH /api/admin/referral-codes/[id]
-  Body: { active: boolean, reason: string }
+  Body: { active: boolean, reason?: string } // reason required when deactivating
   Response: { referralCode: {...} }
 
 GET /api/admin/referral-codes/[id]/audit
@@ -181,52 +184,59 @@ ADMIN_BASIC_AUTH_PASS=...              # Admin password
 
 ### Speaker 1: Aadil Kazmi (Instructor)
 - **Role:** Instructor · Zero-to-Agent
-- **Bio:** Forbes 30 Under 30 Honoree. Built and scaled AI automation systems across enterprise clients.
-- **LinkedIn:** (link to profile)
-- **Headshot:** `/public/speakers/aadil-headshot.jpg` (optional placeholder)
+- **Bio:** Head of AI at Infios. Forbes 30 Under 30 Honoree.
+- **LinkedIn:** https://www.linkedin.com/in/aadilkazmi/
+- **Headshot:** `/public/speakers/aadil-headshot.jpg`
 
-### Speaker 2: Abdur (Guest Speaker)
-- **Full name on award:** Teddy Joseph (this is Abdur's legal/award name)
+### Speaker 2: Abdur Sajid (Guest Speaker)
 - **Role:** Guest Speaker · Zero Risk Growth (cold2close.ai)
 - **Bio bullets:**
   - 20 years old, high school dropout
   - Started first AI startup at 16
   - OpenAI award: "Honored for passing 100 Billion Tokens" (transcribed verbatim from `docs/image2-2-1.jpeg`)
 - **Content:** Will share insights on scaling AI agent businesses from zero
-- **LinkedIn:** (link to profile)
+- **LinkedIn:** https://www.linkedin.com/in/abdur-sajid/
 - **Headshot:** `/public/speakers/abdur-headshot.jpg`
-- **Company logo:** `/public/speakers/cold2close-logo.png`
+- **Award plaque image:** `/public/speakers/openai-award-plaque.jpeg`
+- **Company logo:** `/public/speakers/cold2close-logo.svg` (replace with a PNG later if desired)
+
+> Note: The award plaque image (`docs/image2-2-1.jpeg`) also contains the name "Teddy Joseph".
+> Only treat this as text on the plaque unless you have explicit confirmation you want it presented as Abdur's name.
 
 ---
 
 ## 8. Design Tokens
 
 ### Colors
+Light-first tinted neutrals + indigo accent (OKLCH), defined in `src/app/globals.css`.
+
 | Token | Value | Usage |
 |-------|-------|-------|
-| `--bg-primary` | `#0B0B0B` | Page background |
-| `--text-primary` | `#F5F5F0` | Main text |
-| `--accent` | `#21E27C` | CTAs, highlights, active states |
-| `--accent-hover` | `#1BC96C` | Button hover state |
-| `--text-muted` | `#A0A0A0` | Secondary text |
-| `--border` | `#1A1A1A` | Card borders, dividers |
-| `--surface` | `#111111` | Card backgrounds |
-| `--surface-hover` | `#161616` | Card hover state |
+| `--color-bg` | `oklch(98% 0.01 280)` | Page background |
+| `--color-bg-2` | `oklch(99% 0.015 75)` | Secondary background tint |
+| `--color-surface` | `oklch(100% 0.01 280)` | Surface (cards, pills) |
+| `--color-surface-2` | `oklch(97% 0.015 280)` | Subtle surface tint |
+| `--color-text` | `oklch(22% 0.03 280)` | Primary text |
+| `--color-text-muted` | `oklch(45% 0.03 280)` | Secondary text |
+| `--color-text-faint` | `oklch(60% 0.02 280)` | Tertiary text |
+| `--color-border` | `oklch(88% 0.02 280)` | Borders/dividers |
+| `--color-border-strong` | `oklch(80% 0.03 280)` | Strong borders |
+| `--color-accent` | `oklch(55% 0.22 280)` | CTAs/highlights |
+| `--color-accent-2` | `oklch(60% 0.19 250)` | Secondary accent glow |
+| `--color-accent-ink` | `oklch(99% 0.01 280)` | Text on accent |
+| `--color-focus` | `oklch(63% 0.22 280)` | Focus ring |
 
 ### Typography
 | Element | Font | Weight | Size (desktop) | Size (mobile) | Line Height |
 |---------|------|--------|----------------|---------------|-------------|
-| H1 | Sora | 700 | 56px | 34px | 1.14 |
-| H2 | Sora | 600 | 40px | 28px | 1.2 |
-| H3 | Sora | 600 | 24px | 20px | 1.33 |
-| Body | IBM Plex Sans | 400 | 18px | 16px | 1.6 |
-| Body sm | IBM Plex Sans | 400 | 14px | 14px | 1.5 |
-| Label | IBM Plex Mono | 500 | 12px | 11px | 1.33 |
+| Headings | Space Grotesk | 600–700 | clamp-based | clamp-based | ~1.0–1.1 |
+| Body | IBM Plex Sans | 400–500 | 18px | 15–16px | 1.6 |
+| Labels | IBM Plex Mono | 400–500 | 11–12px | 11px | 1.3 |
 
 ### Spacing
-- Base unit: 8px
-- Section padding: 96–120px (desktop), 64–80px (mobile)
-- Content max-width: 1200px with 24px gutters (mobile: 16px)
+- Base unit: `--spacing: 0.25rem` (Tailwind v4)
+- Section padding: `clamp(72px, 7vw, 124px)` (see `.section-padding`)
+- Content max-width: 1200px with `clamp(16px, 3vw, 28px)` gutters (see `.container-content`)
 
 ---
 
