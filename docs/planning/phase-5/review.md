@@ -29,6 +29,7 @@ Build notes:
   - `src/components/sections/Speakers.tsx`
   - `src/components/Dialog.tsx`
   - `src/components/SpeakerAvatar.tsx`
+  - Abdur Sajid modal copy clarifies the **team** OpenAI recognition (100B tokens) and includes links to `zeroriskgrowth.com` + `cold2close.ai`.
 - Referral code toggle reason semantics aligned across server/UI/docs:
   - Reason **required only for deactivation**, optional for activation/reactivation
   - `src/app/api/admin/referral-codes/[id]/route.ts`

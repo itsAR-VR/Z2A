@@ -15,6 +15,7 @@ type Speaker = {
   bio: string;
   highlights: string[];
   details?: string[];
+  links?: { label: string; href: string }[];
   awardPlaqueSrc?: string;
   awardPlaqueAlt?: string;
   companyLogoSrc?: string;
@@ -52,14 +53,20 @@ const speakers: Speaker[] = [
     role: "Guest Speaker · Zero Risk Growth (cold2close.ai)",
     bio: "Will share insights on scaling AI agent businesses from zero.",
     highlights: [
-      "Zero Risk Growth (cold2close.ai).",
-      'OpenAI award: "Honored for passing 100 Billion Tokens."',
+      "Head of AI & Development at Zero Risk Growth (cold2close.ai).",
+      "Zero Risk Growth team recognized by OpenAI for passing 100B tokens.",
       "Started first AI startup at 16.",
     ],
     details: [
-      "20 years old, high school dropout.",
+      "Head of AI & Development at Zero Risk Growth.",
+      "Joined after the team passed 100B tokens; scaling the next phase.",
+      "Zero Risk Growth team recognized by OpenAI for passing 100B tokens.",
       "Started first AI startup at 16.",
-      'OpenAI award: "Honored for passing 100 Billion Tokens."',
+      "20 years old, high school dropout.",
+    ],
+    links: [
+      { label: "zeroriskgrowth.com", href: "https://zeroriskgrowth.com" },
+      { label: "cold2close.ai", href: "https://cold2close.ai" },
     ],
     companyLogoSrc: "/speakers/cold2close-logo.svg",
     companyLogoAlt: "cold2close.ai logo",
@@ -132,6 +139,41 @@ export function Speakers() {
                   className="h-6 w-auto"
                   loading="lazy"
                 />
+              </div>
+            ) : null}
+
+            {activeSpeaker.links?.length ? (
+              <div className="mt-4 flex flex-wrap gap-2">
+                {activeSpeaker.links.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.14em] uppercase px-3 py-1 rounded-full border border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-accent)_6%,var(--color-surface))] text-[var(--color-text-muted)] transition-[transform,border-color,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:border-[color-mix(in_oklch,var(--color-accent)_22%,var(--color-border))] hover:shadow-[var(--shadow-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface)]"
+                  >
+                    {link.label}
+                    <svg
+                      className="h-3.5 w-3.5"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M14 3h7v7m0-7L10 14"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M5 7v14h14v-5"
+                      />
+                    </svg>
+                  </a>
+                ))}
               </div>
             ) : null}
 
