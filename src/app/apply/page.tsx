@@ -38,7 +38,9 @@ function ApplyForm() {
   const [errors, setErrors] = useState<FieldError>({});
   const [serverError, setServerError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
-  const [showNetworkCode, setShowNetworkCode] = useState(false);
+  const [showNetworkCode, setShowNetworkCode] = useState(
+    () => searchParams.get("network") === "1",
+  );
 
   function validate(): FieldError {
     const e: FieldError = {};

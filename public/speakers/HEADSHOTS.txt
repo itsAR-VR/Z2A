@@ -1,0 +1,8 @@
+Headshots (public/speakers/)
+
+- aadil-headshot.jpg
+- abdur-headshot.jpg
+
+Notes
+- Keep filenames stable (they are referenced in src/components/sections/Speakers.tsx).
+- Prefer square-ish crops (>= 512px) with faces centered.

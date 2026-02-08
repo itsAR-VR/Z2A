@@ -54,13 +54,14 @@ const speakers: Speaker[] = [
     bio: "Will share insights on scaling AI agent businesses from zero.",
     highlights: [
       "Head of AI & Development at Zero Risk Growth (cold2close.ai).",
-      "Zero Risk Growth team recognized by OpenAI for passing 100B tokens.",
+      "Joined after the team passed 100B tokens; leading what comes next.",
+      "Zero Risk Growth AI team was awarded by OpenAI for passing 100B tokens.",
       "Started first AI startup at 16.",
     ],
     details: [
       "Head of AI & Development at Zero Risk Growth.",
-      "Joined after the team passed 100B tokens; scaling the next phase.",
-      "Zero Risk Growth team recognized by OpenAI for passing 100B tokens.",
+      "Joined after the team passed 100B tokens; leading what comes next.",
+      "Zero Risk Growth AI team was awarded by OpenAI for passing 100B tokens.",
       "Started first AI startup at 16.",
       "20 years old, high school dropout.",
     ],
@@ -72,7 +73,7 @@ const speakers: Speaker[] = [
     companyLogoAlt: "cold2close.ai logo",
     awardPlaqueSrc: "/speakers/openai-award-plaque.jpeg",
     awardPlaqueAlt:
-      'OpenAI award plaque reading: OpenAI, Teddy Joseph, "Honored for passing 100 Billion Tokens."',
+      "OpenAI award plaque recognizing the Zero Risk Growth AI team for passing 100B tokens.",
     badges: ["Guest", "OpenAI 100B Tokens", "cold2close.ai"],
     initials: "AS",
     headshotSrc: "/speakers/abdur-headshot.jpg",
@@ -177,6 +178,46 @@ export function Speakers() {
               </div>
             ) : null}
 
+            {activeSpeaker.linkedinUrl ? (
+              <div className="mt-4">
+                <a
+                  href={activeSpeaker.linkedinUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center gap-2 font-heading font-semibold text-[14px] leading-none px-4 py-2.5 rounded-full bg-[var(--color-surface)] border border-[var(--color-border-strong)] text-[var(--color-text)] shadow-[var(--shadow-sm)] transition-[transform,box-shadow,border-color] duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)] hover:border-[color-mix(in_oklch,var(--color-accent)_42%,var(--color-border-strong))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface)]"
+                >
+                  <svg
+                    className="h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 114.126 0 2.062 2.062 0 01-2.063 2.065zM6.814 20.452H3.861V9h2.953v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.727v20.545C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.273V1.727C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
+                  LinkedIn
+                  <svg
+                    className="h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M14 3h7v7m0-7L10 14"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M5 7v14h14v-5"
+                    />
+                  </svg>
+                </a>
+              </div>
+            ) : null}
+
             <div className="mt-5 text-[var(--color-text-muted)] text-sm leading-relaxed">
               {activeSpeaker.details ? (
                 <ul className="space-y-2">
@@ -215,46 +256,6 @@ export function Speakers() {
                     />
                   </div>
                 </figure>
-              </div>
-            ) : null}
-
-            {activeSpeaker.linkedinUrl ? (
-              <div className="mt-6">
-                <a
-                  href={activeSpeaker.linkedinUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-2 font-heading font-semibold text-[14px] leading-none px-4 py-2.5 rounded-full bg-[var(--color-surface)] border border-[var(--color-border-strong)] text-[var(--color-text)] shadow-[var(--shadow-sm)] transition-[transform,box-shadow,border-color] duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)] hover:border-[color-mix(in_oklch,var(--color-accent)_42%,var(--color-border-strong))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface)]"
-                >
-                  <svg
-                    className="h-4 w-4"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 114.126 0 2.062 2.062 0 01-2.063 2.065zM6.814 20.452H3.861V9h2.953v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.727v20.545C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.273V1.727C24 .774 23.2 0 22.222 0h.003z" />
-                  </svg>
-                  LinkedIn
-                  <svg
-                    className="h-4 w-4"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M14 3h7v7m0-7L10 14"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M5 7v14h14v-5"
-                    />
-                  </svg>
-                </a>
               </div>
             ) : null}
           </div>

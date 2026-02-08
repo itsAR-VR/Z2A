@@ -49,7 +49,6 @@ async function dismissCookieBanners(page) {
     "Allow all",
     "Accept all",
     "I agree",
-    "OK",
     "Got it",
   ];
 
@@ -241,7 +240,7 @@ try {
       }
 
       // Competitor sites often have cookie banners that obscure the hero.
-      if (!url.includes("localhost")) {
+      if (!url.includes("localhost") && !url.includes("zerotoagent.com")) {
         // Some sites show banners after initial hydration; try twice.
         await dismissCookieBanners(page);
         await page.waitForTimeout(900);

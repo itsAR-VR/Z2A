@@ -16,6 +16,14 @@ test.describe("Apply", () => {
   test("submits and redirects (mocked /api/apply)", async ({ page }) => {
     await page.route("**/api/apply", async (route) => {
       if (route.request().method() !== "POST") return route.continue();
+      const body = route.request().postDataJSON();
+      expect(body).toEqual({
+        firstName: "Test",
+        lastName: "User",
+        email: "test@example.com",
+        roleTitle: "Product Manager",
+        useCase: "Triage inbound support tickets and draft replies with guardrails.",
+      });
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -37,4 +45,3 @@ test.describe("Apply", () => {
     await expect(page).toHaveURL(/\/apply\/success$/);
   });
 });
-

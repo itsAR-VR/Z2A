@@ -32,10 +32,75 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: `Invalid signature: ${message}` }, { status: 400 });
   }
 
-  // Idempotency: Stripe will retry; duplicates must be safe.
+  // Idempotency + reliability:
+  //
+  // Stripe will retry deliveries on 5xx/timeouts. We want duplicates to be safe
+  // AND we want retries to be able to re-attempt side effects if we fail mid-way.
+  // Use a transaction so `StripeEvent` creation and side effects are atomic.
   try {
-    await prisma.stripeEvent.create({
-      data: { stripeEventId: event.id, eventType: event.type },
+    await prisma.$transaction(async (tx) => {
+      await tx.stripeEvent.create({
+        data: { stripeEventId: event.id, eventType: event.type },
+      });
+
+      switch (event.type) {
+        case "checkout.session.completed": {
+          const session = event.data.object as Stripe.Checkout.Session;
+          const attendeeId = session.metadata?.attendee_id || session.client_reference_id;
+
+          if (!attendeeId) {
+            // No-op, but log for debugging so we can fix checkout metadata quickly.
+            console.error("[stripe-webhook] Missing attendee reference on checkout.session.completed", {
+              eventId: event.id,
+              sessionId: session.id,
+            });
+            break;
+          }
+
+          if (!session.metadata?.attendee_id) {
+            console.error(
+              "[stripe-webhook] checkout.session.completed missing metadata.attendee_id; using client_reference_id",
+              { eventId: event.id, sessionId: session.id },
+            );
+          }
+
+          const updated = await tx.attendee.updateMany({
+            where: { id: attendeeId },
+            data: {
+              depositStatus: "paid",
+              checkoutSessionId: session.id,
+              depositPaymentIntentId: getPaymentIntentId(session.payment_intent),
+            },
+          });
+
+          if (updated.count === 0) {
+            console.error("[stripe-webhook] Attendee not found for checkout.session.completed", {
+              eventId: event.id,
+              sessionId: session.id,
+              attendeeId,
+            });
+          }
+
+          break;
+        }
+
+        case "charge.refunded": {
+          const charge = event.data.object as Stripe.Charge;
+          const paymentIntentId = getPaymentIntentId(charge.payment_intent);
+          if (!paymentIntentId) break;
+
+          await tx.attendee.updateMany({
+            where: { depositPaymentIntentId: paymentIntentId },
+            data: { depositStatus: "refunded" },
+          });
+          break;
+        }
+
+        default: {
+          // Ignore unhandled event types for now.
+          break;
+        }
+      }
     });
   } catch (err) {
     const code =
@@ -43,48 +108,10 @@ export async function POST(req: Request) {
         ? (err as { code?: unknown }).code
         : null;
     if (code === "P2002") {
+      // Duplicate event delivery.
       return NextResponse.json({ received: true });
     }
     throw err;
-  }
-
-  switch (event.type) {
-    case "checkout.session.completed": {
-      const session = event.data.object as Stripe.Checkout.Session;
-      const attendeeId = session.metadata?.attendee_id;
-
-      if (!attendeeId) {
-        break;
-      }
-
-      await prisma.attendee.update({
-        where: { id: attendeeId },
-        data: {
-          depositStatus: "paid",
-          checkoutSessionId: session.id,
-          depositPaymentIntentId: getPaymentIntentId(session.payment_intent),
-        },
-      });
-
-      break;
-    }
-
-    case "charge.refunded": {
-      const charge = event.data.object as Stripe.Charge;
-      const paymentIntentId = getPaymentIntentId(charge.payment_intent);
-      if (!paymentIntentId) break;
-
-      await prisma.attendee.updateMany({
-        where: { depositPaymentIntentId: paymentIntentId },
-        data: { depositStatus: "refunded" },
-      });
-      break;
-    }
-
-    default: {
-      // Ignore unhandled event types for now.
-      break;
-    }
   }
 
   return NextResponse.json({ received: true });

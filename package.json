@@ -11,6 +11,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "test:e2e": "playwright test --reporter=list",
+    "test:e2e:prod": "playwright test --reporter=list --grep @prod-safe",
     "prisma:generate": "prisma generate",
     "postinstall": "npm run prisma:generate",
     "db:push": "prisma db push",

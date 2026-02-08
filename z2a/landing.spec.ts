@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Landing", () => {
-  test("renders hero and anchored sections", async ({ page }) => {
+  test("renders hero and anchored sections @prod-safe", async ({ page }) => {
     await page.goto("/");
 
     await expect(page.getByRole("heading", { level: 1 })).toContainText(

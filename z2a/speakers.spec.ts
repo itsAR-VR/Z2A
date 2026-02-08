@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Speakers", () => {
-  test("opens Abdur Sajid profile with award plaque and restores focus on close", async ({
+  test("opens Abdur Sajid profile with award plaque and restores focus on close @prod-safe", async ({
     page,
   }) => {
     await page.goto("/");
@@ -36,7 +36,7 @@ test.describe("Speakers", () => {
     await expect(trigger).toBeFocused();
   });
 
-  test("opens Aadil profile and does not show award plaque", async ({ page }) => {
+  test("opens Aadil profile and does not show award plaque @prod-safe", async ({ page }) => {
     await page.goto("/");
 
     const trigger = page.getByRole("button", { name: "View Aadil Kazmi details" });

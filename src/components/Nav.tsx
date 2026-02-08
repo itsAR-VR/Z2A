@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { Button } from "./Button";
 
 const navLinks = [
@@ -19,11 +20,43 @@ const sectionIds = ["top", ...navLinks.map((l) => l.id), "apply"];
 
 export function Nav() {
   const activeId = useScrollSpy(sectionIds);
+  const reducedMotion = useReducedMotion();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuRendered, setMenuRendered] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement | null>(null);
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const firstOverlayLinkRef = useRef<HTMLAnchorElement | null>(null);
   const prevMenuOpenRef = useRef(false);
+  const closeTimeoutRef = useRef<number | null>(null);
+
+  const openMenu = useCallback(() => {
+    if (closeTimeoutRef.current) {
+      window.clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setMenuRendered(true);
+    setMenuOpen(true);
+  }, []);
+
+  const closeMenu = useCallback(() => {
+    if (closeTimeoutRef.current) {
+      window.clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+
+    setMenuOpen(false);
+
+    if (reducedMotion) {
+      setMenuRendered(false);
+      return;
+    }
+
+    // Keep the overlay mounted briefly to allow CSS fade-out to complete.
+    closeTimeoutRef.current = window.setTimeout(() => {
+      closeTimeoutRef.current = null;
+      setMenuRendered(false);
+    }, 180);
+  }, [reducedMotion]);
 
   useEffect(() => {
     const wasOpen = prevMenuOpenRef.current;
@@ -39,19 +72,42 @@ export function Nav() {
 
   // Lock body scroll when menu is open
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    if (!menuOpen) return;
+
+    const prevOverflow = document.body.style.overflow;
+    const prevPaddingRight = document.body.style.paddingRight;
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+
+    document.body.style.overflow = "hidden";
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
+
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      document.body.style.paddingRight = prevPaddingRight;
+    };
   }, [menuOpen]);
 
   // ESC closes the overlay menu.
   useEffect(() => {
     if (!menuOpen) return;
     function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") setMenuOpen(false);
+      if (e.key === "Escape") closeMenu();
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [menuOpen]);
+  }, [menuOpen, closeMenu]);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        window.clearTimeout(closeTimeoutRef.current);
+        closeTimeoutRef.current = null;
+      }
+    };
+  }, []);
 
   function trapFocus(e: React.KeyboardEvent) {
     if (!menuOpen || e.key !== "Tab") return;
@@ -61,7 +117,14 @@ export function Nav() {
       root.querySelectorAll<HTMLElement>(
         'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])',
       ),
-    ).filter((el) => !el.hasAttribute("aria-hidden"));
+    ).filter((el) => {
+      if (el.getAttribute("aria-hidden") === "true") return false;
+      if (el.hasAttribute("hidden")) return false;
+      if ("disabled" in el && Boolean((el as { disabled?: boolean }).disabled)) {
+        return false;
+      }
+      return true;
+    });
 
     if (focusable.length === 0) return;
     const first = focusable[0];
@@ -96,6 +159,7 @@ export function Nav() {
                 <a
                   key={link.id}
                   href={`#${link.id}`}
+                  aria-current={activeId === link.id ? "page" : undefined}
                   className={`rounded-full px-3 py-2 text-[13px] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] ${
                     activeId === link.id
                       ? "text-[var(--color-accent)]"
@@ -117,10 +181,11 @@ export function Nav() {
             <button
               ref={menuButtonRef}
               type="button"
-              className="md:hidden inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-[13px] font-medium text-[var(--color-text)] shadow-[var(--shadow-sm)] transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
-              onClick={() => setMenuOpen((v) => !v)}
+              className="md:hidden inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-[13px] font-medium text-[var(--color-text)] shadow-[var(--shadow-sm)] transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:hover:shadow-[var(--shadow-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
+              onClick={() => (menuOpen ? closeMenu() : openMenu())}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
+              aria-controls="nav-menu"
             >
               <span>Menu</span>
               {menuOpen ? (
@@ -138,25 +203,47 @@ export function Nav() {
       </nav>
 
       {/* Mobile overlay menu */}
-      {menuOpen && (
+      {menuRendered && (
         <div
           ref={overlayRef}
+          id="nav-menu"
           role="dialog"
           aria-modal="true"
-          aria-label="Navigation menu"
-          className="fixed inset-0 z-40 bg-[color-mix(in_oklch,var(--color-bg)_84%,black)] backdrop-blur-sm"
+          aria-labelledby="nav-menu-title"
+          aria-hidden={!menuOpen}
+          className={`fixed inset-0 z-[60] bg-[color-mix(in_oklch,var(--color-bg)_84%,black)] backdrop-blur-sm ${
+            reducedMotion ? "" : "transition-opacity duration-200 ease-out"
+          } ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
           onKeyDown={trapFocus}
         >
           <div className="container-content pt-24 pb-10">
-            <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-lg)] p-6">
+            <div
+              className={`rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-lg)] p-6 ${
+                reducedMotion
+                  ? ""
+                  : "transition-[transform,opacity] duration-200 ease-out"
+              } ${menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}
+            >
               <div className="flex items-center justify-between gap-3 mb-6">
-                <p className="font-heading font-semibold text-[13px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
-                  Navigate
-                </p>
+                <div className="flex items-center gap-2">
+                  <p
+                    id="nav-menu-title"
+                    className="font-heading font-semibold text-[13px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]"
+                  >
+                    Navigate
+                  </p>
+                  <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-accent)_8%,var(--color-surface))] px-3 py-1 text-[11px] font-mono tracking-[0.14em] uppercase text-[var(--color-text-muted)]">
+                    <span
+                      aria-hidden="true"
+                      className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]"
+                    />
+                    Admissions open
+                  </span>
+                </div>
                 <button
                   type="button"
                   className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-[13px] font-medium text-[var(--color-text)] shadow-[var(--shadow-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface)]"
-                  onClick={() => setMenuOpen(false)}
+                  onClick={closeMenu}
                 >
                   Close
                 </button>
@@ -168,12 +255,13 @@ export function Nav() {
                     key={link.id}
                     ref={idx === 0 ? firstOverlayLinkRef : undefined}
                     href={`#${link.id}`}
+                    aria-current={activeId === link.id ? "page" : undefined}
                     className={`rounded-[var(--radius-md)] border border-[var(--color-border)] px-4 py-4 font-heading text-base font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface)] ${
                       activeId === link.id
                         ? "text-[var(--color-accent)] bg-[color-mix(in_oklch,var(--color-accent)_8%,var(--color-surface))]"
                         : "text-[var(--color-text)] hover:bg-[color-mix(in_oklch,var(--color-accent)_6%,var(--color-surface))]"
                     }`}
-                    onClick={() => setMenuOpen(false)}
+                    onClick={closeMenu}
                   >
                     {link.label}
                   </a>
@@ -181,7 +269,7 @@ export function Nav() {
               </div>
 
               <div className="mt-6 pt-6 border-t border-[var(--color-border)] flex flex-col gap-3">
-                <Button href="/apply" onClick={() => setMenuOpen(false)} className="w-full justify-center">
+                <Button href="/apply" onClick={closeMenu} className="w-full justify-center">
                   Apply / Reserve Seat
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />

@@ -145,11 +145,19 @@ export function Hero() {
             <div ref={ctasRef} className="mt-8 flex flex-col sm:flex-row gap-3">
               <Button href="/apply">
                 Apply / Reserve Seat
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <svg
+                  aria-hidden="true"
+                  focusable="false"
+                  className="w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Button>
-              <Button variant="secondary" href="/apply">
+              <Button variant="secondary" href="/apply?network=1">
                 Have a network code?
               </Button>
             </div>
@@ -159,9 +167,15 @@ export function Hero() {
                 Deposit $100 today
               </span>
               <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 shadow-[var(--shadow-sm)]">
+                Checkout via Stripe
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 shadow-[var(--shadow-sm)]">
+                Full refund by end of Day 2
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 shadow-[var(--shadow-sm)]">
                 Location:{" "}
                 <span className="text-[var(--color-text-muted)]">
-                  Please register to see the exact location of this event.
+                  Venue shared after you reserve a seat.
                 </span>
               </span>
               <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 shadow-[var(--shadow-sm)]">
@@ -196,7 +210,15 @@ export function Hero() {
                 ].map((item) => (
                   <li key={item.title} className="flex gap-3">
                     <div className="mt-1 h-5 w-5 shrink-0 rounded-full bg-[color-mix(in_oklch,var(--color-accent)_18%,white)] border border-[color-mix(in_oklch,var(--color-accent)_35%,var(--color-border))] flex items-center justify-center">
-                      <svg className="h-3 w-3 text-[var(--color-accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        className="h-3 w-3 text-[var(--color-accent)]"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={2.5}
+                      >
                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
