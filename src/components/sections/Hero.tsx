@@ -2,11 +2,13 @@
 
 import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
-import { useReveal } from "@/hooks/useReveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { DURATION, EASE } from "@/lib/motion-tokens";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
+import { MotionPathPlugin } from "gsap/MotionPathPlugin";
+
+gsap.registerPlugin(MotionPathPlugin);
 
 const marqueeItems = [
   "Applications open",
@@ -49,12 +51,9 @@ export function Hero() {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const headlineRef = useRef<HTMLHeadingElement | null>(null);
   const subheadRef = useRef<HTMLParagraphElement | null>(null);
+  const loopRef = useRef<HTMLDivElement | null>(null);
   const ctasRef = useRef<HTMLDivElement | null>(null);
   const artRef = useRef<HTMLDivElement | null>(null);
-  const { ref: traceRef, isVisible: traceVisible } = useReveal<HTMLDivElement>({
-    threshold: 0.2,
-  });
-  const traceActive = prefersReduced || traceVisible;
 
   useLayoutEffect(() => {
     if (prefersReduced) return;
@@ -82,6 +81,12 @@ export function Hero() {
           "-=0.5",
         )
         .fromTo(
+          loopRef.current,
+          { opacity: 0.96, y: 6 },
+          { opacity: 1, y: 0, duration: DURATION.default },
+          "-=0.35",
+        )
+        .fromTo(
           ctasRef.current,
           { opacity: 0.96, y: 6 },
           { opacity: 1, y: 0, duration: DURATION.default },
@@ -93,6 +98,77 @@ export function Hero() {
           { opacity: 1, y: 0, rotate: 0, duration: DURATION.cinematic },
           "-=0.35",
         );
+
+      // Subtle “agent loop” animation: draw path, then run a dot around the loop.
+      const loopRoot = loopRef.current;
+      if (!loopRoot) return;
+
+      const drawPath = loopRoot.querySelector<SVGPathElement>(
+        "path[data-loop-draw]",
+      );
+      const runner = loopRoot.querySelector<SVGCircleElement>(
+        "circle[data-loop-runner]",
+      );
+      const pulses = Array.from(
+        loopRoot.querySelectorAll<SVGCircleElement>("circle[data-loop-pulse]"),
+      );
+
+      if (!drawPath || !runner) return;
+
+      const length = Math.max(1, drawPath.getTotalLength());
+      gsap.set(drawPath, {
+        opacity: 1,
+        strokeDasharray: length,
+        strokeDashoffset: length,
+      });
+      gsap.set(runner, { opacity: 0, scale: 0.9, transformOrigin: "50% 50%" });
+
+      const loopIntro = gsap.timeline({
+        defaults: { ease: EASE.quint },
+        delay: 0.25,
+      });
+      loopIntro
+        .to(drawPath, { strokeDashoffset: 0, duration: 1.05 })
+        .to(runner, { opacity: 1, scale: 1, duration: DURATION.fast }, "-=0.55");
+
+      // Runner motion: continuous, transform-only.
+      gsap.to(runner, {
+        delay: 0.7,
+        duration: 5.4,
+        repeat: -1,
+        ease: "none",
+        motionPath: {
+          path: drawPath,
+          align: drawPath,
+          alignOrigin: [0.5, 0.5],
+          autoRotate: false,
+        },
+      });
+
+      // Node pulses: staggered and restrained (no “bouncy” feel).
+      if (pulses.length > 0) {
+        pulses.forEach((p) => {
+          // Ensure SVG transforms behave predictably.
+          p.style.transformBox = "fill-box";
+          p.style.transformOrigin = "center";
+        });
+
+        const pulseTl = gsap.timeline({ repeat: -1, delay: 0.9 });
+        pulses.forEach((p, idx) => {
+          const at = idx * 0.75;
+          pulseTl
+            .to(
+              p,
+              { opacity: 0.7, scale: 1.12, duration: 0.16, ease: EASE.quart },
+              at,
+            )
+            .to(
+              p,
+              { opacity: 0.22, scale: 1, duration: 0.55, ease: EASE.expo },
+              at + 0.16,
+            );
+        });
+      }
     }, root);
 
     return () => ctx.revert();
@@ -141,6 +217,113 @@ export function Hero() {
               evaluation loop you can trust.
             </p>
 
+            <div
+              ref={loopRef}
+              data-testid="hero-agent-loop"
+              aria-hidden="true"
+              className="mt-7 max-w-[60ch] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-surface)_70%,transparent)] backdrop-blur-md shadow-[var(--shadow-sm)] px-4 py-3"
+            >
+              <svg
+                viewBox="0 0 520 72"
+                className="h-12 w-full"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  <linearGradient
+                    id="z2a-loop-grad"
+                    x1="44"
+                    y1="20"
+                    x2="476"
+                    y2="52"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop
+                      stopColor="var(--color-accent)"
+                      stopOpacity="0.65"
+                    />
+                    <stop
+                      offset="1"
+                      stopColor="var(--color-accent-2)"
+                      stopOpacity="0.55"
+                    />
+                  </linearGradient>
+                </defs>
+
+                <path
+                  d="M70 24H430C450 24 456 30 456 36C456 42 450 48 430 48H70C50 48 44 42 44 36C44 30 50 24 70 24Z"
+                  stroke="url(#z2a-loop-grad)"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  opacity="0.22"
+                />
+                <path
+                  data-loop-draw
+                  d="M70 24H430C450 24 456 30 456 36C456 42 450 48 430 48H70C50 48 44 42 44 36C44 30 50 24 70 24Z"
+                  stroke="url(#z2a-loop-grad)"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  opacity="0"
+                />
+
+                <circle
+                  data-loop-runner
+                  cx="44"
+                  cy="36"
+                  r="4"
+                  fill="var(--color-accent)"
+                  opacity="0"
+                />
+
+                {[
+                  { x: 96, label: "Scope" },
+                  { x: 216, label: "Build" },
+                  { x: 324, label: "Deploy" },
+                  { x: 430, label: "Evaluate" },
+                ].map((n) => (
+                  <g key={n.label}>
+                    <circle
+                      cx={n.x}
+                      cy={36}
+                      r={12}
+                      fill="var(--color-surface)"
+                      stroke="var(--color-border)"
+                      opacity="0.95"
+                    />
+                    <circle
+                      data-loop-pulse
+                      cx={n.x}
+                      cy={36}
+                      r={14}
+                      fill="none"
+                      stroke="var(--color-accent)"
+                      strokeWidth="1.5"
+                      opacity="0.22"
+                    />
+                    <circle
+                      cx={n.x}
+                      cy={36}
+                      r={3.5}
+                      fill="var(--color-accent)"
+                      opacity="0.85"
+                    />
+                    <text
+                      x={n.x}
+                      y={17}
+                      textAnchor="middle"
+                      fontSize="11"
+                      fontFamily="var(--font-mono)"
+                      letterSpacing="0.18em"
+                      fill="var(--color-text-faint)"
+                      opacity="0.8"
+                    >
+                      {n.label}
+                    </text>
+                  </g>
+                ))}
+              </svg>
+            </div>
+
             <div ref={ctasRef} className="mt-8 flex flex-col sm:flex-row gap-3">
               <Button href="/apply">
                 Apply / Reserve Seat
@@ -160,59 +343,6 @@ export function Hero() {
           </div>
 
           <div ref={artRef} className="md:col-span-5 md:pt-14 relative">
-            <div
-              ref={traceRef}
-              data-testid="hero-agent-trace"
-              aria-hidden="true"
-              className={`z2a-trace ${traceActive ? "z2a-trace-on" : ""} pointer-events-none absolute -inset-10 hidden md:block opacity-70`}
-            >
-              <svg
-                viewBox="0 0 560 340"
-                className="h-full w-full"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <defs>
-                  <linearGradient id="z2a-trace-grad" x1="40" y1="40" x2="520" y2="300" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="var(--color-accent)" stopOpacity="0.55" />
-                    <stop offset="1" stopColor="var(--color-accent-2)" stopOpacity="0.45" />
-                  </linearGradient>
-                </defs>
-
-                <g stroke="url(#z2a-trace-grad)" strokeWidth="2" strokeLinecap="round">
-                  <path data-trace-path d="M70 70 C 160 40, 220 110, 280 120" />
-                  <path data-trace-path d="M280 120 C 350 130, 390 92, 460 70" />
-                  <path data-trace-path d="M460 70 C 520 66, 520 210, 380 240" />
-                  <path data-trace-path d="M380 240 C 220 282, 120 220, 70 70" />
-                </g>
-
-                <g>
-                  {[
-                    { x: 70, y: 70, label: "Scope" },
-                    { x: 280, y: 120, label: "Build" },
-                    { x: 460, y: 70, label: "Deploy" },
-                    { x: 380, y: 240, label: "Evaluate" },
-                  ].map((n) => (
-                    <g key={n.label}>
-                      <circle cx={n.x} cy={n.y} r="10" fill="var(--color-surface)" stroke="var(--color-border)" />
-                      <circle cx={n.x} cy={n.y} r="3.5" fill="var(--color-accent)" opacity="0.8" />
-                      <text
-                        x={n.x + 16}
-                        y={n.y + 4}
-                        fontSize="12"
-                        fontFamily="var(--font-mono)"
-                        letterSpacing="0.18em"
-                        fill="var(--color-text-faint)"
-                        opacity="0.75"
-                      >
-                        {n.label}
-                      </text>
-                    </g>
-                  ))}
-                </g>
-              </svg>
-            </div>
-
             <div className="relative z-10 rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-surface)_70%,transparent)] backdrop-blur-md shadow-[var(--shadow-lg)] p-6 overflow-hidden">
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_240px_at_20%_0%,color-mix(in_oklch,var(--color-accent)_14%,transparent),transparent_62%)]" />
               <p className="relative font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
@@ -270,7 +400,7 @@ export function Hero() {
             </div>
 
             {/* small “ticket” cards */}
-            <div className="hidden md:block pointer-events-none absolute -bottom-8 -left-6 rotate-[-6deg] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-md)] px-4 py-3">
+            <div className="hidden md:block pointer-events-none absolute bottom-3 -left-4 z-20 rotate-[-6deg] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-md)] px-4 py-3">
               <p className="font-mono text-[10px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
                 Toronto pilot
               </p>
@@ -278,7 +408,7 @@ export function Hero() {
                 50 seats
               </p>
             </div>
-            <div className="hidden md:block pointer-events-none absolute -top-8 right-2 rotate-[5deg] rounded-[var(--radius-lg)] border border-[color-mix(in_oklch,var(--color-accent)_28%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-accent)_8%,var(--color-surface))] shadow-[var(--shadow-md)] px-4 py-3">
+            <div className="hidden md:block pointer-events-none absolute top-3 right-2 z-20 rotate-[5deg] rounded-[var(--radius-lg)] border border-[color-mix(in_oklch,var(--color-accent)_28%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-accent)_8%,var(--color-surface))] shadow-[var(--shadow-md)] px-4 py-3">
               <p className="font-mono text-[10px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
                 Refund
               </p>

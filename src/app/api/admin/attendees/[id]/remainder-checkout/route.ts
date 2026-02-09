@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { EARLY_BIRD_REMAINDER_AMOUNT_CENTS } from "@/lib/config";
 import { prisma } from "@/lib/db";
 import { env } from "@/lib/env";
 import { stripe } from "@/lib/stripe";
@@ -38,10 +39,23 @@ export async function POST(
     );
   }
 
+  const isEarlyBird = attendee.remainderAmount === EARLY_BIRD_REMAINDER_AMOUNT_CENTS;
+  if (isEarlyBird && !env.STRIPE_EARLY_BIRD_COUPON_ID) {
+    return NextResponse.json(
+      { error: "STRIPE_EARLY_BIRD_COUPON_ID is not configured" },
+      { status: 500 },
+    );
+  }
+
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
     line_items: [{ price: env.STRIPE_REMAINDER_PRICE_ID, quantity: 1 }],
-    allow_promotion_codes: true,
+    ...(isEarlyBird
+      ? {
+          discounts: [{ coupon: env.STRIPE_EARLY_BIRD_COUPON_ID! }],
+          allow_promotion_codes: false,
+        }
+      : { allow_promotion_codes: true }),
     payment_intent_data: {
       capture_method: "manual",
     },
@@ -53,6 +67,7 @@ export async function POST(
       attendee_id: attendee.id,
       payment_type: "remainder",
       referral_code: attendee.networkCode || "",
+      pricing_tier: isEarlyBird ? "early_bird" : "standard",
     },
   });
 
@@ -65,4 +80,3 @@ export async function POST(
 
   return NextResponse.json({ checkoutUrl: session.url });
 }
-

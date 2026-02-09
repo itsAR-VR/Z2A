@@ -1,6 +1,7 @@
 import type Stripe from "stripe";
 import { NextResponse } from "next/server";
 
+import { EARLY_BIRD_END_AT_ISO, EARLY_BIRD_REMAINDER_AMOUNT_CENTS } from "@/lib/config";
 import { prisma } from "@/lib/db";
 import { env } from "@/lib/env";
 import { stripe } from "@/lib/stripe";
@@ -116,6 +117,22 @@ export async function POST(req: Request) {
               eventId: event.id,
               sessionId: session.id,
               attendeeId,
+            });
+          }
+
+          // Lock-in Early Bird eligibility at deposit payment time.
+          //
+          // IMPORTANT: use the webhook event creation timestamp (not the Checkout session creation time)
+          // to avoid “create session before deadline, pay after deadline” loopholes.
+          const earlyBirdCutoffMs = Date.parse(EARLY_BIRD_END_AT_ISO);
+          const isEarlyBird =
+            Number.isFinite(earlyBirdCutoffMs) &&
+            event.created * 1000 <= earlyBirdCutoffMs;
+
+          if (isEarlyBird) {
+            await tx.attendee.updateMany({
+              where: { id: attendeeId, remainderStatus: "none" },
+              data: { remainderAmount: EARLY_BIRD_REMAINDER_AMOUNT_CENTS },
             });
           }
 

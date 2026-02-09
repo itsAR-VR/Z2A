@@ -53,14 +53,14 @@ export function Speakers() {
         </p>
       </RevealOnScroll>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
+      <div className="mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl items-stretch">
         {speakers.map((speaker, i) => (
           <RevealOnScroll key={speaker.name} delay={i * 150} className="h-full">
             <a
               href={speaker.linkedinUrl}
               target="_blank"
-              rel="noreferrer"
-              className="group h-full w-full text-left rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] p-6 md:p-7 transition-[transform,box-shadow,border-color] duration-200 ease-out hover:-translate-y-1 hover:shadow-[var(--shadow-md)] hover:border-[color-mix(in_oklch,var(--color-accent)_25%,var(--color-border-strong))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
+              rel="noopener noreferrer"
+              className="group block h-full w-full text-left rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] p-6 md:p-7 transition-[transform,box-shadow,border-color] duration-200 ease-out hover:-translate-y-1 hover:shadow-[var(--shadow-md)] hover:border-[color-mix(in_oklch,var(--color-accent)_25%,var(--color-border-strong))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
               aria-label={`Open ${speaker.name} on LinkedIn`}
             >
               <div className="flex items-start gap-4 mb-4">

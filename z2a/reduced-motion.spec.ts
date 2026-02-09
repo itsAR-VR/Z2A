@@ -66,14 +66,18 @@ test.describe("Reduced Motion", () => {
     await expect(menuButton).toBeFocused();
   });
 
-  test("does not animate hero agent trace @prod-safe", async ({ page }) => {
+  test("does not animate hero agent loop @prod-safe", async ({ page }) => {
     await page.goto("/");
 
-    const trace = page.getByTestId("hero-agent-trace");
-    if ((await trace.count()) === 0) return; // trace is desktop-only
+    const loop = page.getByTestId("hero-agent-loop");
+    await expect(loop).toBeVisible();
 
-    const path = trace.locator("path[data-trace-path]").first();
-    await expect(path).toHaveCSS("animation-name", "none");
-    await expect(path).toHaveCSS("stroke-dashoffset", /0(px)?/);
+    // In reduced motion we never initialize the GSAP loop timeline, so the
+    // animated draw-path and runner dot remain hidden.
+    await expect(loop.locator("path[data-loop-draw]")).toHaveCSS("opacity", "0");
+    await expect(loop.locator("circle[data-loop-runner]")).toHaveCSS(
+      "opacity",
+      "0",
+    );
   });
 });
