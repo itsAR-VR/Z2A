@@ -2,7 +2,9 @@
 
 import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
+import { useReveal } from "@/hooks/useReveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { DURATION, EASE } from "@/lib/motion-tokens";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 
@@ -48,8 +50,11 @@ export function Hero() {
   const headlineRef = useRef<HTMLHeadingElement | null>(null);
   const subheadRef = useRef<HTMLParagraphElement | null>(null);
   const ctasRef = useRef<HTMLDivElement | null>(null);
-  const metaRef = useRef<HTMLDivElement | null>(null);
   const artRef = useRef<HTMLDivElement | null>(null);
+  const { ref: traceRef, isVisible: traceVisible } = useReveal<HTMLDivElement>({
+    threshold: 0.2,
+  });
+  const traceActive = prefersReduced || traceVisible;
 
   useLayoutEffect(() => {
     if (prefersReduced) return;
@@ -57,42 +62,36 @@ export function Hero() {
     if (!root) return;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      const tl = gsap.timeline({ defaults: { ease: EASE.expo } });
 
       tl.fromTo(
         root.querySelectorAll("[data-hero='badge']"),
         { opacity: 0.95, y: 4 },
-        { opacity: 1, y: 0, duration: 0.6 },
+        { opacity: 1, y: 0, duration: DURATION.default },
       )
         .fromTo(
           headlineRef.current,
           { opacity: 0.96, y: 6 },
-          { opacity: 1, y: 0, duration: 0.75 },
-          "-=0.35",
+          { opacity: 1, y: 0, duration: DURATION.slow },
+          "-=0.2",
         )
         .fromTo(
           subheadRef.current,
           { opacity: 0.96, y: 6 },
-          { opacity: 1, y: 0, duration: 0.6 },
-          "-=0.55",
+          { opacity: 1, y: 0, duration: DURATION.default },
+          "-=0.5",
         )
         .fromTo(
           ctasRef.current,
           { opacity: 0.96, y: 6 },
-          { opacity: 1, y: 0, duration: 0.55 },
-          "-=0.5",
-        )
-        .fromTo(
-          metaRef.current,
-          { opacity: 0.96, y: 6 },
-          { opacity: 1, y: 0, duration: 0.5 },
-          "-=0.45",
+          { opacity: 1, y: 0, duration: DURATION.default },
+          "-=0.25",
         )
         .fromTo(
           artRef.current,
           { opacity: 0.96, y: 10, rotate: -0.8 },
-          { opacity: 1, y: 0, rotate: 0, duration: 0.8 },
-          "-=0.7",
+          { opacity: 1, y: 0, rotate: 0, duration: DURATION.cinematic },
+          "-=0.35",
         );
     }, root);
 
@@ -157,38 +156,64 @@ export function Hero() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Button>
-              <Button variant="secondary" href="/apply?network=1">
-                Have a network code?
-              </Button>
-            </div>
-
-            <div ref={metaRef} className="mt-5 flex flex-wrap items-center gap-3 text-sm text-[var(--color-text-faint)]">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 shadow-[var(--shadow-sm)]">
-                Deposit $100 today
-              </span>
-              <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 shadow-[var(--shadow-sm)]">
-                Checkout via Stripe
-              </span>
-              <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 shadow-[var(--shadow-sm)]">
-                Full refund by end of Day 2
-              </span>
-              <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 shadow-[var(--shadow-sm)]">
-                Location:{" "}
-                <span className="text-[var(--color-text-muted)]">
-                  Venue shared after you reserve a seat.
-                </span>
-              </span>
-              <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 shadow-[var(--shadow-sm)]">
-                Instructor:{" "}
-                <span className="text-[var(--color-text-muted)]">
-                  Aadil Kazmi
-                </span>
-              </span>
             </div>
           </div>
 
           <div ref={artRef} className="md:col-span-5 md:pt-14 relative">
-            <div className="relative rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-surface)_70%,transparent)] backdrop-blur-md shadow-[var(--shadow-lg)] p-6 overflow-hidden">
+            <div
+              ref={traceRef}
+              data-testid="hero-agent-trace"
+              aria-hidden="true"
+              className={`z2a-trace ${traceActive ? "z2a-trace-on" : ""} pointer-events-none absolute -inset-10 hidden md:block opacity-70`}
+            >
+              <svg
+                viewBox="0 0 560 340"
+                className="h-full w-full"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  <linearGradient id="z2a-trace-grad" x1="40" y1="40" x2="520" y2="300" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="var(--color-accent)" stopOpacity="0.55" />
+                    <stop offset="1" stopColor="var(--color-accent-2)" stopOpacity="0.45" />
+                  </linearGradient>
+                </defs>
+
+                <g stroke="url(#z2a-trace-grad)" strokeWidth="2" strokeLinecap="round">
+                  <path data-trace-path d="M70 70 C 160 40, 220 110, 280 120" />
+                  <path data-trace-path d="M280 120 C 350 130, 390 92, 460 70" />
+                  <path data-trace-path d="M460 70 C 520 66, 520 210, 380 240" />
+                  <path data-trace-path d="M380 240 C 220 282, 120 220, 70 70" />
+                </g>
+
+                <g>
+                  {[
+                    { x: 70, y: 70, label: "Scope" },
+                    { x: 280, y: 120, label: "Build" },
+                    { x: 460, y: 70, label: "Deploy" },
+                    { x: 380, y: 240, label: "Evaluate" },
+                  ].map((n) => (
+                    <g key={n.label}>
+                      <circle cx={n.x} cy={n.y} r="10" fill="var(--color-surface)" stroke="var(--color-border)" />
+                      <circle cx={n.x} cy={n.y} r="3.5" fill="var(--color-accent)" opacity="0.8" />
+                      <text
+                        x={n.x + 16}
+                        y={n.y + 4}
+                        fontSize="12"
+                        fontFamily="var(--font-mono)"
+                        letterSpacing="0.18em"
+                        fill="var(--color-text-faint)"
+                        opacity="0.75"
+                      >
+                        {n.label}
+                      </text>
+                    </g>
+                  ))}
+                </g>
+              </svg>
+            </div>
+
+            <div className="relative z-10 rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-surface)_70%,transparent)] backdrop-blur-md shadow-[var(--shadow-lg)] p-6 overflow-hidden">
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_240px_at_20%_0%,color-mix(in_oklch,var(--color-accent)_14%,transparent),transparent_62%)]" />
               <p className="relative font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
                 What you leave with

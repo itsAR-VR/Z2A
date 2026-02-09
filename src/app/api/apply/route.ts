@@ -7,7 +7,6 @@ import {
   CURRENCY,
   DEPOSIT_AMOUNT_CENTS,
   LIST_REMAINDER_AMOUNT_CENTS,
-  NETWORK_REMAINDER_AMOUNT_CENTS,
   SEAT_CAP,
 } from "@/lib/config";
 import { stripe } from "@/lib/stripe";
@@ -52,18 +51,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Sold out" }, { status: 409 });
   }
 
-  const networkCodeValid = networkCode
-    ? Boolean(
-        await prisma.referralCode.findFirst({
-          where: { code: networkCode, active: true, type: "network" },
-          select: { id: true },
-        }),
-      )
-    : false;
-
-  const remainderAmount = networkCodeValid
-    ? NETWORK_REMAINDER_AMOUNT_CENTS
-    : LIST_REMAINDER_AMOUNT_CENTS;
+  const remainderAmount = LIST_REMAINDER_AMOUNT_CENTS;
 
   const existing = await prisma.attendee.findUnique({
     where: { email: data.email },
@@ -140,4 +128,3 @@ export async function POST(req: Request) {
 
   return NextResponse.json({ checkoutUrl: session.url });
 }
-

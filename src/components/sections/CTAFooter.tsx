@@ -44,8 +44,8 @@ export function CTAFooter() {
                     Ready when you are
                   </p>
                   <p className="mt-2 text-sm text-[var(--color-text-muted)]">
-                    You&apos;ll be redirected to Stripe for the deposit. Network codes
-                    (if you have one) apply to the remainder.
+                    You&apos;ll be redirected to Stripe for the deposit. Referral codes
+                    (optional) help us track how you found us.
                   </p>
                   <div className="mt-5">
                     <Button href="/apply" className="w-full justify-center">

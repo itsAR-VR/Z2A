@@ -1,6 +1,8 @@
 "use client";
 
 import { useReveal } from "@/hooks/useReveal";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { useMemo } from "react";
 
 interface RevealOnScrollProps {
   children: React.ReactNode;
@@ -9,6 +11,8 @@ interface RevealOnScrollProps {
   delay?: number;
   /** Direction of reveal. Default: "up" */
   direction?: "up" | "left" | "right" | "none";
+  /** Motion feel preset. Default: "soft" */
+  variant?: "soft" | "snappy" | "cinematic";
 }
 
 /**
@@ -20,15 +24,44 @@ export function RevealOnScroll({
   className = "",
   delay = 0,
   direction = "up",
+  variant = "soft",
 }: RevealOnScrollProps) {
   const { ref, isVisible } = useReveal<HTMLDivElement>();
+  const prefersReduced = useReducedMotion();
+
+  const tokens = useMemo(() => {
+    switch (variant) {
+      case "snappy":
+        return {
+          offsetPx: 10,
+          durationVar: "var(--duration-default)",
+          easeVar: "var(--ease-quart)",
+          durationMs: 400,
+        };
+      case "cinematic":
+        return {
+          offsetPx: 24,
+          durationVar: "var(--duration-cinematic)",
+          easeVar: "var(--ease-quint)",
+          durationMs: 1000,
+        };
+      case "soft":
+      default:
+        return {
+          offsetPx: 18,
+          durationVar: "var(--duration-slow)",
+          easeVar: "var(--ease-expo)",
+          durationMs: 720,
+        };
+    }
+  }, [variant]);
 
   const translateMap = {
-    up: "translate3d(0, 18px, 0)",
-    left: "translate3d(-18px, 0, 0)",
-    right: "translate3d(18px, 0, 0)",
+    up: `translate3d(0, ${tokens.offsetPx}px, 0)`,
+    left: `translate3d(-${tokens.offsetPx}px, 0, 0)`,
+    right: `translate3d(${tokens.offsetPx}px, 0, 0)`,
     none: "none",
-  };
+  } as const;
 
   return (
     <div
@@ -37,8 +70,11 @@ export function RevealOnScroll({
       style={{
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? "translate3d(0, 0, 0)" : translateMap[direction],
-        willChange: "transform, opacity",
-        transition: `opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 0.72s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+        willChange:
+          prefersReduced || isVisible ? undefined : "transform, opacity",
+        transition: prefersReduced
+          ? "none"
+          : `opacity ${tokens.durationVar} ${tokens.easeVar} ${delay}ms, transform ${tokens.durationVar} ${tokens.easeVar} ${delay}ms`,
       }}
     >
       {children}

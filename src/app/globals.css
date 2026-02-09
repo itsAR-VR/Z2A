@@ -29,6 +29,31 @@
 
   --color-error: oklch(58% 0.22 25);
   --color-warning: oklch(80% 0.17 85);
+  --color-success: oklch(55% 0.18 155);
+  --color-info: oklch(55% 0.15 240);
+
+  /* Semantic "tint" surfaces for badges and subtle fills. */
+  --color-error-surface: color-mix(in oklch, var(--color-error) 12%, var(--color-surface));
+  --color-warning-surface: color-mix(in oklch, var(--color-warning) 14%, var(--color-surface));
+  --color-success-surface: color-mix(in oklch, var(--color-success) 12%, var(--color-surface));
+  --color-info-surface: color-mix(in oklch, var(--color-info) 12%, var(--color-surface));
+
+  /* Motion tokens (used by CSS transitions/animations). */
+  --duration-fast: 0.2s;
+  --duration-default: 0.4s;
+  --duration-slow: 0.72s;
+  --duration-cinematic: 1s;
+
+  --ease-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-quint: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --stagger-step: 60ms;
+
+  /* Interaction primitives */
+  --ring-color: var(--color-focus);
+  --ring-width: 2px;
+  --ring-offset: 2px;
 
   --radius-sm: 10px;
   --radius-md: 14px;
@@ -139,4 +164,24 @@ section[id] {
 @keyframes z2a-marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
+}
+
+@keyframes z2a-trace-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+.z2a-trace path[data-trace-path] {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+}
+
+.z2a-trace.z2a-trace-on path[data-trace-path] {
+  animation: z2a-trace-draw var(--duration-cinematic) var(--ease-quint) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .z2a-trace path[data-trace-path] {
+    animation: none !important;
+    stroke-dashoffset: 0;
+  }
 }

@@ -3,13 +3,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Zero-to-Agent | Build a Working Agent in a Weekend — In Person",
+  title: "Zero-to-Agent | Build a Working AI Agent in a Weekend — In Person",
   description:
-    "Zero-to-Agent Toronto Pilot. Two days of hands-on build time in pods of 3–4, designed to help you leave with a working agent, a basic deployment path, and an evaluation/testing workflow. Feb 28 – Mar 1, 2026.",
+    "Zero-to-Agent Toronto Pilot. Two days of guided build time in pods of 3–4. Leave with a working AI agent for your workflow, a deployment path, and a lightweight evaluation loop. Feb 28 – Mar 1, 2026.",
   openGraph: {
     title: "Zero-to-Agent Toronto Pilot",
     description:
-      "Build a working agent in a weekend — in person. Feb 28 – Mar 1, 2026. 50 seats.",
+      "Build a working AI agent in a weekend — in person. Feb 28 – Mar 1, 2026. 50 seats.",
     type: "website",
   },
 };

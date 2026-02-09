@@ -154,7 +154,7 @@ export function Nav() {
             </Link>
 
             {/* Desktop nav links */}
-            <div className="hidden md:flex items-center gap-1">
+            <div className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) => (
                 <a
                   key={link.id}
@@ -177,16 +177,16 @@ export function Nav() {
               </Button>
             </div>
 
-            {/* Mobile menu button */}
-            <button
-              ref={menuButtonRef}
-              type="button"
-              className="md:hidden inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-[13px] font-medium text-[var(--color-text)] shadow-[var(--shadow-sm)] transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:hover:shadow-[var(--shadow-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
-              onClick={() => (menuOpen ? closeMenu() : openMenu())}
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={menuOpen}
-              aria-controls="nav-menu"
-            >
+            {/* Menu button */}
+	            <button
+	              ref={menuButtonRef}
+	              type="button"
+	              className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-[13px] font-medium text-[var(--color-text)] shadow-[var(--shadow-sm)] transition-[transform,box-shadow] [transition-duration:var(--duration-fast)] [transition-timing-function:var(--ease-quart)] hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:hover:shadow-[var(--shadow-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
+	              onClick={() => (menuOpen ? closeMenu() : openMenu())}
+	              aria-label={menuOpen ? "Close menu" : "Open menu"}
+	              aria-expanded={menuOpen}
+	              aria-controls="nav-menu"
+	            >
               <span>Menu</span>
               {menuOpen ? (
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -208,22 +208,24 @@ export function Nav() {
           ref={overlayRef}
           id="nav-menu"
           role="dialog"
-          aria-modal="true"
-          aria-labelledby="nav-menu-title"
-          aria-hidden={!menuOpen}
-          className={`fixed inset-0 z-[60] bg-[color-mix(in_oklch,var(--color-bg)_84%,black)] backdrop-blur-sm ${
-            reducedMotion ? "" : "transition-opacity duration-200 ease-out"
-          } ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
-          onKeyDown={trapFocus}
-        >
+	          aria-modal="true"
+	          aria-labelledby="nav-menu-title"
+	          aria-hidden={!menuOpen}
+	          className={`fixed inset-0 z-[60] bg-[color-mix(in_oklch,var(--color-bg)_84%,black)] backdrop-blur-sm ${
+	            reducedMotion
+	              ? ""
+	              : "transition-opacity [transition-duration:var(--duration-fast)] [transition-timing-function:var(--ease-quart)]"
+	          } ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+	          onKeyDown={trapFocus}
+	        >
           <div className="container-content pt-24 pb-10">
-            <div
-              className={`rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-lg)] p-6 ${
-                reducedMotion
-                  ? ""
-                  : "transition-[transform,opacity] duration-200 ease-out"
-              } ${menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}
-            >
+	            <div
+	              className={`rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-lg)] p-6 ${
+	                reducedMotion
+	                  ? ""
+	                  : "transition-[transform,opacity] [transition-duration:var(--duration-fast)] [transition-timing-function:var(--ease-quart)]"
+	              } ${menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}
+	            >
               <div className="flex items-center justify-between gap-3 mb-6">
                 <div className="flex items-center gap-2">
                   <p

@@ -166,8 +166,8 @@ export function ReferralCodeTable() {
                     <span
                       className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${
                         code.active
-                          ? "text-green-400 bg-green-400/10"
-                          : "text-red-400 bg-red-400/10"
+                          ? "text-[var(--color-success)] bg-[var(--color-success-surface)]"
+                          : "text-[var(--color-error)] bg-[var(--color-error-surface)]"
                       }`}
                     >
                       {code.active ? "Active" : "Inactive"}
@@ -193,10 +193,10 @@ export function ReferralCodeTable() {
                         setToggleReason("");
                         setToggleError(null);
                       }}
-                      className={`text-sm font-medium cursor-pointer ${
+                      className={`text-sm font-medium cursor-pointer hover:opacity-80 ${
                         code.active
-                          ? "text-red-400 hover:text-red-300"
-                          : "text-green-400 hover:text-green-300"
+                          ? "text-[var(--color-error)]"
+                          : "text-[var(--color-success)]"
                       }`}
                     >
                       {code.active ? "Deactivate" : "Activate"}

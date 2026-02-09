@@ -15,14 +15,24 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    function setLenisMarker(on: boolean) {
+      if (on) {
+        document.documentElement.dataset.z2aLenis = "on";
+      } else {
+        delete document.documentElement.dataset.z2aLenis;
+      }
+    }
+
     // Skip on mobile/touch or reduced motion
     const isTouch = window.matchMedia("(pointer: coarse)").matches;
     if (prefersReduced || isTouch) {
+      setLenisMarker(false);
       lenisRef.current?.destroy();
       lenisRef.current = null;
       return;
     }
 
+    setLenisMarker(true);
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -37,6 +47,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
     requestAnimationFrame(raf);
 
     return () => {
+      setLenisMarker(false);
       lenis.destroy();
       lenisRef.current = null;
     };

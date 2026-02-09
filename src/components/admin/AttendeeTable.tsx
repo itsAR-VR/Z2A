@@ -22,6 +22,12 @@ export function AttendeeTable() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [captureBusy, setCaptureBusy] = useState(false);
+  const [captureError, setCaptureError] = useState<string | null>(null);
+  const [captureResult, setCaptureResult] = useState<{
+    captured: number;
+    failed: Array<{ attendeeId: string; paymentIntentId: string; error: string }>;
+  } | null>(null);
 
   const fetchAttendees = useCallback(async () => {
     setLoading(true);
@@ -45,6 +51,53 @@ export function AttendeeTable() {
     return () => clearTimeout(timeout);
   }, [fetchAttendees]);
 
+  const authorizedCount = attendees.filter(
+    (a) => a.remainderStatus === "authorized",
+  ).length;
+
+  async function handleCaptureAll() {
+    if (captureBusy) return;
+    if (authorizedCount === 0) return;
+    if (
+      search.trim() &&
+      !confirm(
+        "You have a search filter applied. Capture all authorized remainders anyway?",
+      )
+    ) {
+      return;
+    }
+    if (
+      !confirm(
+        `Capture ${authorizedCount} authorized remainder${
+          authorizedCount === 1 ? "" : "s"
+        } now?`,
+      )
+    ) {
+      return;
+    }
+
+    setCaptureBusy(true);
+    setCaptureError(null);
+    setCaptureResult(null);
+
+    try {
+      const res = await fetch("/api/admin/remainder-capture-all", {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setCaptureError(data.error || "Failed to capture authorized remainders.");
+        return;
+      }
+      setCaptureResult(data);
+      await fetchAttendees();
+    } catch {
+      setCaptureError("Network error. Please try again.");
+    } finally {
+      setCaptureBusy(false);
+    }
+  }
+
   return (
     <div>
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
@@ -67,6 +120,54 @@ export function AttendeeTable() {
         </button>
       </div>
 
+      {authorizedCount > 0 && (
+        <div className="mb-4 rounded-lg border border-[color-mix(in_oklch,var(--color-warning)_35%,var(--color-border-700))] bg-[color-mix(in_oklch,var(--color-warning)_10%,var(--color-bg-900))] p-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div>
+              <p className="text-sm font-medium text-[var(--color-text-100)]">
+                {authorizedCount} remainder
+                {authorizedCount === 1 ? "" : "s"} authorized
+              </p>
+              <p className="mt-1 text-xs text-[var(--color-text-500)]">
+                Capture after Day 1. This charges all authorized cards in one batch.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={handleCaptureAll}
+              disabled={captureBusy}
+              className="inline-flex items-center justify-center rounded-lg bg-[var(--color-accent-500)] text-[var(--color-bg-900)] px-4 py-2 text-sm font-medium hover:bg-[var(--color-accent-600)] transition-colors disabled:opacity-50 cursor-pointer"
+            >
+              {captureBusy
+                ? "Capturing..."
+                : `Capture ${authorizedCount} authorized`}
+            </button>
+          </div>
+
+          {captureError ? (
+            <p className="mt-3 text-sm text-[var(--color-error)]">{captureError}</p>
+          ) : null}
+
+          {captureResult ? (
+            <div className="mt-3 space-y-2">
+              <p className="text-sm text-[var(--color-text-300)]">
+                Captured {captureResult.captured}. Failed{" "}
+                {captureResult.failed?.length || 0}.
+              </p>
+              {captureResult.failed?.length ? (
+                <ul className="text-xs text-[var(--color-text-500)] space-y-1">
+                  {captureResult.failed.slice(0, 6).map((f) => (
+                    <li key={`${f.attendeeId}-${f.paymentIntentId}`}>
+                      {f.attendeeId}: {f.error}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+          ) : null}
+        </div>
+      )}
+
       {loading ? (
         <p className="text-sm text-[var(--color-text-500)] py-8 text-center">
           Loading...
@@ -84,6 +185,7 @@ export function AttendeeTable() {
                 <th className="px-4 py-3 font-medium">Email</th>
                 <th className="px-4 py-3 font-medium">Role</th>
                 <th className="px-4 py-3 font-medium">Deposit</th>
+                <th className="px-4 py-3 font-medium">Remainder</th>
                 <th className="px-4 py-3 font-medium">Seat</th>
                 <th className="px-4 py-3 font-medium">Code</th>
                 <th className="px-4 py-3 font-medium">Date</th>
@@ -93,11 +195,33 @@ export function AttendeeTable() {
               {attendees.map((a) => (
                 <tr
                   key={a.id}
-                  onClick={() => setSelectedId(a.id)}
-                  className="hover:bg-[var(--color-bg-800)] cursor-pointer transition-colors"
+                  className="hover:bg-[var(--color-bg-800)] transition-colors"
                 >
                   <td className="px-4 py-3 text-[var(--color-text-100)] whitespace-nowrap">
-                    {a.firstName} {a.lastName}
+                    <button
+                      type="button"
+                      onClick={() => setSelectedId(a.id)}
+                      className="group inline-flex items-center gap-2 font-medium text-[var(--color-text-100)] hover:text-[var(--color-text-100)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-500)]/50 rounded-md px-1 -mx-1"
+                      aria-label={`View ${a.firstName} ${a.lastName} details`}
+                    >
+                      <span className="truncate">
+                        {a.firstName} {a.lastName}
+                      </span>
+                      <svg
+                        className="h-4 w-4 text-[var(--color-text-500)] transition-transform duration-200 group-hover:translate-x-0.5"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        aria-hidden="true"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M9 18l6-6-6-6"
+                        />
+                      </svg>
+                    </button>
                   </td>
                   <td className="px-4 py-3 text-[var(--color-text-300)]">
                     {a.email}
@@ -107,6 +231,9 @@ export function AttendeeTable() {
                   </td>
                   <td className="px-4 py-3">
                     <StatusBadge status={a.depositStatus} />
+                  </td>
+                  <td className="px-4 py-3">
+                    <StatusBadge status={a.remainderStatus} />
                   </td>
                   <td className="px-4 py-3">
                     <StatusBadge status={a.seatStatus} />
@@ -137,16 +264,20 @@ export function AttendeeTable() {
 
 function StatusBadge({ status }: { status: string }) {
   const colorMap: Record<string, string> = {
-    paid: "text-green-400 bg-green-400/10",
-    unpaid: "text-yellow-400 bg-yellow-400/10",
-    refunded: "text-red-400 bg-red-400/10",
-    reserved: "text-blue-400 bg-blue-400/10",
-    attended_day1: "text-green-400 bg-green-400/10",
-    attended_day2: "text-green-400 bg-green-400/10",
-    no_show: "text-red-400 bg-red-400/10",
-    submitted: "text-yellow-400 bg-yellow-400/10",
-    approved: "text-green-400 bg-green-400/10",
-    declined: "text-red-400 bg-red-400/10",
+    paid: "text-[var(--color-success)] bg-[var(--color-success-surface)]",
+    unpaid: "text-[var(--color-warning)] bg-[var(--color-warning-surface)]",
+    refunded: "text-[var(--color-error)] bg-[var(--color-error-surface)]",
+    none: "text-[var(--color-text-500)] bg-[var(--color-bg-800)]",
+    authorized: "text-[var(--color-warning)] bg-[var(--color-warning-surface)]",
+    captured: "text-[var(--color-success)] bg-[var(--color-success-surface)]",
+    canceled: "text-[var(--color-text-500)] bg-[var(--color-bg-800)]",
+    reserved: "text-[var(--color-info)] bg-[var(--color-info-surface)]",
+    attended_day1: "text-[var(--color-success)] bg-[var(--color-success-surface)]",
+    attended_day2: "text-[var(--color-success)] bg-[var(--color-success-surface)]",
+    no_show: "text-[var(--color-error)] bg-[var(--color-error-surface)]",
+    submitted: "text-[var(--color-warning)] bg-[var(--color-warning-surface)]",
+    approved: "text-[var(--color-success)] bg-[var(--color-success-surface)]",
+    declined: "text-[var(--color-error)] bg-[var(--color-error-surface)]",
   };
 
   return (

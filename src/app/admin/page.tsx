@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import { AttendeeTable } from "@/components/admin/AttendeeTable";
 import { ReferralCodeTable } from "@/components/admin/ReferralCodeTable";
 
@@ -8,6 +8,27 @@ type Tab = "attendees" | "referral-codes";
 
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState<Tab>("attendees");
+  const ids = useId();
+
+  const tabs: Array<{
+    value: Tab;
+    label: string;
+    tabId: string;
+    panelId: string;
+  }> = [
+    {
+      value: "attendees",
+      label: "Attendees",
+      tabId: `${ids}-tab-attendees`,
+      panelId: `${ids}-panel-attendees`,
+    },
+    {
+      value: "referral-codes",
+      label: "Referral Codes",
+      tabId: `${ids}-tab-referral`,
+      panelId: `${ids}-panel-referral`,
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-[var(--color-bg-900)]">
@@ -23,41 +44,94 @@ export default function AdminPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
         {/* Tabs */}
-        <div className="flex gap-1 mb-6 border-b border-[var(--color-border-700)]">
-          <TabButton
-            active={activeTab === "attendees"}
-            onClick={() => setActiveTab("attendees")}
-          >
-            Attendees
-          </TabButton>
-          <TabButton
-            active={activeTab === "referral-codes"}
-            onClick={() => setActiveTab("referral-codes")}
-          >
-            Referral Codes
-          </TabButton>
+        <div
+          role="tablist"
+          aria-label="Admin sections"
+          className="flex gap-1 mb-6 border-b border-[var(--color-border-700)]"
+        >
+          {tabs.map((t, idx) => (
+            <TabButton
+              key={t.value}
+              id={t.tabId}
+              controls={t.panelId}
+              active={activeTab === t.value}
+              onClick={() => setActiveTab(t.value)}
+              onKeyDown={(e) => {
+                const key = e.key;
+                if (
+                  key !== "ArrowLeft" &&
+                  key !== "ArrowRight" &&
+                  key !== "Home" &&
+                  key !== "End"
+                ) {
+                  return;
+                }
+                e.preventDefault();
+
+                let nextIdx = idx;
+                if (key === "ArrowLeft") nextIdx = (idx - 1 + tabs.length) % tabs.length;
+                if (key === "ArrowRight") nextIdx = (idx + 1) % tabs.length;
+                if (key === "Home") nextIdx = 0;
+                if (key === "End") nextIdx = tabs.length - 1;
+
+                const next = tabs[nextIdx];
+                setActiveTab(next.value);
+                requestAnimationFrame(() => {
+                  document.getElementById(next.tabId)?.focus();
+                });
+              }}
+            >
+              {t.label}
+            </TabButton>
+          ))}
         </div>
 
-        {activeTab === "attendees" && <AttendeeTable />}
-        {activeTab === "referral-codes" && <ReferralCodeTable />}
+        <div
+          id={tabs[0].panelId}
+          role="tabpanel"
+          aria-labelledby={tabs[0].tabId}
+          hidden={activeTab !== tabs[0].value}
+        >
+          <AttendeeTable />
+        </div>
+        <div
+          id={tabs[1].panelId}
+          role="tabpanel"
+          aria-labelledby={tabs[1].tabId}
+          hidden={activeTab !== tabs[1].value}
+        >
+          <ReferralCodeTable />
+        </div>
       </div>
     </div>
   );
 }
 
 function TabButton({
+  id,
+  controls,
   active,
   onClick,
+  onKeyDown,
   children,
 }: {
+  id: string;
+  controls: string;
   active: boolean;
   onClick: () => void;
+  onKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>) => void;
   children: React.ReactNode;
 }) {
   return (
     <button
+      id={id}
       type="button"
       onClick={onClick}
+      onKeyDown={onKeyDown}
+      role="tab"
+      aria-selected={active}
+      aria-controls={controls}
+      tabIndex={active ? 0 : -1}
       className={`px-4 py-2 text-sm font-medium transition-colors cursor-pointer -mb-px ${
         active
           ? "text-[var(--color-accent-500)] border-b-2 border-[var(--color-accent-500)]"

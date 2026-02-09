@@ -73,10 +73,10 @@ export function AuditLogViewer({ referralCodeId, onClose }: AuditLogViewerProps)
                   <span
                     className={`text-xs font-medium px-1.5 py-0.5 rounded ${
                       log.action === "created"
-                        ? "text-blue-400 bg-blue-400/10"
+                        ? "text-[var(--color-info)] bg-[var(--color-info-surface)]"
                         : log.action === "activated" || log.action === "reactivated"
-                          ? "text-green-400 bg-green-400/10"
-                        : "text-red-400 bg-red-400/10"
+                          ? "text-[var(--color-success)] bg-[var(--color-success-surface)]"
+                        : "text-[var(--color-error)] bg-[var(--color-error-surface)]"
                     }`}
                   >
                     {log.action}

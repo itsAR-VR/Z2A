@@ -1,50 +1,38 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Speakers", () => {
-  test("opens Abdur Sajid profile with award plaque and restores focus on close @prod-safe", async ({
-    page,
-  }) => {
+  test("speaker cards link to LinkedIn @prod-safe", async ({ page }) => {
     await page.goto("/");
 
-    const trigger = page.getByRole("button", {
-      name: "View Abdur Sajid details",
+    const aadil = page.getByRole("link", {
+      name: "Open Aadil Kazmi on LinkedIn",
     });
-    await trigger.scrollIntoViewIfNeeded();
-    await trigger.click();
-
-    const dialog = page.getByRole("dialog", { name: "Abdur Sajid" });
-    await expect(dialog).toBeVisible();
-
-    await expect(dialog.getByRole("img", { name: /OpenAI award plaque/i })).toBeVisible();
-
-    await expect(dialog.getByRole("link", { name: "zeroriskgrowth.com" })).toHaveAttribute(
+    await expect(aadil).toHaveAttribute(
       "href",
-      "https://zeroriskgrowth.com",
-    );
-    await expect(dialog.getByRole("link", { name: "cold2close.ai" })).toHaveAttribute(
-      "href",
-      "https://cold2close.ai",
+      "https://www.linkedin.com/in/aadilkazmi/",
     );
 
-    await expect(dialog.getByRole("link", { name: "LinkedIn" })).toHaveAttribute(
+    const abdur = page.getByRole("link", {
+      name: "Open Abdur Sajid on LinkedIn",
+    });
+    await expect(abdur).toHaveAttribute(
       "href",
       "https://www.linkedin.com/in/abdur-sajid/",
     );
 
-    await page.keyboard.press("Escape");
-    await expect(page.getByRole("dialog")).toHaveCount(0);
-    await expect(trigger).toBeFocused();
-  });
+    // Removed from the simplified section.
+    await expect(page.locator("text=Award plaque")).toHaveCount(0);
+    await expect(
+      page.getByRole("img", { name: /OpenAI award plaque/i }),
+    ).toHaveCount(0);
 
-  test("opens Aadil profile and does not show award plaque @prod-safe", async ({ page }) => {
-    await page.goto("/");
-
-    const trigger = page.getByRole("button", { name: "View Aadil Kazmi details" });
-    await trigger.scrollIntoViewIfNeeded();
-    await trigger.click();
-
-    const dialog = page.getByRole("dialog", { name: "Aadil Kazmi" });
-    await expect(dialog).toBeVisible();
-    await expect(dialog.getByRole("img", { name: /OpenAI award plaque/i })).toHaveCount(0);
+    for (const removed of [
+      "Joined after the team passed 100B tokens; leading what comes next.",
+      "20 years old, high school dropout.",
+      "Forbes 30 Under 30 (Retail & Ecommerce, 2022).",
+    ]) {
+      await expect(page.locator(`text=${removed}`)).toHaveCount(0);
+    }
   });
 });
+

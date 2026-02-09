@@ -9,4 +9,71 @@ test.describe("Reduced Motion", () => {
     const marqueeRow = page.getByTestId("hero-marquee");
     await expect(marqueeRow).not.toHaveClass(/z2a-marquee/);
   });
+
+  test("RevealOnScroll content is visible and transitionless @prod-safe", async ({
+    page,
+  }) => {
+    await page.goto("/");
+
+    const wrapper = page
+      .getByRole("heading", { name: /The hard part isn't knowing/i })
+      .locator("..");
+
+    await expect(wrapper).toBeVisible();
+    await expect(wrapper).toHaveCSS("opacity", "1");
+
+    const inline = await wrapper.evaluate((el) => ({
+      transition: (el as HTMLElement).style.transition,
+      transform: (el as HTMLElement).style.transform,
+    }));
+    expect(inline.transition).toBe("none");
+    const t = inline.transform.trim();
+    if (t === "none") return;
+    const m = t.match(
+      /^translate3d\(\s*([+-]?\d+(?:\.\d+)?)px?,\s*([+-]?\d+(?:\.\d+)?)px?,\s*([+-]?\d+(?:\.\d+)?)px?\s*\)$/,
+    );
+    expect(m, `unexpected transform: ${t}`).toBeTruthy();
+    if (!m) return;
+    expect(Number(m[1])).toBe(0);
+    expect(Number(m[2])).toBe(0);
+    expect(Number(m[3])).toBe(0);
+  });
+
+  test("does not initialize Lenis smooth scroll @prod-safe", async ({ page }) => {
+    await page.goto("/");
+    const marker = await page.evaluate(() => document.documentElement.dataset.z2aLenis);
+    expect(marker).not.toBe("on");
+  });
+
+  test("menu opens without transitions and locks scroll @prod-safe", async ({
+    page,
+  }) => {
+    await page.goto("/");
+
+    const menuButton = page.getByRole("button", { name: "Open menu" });
+    await menuButton.click();
+
+    const menu = page.getByRole("dialog", { name: "Navigate" });
+    await expect(menu).toBeVisible();
+
+    await expect(menu.getByRole("link", { name: "Why" })).toBeFocused();
+    await expect(page.locator("body")).toHaveCSS("overflow", "hidden");
+    await expect(menu).not.toHaveClass(/transition-opacity/);
+
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("dialog", { name: "Navigate" })).toHaveCount(0);
+    await expect(page.locator("body")).not.toHaveCSS("overflow", "hidden");
+    await expect(menuButton).toBeFocused();
+  });
+
+  test("does not animate hero agent trace @prod-safe", async ({ page }) => {
+    await page.goto("/");
+
+    const trace = page.getByTestId("hero-agent-trace");
+    if ((await trace.count()) === 0) return; // trace is desktop-only
+
+    const path = trace.locator("path[data-trace-path]").first();
+    await expect(path).toHaveCSS("animation-name", "none");
+    await expect(path).toHaveCSS("stroke-dashoffset", /0(px)?/);
+  });
 });

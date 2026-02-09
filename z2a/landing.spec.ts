@@ -34,4 +34,23 @@ test.describe("Landing", () => {
     await page.locator("#apply").scrollIntoViewIfNeeded();
     await expect(sticky).toHaveClass(hasClass("invisible"));
   });
+
+  test("menu locks scroll and restores focus on close @prod-safe", async ({
+    page,
+  }) => {
+    await page.goto("/");
+
+    const menuButton = page.locator('button[aria-controls="nav-menu"]');
+    await menuButton.click();
+
+    const menu = page.getByRole("dialog", { name: "Navigate" });
+    await expect(menu).toBeVisible();
+    await expect(menu.getByRole("link", { name: "Why" })).toBeFocused();
+    await expect(page.locator("body")).toHaveCSS("overflow", "hidden");
+
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("dialog", { name: "Navigate" })).toHaveCount(0);
+    await expect(page.locator("body")).not.toHaveCSS("overflow", "hidden");
+    await expect(menuButton).toBeFocused();
+  });
 });

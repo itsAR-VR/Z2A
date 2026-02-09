@@ -64,6 +64,44 @@ export async function POST(req: Request) {
             );
           }
 
+          const paymentType = session.metadata?.payment_type || "";
+
+          if (paymentType === "remainder") {
+            const paymentIntentId = getPaymentIntentId(session.payment_intent);
+            if (!paymentIntentId) {
+              console.error(
+                "[stripe-webhook] Missing payment_intent on remainder checkout.session.completed",
+                { eventId: event.id, sessionId: session.id, attendeeId },
+              );
+              break;
+            }
+
+            const amountTotal =
+              typeof session.amount_total === "number" ? session.amount_total : null;
+            const currency = typeof session.currency === "string" ? session.currency : null;
+
+            const updated = await tx.attendee.updateMany({
+              where: { id: attendeeId },
+              data: {
+                remainderStatus: "authorized",
+                remainderPaymentIntentId: paymentIntentId,
+                remainderAuthorizedAt: new Date(),
+                ...(amountTotal !== null ? { remainderAmount: amountTotal } : {}),
+                ...(currency ? { remainderCurrency: currency } : {}),
+              },
+            });
+
+            if (updated.count === 0) {
+              console.error("[stripe-webhook] Attendee not found for remainder checkout", {
+                eventId: event.id,
+                sessionId: session.id,
+                attendeeId,
+              });
+            }
+
+            break;
+          }
+
           const updated = await tx.attendee.updateMany({
             where: { id: attendeeId },
             data: {
@@ -92,6 +130,10 @@ export async function POST(req: Request) {
           await tx.attendee.updateMany({
             where: { depositPaymentIntentId: paymentIntentId },
             data: { depositStatus: "refunded" },
+          });
+          await tx.attendee.updateMany({
+            where: { remainderPaymentIntentId: paymentIntentId },
+            data: { remainderStatus: "refunded" },
           });
           break;
         }

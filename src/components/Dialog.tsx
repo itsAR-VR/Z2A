@@ -49,6 +49,8 @@ type DialogProps = {
   children: React.ReactNode;
   overlayClassName?: string;
   panelClassName?: string;
+  panelId?: string;
+  panelTestId?: string;
 };
 
 export function Dialog({
@@ -59,6 +61,8 @@ export function Dialog({
   children,
   overlayClassName = "",
   panelClassName = "",
+  panelId,
+  panelTestId,
 }: DialogProps) {
   const panelRef = useRef<HTMLDivElement | null>(null);
   const previouslyFocusedElementRef = useRef<HTMLElement | null>(null);
@@ -115,11 +119,13 @@ export function Dialog({
     >
       <div
         ref={panelRef}
+        id={panelId}
         role="dialog"
         aria-modal="true"
         aria-labelledby={labelledBy}
         aria-describedby={describedBy}
         tabIndex={-1}
+        data-testid={panelTestId}
         className={panelClassName}
       >
         {children}

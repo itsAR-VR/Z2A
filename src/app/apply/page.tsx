@@ -37,9 +37,16 @@ function ApplyForm() {
   });
   const [errors, setErrors] = useState<FieldError>({});
   const [serverError, setServerError] = useState<string | null>(null);
+  const [validationSummary, setValidationSummary] = useState<string | null>(
+    null,
+  );
   const [submitting, setSubmitting] = useState(false);
+  const [redirectFallbackUrl, setRedirectFallbackUrl] = useState<string | null>(
+    null,
+  );
+  const [showRedirectHelp, setShowRedirectHelp] = useState(false);
   const [showNetworkCode, setShowNetworkCode] = useState(
-    () => searchParams.get("network") === "1",
+    () => searchParams.get("referral") === "1",
   );
 
   function validate(): FieldError {
@@ -56,13 +63,42 @@ function ApplyForm() {
     return e;
   }
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
+  function focusFirstInvalid(validationErrors: FieldError) {
+    const order: Array<keyof FormData> = [
+      "firstName",
+      "lastName",
+      "email",
+      "roleTitle",
+      "useCase",
+      "linkedinUrl",
+      "networkCode",
+    ];
+
+    const first = order.find((k) => Boolean(validationErrors[k]));
+    if (!first) return;
+
+    // Inputs use `id={name}`. The use-case textarea uses id="useCase".
+    const el =
+      document.getElementById(String(first)) ??
+      document.querySelector<HTMLElement>(`[name="${String(first)}"]`);
+    el?.focus();
+  }
+
+  async function submit() {
+    if (submitting) return;
+
     setServerError(null);
+    setValidationSummary(null);
+    setRedirectFallbackUrl(null);
+    setShowRedirectHelp(false);
 
     const validationErrors = validate();
     setErrors(validationErrors);
-    if (Object.keys(validationErrors).length > 0) return;
+    if (Object.keys(validationErrors).length > 0) {
+      setValidationSummary("Please fix the highlighted fields and try again.");
+      focusFirstInvalid(validationErrors);
+      return;
+    }
 
     setSubmitting(true);
 
@@ -78,11 +114,17 @@ function ApplyForm() {
       if (form.linkedinUrl.trim()) body.linkedinUrl = form.linkedinUrl.trim();
       if (form.networkCode.trim()) body.networkCode = form.networkCode.trim();
 
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => controller.abort(), 15_000);
+
       const res = await fetch("/api/apply", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
+        signal: controller.signal,
       });
+
+      window.clearTimeout(timeoutId);
 
       const data = await res.json();
 
@@ -93,11 +135,20 @@ function ApplyForm() {
       }
 
       // Redirect to Stripe Checkout
+      setRedirectFallbackUrl(data.checkoutUrl);
+      window.setTimeout(() => setShowRedirectHelp(true), 1500);
       window.location.href = data.checkoutUrl;
     } catch {
-      setServerError("Network error. Please check your connection and try again.");
+      setServerError(
+        "Network error (or timeout). Please check your connection and try again.",
+      );
       setSubmitting(false);
     }
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    await submit();
   }
 
   function handleChange(
@@ -105,6 +156,7 @@ function ApplyForm() {
   ) {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+    if (validationSummary) setValidationSummary(null);
     if (errors[name]) {
       setErrors((prev) => {
         const next = { ...prev };
@@ -146,7 +198,7 @@ function ApplyForm() {
             </h1>
             <p className="mt-3 text-[15px] md:text-lg leading-relaxed text-[var(--color-text-muted)] max-w-[60ch]">
               Takes about 2–3 minutes. After you submit, you&apos;ll be redirected to Stripe
-              for the $100 deposit.
+              for the $100 deposit. Full refund available through end of Day 2.
             </p>
 
             <div className="mt-6 rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] p-5">
@@ -178,11 +230,42 @@ function ApplyForm() {
 
             {serverError && (
               <div className="mt-6 rounded-[var(--radius-xl)] border border-[color-mix(in_oklch,var(--color-error)_45%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-error)_10%,var(--color-surface))] p-5 text-sm text-[var(--color-text)] shadow-[var(--shadow-sm)]">
-                {serverError}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <p>{serverError}</p>
+                  <button
+                    type="button"
+                    onClick={() => void submit()}
+                    disabled={submitting}
+                    className="inline-flex items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-2 text-[13px] font-medium text-[var(--color-text)] shadow-[var(--shadow-sm)] transition-[transform,box-shadow] [transition-duration:var(--duration-fast)] [transition-timing-function:var(--ease-quart)] hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)] disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-color)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
+                  >
+                    Try again
+                  </button>
+                </div>
+                {redirectFallbackUrl && (
+                  <p className="mt-3 text-xs text-[var(--color-text-muted)]">
+                    If you are not redirected, use this link:{" "}
+                    <a
+                      className="underline text-[var(--color-accent)]"
+                      href={redirectFallbackUrl}
+                    >
+                      Continue to Stripe
+                    </a>
+                    .
+                  </p>
+                )}
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+              {validationSummary && (
+                <div
+                  role="alert"
+                  aria-live="assertive"
+                  className="rounded-[var(--radius-xl)] border border-[color-mix(in_oklch,var(--color-error)_35%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-error)_8%,var(--color-surface))] p-5 text-sm text-[var(--color-text)] shadow-[var(--shadow-sm)]"
+                >
+                  {validationSummary}
+                </div>
+              )}
               <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] p-6 md:p-7">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <Field
@@ -258,6 +341,44 @@ function ApplyForm() {
                       What do you want to automate?{" "}
                       <span className="text-[var(--color-error)]">*</span>
                     </label>
+                    <div className="mb-2 flex flex-wrap gap-2">
+                      {[
+                        {
+                          label: "Support triage",
+                          value:
+                            "Triage inbound support tickets and draft replies with guardrails.",
+                        },
+                        {
+                          label: "Lead qualifying",
+                          value:
+                            "Qualify leads and route them to the right rep with clear rules.",
+                        },
+                        {
+                          label: "Call follow-ups",
+                          value:
+                            "Summarize customer calls and generate follow-up tasks automatically.",
+                        },
+                      ].map((ex) => (
+                        <button
+                          key={ex.label}
+                          type="button"
+                          onClick={() => {
+                            setForm((prev) => ({ ...prev, useCase: ex.value }));
+                            if (errors.useCase) {
+                              setErrors((prev) => {
+                                const next = { ...prev };
+                                delete next.useCase;
+                                return next;
+                              });
+                            }
+                            setValidationSummary(null);
+                          }}
+                          className="inline-flex items-center rounded-full border border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-accent)_6%,var(--color-surface))] px-3 py-1 text-[12px] font-medium text-[var(--color-text-muted)] transition-colors [transition-duration:var(--duration-fast)] [transition-timing-function:var(--ease-quart)] hover:text-[var(--color-text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-color)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface)]"
+                        >
+                          {ex.label}
+                        </button>
+                      ))}
+                    </div>
                     <textarea
                       id="useCase"
                       name="useCase"
@@ -291,7 +412,7 @@ function ApplyForm() {
                         onClick={() => setShowNetworkCode(true)}
                         className="inline-flex items-center gap-2 text-[13px] font-medium text-[var(--color-accent)] hover:text-[color-mix(in_oklch,var(--color-accent)_80%,black)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface)] rounded-full px-2 py-1"
                       >
-                        Add a network code (optional)
+                        Add a referral code (optional)
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                         </svg>
@@ -299,7 +420,7 @@ function ApplyForm() {
                     ) : (
                       <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-accent)_6%,var(--color-surface))] p-4">
                         <Field
-                          label="Network code"
+                          label="Referral code"
                           name="networkCode"
                           value={form.networkCode}
                           onChange={handleChange}
@@ -307,7 +428,7 @@ function ApplyForm() {
                           placeholder="Enter your code"
                         />
                         <p className="mt-2 text-xs text-[var(--color-text-faint)]">
-                          Network codes discount the remainder only. The deposit stays $100.
+                          Referral codes help us track how you found us.
                         </p>
                       </div>
                     )}
@@ -322,6 +443,18 @@ function ApplyForm() {
                     You&apos;ll be redirected to Stripe to pay the $100 deposit. Full refund if
                     unsatisfied by end of Day 2.
                   </p>
+                  {submitting && redirectFallbackUrl && showRedirectHelp && (
+                    <p className="mt-2 text-xs text-center text-[var(--color-text-muted)]">
+                      Not redirected?{" "}
+                      <a
+                        className="underline text-[var(--color-accent)]"
+                        href={redirectFallbackUrl}
+                      >
+                        Continue to Stripe
+                      </a>
+                      .
+                    </p>
+                  )}
                 </div>
               </div>
             </form>
