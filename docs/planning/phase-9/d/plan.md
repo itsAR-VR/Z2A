@@ -16,7 +16,7 @@ Revert the hero “Scope / Build / Deploy / Evaluate” element back to the anim
    - Trigger a small pulse/highlight on the node as the runner arrives (no continuous “bouncy” pulsing).
    - Ensure reduced-motion disables the loop animation (static UI).
 2. Ticket positioning:
-   - Move the desktop Toronto/50 seats ticket slightly lower (e.g., `-bottom-4` → `-bottom-6`).
+   - Move the desktop Toronto/50 seats ticket slightly lower (e.g., `-bottom-4` → `-bottom-8`).
 3. Tests:
    - Update `z2a/landing.spec.ts` and `z2a/reduced-motion.spec.ts` to stop referencing the stepper selectors and re-assert loop presence/reduced-motion behavior.
 4. Gates:
@@ -32,7 +32,7 @@ Revert the hero “Scope / Build / Deploy / Evaluate” element back to the anim
     - `data-testid="hero-agent-loop"`
     - `data-testid="hero-agent-loop-runner"`
 - Lowered the desktop Toronto/50 seats ticket further:
-  - `src/components/sections/Hero.tsx` changed `-bottom-4` → `-bottom-6` on `data-testid="hero-ticket-toronto"`.
+  - `src/components/sections/Hero.tsx` changed `-bottom-4` → `-bottom-8` on `data-testid="hero-ticket-toronto"`.
 - Removed stepper artifacts:
   - Deleted `src/components/hero/HeroStepper.tsx`
   - Removed `.z2a-stepper-range` styling from `src/app/globals.css`

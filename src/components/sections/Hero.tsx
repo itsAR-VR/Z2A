@@ -388,7 +388,7 @@ export function Hero() {
             {/* small “ticket” cards */}
             <div
               data-testid="hero-ticket-toronto"
-              className="hidden md:block pointer-events-none absolute -bottom-6 -left-4 z-20 rotate-[-6deg] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-md)] px-4 py-3"
+              className="hidden md:block pointer-events-none absolute -bottom-8 -left-4 z-20 rotate-[-6deg] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-md)] px-4 py-3"
             >
               <p className="font-mono text-[10px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
                 Toronto pilot

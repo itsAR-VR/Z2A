@@ -91,7 +91,7 @@ Overlap exists with recent completed work that touched the same landing files.
 - Shipped:
   - Lowered desktop “Toronto pilot / 50 seats” floating ticket and added hero selectors.
   - Restored the animated “Scope / Build / Deploy / Evaluate” hero loop (runner dot + brief node accents).
-  - Lowered the Toronto ticket further (`-bottom-6`) and updated Playwright specs to match the final selectors/behavior.
+  - Lowered the Toronto ticket further (`-bottom-8`) and updated Playwright specs to match the final selectors/behavior.
 - Verified:
   - `npm run lint`: pass
   - `npm run typecheck`: pass

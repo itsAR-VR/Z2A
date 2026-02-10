@@ -9,7 +9,7 @@
 
 ## What Shipped
 - Ticket alignment + test ids:
-  - `src/components/sections/Hero.tsx` (`data-testid="hero-ticket-toronto"`, class `-bottom-6`)
+  - `src/components/sections/Hero.tsx` (`data-testid="hero-ticket-toronto"`, class `-bottom-8`)
   - `src/components/sections/Hero.tsx` (`data-testid="hero-structure-card"`)
 - Animated hero loop (final):
   - `src/components/sections/Hero.tsx` (renders “Weekend loop” SVG, GSAP runner loop + node pulse accents)
@@ -40,7 +40,7 @@
 ## Success Criteria → Evidence
 
 1. Desktop hero ticket is visibly lower and no longer feels misaligned.
-   - Evidence: `src/components/sections/Hero.tsx` uses `className="... absolute -bottom-6 -left-4 ..."` on `data-testid="hero-ticket-toronto"`.
+   - Evidence: `src/components/sections/Hero.tsx` uses `className="... absolute -bottom-8 -left-4 ..."` on `data-testid="hero-ticket-toronto"`.
    - Status: met (code-level); requires final visual confirm in a real browser session.
 
 2. Hero loop runner visits nodes and avoids “bouncy slider” behavior.
