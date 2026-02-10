@@ -35,6 +35,32 @@ test.describe("Landing", () => {
     await expect(sticky).toHaveClass(hasClass("invisible"));
   });
 
+  test("hero stepper supports click and drag @prod-safe", async ({ page }) => {
+    await page.goto("/");
+
+    const stepper = page.getByTestId("hero-stepper");
+    await expect(stepper).toBeVisible();
+
+    await stepper.getByRole("button", { name: "Deploy" }).click();
+    await expect(stepper.getByTestId("hero-stepper-active-label")).toHaveText(
+      "Deploy",
+    );
+    await expect(
+      stepper.getByTestId("hero-stepper-active-description"),
+    ).toContainText("runnable");
+
+    const slider = stepper.getByRole("slider", { name: "Hero timeline" });
+    await slider.evaluate((el) => {
+      const input = el as HTMLInputElement;
+      input.value = "3";
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+      input.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+    await expect(stepper.getByTestId("hero-stepper-active-label")).toHaveText(
+      "Evaluate",
+    );
+  });
+
   test("menu locks scroll and restores focus on close @prod-safe", async ({
     page,
   }) => {

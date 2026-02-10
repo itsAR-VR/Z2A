@@ -66,18 +66,26 @@ test.describe("Reduced Motion", () => {
     await expect(menuButton).toBeFocused();
   });
 
-  test("does not animate hero agent loop @prod-safe", async ({ page }) => {
+  test("hero stepper is visible and transitionless @prod-safe", async ({
+    page,
+  }) => {
     await page.goto("/");
 
-    const loop = page.getByTestId("hero-agent-loop");
-    await expect(loop).toBeVisible();
+    const stepper = page.getByTestId("hero-stepper");
+    await expect(stepper).toBeVisible();
 
-    // In reduced motion we never initialize the GSAP loop timeline, so the
-    // animated draw-path and runner dot remain hidden.
-    await expect(loop.locator("path[data-loop-draw]")).toHaveCSS("opacity", "0");
-    await expect(loop.locator("circle[data-loop-runner]")).toHaveCSS(
-      "opacity",
-      "0",
-    );
+    // Reduced motion forces transition durations to near-zero via globals.css.
+    const progress = stepper.getByTestId("hero-stepper-progress");
+    const transitionDuration = await progress.evaluate((el) => {
+      const d = getComputedStyle(el).transitionDuration;
+      const parts = d.split(",").map((p) => p.trim()).filter(Boolean);
+      const toMs = (part: string) => {
+        if (part.endsWith("ms")) return Number.parseFloat(part);
+        if (part.endsWith("s")) return Number.parseFloat(part) * 1000;
+        return Number.parseFloat(part);
+      };
+      return Math.max(0, ...parts.map(toMs));
+    });
+    expect(transitionDuration).toBeLessThanOrEqual(5);
   });
 });

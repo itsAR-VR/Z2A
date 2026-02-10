@@ -1,4 +1,22 @@
 import { defineConfig, devices } from "@playwright/test";
+import os from "os";
+
+// Some sandboxed environments return an empty `os.cpus()` list on Apple Silicon.
+// Playwright uses that to detect `mac-arm64`, so force it when needed.
+if (
+  !process.env.PLAYWRIGHT_HOST_PLATFORM_OVERRIDE &&
+  process.platform === "darwin" &&
+  process.arch === "arm64" &&
+  os.cpus().length === 0
+) {
+  const ver = os.release().split(".").map((a) => Number.parseInt(a, 10));
+  let macVersion = "mac";
+  if (ver[0] < 18) macVersion = "mac10.13";
+  else if (ver[0] === 18) macVersion = "mac10.14";
+  else if (ver[0] === 19) macVersion = "mac10.15";
+  else macVersion = `mac${Math.min(ver[0] - 9, 15)}`;
+  process.env.PLAYWRIGHT_HOST_PLATFORM_OVERRIDE = `${macVersion}-arm64`;
+}
 
 const isCI = Boolean(process.env.CI);
 const baseURL =
