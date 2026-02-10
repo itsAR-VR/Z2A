@@ -66,26 +66,24 @@ test.describe("Reduced Motion", () => {
     await expect(menuButton).toBeFocused();
   });
 
-  test("hero stepper is visible and transitionless @prod-safe", async ({
-    page,
-  }) => {
+  test("hero loop runner does not animate @prod-safe", async ({ page }) => {
     await page.goto("/");
 
-    const stepper = page.getByTestId("hero-stepper");
-    await expect(stepper).toBeVisible();
+    const loop = page.getByTestId("hero-agent-loop");
+    await expect(loop).toBeVisible();
 
-    // Reduced motion forces transition durations to near-zero via globals.css.
-    const progress = stepper.getByTestId("hero-stepper-progress");
-    const transitionDuration = await progress.evaluate((el) => {
-      const d = getComputedStyle(el).transitionDuration;
-      const parts = d.split(",").map((p) => p.trim()).filter(Boolean);
-      const toMs = (part: string) => {
-        if (part.endsWith("ms")) return Number.parseFloat(part);
-        if (part.endsWith("s")) return Number.parseFloat(part) * 1000;
-        return Number.parseFloat(part);
-      };
-      return Math.max(0, ...parts.map(toMs));
-    });
-    expect(transitionDuration).toBeLessThanOrEqual(5);
+    const runner = page.getByTestId("hero-agent-loop-runner");
+    await expect(runner).toHaveCount(1);
+    const bb1 = await runner.boundingBox();
+    expect(bb1).not.toBeNull();
+    if (!bb1) return;
+
+    await page.waitForTimeout(400);
+
+    const bb2 = await runner.boundingBox();
+    expect(bb2).not.toBeNull();
+    if (!bb2) return;
+    expect(Math.abs(bb2.x - bb1.x)).toBeLessThan(0.5);
+    expect(Math.abs(bb2.y - bb1.y)).toBeLessThan(0.5);
   });
 });

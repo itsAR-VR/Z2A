@@ -2,7 +2,6 @@
 
 import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
-import { HeroStepper } from "@/components/hero/HeroStepper";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { DURATION, EASE } from "@/lib/motion-tokens";
 import { useLayoutEffect, useRef } from "react";
@@ -17,17 +16,6 @@ const marqueeItems = [
   "Live build support",
   "Deposit $100",
 ];
-
-const heroStepperSteps = [
-  {
-    key: "scope",
-    label: "Scope",
-    description: "Define the workflow and success criteria.",
-  },
-  { key: "build", label: "Build", description: "Implement the core loop with real data." },
-  { key: "deploy", label: "Deploy", description: "Make it runnable after the weekend." },
-  { key: "evaluate", label: "Evaluate", description: "Add checks so it stays reliable." },
-] as const;
 
 function Marquee() {
   const prefersReduced = useReducedMotion();
@@ -61,6 +49,7 @@ export function Hero() {
   const headlineRef = useRef<HTMLHeadingElement | null>(null);
   const subheadRef = useRef<HTMLParagraphElement | null>(null);
   const loopRef = useRef<HTMLDivElement | null>(null);
+  const loopSvgRef = useRef<SVGSVGElement | null>(null);
   const ctasRef = useRef<HTMLDivElement | null>(null);
   const artRef = useRef<HTMLDivElement | null>(null);
 
@@ -112,6 +101,80 @@ export function Hero() {
     return () => ctx.revert();
   }, [prefersReduced]);
 
+  useLayoutEffect(() => {
+    if (prefersReduced) return;
+    const loop = loopRef.current;
+    const svg = loopSvgRef.current;
+    if (!loop || !svg) return;
+
+    const ctx = gsap.context(() => {
+      const runner = svg.querySelector<SVGCircleElement>("[data-loop-runner='dot']");
+      const runnerHalo = svg.querySelector<SVGCircleElement>("[data-loop-runner='halo']");
+
+      const pulse = (key: string, tl: gsap.core.Timeline) => {
+        const halo = svg.querySelector<SVGCircleElement>(`[data-loop-node-halo='${key}']`);
+        const label = svg.querySelector<SVGTextElement>(`[data-loop-node-label='${key}']`);
+        if (!halo || !label) return;
+
+        const haloCx = Number(halo.getAttribute("cx") || 0);
+        const haloCy = Number(halo.getAttribute("cy") || 0);
+        gsap.set(halo, { transformOrigin: "50% 50%", svgOrigin: `${haloCx} ${haloCy}` });
+
+        tl.to(
+          halo,
+          { opacity: 0.65, scale: 1.16, duration: 0.14, ease: EASE.expo },
+          "<",
+        )
+          .to(halo, { opacity: 0, scale: 1, duration: 0.36, ease: EASE.expo }, "<0.08")
+          .to(label, { opacity: 1, duration: 0.14, ease: EASE.expo }, "<")
+          .to(label, { opacity: 0.78, duration: 0.36, ease: EASE.expo }, "<0.08");
+      };
+
+      if (!runner || !runnerHalo) return;
+
+      const topY = 26;
+      const bottomY = 50;
+      const leftX = 72;
+      const rightX = 448;
+      const leftArcX = 60;
+      const rightArcX = 460;
+      const arcMidY = 38;
+
+      const nodes = [
+        { key: "scope", x: 96 },
+        { key: "build", x: 216 },
+        { key: "deploy", x: 324 },
+        { key: "evaluate", x: 430 },
+      ] as const;
+
+      const startX = nodes[0].x;
+      const startY = topY;
+      gsap.set([runner, runnerHalo], { x: 0, y: 0 });
+
+      const tl = gsap.timeline({ repeat: -1, defaults: { ease: EASE.expo } });
+
+      // Give the hero intro a beat so this reads intentional, not random mid-loop.
+      tl.to({}, { duration: 0.65 });
+
+      for (const node of nodes) {
+        tl.to([runner, runnerHalo], { x: node.x - startX, y: topY - startY, duration: 0.55 });
+        pulse(node.key, tl);
+        tl.to({}, { duration: 0.35 });
+      }
+
+      // Finish the loop by traveling down and back across the bottom rail.
+      tl.to([runner, runnerHalo], { x: rightX - startX, y: topY - startY, duration: 0.28 })
+        .to([runner, runnerHalo], { x: rightArcX - startX, y: arcMidY - startY, duration: 0.22 }, "<0.02")
+        .to([runner, runnerHalo], { x: rightX - startX, y: bottomY - startY, duration: 0.22 })
+        .to([runner, runnerHalo], { x: leftX - startX, y: bottomY - startY, duration: 0.74 })
+        .to([runner, runnerHalo], { x: leftArcX - startX, y: arcMidY - startY, duration: 0.22 }, "<0.02")
+        .to([runner, runnerHalo], { x: leftX - startX, y: topY - startY, duration: 0.22 })
+        .to([runner, runnerHalo], { x: nodes[0].x - startX, y: topY - startY, duration: 0.28 });
+    }, loop);
+
+    return () => ctx.revert();
+  }, [prefersReduced]);
+
   return (
     <section
       id="top"
@@ -159,7 +222,89 @@ export function Hero() {
               ref={loopRef}
               className="mt-7 max-w-[60ch] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-surface)_70%,transparent)] backdrop-blur-md shadow-[var(--shadow-sm)] px-4 py-4"
             >
-              <HeroStepper steps={heroStepperSteps} />
+              <div data-testid="hero-agent-loop" className="w-full">
+                <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
+                  Weekend loop
+                </p>
+                <svg
+                  ref={loopSvgRef}
+                  className="mt-3 w-full h-[92px]"
+                  viewBox="0 0 520 92"
+                  fill="none"
+                  role="img"
+                  aria-label="Scope, Build, Deploy, Evaluate loop"
+                >
+                  <path
+                    d="M72 26H448A12 12 0 0 1 448 50H72A12 12 0 0 1 72 26Z"
+                    stroke="var(--color-border)"
+                    strokeWidth={1.25}
+                  />
+
+                  {(
+                    [
+                      { key: "scope", label: "Scope", x: 96 },
+                      { key: "build", label: "Build", x: 216 },
+                      { key: "deploy", label: "Deploy", x: 324 },
+                      { key: "evaluate", label: "Evaluate", x: 430 },
+                    ] as const
+                  ).map((node) => (
+                    <g key={node.key}>
+                      <circle
+                        data-loop-node-halo={node.key}
+                        cx={node.x}
+                        cy={26}
+                        r={14}
+                        fill="none"
+                        stroke="var(--color-accent)"
+                        strokeWidth={2}
+                        vectorEffect="non-scaling-stroke"
+                        opacity={0}
+                      />
+                      <circle
+                        cx={node.x}
+                        cy={26}
+                        r={8}
+                        fill="var(--color-surface)"
+                        stroke="var(--color-border)"
+                        strokeWidth={1.25}
+                      />
+                      <text
+                        data-loop-node-label={node.key}
+                        x={node.x}
+                        y={82}
+                        textAnchor="middle"
+                        fill="var(--color-text-muted)"
+                        opacity={0.78}
+                        className="font-mono text-[11px] uppercase"
+                        letterSpacing="0.18em"
+                      >
+                        {node.label}
+                      </text>
+                    </g>
+                  ))}
+
+                  <circle
+                    data-loop-runner="halo"
+                    cx={96}
+                    cy={26}
+                    r={9}
+                    fill="var(--color-accent)"
+                    opacity={0.14}
+                  />
+                  <circle
+                    data-testid="hero-agent-loop-runner"
+                    data-loop-runner="dot"
+                    cx={96}
+                    cy={26}
+                    r={3.75}
+                    fill="var(--color-accent)"
+                  />
+                </svg>
+
+                <p className="mt-2 text-sm text-[var(--color-text-muted)]">
+                  Scope, build, deploy, evaluate. Repeat until it runs end-to-end.
+                </p>
+              </div>
             </div>
 
             <div ref={ctasRef} className="mt-8 flex flex-col sm:flex-row gap-3">
@@ -243,7 +388,7 @@ export function Hero() {
             {/* small “ticket” cards */}
             <div
               data-testid="hero-ticket-toronto"
-              className="hidden md:block pointer-events-none absolute -bottom-4 -left-4 z-20 rotate-[-6deg] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-md)] px-4 py-3"
+              className="hidden md:block pointer-events-none absolute -bottom-6 -left-4 z-20 rotate-[-6deg] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-md)] px-4 py-3"
             >
               <p className="font-mono text-[10px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
                 Toronto pilot

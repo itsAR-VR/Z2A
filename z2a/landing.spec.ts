@@ -35,30 +35,23 @@ test.describe("Landing", () => {
     await expect(sticky).toHaveClass(hasClass("invisible"));
   });
 
-  test("hero stepper supports click and drag @prod-safe", async ({ page }) => {
+  test("hero loop is present and ticket is lowered @prod-safe", async ({
+    page,
+  }) => {
     await page.goto("/");
 
-    const stepper = page.getByTestId("hero-stepper");
-    await expect(stepper).toBeVisible();
+    const loop = page.getByTestId("hero-agent-loop");
+    await expect(loop).toBeVisible();
+    await expect(loop).toContainText("Scope");
+    await expect(loop).toContainText("Build");
+    await expect(loop).toContainText("Deploy");
+    await expect(loop).toContainText("Evaluate");
 
-    await stepper.getByRole("button", { name: "Deploy" }).click();
-    await expect(stepper.getByTestId("hero-stepper-active-label")).toHaveText(
-      "Deploy",
-    );
-    await expect(
-      stepper.getByTestId("hero-stepper-active-description"),
-    ).toContainText("runnable");
+    const torontoTicket = page.getByTestId("hero-ticket-toronto");
+    await expect(torontoTicket).toHaveCount(1);
+    await expect(torontoTicket).toHaveClass(/-bottom-6/);
 
-    const slider = stepper.getByRole("slider", { name: "Hero timeline" });
-    await slider.evaluate((el) => {
-      const input = el as HTMLInputElement;
-      input.value = "3";
-      input.dispatchEvent(new Event("input", { bubbles: true }));
-      input.dispatchEvent(new Event("change", { bubbles: true }));
-    });
-    await expect(stepper.getByTestId("hero-stepper-active-label")).toHaveText(
-      "Evaluate",
-    );
+    await expect(page.getByTestId("hero-agent-loop-runner")).toHaveCount(1);
   });
 
   test("menu locks scroll and restores focus on close @prod-safe", async ({

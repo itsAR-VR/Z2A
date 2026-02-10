@@ -1,7 +1,7 @@
-# Phase 9 — Hero Ticket Alignment + Interactive Hero Stepper (Jam 9440520b…)
+# Phase 9 — Hero Ticket Alignment + Animated Hero Loop (Jam 9440520b…)
 
 ## Purpose
-Fix the homepage hero UI issues reported in Jam `9440520b-504e-4c64-93d0-1cd1c9acdc4f`: the desktop “Toronto pilot / 50 seats” floating ticket sits too high, and the hero “Scope / Build / Deploy / Evaluate” progress graphic reads as a draggable control but behaves/animates inconsistently (“bouncy”).
+Fix the homepage hero UI issues reported in Jam `9440520b-504e-4c64-93d0-1cd1c9acdc4f`: the desktop “Toronto pilot / 50 seats” floating ticket sits too high, and the hero “Scope / Build / Deploy / Evaluate” element should read as a coherent animated loop (runner dot visits each node) without a “bouncy” feel.
 
 ## Context
 - Jam report: `https://jam.dev/c/9440520b-504e-4c64-93d0-1cd1c9acdc4f`
@@ -22,8 +22,10 @@ Overlap exists with recent completed work that touched the same landing files.
 
 ## Objectives
 * [x] Lower the desktop floating “Toronto pilot / 50 seats” ticket so it feels attached to the right-side content.
-* [x] Replace the hero SVG “agent loop” animation with an interactive, accessible stepper/slider for Scope/Build/Deploy/Evaluate.
-* [x] Update Playwright tests (landing + reduced motion) to cover the new stepper and avoid flake.
+* [x] Replace the hero SVG “agent loop” animation with an interactive, accessible stepper/slider for Scope/Build/Deploy/Evaluate. (implemented in 9b, reverted in 9d)
+* [x] Update Playwright tests (landing + reduced motion) to cover the new stepper and avoid flake. (implemented in 9c, reverted in 9d)
+* [x] Restore the animated hero loop (runner dot visits each node) and add purposeful node animations (no “bouncy” feel).
+* [x] Move the desktop Toronto/50 seats ticket slightly lower (from the Phase 9a adjustment).
 
 ## Constraints
 - Brand: focused, premium, builder-first. No hype.
@@ -33,10 +35,10 @@ Overlap exists with recent completed work that touched the same landing files.
 
 ## Success Criteria
 - Desktop hero ticket is visibly lower and no longer feels misaligned.
-- Hero stepper:
-  - Clickable step labels (Scope/Build/Deploy/Evaluate) update the active step content.
-  - Draggable control snaps cleanly between steps.
-  - No “bouncy” animation.
+- Hero loop:
+  - The runner dot visits Scope → Build → Deploy → Evaluate in a loop.
+  - Each node gets a small, timed accent (pulse/highlight) as the runner reaches it.
+  - No confusing “bouncy slider” behavior.
 - QA:
   - `npm run lint`, `npm run typecheck`, `npm run build` pass.
   - Playwright `@prod-safe` tests pass.
@@ -45,27 +47,28 @@ Overlap exists with recent completed work that touched the same landing files.
 * a — Adjust desktop floating ticket positioning + add test ids
 * b — Implement interactive hero stepper (replace SVG loop + remove loop GSAP)
 * c — Update Playwright coverage + run quality gates; write review
+* d — Restore animated hero loop + lower ticket further; update tests + re-run gates
 
 ## Repo Reality Check (RED TEAM)
 
 - What exists today:
   - Hero implementation: `src/components/sections/Hero.tsx`
-  - Stepper implementation: `src/components/hero/HeroStepper.tsx`
-  - Stepper thumb CSS: `src/app/globals.css` (`.z2a-stepper-range`)
+  - Hero loop animation: GSAP timeline scoped to the hero loop card (runner dot visits nodes)
+  - Loop selectors: `data-testid="hero-agent-loop"`, `data-testid="hero-agent-loop-runner"`
   - Tests: `z2a/landing.spec.ts`, `z2a/reduced-motion.spec.ts`
   - Playwright config: `playwright.config.ts`
 - What the plan assumes:
-  - Replacing the SVG loop with a real stepper resolves the “bouncy/misaligned” complaint.
+  - A simple animated loop (runner + brief node pulses) resolves the “bouncy/misaligned” complaint without reading as an interactive control.
   - The floating ticket remains a desktop-only overlay (md+) and is not clipped by the right-card container.
 - Verified touch points:
-  - All referenced Phase 9 files exist on disk.
+  - Phase 9 code touch points exist on disk (Hero loop + tests); stepper artifacts were intentionally removed in 9d.
   - `npm run lint`, `npm run typecheck`, `npm run build` run successfully in this environment.
 
 ## RED TEAM Findings (Gaps / Weak Spots)
 
 ### Highest-risk failure modes
-- Stepper labels collide on very narrow widths → Mitigation: spot-check mobile widths; if needed, switch labels row to a compact mode (e.g., hide non-active labels or use abbreviations).
-- Range/thumb styling differs across browsers → Mitigation: verify in Chrome/Safari once E2E/browser tooling is available; keep the UI functional even if styling degrades.
+- Loop motion reads “busy” or “bouncy” at the current tempo → Mitigation: tune durations/dwell in `src/components/sections/Hero.tsx` after visual QA; keep pulses time-bounded.
+- SVG text spacing collides at narrow widths → Mitigation: reduce label letter spacing/font size or simplify labels after mobile QA.
 
 ### Testing / validation
 - Playwright cannot launch Chromium in this execution environment (MachPortRendezvous permission denied; `kill EPERM`) → Mitigation: run `npm run test:e2e:prod` on a normal local machine or CI runner; treat it as the final gate.
@@ -81,13 +84,14 @@ Overlap exists with recent completed work that touched the same landing files.
 - 2026-02-09 — Lowered desktop Toronto/50 seats ticket and added hero test ids (files: `src/components/sections/Hero.tsx`, `docs/planning/phase-9/a/plan.md`)
 - 2026-02-09 — Replaced hero SVG loop with interactive stepper (files: `src/components/sections/Hero.tsx`, `src/components/hero/HeroStepper.tsx`, `src/app/globals.css`, `docs/planning/phase-9/b/plan.md`)
 - 2026-02-09 — Updated Playwright specs + ran lint/typecheck/build; Playwright execution blocked in this sandbox (files: `z2a/landing.spec.ts`, `z2a/reduced-motion.spec.ts`, `docs/planning/phase-9/c/plan.md`)
+- 2026-02-10 — Restored the animated hero loop, removed stepper artifacts, and lowered the ticket further (files: `src/components/sections/Hero.tsx`, `src/app/globals.css`, `z2a/landing.spec.ts`, `z2a/reduced-motion.spec.ts`, `docs/planning/phase-9/d/plan.md`)
 
 ## Phase Summary
 
 - Shipped:
   - Lowered desktop “Toronto pilot / 50 seats” floating ticket and added hero selectors.
-  - Replaced hero SVG/GSAP loop with an interactive stepper (click + drag).
-  - Updated Playwright specs for the new stepper selectors/behavior.
+  - Restored the animated “Scope / Build / Deploy / Evaluate” hero loop (runner dot + brief node accents).
+  - Lowered the Toronto ticket further (`-bottom-6`) and updated Playwright specs to match the final selectors/behavior.
 - Verified:
   - `npm run lint`: pass
   - `npm run typecheck`: pass
