@@ -1,7 +1,15 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect } from "react";
 import { Button } from "@/components/Button";
+import { trackEvent } from "@/lib/analytics";
 
 export default function ApplySuccessPage() {
+  useEffect(() => {
+    trackEvent("deposit_success_view");
+  }, []);
+
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="container-content max-w-lg text-center py-20">

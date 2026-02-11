@@ -6,21 +6,21 @@ import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 const outcomes = [
   {
     number: "01",
-    title: "A working AI agent built during the weekend",
+    title: "A working automation system built during the weekend",
     description:
-      "Not a toy demo — a real agent that handles your use case, built hands-on with guided support.",
+      "Not a toy demo. You build around your own workflow with guided support.",
   },
   {
     number: "02",
-    title: "A basic deployment approach you can adapt",
+    title: "A deployment approach you can use right away",
     description:
-      "Leave with a deployment path that works for your environment, not a theoretical architecture deck.",
+      "Leave with a practical rollout path for your environment, not a theory deck.",
   },
   {
     number: "03",
-    title: "An evaluation/testing workflow for reliability",
+    title: "A reliability checklist to keep quality high",
     description:
-      "Know how to test and evaluate your agent so it works reliably in production.",
+      "Know what to monitor and test so your system keeps working after launch.",
   },
 ];
 
@@ -30,14 +30,14 @@ export function Outcomes() {
       <RevealOnScroll>
         <h2 className="font-heading font-semibold tracking-tight text-[clamp(28px,3.2vw,44px)] leading-[1.05] mb-4 text-[var(--color-text)]">
           Designed so you leave with{" "}
-          <span className="text-[var(--color-accent)]">more than notes.</span>
+          <span className="text-[var(--color-accent)]">working output.</span>
         </h2>
       </RevealOnScroll>
 
       <RevealOnScroll delay={100}>
         <p className="text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed max-w-2xl mb-12">
-          This is for hands-on builders. You’ll leave with artifacts you can keep
-          iterating on Monday, not a slide deck.
+          This is hands-on. You&apos;ll leave with assets you can keep improving
+          on Monday: running workflows, a rollout plan, and reliability checks.
         </p>
       </RevealOnScroll>
 

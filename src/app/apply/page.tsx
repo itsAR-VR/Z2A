@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
 import { Button } from "@/components/Button";
+import { trackEvent } from "@/lib/analytics";
 
 interface FormData {
   firstName: string;
@@ -48,6 +48,13 @@ function ApplyForm() {
   const [showNetworkCode, setShowNetworkCode] = useState(
     () => searchParams.get("referral") === "1",
   );
+  const formStartedRef = useRef(false);
+
+  function onFormFocusCapture() {
+    if (formStartedRef.current) return;
+    formStartedRef.current = true;
+    trackEvent("apply_form_start");
+  }
 
   function validate(): FieldError {
     const e: FieldError = {};
@@ -100,6 +107,7 @@ function ApplyForm() {
       return;
     }
 
+    trackEvent("apply_submit_click");
     setSubmitting(true);
 
     try {
@@ -194,11 +202,12 @@ function ApplyForm() {
               Application
             </p>
             <h1 className="mt-3 font-heading font-bold tracking-tight text-[clamp(30px,3.2vw,44px)] leading-[1.05] text-[var(--color-text)]">
-              Apply to reserve a seat
+              Apply in 2–3 minutes
             </h1>
             <p className="mt-3 text-[15px] md:text-lg leading-relaxed text-[var(--color-text-muted)] max-w-[60ch]">
-              Takes about 2–3 minutes. After you submit, you&apos;ll be redirected to Stripe
-              for the $100 deposit. Full refund available through end of Day 2.
+              Tell us what you want to automate. After you submit, you&apos;ll
+              be redirected to Stripe for the $100 deposit to reserve your seat.
+              Full refund is available through the end of Day 2.
             </p>
 
             <div className="mt-6 rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] p-5">
@@ -256,7 +265,11 @@ function ApplyForm() {
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+            <form
+              onSubmit={handleSubmit}
+              onFocusCapture={onFormFocusCapture}
+              className="mt-6 space-y-5"
+            >
               {validationSummary && (
                 <div
                   role="alert"
@@ -420,7 +433,7 @@ function ApplyForm() {
                     ) : (
                       <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-accent)_6%,var(--color-surface))] p-4">
                         <Field
-                          label="Referral code"
+                          label="Referral code (optional)"
                           name="networkCode"
                           value={form.networkCode}
                           onChange={handleChange}
@@ -440,8 +453,8 @@ function ApplyForm() {
                     {submitting ? "Redirecting to payment..." : "Continue to deposit ($100)"}
                   </Button>
                   <p className="mt-3 text-xs text-[var(--color-text-faint)] text-center">
-                    You&apos;ll be redirected to Stripe to pay the $100 deposit. Full refund if
-                    unsatisfied by end of Day 2.
+                    You&apos;ll be redirected to Stripe to pay the $100 deposit
+                    now. Full refund if unsatisfied by end of Day 2.
                   </p>
                   {submitting && redirectFallbackUrl && showRedirectHelp && (
                     <p className="mt-2 text-xs text-center text-[var(--color-text-muted)]">
@@ -469,11 +482,11 @@ function ApplyForm() {
                 {[
                   {
                     t: "Submit your application",
-                    d: "Basic details + a short description of what you want to automate.",
+                    d: "Basic details plus a short description of your workflow.",
                   },
                   {
                     t: "Pay the $100 deposit via Stripe",
-                    d: "Secure checkout. The deposit reserves your seat.",
+                    d: "Secure checkout. The deposit reserves your seat immediately.",
                   },
                   {
                     t: "Get confirmation + prework",

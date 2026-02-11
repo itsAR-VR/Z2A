@@ -8,27 +8,32 @@ const steps = [
   {
     number: "1",
     title: "Apply and reserve your seat",
-    description: "Submit a short application and pay a $100 deposit to lock in your spot.",
+    description:
+      "Submit a short application and pay a $100 deposit to reserve your spot.",
   },
   {
     number: "2",
     title: "Complete short prework",
-    description: "Pick your use case and set up your dev environment before the weekend.",
+    description:
+      "Pick your workflow and prepare your setup so weekend build time is productive.",
   },
   {
     number: "3",
-    title: "Build in pods with guided support",
-    description: "Work in groups of 3–4 with live instructor guidance to build your agent.",
+    title: "Build in pods with live support",
+    description:
+      "Work in groups of 3–4 with instructor help to ship your first version.",
   },
   {
     number: "4",
     title: "Check in on Day 1",
-    description: "Authorize the remainder payment at check-in. Build all day.",
+    description:
+      "Authorize the remainder payment at check-in, then spend Day 1 building.",
   },
   {
     number: "5",
     title: "Ship and demo",
-    description: "Remainder is captured after the event for Day 1 attendees. Full refund if unsatisfied by end of Day 2.",
+    description:
+      "Remainder is captured after the event for Day 1 attendees. Full refund if unsatisfied by end of Day 2.",
   },
 ];
 

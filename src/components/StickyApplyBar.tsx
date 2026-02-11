@@ -3,9 +3,10 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/Button";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { trackEvent } from "@/lib/analytics";
 
 /**
- * TKS-inspired urgency motif: a minimal sticky "Admissions open" bar that appears
+ * TKS-inspired urgency motif: a minimal sticky status bar that appears
  * once the hero is out of view and hides again when the final CTA is visible.
  *
  * Progressive enhancement: if JS is off, this simply doesn't render.
@@ -13,6 +14,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 export function StickyApplyBar() {
   const prefersReduced = useReducedMotion();
   const [visible, setVisible] = useState(false);
+  const [ctaRedirecting, setCtaRedirecting] = useState(false);
 
   useEffect(() => {
     const hero = document.getElementById("top");
@@ -60,10 +62,16 @@ export function StickyApplyBar() {
     ? ""
     : "transition-[transform,opacity] duration-300 ease-out";
 
+  const onCtaClick = () => {
+    if (ctaRedirecting) return;
+    setCtaRedirecting(true);
+    trackEvent("cta_click", { source: "sticky_apply_bar" });
+  };
+
   return (
     <div
       role="region"
-      aria-label="Admissions"
+      aria-label="Applications"
       className="fixed inset-x-0 bottom-0 z-50 pointer-events-none"
     >
       <div className="container-content pb-[calc(14px+env(safe-area-inset-bottom))]">
@@ -85,29 +93,36 @@ export function StickyApplyBar() {
           <div className="min-w-0 flex items-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-muted)] shadow-[var(--shadow-sm)]">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
-              Admissions open
+              Applications open now
             </span>
             <span className="hidden sm:inline text-sm text-[var(--color-text-faint)] truncate">
-              Feb 28 – Mar 1 · Toronto · 50 seats
+              Feb 28 – Mar 1 · Toronto · 50 seats · $100 deposit
             </span>
           </div>
 
-          <Button href="/apply" className="text-[13px] px-4 py-2">
-            Apply now
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
+          <Button
+            href="/apply"
+            className="text-[13px] px-4 py-2"
+            disabled={ctaRedirecting}
+            onClick={onCtaClick}
+          >
+            {ctaRedirecting ? "Redirecting..." : "Apply now"}
+            {!ctaRedirecting && (
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            )}
           </Button>
         </div>
       </div>

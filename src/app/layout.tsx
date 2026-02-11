@@ -1,15 +1,16 @@
 /* eslint-disable @next/next/no-page-custom-font */
 import type { Metadata } from "next";
+import { PageViewTracker } from "@/components/analytics/PageViewTracker";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Zero-to-Agent | Build a Working AI Agent in a Weekend — In Person",
+  title: "Zero-to-Agent | Automate Real Work in a Weekend — Toronto",
   description:
-    "Zero-to-Agent Toronto Pilot. Two days of guided build time in pods of 3–4. Leave with a working AI agent for your workflow, a deployment path, and a lightweight evaluation loop. Feb 28 – Mar 1, 2026.",
+    "Zero-to-Agent Toronto Pilot. Bring one recurring workflow and leave with a working automation system, deployment path, and reliability checklist. Feb 28 – Mar 1, 2026. 50 seats.",
   openGraph: {
     title: "Zero-to-Agent Toronto Pilot",
     description:
-      "Build a working AI agent in a weekend — in person. Feb 28 – Mar 1, 2026. 50 seats.",
+      "Automate real work in a weekend, in person. Feb 28 – Mar 1, 2026. 50 seats.",
     type: "website",
   },
 };
@@ -27,7 +28,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <PageViewTracker />
+        {children}
+      </body>
     </html>
   );
 }

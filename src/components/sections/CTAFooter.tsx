@@ -1,11 +1,22 @@
 "use client";
 
+import { useState } from "react";
+
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
+import { trackEvent } from "@/lib/analytics";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 
 export function CTAFooter() {
+  const [ctaRedirecting, setCtaRedirecting] = useState(false);
+
+  const onCtaClick = () => {
+    if (ctaRedirecting) return;
+    setCtaRedirecting(true);
+    trackEvent("cta_click", { source: "cta_footer" });
+  };
+
   return (
     <SectionWrapper id="apply" className="relative overflow-hidden">
       <div className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-[color-mix(in_oklch,var(--color-accent)_14%,transparent)] blur-[90px] opacity-60" />
@@ -23,8 +34,8 @@ export function CTAFooter() {
 
               <RevealOnScroll delay={80}>
                 <p className="text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed">
-                  Limited to 50 seats. We review applications to keep pods effective
-                  and outcomes realistic.
+                  Limited to 50 seats. We review applications so pods stay focused
+                  and each team ships real work by the end of the weekend.
                 </p>
               </RevealOnScroll>
 
@@ -48,11 +59,18 @@ export function CTAFooter() {
                     (optional) help us track how you found us.
                   </p>
                   <div className="mt-5">
-                    <Button href="/apply" className="w-full justify-center">
-                      Apply / Reserve Seat
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
+                    <Button
+                      href="/apply"
+                      className="w-full justify-center"
+                      disabled={ctaRedirecting}
+                      onClick={onCtaClick}
+                    >
+                      {ctaRedirecting ? "Redirecting..." : "Apply / Reserve Seat"}
+                      {!ctaRedirecting && (
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      )}
                     </Button>
                     <p className="mt-3 text-xs text-[var(--color-text-faint)]">
                       Questions? We typically respond within 24 hours.

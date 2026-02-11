@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { Card } from "@/components/Card";
 import { Button } from "@/components/Button";
+import { trackEvent } from "@/lib/analytics";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import {
   DEPOSIT_AMOUNT_CENTS,
@@ -27,6 +28,7 @@ function formatUsd0FromCents(amountCents: number): string {
 
 export function Pricing() {
   const [earlyBirdActive, setEarlyBirdActive] = useState(false);
+  const [ctaRedirecting, setCtaRedirecting] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -55,11 +57,17 @@ export function Pricing() {
     ? EARLY_BIRD_TOTAL_AMOUNT_CENTS
     : LIST_TOTAL_AMOUNT_CENTS;
 
+  const onCtaClick = () => {
+    if (ctaRedirecting) return;
+    setCtaRedirecting(true);
+    trackEvent("cta_click", { source: "pricing" });
+  };
+
   return (
     <SectionWrapper id="pricing">
       <RevealOnScroll>
         <h2 className="mx-auto max-w-3xl text-center font-heading font-semibold tracking-tight text-[clamp(28px,3.2vw,44px)] leading-[1.05] mb-4 text-[var(--color-text)]">
-          Reserve with a deposit.{" "}
+          Reserve your seat with a deposit.{" "}
           <span className="text-[var(--color-accent)]">
             Pay the remainder after.
           </span>
@@ -68,9 +76,9 @@ export function Pricing() {
 
       <RevealOnScroll delay={100}>
         <p className="mx-auto max-w-2xl text-center text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed mb-12">
-          Pay a $100 deposit to reserve your seat. Checkout is handled by Stripe.
-          If you&apos;re unsatisfied by the end of Day 2, we&apos;ll refund you in full.
-          Refunds are issued within 7 days.
+          Pay $100 now to reserve your seat. Checkout is handled by Stripe. If
+          you&apos;re unsatisfied by the end of Day 2, we&apos;ll issue a full
+          refund within 7 days.
         </p>
       </RevealOnScroll>
 
@@ -133,8 +141,13 @@ export function Pricing() {
               </div>
             </div>
 
-            <Button href="/apply" className="w-full">
-              Apply / Reserve Seat
+            <Button
+              href="/apply"
+              className="w-full"
+              disabled={ctaRedirecting}
+              onClick={onCtaClick}
+            >
+              {ctaRedirecting ? "Redirecting..." : "Apply / Reserve Seat"}
             </Button>
           </Card>
         </RevealOnScroll>
@@ -179,6 +192,7 @@ export function Pricing() {
             </p>
             <p className="mt-2 text-sm text-[var(--color-text-muted)]">
               Invoice/receipt is available for professional reimbursement.
+              Referral code is optional and used for source tracking only.
             </p>
           </div>
         </div>

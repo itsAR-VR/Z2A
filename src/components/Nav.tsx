@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { trackEvent } from "@/lib/analytics";
 import { Button } from "./Button";
 
 const navLinks = [
@@ -23,6 +24,7 @@ export function Nav() {
   const reducedMotion = useReducedMotion();
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuRendered, setMenuRendered] = useState(false);
+  const [applyRedirecting, setApplyRedirecting] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement | null>(null);
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const firstOverlayLinkRef = useRef<HTMLAnchorElement | null>(null);
@@ -55,8 +57,14 @@ export function Nav() {
     closeTimeoutRef.current = window.setTimeout(() => {
       closeTimeoutRef.current = null;
       setMenuRendered(false);
-    }, 180);
+    }, 280);
   }, [reducedMotion]);
+
+  const onApplyClick = () => {
+    if (applyRedirecting) return;
+    setApplyRedirecting(true);
+    trackEvent("cta_click", { source: "nav" });
+  };
 
   useEffect(() => {
     const wasOpen = prevMenuOpenRef.current;
@@ -172,8 +180,13 @@ export function Nav() {
             </div>
 
             <div className="hidden md:flex items-center gap-2">
-              <Button href="/apply" className="text-[13px] px-4 py-2">
-                Apply
+              <Button
+                href="/apply"
+                className="text-[13px] px-4 py-2"
+                disabled={applyRedirecting}
+                onClick={onApplyClick}
+              >
+                {applyRedirecting ? "Redirecting..." : "Apply"}
               </Button>
             </div>
 
@@ -214,7 +227,7 @@ export function Nav() {
 	          className={`fixed inset-0 z-[60] bg-[color-mix(in_oklch,var(--color-bg)_84%,black)] backdrop-blur-sm ${
 	            reducedMotion
 	              ? ""
-	              : "transition-opacity [transition-duration:var(--duration-fast)] [transition-timing-function:var(--ease-quart)]"
+	              : "transition-opacity [transition-duration:var(--duration-default)] [transition-timing-function:var(--ease-expo)]"
 	          } ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
 	          onKeyDown={trapFocus}
 	        >
@@ -223,7 +236,7 @@ export function Nav() {
 	              className={`rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-lg)] p-6 ${
 	                reducedMotion
 	                  ? ""
-	                  : "transition-[transform,opacity] [transition-duration:var(--duration-fast)] [transition-timing-function:var(--ease-quart)]"
+	                  : "transition-[transform,opacity] [transition-duration:var(--duration-default)] [transition-timing-function:var(--ease-expo)]"
 	              } ${menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}
 	            >
               <div className="flex items-center justify-between gap-3 mb-6">
@@ -239,7 +252,7 @@ export function Nav() {
                       aria-hidden="true"
                       className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]"
                     />
-                    Admissions open
+                    Applications open now
                   </span>
                 </div>
                 <button
@@ -271,14 +284,24 @@ export function Nav() {
               </div>
 
               <div className="mt-6 pt-6 border-t border-[var(--color-border)] flex flex-col gap-3">
-                <Button href="/apply" onClick={closeMenu} className="w-full justify-center">
-                  Apply / Reserve Seat
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
+                <Button
+                  href="/apply"
+                  onClick={() => {
+                    onApplyClick();
+                    closeMenu();
+                  }}
+                  disabled={applyRedirecting}
+                  className="w-full justify-center"
+                >
+                  {applyRedirecting ? "Redirecting..." : "Apply / Reserve Seat"}
+                  {!applyRedirecting && (
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  )}
                 </Button>
                 <p className="text-sm text-[var(--color-text-muted)]">
-                  Limited to 50 seats. Toronto.
+                  New here? Start with Pricing and FAQ. Limited to 50 seats in Toronto.
                 </p>
               </div>
             </div>

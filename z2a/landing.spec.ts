@@ -5,8 +5,9 @@ test.describe("Landing", () => {
     await page.goto("/");
 
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
-      "Build a working AI agent",
+      "Automate real work",
     );
+    await expect(page.locator("#top")).toContainText("Applications open now");
 
     const sticky = page.getByTestId("sticky-apply-bar");
     const hasClass = (className: string) =>

@@ -3,13 +3,14 @@
 import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { trackEvent } from "@/lib/analytics";
 import { DURATION, EASE } from "@/lib/motion-tokens";
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 
 const marqueeItems = [
-  "Applications open",
+  "Applications open now",
   "Feb 28 – Mar 1, 2026",
   "Toronto",
   "50 seats",
@@ -48,6 +49,7 @@ function Marquee() {
 
 export function Hero() {
   const prefersReduced = useReducedMotion();
+  const [ctaRedirecting, setCtaRedirecting] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
   const headlineRef = useRef<HTMLHeadingElement | null>(null);
   const subheadRef = useRef<HTMLParagraphElement | null>(null);
@@ -55,6 +57,12 @@ export function Hero() {
   const loopSvgRef = useRef<SVGSVGElement | null>(null);
   const ctasRef = useRef<HTMLDivElement | null>(null);
   const artRef = useRef<HTMLDivElement | null>(null);
+
+  const onCtaClick = () => {
+    if (ctaRedirecting) return;
+    setCtaRedirecting(true);
+    trackEvent("cta_click", { source: "hero" });
+  };
 
   useLayoutEffect(() => {
     if (prefersReduced) return;
@@ -180,7 +188,7 @@ export function Hero() {
         <div className="absolute top-20 -right-40 h-[520px] w-[520px] rounded-full bg-[color-mix(in_oklch,var(--color-accent-2)_16%,transparent)] blur-[90px] opacity-70" />
       </div>
 
-      <div className="container-content relative z-10 pt-32 md:pt-40 pb-14">
+      <div className="container-content relative z-10 pt-28 md:pt-40 pb-14">
         <div
           ref={rootRef}
           className="grid grid-cols-1 md:grid-cols-12 gap-x-10 gap-y-8 md:gap-x-12 md:gap-y-10 items-start"
@@ -190,7 +198,7 @@ export function Hero() {
               <Badge>Feb 28 – Mar 1, 2026 · Toronto · 50 seats</Badge>
               <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-muted)] shadow-[var(--shadow-sm)]">
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
-                Admissions live
+                Applications open now
               </span>
             </div>
 
@@ -198,18 +206,18 @@ export function Hero() {
               ref={headlineRef}
               className="font-heading font-bold tracking-tight text-[clamp(40px,5.2vw,74px)] leading-[0.98] text-[var(--color-text)]"
             >
-              Build a working AI agent{" "}
+              Automate real work{" "}
               <span className="text-[var(--color-accent)]">in a weekend</span>.
-              <br className="hidden sm:block" /> In person.
+              <br className="hidden sm:block" /> In person, with support.
             </h1>
 
             <p
               ref={subheadRef}
               className="mt-5 text-[15px] md:text-lg leading-relaxed text-[var(--color-text-muted)] max-w-[60ch]"
             >
-              Two days of guided build time in pods of 3–4. Leave with an agent
-              that runs your workflow, a deployment path, and a lightweight
-              evaluation loop you can trust.
+              Bring one recurring workflow that eats your week. Over two days,
+              you&apos;ll build an automation system for it, learn how to run it,
+              and leave with a reliability checklist you can reuse.
             </p>
           </div>
 
@@ -217,19 +225,21 @@ export function Hero() {
             ref={ctasRef}
             className="flex flex-col sm:flex-row gap-3 md:col-span-3 md:col-start-1 md:row-start-2 md:self-end"
           >
-            <Button href="/apply">
-              Apply / Reserve Seat
-              <svg
-                aria-hidden="true"
-                focusable="false"
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+            <Button href="/apply" disabled={ctaRedirecting} onClick={onCtaClick}>
+              {ctaRedirecting ? "Redirecting..." : "Apply / Reserve Seat"}
+              {!ctaRedirecting && (
+                <svg
+                  aria-hidden="true"
+                  focusable="false"
+                  className="w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              )}
             </Button>
           </div>
 

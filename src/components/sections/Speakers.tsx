@@ -20,16 +20,16 @@ const speakers: Speaker[] = [
     name: "Aadil Kazmi",
     role: "Instructor · Zero-to-Agent",
     bio: "Head of AI at Infios. Previously co-founded Swyft (Shopify-backed) and worked at Amazon.",
-    badges: ["Instructor", "Infios", "Forbes 30 Under 30"],
+    badges: ["Instructor", "Head of AI · Infios", "Forbes 30 Under 30"],
     initials: "AK",
     headshotSrc: "/speakers/aadil-headshot.jpg",
     linkedinUrl: "https://www.linkedin.com/in/aadilkazmi/",
   },
   {
     name: "Abdur Sajid",
-    role: "Guest Speaker · Zero Risk Growth (cold2close.ai)",
-    bio: "Will share insights on scaling AI agent businesses from zero.",
-    badges: ["Guest", "OpenAI 100B Tokens", "cold2close.ai"],
+    role: "Guest Operator · cold2close.ai",
+    bio: "Founder of Zero Risk Growth (cold2close.ai). Shares how he scales outbound and GTM workflows with AI systems.",
+    badges: ["Operator", "cold2close.ai", "OpenAI 100B Tokens"],
     initials: "AS",
     headshotSrc: "/speakers/abdur-headshot.jpg",
     linkedinUrl: "https://www.linkedin.com/in/abdur-sajid/",
@@ -41,15 +41,15 @@ export function Speakers() {
     <SectionWrapper id="speakers">
       <RevealOnScroll>
         <h2 className="font-heading font-semibold tracking-tight text-[clamp(28px,3.2vw,44px)] leading-[1.05] mb-4 text-[var(--color-text)]">
-          Learn from builders,{" "}
-          <span className="text-[var(--color-accent)]">not lecturers.</span>
+          Learn from operators{" "}
+          <span className="text-[var(--color-accent)]">who ship.</span>
         </h2>
       </RevealOnScroll>
 
       <RevealOnScroll delay={100}>
         <p className="text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed max-w-2xl mb-12">
-          You’ll be supported by people who have shipped real systems. The goal is
-          execution: scope, build, test, and demo.
+          You&apos;ll build with people who run real systems. The goal is
+          practical output: scope, build, test, and launch.
         </p>
       </RevealOnScroll>
 
@@ -101,6 +101,9 @@ export function Speakers() {
                 {speaker.bio}
               </p>
 
+              <p className="mb-2 font-mono text-[10px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
+                Proof points
+              </p>
               <div className="flex flex-wrap gap-2">
                 {speaker.badges.map((badge) => (
                   <Badge
@@ -111,6 +114,10 @@ export function Speakers() {
                   </Badge>
                 ))}
               </div>
+
+              <p className="mt-5 text-sm font-medium text-[var(--color-accent)]">
+                View LinkedIn profile
+              </p>
             </a>
           </RevealOnScroll>
         ))}
