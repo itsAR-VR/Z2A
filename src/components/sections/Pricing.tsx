@@ -58,7 +58,7 @@ export function Pricing() {
   return (
     <SectionWrapper id="pricing">
       <RevealOnScroll>
-        <h2 className="font-heading font-semibold tracking-tight text-[clamp(28px,3.2vw,44px)] leading-[1.05] mb-4 text-[var(--color-text)]">
+        <h2 className="mx-auto max-w-3xl text-center font-heading font-semibold tracking-tight text-[clamp(28px,3.2vw,44px)] leading-[1.05] mb-4 text-[var(--color-text)]">
           Reserve with a deposit.{" "}
           <span className="text-[var(--color-accent)]">
             Pay the remainder after.
@@ -67,15 +67,15 @@ export function Pricing() {
       </RevealOnScroll>
 
       <RevealOnScroll delay={100}>
-        <p className="text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed max-w-2xl mb-12">
+        <p className="mx-auto max-w-2xl text-center text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed mb-12">
           Pay a $100 deposit to reserve your seat. Checkout is handled by Stripe.
           If you&apos;re unsatisfied by the end of Day 2, we&apos;ll refund you in full.
           Refunds are issued within 7 days.
         </p>
       </RevealOnScroll>
 
-      <div className="max-w-4xl">
-        <RevealOnScroll>
+      <div className="max-w-4xl mx-auto">
+        <RevealOnScroll className="flex justify-center">
           <Card className="h-full relative max-w-xl">
             <div className="flex items-start justify-between gap-3 mb-2">
               <h3 className="font-heading font-semibold text-lg text-[var(--color-text)]">
@@ -172,7 +172,7 @@ export function Pricing() {
       </div>
 
       <RevealOnScroll delay={400}>
-        <div className="mt-10 max-w-4xl">
+        <div className="mt-10 max-w-4xl mx-auto">
           <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] p-6">
             <p className="font-heading font-semibold text-sm text-[var(--color-text)]">
               Reimbursement and referrals

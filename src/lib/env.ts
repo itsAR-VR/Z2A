@@ -6,6 +6,8 @@ const envSchema = z.object({
   STRIPE_WEBHOOK_SECRET: z.string().min(1),
   STRIPE_DEPOSIT_PRICE_ID: z.string().min(1),
   STRIPE_REMAINDER_PRICE_ID: z.string().min(1).optional(),
+  // Promotion code ID for Early Bird (starts with "promo_").
+  STRIPE_EARLY_BIRD_PROMOTION_CODE_ID: z.string().min(1).optional(),
   // Coupon ID for Early Bird (can be a custom string ID like "eb001").
   STRIPE_EARLY_BIRD_COUPON_ID: z.string().min(1).optional(),
   DATABASE_URL: z.string().min(1),
@@ -20,6 +22,7 @@ export const env = envSchema.parse({
   STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
   STRIPE_DEPOSIT_PRICE_ID: process.env.STRIPE_DEPOSIT_PRICE_ID,
   STRIPE_REMAINDER_PRICE_ID: process.env.STRIPE_REMAINDER_PRICE_ID,
+  STRIPE_EARLY_BIRD_PROMOTION_CODE_ID: process.env.STRIPE_EARLY_BIRD_PROMOTION_CODE_ID,
   STRIPE_EARLY_BIRD_COUPON_ID: process.env.STRIPE_EARLY_BIRD_COUPON_ID,
   DATABASE_URL: process.env.DATABASE_URL,
   DIRECT_URL: process.env.DIRECT_URL,

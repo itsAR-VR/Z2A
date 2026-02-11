@@ -9,9 +9,9 @@ export const LIST_REMAINDER_AMOUNT_CENTS = 1400 * 100;
 // Early Bird (Toronto time). Eligibility is locked in when the deposit is paid.
 export const EARLY_BIRD_END_AT_ISO = "2026-02-21T23:59:00-05:00";
 
-// NOTE: This is the discount currently configured in Stripe (coupon `eb001`).
-// If you change the Stripe coupon amount, update this constant to match.
-export const EARLY_BIRD_DISCOUNT_AMOUNT_CENTS = 400 * 100;
+// NOTE: This must match the Early Bird discount configured in Stripe.
+// If you change the Stripe amount (coupon/promotion code), update this constant to match.
+export const EARLY_BIRD_DISCOUNT_AMOUNT_CENTS = 500 * 100;
 export const EARLY_BIRD_REMAINDER_AMOUNT_CENTS =
   LIST_REMAINDER_AMOUNT_CENTS - EARLY_BIRD_DISCOUNT_AMOUNT_CENTS;
 

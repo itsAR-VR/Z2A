@@ -42,8 +42,8 @@ test.describe("Landing", () => {
 
     const loop = page.getByTestId("hero-agent-loop");
     await expect(loop).toBeVisible();
-    await expect(loop.locator('text[data-loop-node-label="scope"]')).toHaveText(
-      "Scope",
+    await expect(loop.locator('text[data-loop-node-label="plan"]')).toHaveText(
+      "Plan",
     );
     await expect(loop.locator('text[data-loop-node-label="build"]')).toHaveText(
       "Build",

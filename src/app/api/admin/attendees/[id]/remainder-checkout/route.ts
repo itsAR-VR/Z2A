@@ -40,9 +40,14 @@ export async function POST(
   }
 
   const isEarlyBird = attendee.remainderAmount === EARLY_BIRD_REMAINDER_AMOUNT_CENTS;
-  if (isEarlyBird && !env.STRIPE_EARLY_BIRD_COUPON_ID) {
+  const earlyBirdPromotionCodeId = env.STRIPE_EARLY_BIRD_PROMOTION_CODE_ID;
+  const earlyBirdCouponId = env.STRIPE_EARLY_BIRD_COUPON_ID;
+  if (isEarlyBird && !earlyBirdPromotionCodeId && !earlyBirdCouponId) {
     return NextResponse.json(
-      { error: "STRIPE_EARLY_BIRD_COUPON_ID is not configured" },
+      {
+        error:
+          "Neither STRIPE_EARLY_BIRD_PROMOTION_CODE_ID nor STRIPE_EARLY_BIRD_COUPON_ID is configured",
+      },
       { status: 500 },
     );
   }
@@ -52,7 +57,9 @@ export async function POST(
     line_items: [{ price: env.STRIPE_REMAINDER_PRICE_ID, quantity: 1 }],
     ...(isEarlyBird
       ? {
-          discounts: [{ coupon: env.STRIPE_EARLY_BIRD_COUPON_ID! }],
+          discounts: earlyBirdPromotionCodeId
+            ? [{ promotion_code: earlyBirdPromotionCodeId }]
+            : [{ coupon: earlyBirdCouponId! }],
           allow_promotion_codes: false,
         }
       : { allow_promotion_codes: true }),

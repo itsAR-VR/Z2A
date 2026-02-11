@@ -65,14 +65,14 @@ export function FAQ() {
   return (
     <SectionWrapper id="faq" alt>
       <RevealOnScroll>
-        <h2 className="font-heading font-semibold tracking-tight text-[clamp(28px,3.2vw,44px)] leading-[1.05] mb-8 text-[var(--color-text)]">
+        <h2 className="mx-auto max-w-3xl text-center font-heading font-semibold tracking-tight text-[clamp(28px,3.2vw,44px)] leading-[1.05] mb-8 text-[var(--color-text)]">
           Frequently asked{" "}
           <span className="text-[var(--color-accent)]">questions</span>
         </h2>
       </RevealOnScroll>
 
       <RevealOnScroll delay={100}>
-        <div className="max-w-3xl">
+        <div className="max-w-3xl mx-auto">
           <Accordion items={faqItems} />
         </div>
       </RevealOnScroll>
