@@ -193,7 +193,7 @@ export function Hero() {
           ref={rootRef}
           className="grid grid-cols-1 md:grid-cols-12 gap-x-10 gap-y-8 md:gap-x-12 md:gap-y-10 items-start"
         >
-          <div className="md:col-span-7">
+          <div className="md:col-span-7 md:col-start-1">
             <div data-hero="badge" className="flex flex-wrap items-center gap-3 mb-6">
               <Badge>Feb 28 – Mar 1, 2026 · Toronto · 50 seats</Badge>
               <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-muted)] shadow-[var(--shadow-sm)]">
@@ -243,7 +243,10 @@ export function Hero() {
             </Button>
           </div>
 
-          <div ref={artRef} className="md:col-span-5 md:pt-14 md:row-start-1 relative">
+          <div
+            ref={artRef}
+            className="md:col-span-5 md:col-start-8 md:pt-14 md:row-start-1 relative"
+          >
             <div className="relative z-10 rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-surface)_70%,transparent)] backdrop-blur-md shadow-[var(--shadow-lg)] p-6 overflow-hidden">
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_240px_at_20%_0%,color-mix(in_oklch,var(--color-accent)_14%,transparent),transparent_62%)]" />
               <p className="relative font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
@@ -399,7 +402,7 @@ export function Hero() {
 
           <div
             data-testid="hero-ticket-toronto"
-            className="hidden md:block pointer-events-none md:col-span-3 md:col-start-10 md:row-start-2 md:self-end md:justify-self-end relative -bottom-10 rotate-[-6deg] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-md)] px-4 py-3"
+            className="hidden md:block pointer-events-none md:col-span-3 md:col-start-9 md:row-start-2 md:self-end md:justify-self-end relative -bottom-4 md:mr-2 rotate-[-6deg] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-md)] px-4 py-3"
           >
             <p className="font-mono text-[10px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
               Toronto pilot

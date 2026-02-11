@@ -58,7 +58,7 @@ test.describe("Landing", () => {
 
     const torontoTicket = page.getByTestId("hero-ticket-toronto");
     await expect(torontoTicket).toHaveCount(1);
-    await expect(torontoTicket).toHaveClass(/-bottom-10/);
+    await expect(torontoTicket).toHaveClass(/-bottom-4/);
 
     await expect(page.getByTestId("hero-agent-loop-runner")).toHaveCount(1);
   });
