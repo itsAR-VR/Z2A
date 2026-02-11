@@ -84,14 +84,14 @@ Overlap exists with recent completed work that touched the same landing files.
 - 2026-02-09 — Lowered desktop Toronto/50 seats ticket and added hero test ids (files: `src/components/sections/Hero.tsx`, `docs/planning/phase-9/a/plan.md`)
 - 2026-02-09 — Replaced hero SVG loop with interactive stepper (files: `src/components/sections/Hero.tsx`, `src/components/hero/HeroStepper.tsx`, `src/app/globals.css`, `docs/planning/phase-9/b/plan.md`)
 - 2026-02-09 — Updated Playwright specs + ran lint/typecheck/build; Playwright execution blocked in this sandbox (files: `z2a/landing.spec.ts`, `z2a/reduced-motion.spec.ts`, `docs/planning/phase-9/c/plan.md`)
-- 2026-02-10 — Restored the animated hero loop, removed stepper artifacts, and lowered the ticket further (files: `src/components/sections/Hero.tsx`, `src/app/globals.css`, `z2a/landing.spec.ts`, `z2a/reduced-motion.spec.ts`, `docs/planning/phase-9/d/plan.md`)
+- 2026-02-10 — Moved the hero loop below “What you leave with”, smoothed runner motion (no jitter), and lowered the ticket further (files: `src/components/sections/Hero.tsx`, `z2a/landing.spec.ts`, `docs/planning/phase-9/d/plan.md`)
 
 ## Phase Summary
 
 - Shipped:
   - Lowered desktop “Toronto pilot / 50 seats” floating ticket and added hero selectors.
   - Restored the animated “Scope / Build / Deploy / Evaluate” hero loop (runner dot + brief node accents).
-  - Lowered the Toronto ticket further (`-bottom-8`) and updated Playwright specs to match the final selectors/behavior.
+  - Lowered the Toronto ticket further (`-bottom-10`) and updated Playwright specs to match the final selectors/behavior.
 - Verified:
   - `npm run lint`: pass
   - `npm run typecheck`: pass

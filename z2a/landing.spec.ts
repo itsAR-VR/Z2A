@@ -42,14 +42,22 @@ test.describe("Landing", () => {
 
     const loop = page.getByTestId("hero-agent-loop");
     await expect(loop).toBeVisible();
-    await expect(loop).toContainText("Scope");
-    await expect(loop).toContainText("Build");
-    await expect(loop).toContainText("Deploy");
-    await expect(loop).toContainText("Evaluate");
+    await expect(loop.locator('text[data-loop-node-label="scope"]')).toHaveText(
+      "Scope",
+    );
+    await expect(loop.locator('text[data-loop-node-label="build"]')).toHaveText(
+      "Build",
+    );
+    await expect(
+      loop.locator('text[data-loop-node-label="deploy"]'),
+    ).toHaveText("Deploy");
+    await expect(
+      loop.locator('text[data-loop-node-label="evaluate"]'),
+    ).toHaveText("Evaluate");
 
     const torontoTicket = page.getByTestId("hero-ticket-toronto");
     await expect(torontoTicket).toHaveCount(1);
-    await expect(torontoTicket).toHaveClass(/-bottom-8/);
+    await expect(torontoTicket).toHaveClass(/-bottom-10/);
 
     await expect(page.getByTestId("hero-agent-loop-runner")).toHaveCount(1);
   });
