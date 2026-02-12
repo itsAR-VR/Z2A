@@ -30,17 +30,35 @@ export function Nav() {
   const firstOverlayLinkRef = useRef<HTMLAnchorElement | null>(null);
   const prevMenuOpenRef = useRef(false);
   const closeTimeoutRef = useRef<number | null>(null);
+  const openRafRef = useRef<number | null>(null);
 
   const openMenu = useCallback(() => {
+    if (openRafRef.current) {
+      window.cancelAnimationFrame(openRafRef.current);
+      openRafRef.current = null;
+    }
     if (closeTimeoutRef.current) {
       window.clearTimeout(closeTimeoutRef.current);
       closeTimeoutRef.current = null;
     }
     setMenuRendered(true);
-    setMenuOpen(true);
-  }, []);
+    if (reducedMotion) {
+      setMenuOpen(true);
+      return;
+    }
+
+    // Mount first, then open on next frame so entrance motion is visible.
+    openRafRef.current = window.requestAnimationFrame(() => {
+      openRafRef.current = null;
+      setMenuOpen(true);
+    });
+  }, [reducedMotion]);
 
   const closeMenu = useCallback(() => {
+    if (openRafRef.current) {
+      window.cancelAnimationFrame(openRafRef.current);
+      openRafRef.current = null;
+    }
     if (closeTimeoutRef.current) {
       window.clearTimeout(closeTimeoutRef.current);
       closeTimeoutRef.current = null;
@@ -57,7 +75,7 @@ export function Nav() {
     closeTimeoutRef.current = window.setTimeout(() => {
       closeTimeoutRef.current = null;
       setMenuRendered(false);
-    }, 280);
+    }, 420);
   }, [reducedMotion]);
 
   const onApplyClick = () => {
@@ -110,6 +128,10 @@ export function Nav() {
 
   useEffect(() => {
     return () => {
+      if (openRafRef.current) {
+        window.cancelAnimationFrame(openRafRef.current);
+        openRafRef.current = null;
+      }
       if (closeTimeoutRef.current) {
         window.clearTimeout(closeTimeoutRef.current);
         closeTimeoutRef.current = null;
@@ -227,7 +249,7 @@ export function Nav() {
 	          className={`fixed inset-0 z-[60] bg-[color-mix(in_oklch,var(--color-bg)_84%,black)] backdrop-blur-sm ${
 	            reducedMotion
 	              ? ""
-	              : "transition-opacity [transition-duration:var(--duration-default)] [transition-timing-function:var(--ease-expo)]"
+	              : "transition-opacity [transition-duration:var(--duration-slow)] [transition-timing-function:var(--ease-expo)]"
 	          } ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
 	          onKeyDown={trapFocus}
 	        >
@@ -236,25 +258,16 @@ export function Nav() {
 	              className={`rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-lg)] p-6 ${
 	                reducedMotion
 	                  ? ""
-	                  : "transition-[transform,opacity] [transition-duration:var(--duration-default)] [transition-timing-function:var(--ease-expo)]"
-	              } ${menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}
+	                  : "transition-[transform,opacity] [transition-duration:var(--duration-slow)] [transition-timing-function:var(--ease-expo)]"
+	              } ${menuOpen ? "opacity-100 translate-y-0 scale-100" : "opacity-0 -translate-y-6 scale-[0.985]"}`}
 	            >
-              <div className="flex items-center justify-between gap-3 mb-6">
-                <div className="flex items-center gap-2">
-                  <p
-                    id="nav-menu-title"
-                    className="font-heading font-semibold text-[13px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]"
-                  >
-                    Navigate
-                  </p>
-                  <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-accent)_8%,var(--color-surface))] px-3 py-1 text-[11px] font-mono tracking-[0.14em] uppercase text-[var(--color-text-muted)]">
-                    <span
-                      aria-hidden="true"
-                      className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]"
-                    />
-                    Applications open now
-                  </span>
-                </div>
+              <div className="relative mb-6 flex items-center justify-end">
+                <p
+                  id="nav-menu-title"
+                  className="absolute left-1/2 -translate-x-1/2 font-heading font-semibold text-[13px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]"
+                >
+                  Navigate
+                </p>
                 <button
                   type="button"
                   className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-[13px] font-medium text-[var(--color-text)] shadow-[var(--shadow-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface)]"
@@ -301,7 +314,7 @@ export function Nav() {
                   )}
                 </Button>
                 <p className="text-sm text-[var(--color-text-muted)]">
-                  New here? Start with Pricing and FAQ. Limited to 50 seats in Toronto.
+                  Limited to 50 seats in Toronto.
                 </p>
               </div>
             </div>

@@ -159,9 +159,3 @@ section[id] {
   background: color-mix(in oklch, var(--color-accent) 24%, white);
   color: var(--color-text);
 }
-
-/* ─── Keyframes ─── */
-@keyframes z2a-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}

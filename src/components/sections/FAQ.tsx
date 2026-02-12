@@ -6,58 +6,39 @@ import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 
 const faqItems = [
   {
-    question: "What's the refund policy?",
+    question: "I can learn this for free online. Why pay?",
     answer:
-      "If you're unsatisfied by the end of Day 2, we'll issue a full refund. Refunds are processed within 7 days.",
+      "You can learn the pieces for free. You’re paying for speed and shipped output: two focused in-person days, live debugging, pod accountability, and a working agent demo by Day 2. Most people don’t lack information. They lack a structure that gets them to finished work.",
   },
   {
-    question: "How does the remainder payment work?",
+    question: "I’m not technical. Will I be lost?",
     answer:
-      "You authorize the remainder at check-in. It is captured after the event for Day 1 attendees.",
+      "You don’t need to be a software engineer, but you do need to be comfortable following step-by-step instructions in a code editor. We provide clear prework, starter scaffolds, and live support in pods of 5 so you’re not stuck alone.",
   },
   {
-    question: "Who is this for?",
+    question: "Will this actually help my job?",
     answer:
-      "PMs, operators, and builder-minded teams who want to automate recurring work. You should be comfortable building hands-on.",
+      "That’s the point of the weekend. You leave with a working agent, a deployment path, and an evaluation workflow you can reuse with your team. We don’t promise promotions or guaranteed outcomes. We do help you ship faster and scope agent work realistically.",
   },
   {
-    question: "Do I need to be an engineer?",
+    question: "How do I know this isn’t a scam?",
     answer:
-      "No. You do need to be comfortable building hands-on. Pods are structured to support mixed technical backgrounds.",
+      "Healthy skepticism is fair. We keep this concrete: in-person Toronto workshop, public agenda, explicit payment terms through Stripe, and full refund by end of Day 2 if you’re unsatisfied. No hype claims, no job guarantees, and no vague “AI magic” promises.",
   },
   {
-    question: "Can my employer reimburse this?",
+    question: "What if I’m busy and can’t commit much time?",
     answer:
-      "Yes. We provide invoices and receipts suitable for professional development reimbursement.",
+      "The format is intentionally short: one weekend, around six hours per day. If you’re overloaded right now, wait for another cohort. If you’re tired of postponing this, blocking one focused weekend is the fastest path to a shipped first version.",
   },
   {
-    question: "Where is it?",
+    question: "Can my company reimburse this?",
     answer:
-      "Toronto. We share the exact venue after your deposit is completed.",
+      "Many employers reimburse professional development. We provide an invoice and receipt suitable for reimbursement and keep the workshop description practical so finance teams can review it quickly.",
   },
   {
-    question: "What if I already have an agent?",
+    question: "Why in-person instead of Zoom?",
     answer:
-      "You'll refine it with a deployment path and evaluation loop, or build a new use case.",
-  },
-  {
-    question: "Can I transfer my seat?",
-    answer:
-      "Yes. Transfers are allowed up to 7 days before the event.",
-  },
-  {
-    question: "Is there alcohol or afterparties?",
-    answer: "No alcohol. Professional, focused environment.",
-  },
-  {
-    question: "What if I can't attend Day 2?",
-    answer:
-      "Contact us in advance. Refund decisions still follow the Day 2 policy.",
-  },
-  {
-    question: "Is there a remote option?",
-    answer:
-      "Not for the pilot. This is intentionally in-person.",
+      "Because the promise is a shipped outcome, not passive watching. In person gives you faster setup help, real-time debugging, and pod accountability. That compression is hard to reproduce on Zoom, especially if your goal is to leave with something running.",
   },
 ];
 
@@ -67,6 +48,7 @@ export function FAQ() {
     "50 seats · Toronto",
     "$100 deposit via Stripe",
     "Full refund by end of Day 2",
+    "Pods of 5",
   ];
 
   return (

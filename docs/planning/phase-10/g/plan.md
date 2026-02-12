@@ -62,6 +62,16 @@ Implement the approved Phase 10 checklist in product code with minimal, reversib
   - `src/app/layout.tsx` metadata
 - Updated affected E2E assertion text:
   - `z2a/landing.spec.ts`
+  - `z2a/reduced-motion.spec.ts`
+  - `z2a/speakers.spec.ts`
+- Implemented mobile-first conversion polish update per user feedback:
+  - Mobile menu panel now opens with a softer swipe-down ease and cleaner header layout; removed in-panel "Applications open now" badge and centered "Navigate" label.
+  - Hero now uses a stronger minimal-premium date/location/seat callout and includes `Limited to 50 seats in Toronto.` helper text beneath the primary CTA.
+  - Removed the animated hero marquee and tightened hero-to-next-section spacing.
+  - Replaced Outcomes cards with a TKS-inspired three-image statement block: `One weekend`, `Pods of 5`, `Future-ready`.
+  - Updated speakers so both cards use explicit bottom-right LinkedIn icon links under proof points.
+  - Reworked FAQ to 7 objection-first, purchase-blocking questions and concise answers.
+  - Normalized pod-size references to `pods of 5` in relevant sections.
 
 ## Coordination Notes
 - Integrated baseline behavior from overlap-heavy phases:
@@ -72,12 +82,30 @@ Implement the approved Phase 10 checklist in product code with minimal, reversib
 ## Verification
 - `npm run lint` — pass
 - `npm run typecheck` — pass
-- `npm run build` — pass
+- `npm run build` — pass (with required local env vars for Prisma config: `DIRECT_URL`, `DATABASE_URL`, etc.)
 - `PLAYWRIGHT_WEB_SERVER=1 PLAYWRIGHT_BASE_URL=http://localhost:3000 npx playwright test z2a/landing.spec.ts z2a/reduced-motion.spec.ts --project=chromium --project=mobile-chrome` — blocked by sandbox bind error (`listen EPERM 0.0.0.0:3000`)
+- `PLAYWRIGHT_BASE_URL=http://localhost:3000 npx playwright test z2a/landing.spec.ts z2a/reduced-motion.spec.ts z2a/speakers.spec.ts --project=chromium --project=mobile-chrome --reporter=list` — pass (18 passed)
+- Playwright visual QA via `playwright-skill` custom script (`/tmp/playwright-test-post-implementation-qa.js`) — pass with mobile+desktop screenshots captured.
+
+## Progress This Turn (Terminus Maximus)
+- Work done:
+  - Applied the approved mobile-first implementation plan across Nav/Hero/Why/Outcomes/Speakers/FAQ/Pricing/HowItWorks/CTAFooter plus test suite updates.
+  - Added fallback image assets under `public/program/` to ensure the new three-image outcomes block renders until final photos are supplied.
+  - Executed automated quality gates and full targeted Playwright spec run on both Chromium and mobile-chrome.
+  - Executed manual visual QA with `playwright-skill` and captured post-change evidence screenshots.
+- Commands run:
+  - `npm run lint` — pass.
+  - `npm run typecheck` — pass.
+  - `npm run build` — fail first (missing `DIRECT_URL`), then pass with explicit env vars.
+  - `PLAYWRIGHT_BASE_URL=http://localhost:3000 npx playwright test z2a/landing.spec.ts z2a/reduced-motion.spec.ts z2a/speakers.spec.ts --project=chromium --project=mobile-chrome --reporter=list` — pass (18/18).
+  - `cd /Users/mm-macbookpro/.codex/skills/playwright-skill && node -e "require('./lib/helpers').detectDevServers().then(servers => console.log(JSON.stringify(servers)))"` — pass (found `:3000` and `:5000`).
+  - `cd /Users/mm-macbookpro/.codex/skills/playwright-skill && TARGET_URL=http://localhost:3000 node run.js /tmp/playwright-test-post-implementation-qa.js` — pass (captured mobile/desktop screenshots).
+- Blockers:
+  - None blocking implementation completion.
+- Next concrete steps:
+  - Replace temporary placeholder assets in `public/program/` with the final three user-provided photos.
+  - Optionally run one more polish pass after final assets are swapped.
 
 ## Handoff
-- Next operator should run local Playwright validation outside this sandbox (or on CI) for:
-  - `z2a/landing.spec.ts`
-  - `z2a/reduced-motion.spec.ts`
-- If visual QA reveals hero loop misalignment at 390x844 or 1333x863, tune only positional/layout classes in `src/components/sections/Hero.tsx` without altering loop motion logic.
-- Optional follow-up: add dedicated testimonial/proof section if product wants additional social-proof above Pricing.
+- Replace temporary placeholder assets in `public/program/` with final approved photos from product/brand.
+- Optionally run a final visual polish pass after image swap to fine-tune crop focal points and text contrast.

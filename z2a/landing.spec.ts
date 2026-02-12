@@ -8,6 +8,15 @@ test.describe("Landing", () => {
       "Automate real work",
     );
     await expect(page.locator("#top")).toContainText("Applications open now");
+    await expect(page.locator("#top")).toContainText(
+      "Feb 28 – Mar 1, 2026 · Toronto · 50 seats",
+    );
+    await expect(page.locator("#top")).toContainText(
+      "Limited to 50 seats in Toronto",
+    );
+    await expect(page.locator("#outcomes")).toContainText("One weekend");
+    await expect(page.locator("#outcomes")).toContainText("Pods of 5");
+    await expect(page.locator("#outcomes")).toContainText("Future-ready");
 
     const sticky = page.getByTestId("sticky-apply-bar");
     const hasClass = (className: string) =>
@@ -74,6 +83,8 @@ test.describe("Landing", () => {
     const menu = page.getByRole("dialog", { name: "Navigate" });
     await expect(menu).toBeVisible();
     await expect(menu.getByRole("link", { name: "Why" })).toBeFocused();
+    await expect(menu.getByText("Applications open now")).toHaveCount(0);
+    await expect(menu).toContainText("Limited to 50 seats in Toronto.");
     await expect(page.locator("body")).toHaveCSS("overflow", "hidden");
 
     await page.keyboard.press("Escape");

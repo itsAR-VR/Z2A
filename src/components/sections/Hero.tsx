@@ -1,6 +1,5 @@
 "use client";
 
-import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { trackEvent } from "@/lib/analytics";
@@ -9,43 +8,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 
-const marqueeItems = [
-  "Applications open now",
-  "Feb 28 – Mar 1, 2026",
-  "Toronto",
-  "50 seats",
-  "Pods of 3–4",
-  "Live build support",
-  "Deposit $100",
-];
-
 gsap.registerPlugin(MotionPathPlugin);
-
-function Marquee() {
-  const prefersReduced = useReducedMotion();
-  const row = marqueeItems.join("  •  ");
-
-  return (
-    <div className="relative border-y border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-accent)_4%,var(--color-surface))]">
-      <div className="container-content">
-        <div className="overflow-hidden py-3">
-          <div
-            className={`inline-flex items-center gap-10 whitespace-nowrap font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-muted)] ${
-              prefersReduced ? "" : "animate-[z2a-marquee_18s_linear_infinite]"
-            }`}
-            data-testid="hero-marquee"
-            aria-hidden={!prefersReduced}
-          >
-            <span>{row}</span>
-            {!prefersReduced && <span aria-hidden="true">{row}</span>}
-          </div>
-
-          {!prefersReduced && <div className="sr-only">{row}</div>}
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export function Hero() {
   const prefersReduced = useReducedMotion();
@@ -188,15 +151,22 @@ export function Hero() {
         <div className="absolute top-20 -right-40 h-[520px] w-[520px] rounded-full bg-[color-mix(in_oklch,var(--color-accent-2)_16%,transparent)] blur-[90px] opacity-70" />
       </div>
 
-      <div className="container-content relative z-10 pt-28 md:pt-40 pb-14">
+      <div className="container-content relative z-10 pt-28 md:pt-40 pb-8 md:pb-10">
         <div
           ref={rootRef}
           className="grid grid-cols-1 md:grid-cols-12 gap-x-10 gap-y-8 md:gap-x-12 md:gap-y-10 items-start"
         >
           <div className="md:col-span-7 md:col-start-1">
-            <div data-hero="badge" className="flex flex-wrap items-center gap-3 mb-6">
-              <Badge>Feb 28 – Mar 1, 2026 · Toronto · 50 seats</Badge>
-              <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-muted)] shadow-[var(--shadow-sm)]">
+            <div data-hero="badge" className="mb-6 max-w-xl">
+              <div className="rounded-[var(--radius-lg)] border border-[color-mix(in_oklch,var(--color-accent)_32%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-accent)_10%,var(--color-surface))] px-4 py-3 shadow-[var(--shadow-sm)]">
+                <p className="font-mono text-[10px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
+                  Toronto pilot · in person
+                </p>
+                <p className="mt-1 font-heading text-[15px] md:text-base font-semibold text-[var(--color-text)]">
+                  Feb 28 – Mar 1, 2026 · Toronto · 50 seats
+                </p>
+              </div>
+              <span className="mt-3 inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-muted)] shadow-[var(--shadow-sm)]">
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
                 Applications open now
               </span>
@@ -215,15 +185,16 @@ export function Hero() {
               ref={subheadRef}
               className="mt-5 text-[15px] md:text-lg leading-relaxed text-[var(--color-text-muted)] max-w-[60ch]"
             >
-              Bring one recurring workflow that eats your week. Over two days,
-              you&apos;ll build an automation system for it, learn how to run it,
-              and leave with a reliability checklist you can reuse.
+              You can learn the pieces online. The hard part is shipping.
+              Bring one recurring workflow and spend one focused weekend building
+              a working agent, a deployment path, and an evaluation workflow in
+              pods of 5.
             </p>
           </div>
 
           <div
             ref={ctasRef}
-            className="flex flex-col sm:flex-row gap-3 md:col-span-3 md:col-start-1 md:row-start-2 md:self-end"
+            className="flex flex-col gap-3 md:col-span-4 md:col-start-1 md:row-start-2 md:self-end"
           >
             <Button href="/apply" disabled={ctaRedirecting} onClick={onCtaClick}>
               {ctaRedirecting ? "Redirecting..." : "Apply / Reserve Seat"}
@@ -241,6 +212,9 @@ export function Hero() {
                 </svg>
               )}
             </Button>
+            <p className="text-sm text-[var(--color-text-muted)]">
+              Limited to 50 seats in Toronto.
+            </p>
           </div>
 
           <div
@@ -414,7 +388,6 @@ export function Hero() {
         </div>
       </div>
 
-      <Marquee />
     </section>
   );
 }

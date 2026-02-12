@@ -56,13 +56,7 @@ export function Speakers() {
       <div className="mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl items-stretch">
         {speakers.map((speaker, i) => (
           <RevealOnScroll key={speaker.name} delay={i * 150} className="h-full">
-            <a
-              href={speaker.linkedinUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block h-full w-full text-left rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] p-6 md:p-7 transition-[transform,box-shadow,border-color] duration-200 ease-out hover:-translate-y-1 hover:shadow-[var(--shadow-md)] hover:border-[color-mix(in_oklch,var(--color-accent)_25%,var(--color-border-strong))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
-              aria-label={`Open ${speaker.name} on LinkedIn`}
-            >
+            <article className="group h-full w-full rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] p-6 md:p-7 transition-[transform,box-shadow,border-color] duration-200 ease-out hover:-translate-y-1 hover:shadow-[var(--shadow-md)] hover:border-[color-mix(in_oklch,var(--color-accent)_25%,var(--color-border-strong))]">
               <div className="flex items-start gap-4 mb-4">
                 <SpeakerAvatar
                   name={speaker.name}
@@ -77,23 +71,6 @@ export function Speakers() {
                   <p className="text-[var(--color-text-faint)] text-sm">
                     {speaker.role}
                   </p>
-                </div>
-                <div className="pt-1">
-                  <svg
-                    className="h-5 w-5 text-[var(--color-text-faint)] transition-transform duration-200 ease-out group-hover:translate-x-0.5"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M7 17L17 7"
-                    />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M10 7h7v7" />
-                  </svg>
                 </div>
               </div>
 
@@ -115,10 +92,26 @@ export function Speakers() {
                 ))}
               </div>
 
-              <p className="mt-5 text-sm font-medium text-[var(--color-accent)]">
-                View LinkedIn profile
-              </p>
-            </a>
+              <div className="mt-5 flex justify-end">
+                <a
+                  href={speaker.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-accent)_10%,var(--color-surface))] text-[var(--color-accent)] shadow-[var(--shadow-sm)] transition-[transform,box-shadow,border-color] [transition-duration:var(--duration-fast)] [transition-timing-function:var(--ease-quart)] hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)] hover:border-[color-mix(in_oklch,var(--color-accent)_35%,var(--color-border-strong))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
+                  aria-label={`Open ${speaker.name} on LinkedIn`}
+                >
+                  <svg
+                    aria-hidden="true"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                    className="h-4 w-4"
+                    fill="currentColor"
+                  >
+                    <path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3 9h4v12H3V9Zm7 0h3.83v1.69h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.65c0-1.35-.02-3.08-1.88-3.08-1.88 0-2.16 1.47-2.16 2.98V21h-4V9Z" />
+                  </svg>
+                </a>
+              </div>
+            </article>
           </RevealOnScroll>
         ))}
       </div>

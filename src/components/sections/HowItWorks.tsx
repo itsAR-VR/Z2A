@@ -19,9 +19,9 @@ const steps = [
   },
   {
     number: "3",
-    title: "Build in pods with live support",
+    title: "Build in pods of 5 with live support",
     description:
-      "Work in groups of 3–4 with instructor help to ship your first version.",
+      "Work in groups of 5 with instructor help to ship your first version.",
   },
   {
     number: "4",
@@ -48,6 +48,14 @@ export function HowItWorks() {
           How the weekend{" "}
           <span className="text-[var(--color-accent)]">works</span>
         </h2>
+      </RevealOnScroll>
+
+      <RevealOnScroll delay={70}>
+        <p className="max-w-2xl text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed mb-10">
+          Two focused days, around six hours each. You build the whole time,
+          with short instruction blocks and guided work blocks so you keep
+          moving.
+        </p>
       </RevealOnScroll>
 
       <div ref={timelineRef} className="relative max-w-2xl">

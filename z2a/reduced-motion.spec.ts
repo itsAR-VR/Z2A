@@ -3,11 +3,10 @@ import { test, expect } from "@playwright/test";
 test.describe("Reduced Motion", () => {
   test.use({ contextOptions: { reducedMotion: "reduce" } });
 
-  test("does not animate marquee @prod-safe", async ({ page }) => {
+  test("removes the old hero marquee @prod-safe", async ({ page }) => {
     await page.goto("/");
 
-    const marqueeRow = page.getByTestId("hero-marquee");
-    await expect(marqueeRow).not.toHaveClass(/z2a-marquee/);
+    await expect(page.getByTestId("hero-marquee")).toHaveCount(0);
   });
 
   test("RevealOnScroll content is visible and transitionless @prod-safe", async ({
@@ -16,7 +15,7 @@ test.describe("Reduced Motion", () => {
     await page.goto("/");
 
     const wrapper = page
-      .getByRole("heading", { name: /The hard part isn't knowing/i })
+      .getByRole("heading", { name: /The bottleneck isn't ideas/i })
       .locator("..");
 
     await expect(wrapper).toBeVisible();

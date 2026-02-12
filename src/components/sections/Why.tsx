@@ -8,25 +8,25 @@ const reasons = [
     eyebrow: "01",
     title: "Live help when you get blocked",
     description:
-      "No forum delays and no calendar ping-pong. Get unstuck quickly and keep moving.",
+      "No forum delays. No long async threads. Get unstuck in real time and keep momentum.",
   },
   {
     eyebrow: "02",
-    title: "Pods of 3–4 keep momentum up",
+    title: "Pods of 5 keep momentum up",
     description:
-      "Small groups keep scope realistic and progress visible. You’ll build with people solving similar problems.",
+      "Small pods keep progress visible and scope realistic. You build beside people solving similar workflows.",
   },
   {
     eyebrow: "03",
-    title: "A scope designed to ship",
+    title: "A scope built to ship",
     description:
-      "This is a weekend-sized build. You leave with running work, not another set of notes.",
+      "This is a weekend sprint, not a lecture. You leave with running work, not another folder of notes.",
   },
 ];
 
 export function Why() {
   return (
-    <SectionWrapper id="why" alt>
+    <SectionWrapper id="why" alt className="pt-10 md:pt-16">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-start">
         <div className="md:col-span-5">
           <RevealOnScroll>
@@ -38,22 +38,11 @@ export function Why() {
 
           <RevealOnScroll delay={80}>
             <p className="text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed mb-6">
-              Bring a repetitive workflow. Leave with a working automation
-              system, a deployment plan, and a reliability process you can run
-              again next week.
+              If free tutorials were enough, this wouldn&apos;t still be on your
+              backlog. Bring one repetitive workflow and leave with something
+              running: a working agent, a deployment path, and a reliability
+              loop you can use on Monday.
             </p>
-          </RevealOnScroll>
-
-          <RevealOnScroll delay={140}>
-            <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] p-5">
-              <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
-                Translation
-              </p>
-              <p className="mt-2 text-sm text-[var(--color-text-muted)]">
-                You bring one real workflow. We help you ship something that
-                works in two days.
-              </p>
-            </div>
           </RevealOnScroll>
         </div>
 

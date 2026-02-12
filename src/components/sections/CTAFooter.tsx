@@ -43,7 +43,7 @@ export function CTAFooter() {
                 <div className="mt-6 flex flex-wrap gap-2">
                   <Badge>Deposit $100</Badge>
                   <Badge>Refund by end of Day 2</Badge>
-                  <Badge>Pods of 3–4</Badge>
+                  <Badge>Pods of 5</Badge>
                 </div>
               </RevealOnScroll>
             </div>

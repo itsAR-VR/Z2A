@@ -19,6 +19,7 @@ test.describe("Speakers", () => {
       "href",
       "https://www.linkedin.com/in/abdur-sajid/",
     );
+    await expect(page.locator("text=View LinkedIn profile")).toHaveCount(0);
 
     // Removed from the simplified section.
     await expect(page.locator("text=Award plaque")).toHaveCount(0);
@@ -35,4 +36,3 @@ test.describe("Speakers", () => {
     }
   });
 });
-

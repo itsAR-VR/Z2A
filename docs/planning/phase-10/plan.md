@@ -151,6 +151,7 @@ Key plan hardening updates this turn:
 - 2026-02-11 — Completed subphase deliverables 10a–10f and linked each plan to concrete output artifacts for execution handoff.
 - 2026-02-11 — Added execution subphase 10g and implemented Jam-priority copy/UX remediations in product code.
 - 2026-02-11 — Added lightweight analytics baseline (page views, CTA clicks, apply start, success signal) and updated landing assertions.
+- 2026-02-11 23:34 EST — Implemented mobile-first conversion polish pass (menu swipe-down softening, hero metadata emphasis, marquee removal, outcomes section replacement with three-image block, objection-first FAQ rewrite, LinkedIn icon CTA update, pods-of-5 copy normalization) and validated via lint/typecheck/build + Playwright specs + Playwright visual QA (files: `src/components/Nav.tsx`, `src/components/sections/Hero.tsx`, `src/components/sections/Why.tsx`, `src/components/sections/Outcomes.tsx`, `src/components/sections/Speakers.tsx`, `src/components/sections/FAQ.tsx`, `src/components/sections/Pricing.tsx`, `src/components/sections/HowItWorks.tsx`, `src/components/sections/CTAFooter.tsx`, `src/app/globals.css`, `z2a/landing.spec.ts`, `z2a/reduced-motion.spec.ts`, `z2a/speakers.spec.ts`, `public/program/*`, `docs/planning/phase-10/g/plan.md`).
 
 ## Phase Summary
 

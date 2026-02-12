@@ -69,16 +69,16 @@ export function Pricing() {
         <h2 className="mx-auto max-w-3xl text-center font-heading font-semibold tracking-tight text-[clamp(28px,3.2vw,44px)] leading-[1.05] mb-4 text-[var(--color-text)]">
           Reserve your seat with a deposit.{" "}
           <span className="text-[var(--color-accent)]">
-            Pay the remainder after.
+            Pay the remainder after check-in.
           </span>
         </h2>
       </RevealOnScroll>
 
       <RevealOnScroll delay={100}>
         <p className="mx-auto max-w-2xl text-center text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed mb-12">
-          Pay $100 now to reserve your seat. Checkout is handled by Stripe. If
-          you&apos;re unsatisfied by the end of Day 2, we&apos;ll issue a full
-          refund within 7 days.
+          Pay $100 now to reserve your seat. Stripe handles checkout. If
+          you&apos;re unsatisfied by the end of Day 2, we issue a full refund
+          within 7 days.
         </p>
       </RevealOnScroll>
 
@@ -185,14 +185,15 @@ export function Pricing() {
       </div>
 
       <RevealOnScroll delay={400}>
-        <div className="mt-10 max-w-4xl mx-auto">
+          <div className="mt-10 max-w-4xl mx-auto">
           <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] p-6">
             <p className="font-heading font-semibold text-sm text-[var(--color-text)]">
               Reimbursement and referrals
             </p>
             <p className="mt-2 text-sm text-[var(--color-text-muted)]">
-              Invoice/receipt is available for professional reimbursement.
-              Referral code is optional and used for source tracking only.
+              Many employers reimburse professional development. We provide an
+              invoice/receipt suitable for reimbursement. Referral code is
+              optional and used for source tracking only.
             </p>
           </div>
         </div>
