@@ -4,7 +4,7 @@ import { StickyApplyBar } from "@/components/StickyApplyBar";
 import { Hero } from "@/components/sections/Hero";
 import { Why } from "@/components/sections/Why";
 import { Speakers } from "@/components/sections/Speakers";
-import { Outcomes } from "@/components/sections/Outcomes";
+// import { Outcomes } from "@/components/sections/Outcomes";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Agenda } from "@/components/sections/Agenda";
 import { Pricing } from "@/components/sections/Pricing";
@@ -20,7 +20,7 @@ export default function Home() {
         <Hero />
         <Why />
         <Speakers />
-        <Outcomes />
+        {/* <Outcomes /> */}
         <HowItWorks />
         <Agenda />
         <Pricing />

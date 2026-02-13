@@ -10,7 +10,7 @@ import { Button } from "./Button";
 const navLinks = [
   { id: "why", label: "Why" },
   { id: "speakers", label: "Speakers" },
-  { id: "outcomes", label: "Outcomes" },
+  // { id: "outcomes", label: "Outcomes" },
   { id: "how", label: "How" },
   { id: "agenda", label: "Agenda" },
   { id: "pricing", label: "Pricing" },
