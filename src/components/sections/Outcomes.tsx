@@ -32,12 +32,6 @@ function clamp01(value: number): number {
   return Math.min(1, Math.max(0, value));
 }
 
-function smoothStep(edge0: number, edge1: number, value: number): number {
-  if (edge0 === edge1) return value >= edge1 ? 1 : 0;
-  const t = clamp01((value - edge0) / (edge1 - edge0));
-  return t * t * (3 - 2 * t);
-}
-
 export function Outcomes() {
   const prefersReduced = useReducedMotion();
   const trackRef = useRef<HTMLDivElement | null>(null);
@@ -84,29 +78,45 @@ export function Outcomes() {
   }, [prefersReduced]);
 
   const stage = useMemo(() => {
-    const segmentCount = slides.length - 1;
-    const rawPosition = progress * Math.max(segmentCount, 1);
-    const segment =
-      segmentCount > 0
-        ? Math.min(segmentCount - 1, Math.floor(rawPosition))
-        : 0;
-    const local = segmentCount > 0 ? clamp01(rawPosition - segment) : 0;
-    const activeFloat = segment + local;
-    const finalRelease = smoothStep(0.965, 0.998, progress);
-    const transitionT = smoothStep(0.28, 0.72, local);
-    const incomingIn = smoothStep(0.3, 0.55, local);
-    const outgoingOut = smoothStep(0.48, 0.78, local);
-    const firstEnter = smoothStep(0.04, 0.22, local);
+    const transitionHalfWindow = 0.04;
+    const pageBreaks = Array.from(
+      { length: Math.max(0, slides.length - 1) },
+      (_, index) => (index + 1) / slides.length,
+    );
+
+    const normalizedProgress = clamp01(progress);
+    let segment = 0;
+    let transitionEnabled = false;
+    let transitionT = 0;
+
+    for (let i = 0; i < pageBreaks.length; i += 1) {
+      const breakPoint = pageBreaks[i];
+      const start = breakPoint - transitionHalfWindow;
+      const end = breakPoint + transitionHalfWindow;
+
+      if (normalizedProgress < start) {
+        segment = i;
+        break;
+      }
+
+      if (normalizedProgress <= end) {
+        segment = i;
+        transitionEnabled = true;
+        transitionT = clamp01((normalizedProgress - start) / (end - start));
+        break;
+      }
+
+      segment = i + 1;
+    }
+
+    segment = clamp01(Math.min(slides.length - 1, segment));
 
     return {
       segment,
-      local,
-      activeFloat,
-      finalRelease,
+      nextIndex: Math.min(segment + 1, slides.length - 1),
+      transitionEnabled,
       transitionT,
-      incomingIn,
-      outgoingOut,
-      firstEnter,
+      activeFloat: segment + (transitionEnabled ? transitionT : 0),
     };
   }, [progress]);
 
@@ -157,7 +167,7 @@ export function Outcomes() {
     <section id="outcomes" className="relative bg-black">
       <div
         ref={trackRef}
-        className="relative h-[360svh] md:h-[380svh]"
+        className="relative h-[200svh]"
         data-testid="outcomes-track"
         aria-label="Program structure sequence"
       >
@@ -170,8 +180,8 @@ export function Outcomes() {
           {slides.map((slide, index) => {
             const failed = Boolean(imgFailures[index]);
             const currentIndex = stage.segment;
-            const nextIndex = Math.min(slides.length - 1, currentIndex + 1);
-            const transitionEnabled = currentIndex !== nextIndex;
+            const nextIndex = stage.nextIndex;
+            const transitionEnabled = stage.transitionEnabled;
             const transitionT = stage.transitionT;
 
             let panelShift = 100;
@@ -180,7 +190,7 @@ export function Outcomes() {
             } else if (index === currentIndex) {
               panelShift = transitionEnabled ? -100 * transitionT : 0;
             } else if (index === nextIndex) {
-              panelShift = transitionEnabled ? 100 - 100 * transitionT : 0;
+              panelShift = transitionEnabled ? 100 - 100 * transitionT : 100;
             }
 
             const delta = index - stage.activeFloat;
@@ -230,76 +240,49 @@ export function Outcomes() {
                       : "none",
                   }}
                 />
-
               </article>
             );
           })}
 
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 z-40"
-          >
-            {(() => {
-              const travel = 22;
-              const currentIndex = stage.segment;
-              const nextIndex = Math.min(slides.length - 1, currentIndex + 1);
-              const transitionEnabled = currentIndex !== nextIndex;
-              const currentIsFirst = currentIndex === 0;
-              const currentIsLast = currentIndex === slides.length - 1;
-              const nextIsLast = nextIndex === slides.length - 1;
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+            <div
+              data-testid="outcomes-title-mask"
+              className="absolute left-1/2 z-40 flex overflow-hidden"
+              style={{
+                top: "46svh",
+                height: "clamp(56px,10.5vw,170px)",
+                width: "min(90vw,1200px)",
+                transform: "translateX(-50%)",
+              }}
+            >
+              <div className="relative h-full w-full">
+                <div
+                  className="absolute inset-0 flex items-center justify-center"
+                  style={{
+                    transform: `translate3d(0, ${-stage.transitionT * 100}%, 0)`,
+                    willChange: "transform",
+                  }}
+                >
+                  <h3 className="w-full text-center font-heading font-bold text-white tracking-tight leading-[0.9] text-[clamp(56px,10.5vw,170px)]">
+                    {slides[stage.segment]?.title}
+                  </h3>
+                </div>
 
-              let currentOpacity = transitionEnabled
-                ? 1 - stage.outgoingOut
-                : 1;
-              let currentY = transitionEnabled ? -stage.outgoingOut * travel : 0;
-
-              if (currentIsFirst) {
-                currentOpacity *= stage.firstEnter;
-                currentY += (1 - stage.firstEnter) * travel;
-              }
-
-              if (currentIsLast) {
-                currentOpacity *= 1 - stage.finalRelease;
-                currentY += -stage.finalRelease * (travel * 0.35);
-              }
-
-              let nextOpacity = transitionEnabled ? stage.incomingIn : 0;
-              let nextY = transitionEnabled ? (1 - stage.incomingIn) * travel : 0;
-
-              if (nextIsLast) {
-                nextOpacity *= 1 - stage.finalRelease;
-                nextY += -stage.finalRelease * (travel * 0.35);
-              }
-
-              return (
-                <>
-                  <h3
-                    data-testid="outcomes-title-current"
-                    className="absolute left-1/2 top-1/2 w-[min(90vw,1200px)] text-center font-heading font-bold text-white tracking-tight leading-[0.9] text-[clamp(56px,10.5vw,170px)]"
+                {stage.transitionEnabled ? (
+                  <div
+                    className="absolute inset-0 flex items-center justify-center"
                     style={{
-                      opacity: currentOpacity,
-                      transform: `translate3d(-50%, calc(-50% + ${currentY}svh), 0)`,
-                      willChange: "transform, opacity",
+                      transform: `translate3d(0, ${(1 - stage.transitionT) * 100}%, 0)`,
+                      willChange: "transform",
                     }}
                   >
-                    {slides[currentIndex]?.title}
-                  </h3>
-                  {transitionEnabled ? (
-                    <h3
-                      data-testid="outcomes-title-next"
-                      className="absolute left-1/2 top-1/2 w-[min(90vw,1200px)] text-center font-heading font-bold text-white tracking-tight leading-[0.9] text-[clamp(56px,10.5vw,170px)]"
-                      style={{
-                        opacity: nextOpacity,
-                        transform: `translate3d(-50%, calc(-50% + ${nextY}svh), 0)`,
-                        willChange: "transform, opacity",
-                      }}
-                    >
-                      {slides[nextIndex]?.title}
+                    <h3 className="w-full text-center font-heading font-bold text-white tracking-tight leading-[0.9] text-[clamp(56px,10.5vw,170px)]">
+                      {slides[stage.nextIndex]?.title}
                     </h3>
-                  ) : null}
-                </>
-              );
-            })()}
+                  </div>
+                ) : null}
+              </div>
+            </div>
           </div>
         </div>
       </div>

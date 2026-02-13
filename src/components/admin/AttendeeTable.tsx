@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { AttendeeDetail } from "./AttendeeDetail";
+import { StatsBar } from "./StatsBar";
 
 interface Attendee {
   id: string;
@@ -17,9 +18,19 @@ interface Attendee {
   networkCode: string | null;
 }
 
-export function AttendeeTable() {
+export function AttendeeTable({
+  forcedNetworkCode = null,
+}: {
+  forcedNetworkCode?: string | null;
+}) {
   const [attendees, setAttendees] = useState<Attendee[]>([]);
   const [search, setSearch] = useState("");
+  const [depositStatusFilter, setDepositStatusFilter] = useState("");
+  const [remainderStatusFilter, setRemainderStatusFilter] = useState("");
+  const [seatStatusFilter, setSeatStatusFilter] = useState("");
+  const [networkCodeFilter, setNetworkCodeFilter] = useState("");
+  const [networkCodeOptions, setNetworkCodeOptions] = useState<string[]>([]);
+  const [refreshKey, setRefreshKey] = useState(0);
   const [loading, setLoading] = useState(true);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [captureBusy, setCaptureBusy] = useState(false);
@@ -32,24 +43,35 @@ export function AttendeeTable() {
   const fetchAttendees = useCallback(async () => {
     setLoading(true);
     try {
+      const params = new URLSearchParams();
       const q = search.trim();
-      const url = q
-        ? `/api/admin/attendees?q=${encodeURIComponent(q)}`
-        : "/api/admin/attendees";
+      if (q) params.set("q", q);
+      if (depositStatusFilter) params.set("depositStatus", depositStatusFilter);
+      if (remainderStatusFilter) params.set("remainderStatus", remainderStatusFilter);
+      if (seatStatusFilter) params.set("seatStatus", seatStatusFilter);
+      if (networkCodeFilter) params.set("networkCode", networkCodeFilter);
+      const query = params.toString();
+      const url = query ? `/api/admin/attendees?${query}` : "/api/admin/attendees";
       const res = await fetch(url);
       const data = await res.json();
       setAttendees(data.attendees || []);
+      setRefreshKey((value) => value + 1);
     } catch {
       // Handle error silently — table shows empty state
     } finally {
       setLoading(false);
     }
-  }, [search]);
+  }, [search, depositStatusFilter, remainderStatusFilter, seatStatusFilter, networkCodeFilter]);
 
   useEffect(() => {
     const timeout = setTimeout(fetchAttendees, 300);
     return () => clearTimeout(timeout);
   }, [fetchAttendees]);
+
+  useEffect(() => {
+    if (!forcedNetworkCode) return;
+    setNetworkCodeFilter(forcedNetworkCode);
+  }, [forcedNetworkCode]);
 
   const authorizedCount = attendees.filter(
     (a) => a.remainderStatus === "authorized",
@@ -100,6 +122,10 @@ export function AttendeeTable() {
 
   return (
     <div>
+      <StatsBar
+        refreshKey={refreshKey}
+        onLoaded={(stats) => setNetworkCodeOptions(stats.networkCodes || [])}
+      />
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
         <input
           type="text"
@@ -118,6 +144,54 @@ export function AttendeeTable() {
           </svg>
           Export CSV
         </button>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+        <FilterSelect
+          value={depositStatusFilter}
+          onChange={setDepositStatusFilter}
+          label="Deposit"
+          options={[
+            { value: "", label: "All deposit statuses" },
+            { value: "paid", label: "Paid" },
+            { value: "unpaid", label: "Unpaid" },
+            { value: "refunded", label: "Refunded" },
+          ]}
+        />
+        <FilterSelect
+          value={remainderStatusFilter}
+          onChange={setRemainderStatusFilter}
+          label="Remainder"
+          options={[
+            { value: "", label: "All remainder statuses" },
+            { value: "none", label: "None" },
+            { value: "authorized", label: "Authorized" },
+            { value: "captured", label: "Captured" },
+            { value: "canceled", label: "Canceled" },
+            { value: "refunded", label: "Refunded" },
+          ]}
+        />
+        <FilterSelect
+          value={seatStatusFilter}
+          onChange={setSeatStatusFilter}
+          label="Seat"
+          options={[
+            { value: "", label: "All seat statuses" },
+            { value: "reserved", label: "Reserved" },
+            { value: "attended_day1", label: "Attended Day 1" },
+            { value: "attended_day2", label: "Attended Day 2" },
+            { value: "no_show", label: "No Show" },
+          ]}
+        />
+        <FilterSelect
+          value={networkCodeFilter}
+          onChange={setNetworkCodeFilter}
+          label="Referral Code"
+          options={[
+            { value: "", label: "All referral codes" },
+            ...networkCodeOptions.map((code) => ({ value: code, label: code })),
+          ]}
+        />
       </div>
 
       {authorizedCount > 0 && (
@@ -259,6 +333,35 @@ export function AttendeeTable() {
         />
       )}
     </div>
+  );
+}
+
+function FilterSelect({
+  label,
+  value,
+  onChange,
+  options,
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  options: Array<{ value: string; label: string }>;
+}) {
+  return (
+    <label className="block">
+      <span className="block text-xs mb-1 text-[var(--color-text-500)]">{label}</span>
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full rounded-lg border border-[var(--color-border-700)] bg-[var(--color-bg-800)] px-3 py-2 text-sm text-[var(--color-text-100)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-500)]/50"
+      >
+        {options.map((option) => (
+          <option key={`${label}-${option.value}`} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </label>
   );
 }
 

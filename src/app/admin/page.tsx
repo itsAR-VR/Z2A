@@ -2,12 +2,15 @@
 
 import { useId, useState } from "react";
 import { AttendeeTable } from "@/components/admin/AttendeeTable";
+import { EmailSender } from "@/components/admin/EmailSender";
 import { ReferralCodeTable } from "@/components/admin/ReferralCodeTable";
+import { WaitlistTable } from "@/components/admin/WaitlistTable";
 
-type Tab = "attendees" | "referral-codes";
+type Tab = "attendees" | "referral-codes" | "waitlist" | "emails";
 
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState<Tab>("attendees");
+  const [forcedNetworkCode, setForcedNetworkCode] = useState<string | null>(null);
   const ids = useId();
 
   const tabs: Array<{
@@ -27,6 +30,18 @@ export default function AdminPage() {
       label: "Referral Codes",
       tabId: `${ids}-tab-referral`,
       panelId: `${ids}-panel-referral`,
+    },
+    {
+      value: "waitlist",
+      label: "Waitlist",
+      tabId: `${ids}-tab-waitlist`,
+      panelId: `${ids}-panel-waitlist`,
+    },
+    {
+      value: "emails",
+      label: "Emails",
+      tabId: `${ids}-tab-emails`,
+      panelId: `${ids}-panel-emails`,
     },
   ];
 
@@ -92,7 +107,7 @@ export default function AdminPage() {
           aria-labelledby={tabs[0].tabId}
           hidden={activeTab !== tabs[0].value}
         >
-          <AttendeeTable />
+          <AttendeeTable forcedNetworkCode={forcedNetworkCode} />
         </div>
         <div
           id={tabs[1].panelId}
@@ -100,7 +115,28 @@ export default function AdminPage() {
           aria-labelledby={tabs[1].tabId}
           hidden={activeTab !== tabs[1].value}
         >
-          <ReferralCodeTable />
+          <ReferralCodeTable
+            onFilterByCode={(code) => {
+              setForcedNetworkCode(code);
+              setActiveTab("attendees");
+            }}
+          />
+        </div>
+        <div
+          id={tabs[2].panelId}
+          role="tabpanel"
+          aria-labelledby={tabs[2].tabId}
+          hidden={activeTab !== tabs[2].value}
+        >
+          <WaitlistTable />
+        </div>
+        <div
+          id={tabs[3].panelId}
+          role="tabpanel"
+          aria-labelledby={tabs[3].tabId}
+          hidden={activeTab !== tabs[3].value}
+        >
+          <EmailSender />
         </div>
       </div>
     </div>

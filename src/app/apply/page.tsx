@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/Button";
@@ -24,6 +24,7 @@ interface FieldError {
 function ApplyForm() {
   const searchParams = useSearchParams();
   const canceled = searchParams.get("canceled") === "1";
+  const canceledMode = searchParams.get("mode") || "";
 
   const [form, setForm] = useState<FormData>({
     firstName: "",
@@ -48,6 +49,12 @@ function ApplyForm() {
   const [showNetworkCode, setShowNetworkCode] = useState(
     () => searchParams.get("referral") === "1",
   );
+  const [seatInfo, setSeatInfo] = useState<{
+    soldOut: boolean;
+    remaining: number;
+    waitlistCount: number;
+  } | null>(null);
+  const [waitlistFlowNotice, setWaitlistFlowNotice] = useState<string | null>(null);
   const formStartedRef = useRef(false);
 
   function onFormFocusCapture() {
@@ -55,6 +62,28 @@ function ApplyForm() {
     formStartedRef.current = true;
     trackEvent("apply_form_start");
   }
+
+  useEffect(() => {
+    let cancelled = false;
+    async function loadSeats() {
+      try {
+        const res = await fetch("/api/seats");
+        const data = await res.json();
+        if (cancelled) return;
+        setSeatInfo({
+          soldOut: Boolean(data.soldOut),
+          remaining: Number(data.remaining || 0),
+          waitlistCount: Number(data.waitlistCount || 0),
+        });
+      } catch {
+        // Non-blocking: form still works if seat status request fails.
+      }
+    }
+    void loadSeats();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   function validate(): FieldError {
     const e: FieldError = {};
@@ -98,6 +127,7 @@ function ApplyForm() {
     setValidationSummary(null);
     setRedirectFallbackUrl(null);
     setShowRedirectHelp(false);
+    setWaitlistFlowNotice(null);
 
     const validationErrors = validate();
     setErrors(validationErrors);
@@ -137,9 +167,26 @@ function ApplyForm() {
       const data = await res.json();
 
       if (!res.ok) {
+        if (res.status === 409 && /sold out/i.test(String(data.error || ""))) {
+          setSeatInfo((prev) => ({
+            soldOut: true,
+            remaining: 0,
+            waitlistCount: prev?.waitlistCount || 0,
+          }));
+          setWaitlistFlowNotice(
+            "Seats are currently full. You'll continue through the waitlist path.",
+          );
+        }
         setServerError(data.error || "Something went wrong. Please try again.");
         setSubmitting(false);
         return;
+      }
+
+      if (data.mode === "waitlist_setup") {
+        setWaitlistFlowNotice(
+          data.message ||
+            "Current cohort is sold out. You're joining the waitlist with card-on-file setup.",
+        );
       }
 
       // Redirect to Stripe Checkout
@@ -206,7 +253,10 @@ function ApplyForm() {
             </h1>
             <p className="mt-3 text-[15px] md:text-lg leading-relaxed text-[var(--color-text-muted)] max-w-[60ch]">
               Tell us what you want to automate. After you submit, you&apos;ll
-              be redirected to Stripe for the $100 deposit to reserve your seat.
+              be redirected to Stripe.
+              {seatInfo?.soldOut
+                ? " This cohort is sold out, so you'll join the waitlist path with card-on-file setup."
+                : " You'll pay the $100 deposit to reserve your seat."}{" "}
               Full refund is available through the end of Day 2.
             </p>
 
@@ -214,7 +264,10 @@ function ApplyForm() {
               <div className="grid grid-cols-3 gap-3">
                 {[
                   { label: "1. Application", active: true },
-                  { label: "2. Deposit", active: false },
+                  {
+                    label: seatInfo?.soldOut ? "2. Waitlist setup" : "2. Deposit",
+                    active: false,
+                  },
                   { label: "3. Confirmed", active: false },
                 ].map((s) => (
                   <div
@@ -233,7 +286,30 @@ function ApplyForm() {
 
             {canceled && (
               <div className="mt-6 rounded-[var(--radius-xl)] border border-[color-mix(in_oklch,var(--color-warning)_40%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-warning)_10%,var(--color-surface))] p-5 text-sm text-[var(--color-text)] shadow-[var(--shadow-sm)]">
-                Payment was canceled. Your application is saved. You can try again when you&apos;re ready.
+                {canceledMode === "waitlist"
+                  ? "Waitlist setup was canceled. Your application is still saved. You can try again when you're ready."
+                  : "Payment was canceled. Your application is saved. You can try again when you're ready."}
+              </div>
+            )}
+
+            {seatInfo?.soldOut && (
+              <div className="mt-6 rounded-[var(--radius-xl)] border border-[color-mix(in_oklch,var(--color-warning)_40%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-warning)_10%,var(--color-surface))] p-5 text-sm text-[var(--color-text)] shadow-[var(--shadow-sm)]">
+                <p className="font-medium">Sold out for this cohort.</p>
+                <p className="mt-2 text-[var(--color-text-muted)]">
+                  You can still apply now. We&apos;ll place you on the waitlist for
+                  this cohort fill-ins and next event planning. You&apos;ll complete card-on-file setup
+                  on Stripe after submission, but you won&apos;t be charged immediately.
+                </p>
+                <p className="mt-2 text-xs text-[var(--color-text-faint)]">
+                  Current waitlist: {seatInfo.waitlistCount} applicant
+                  {seatInfo.waitlistCount === 1 ? "" : "s"}.
+                </p>
+              </div>
+            )}
+
+            {waitlistFlowNotice && (
+              <div className="mt-6 rounded-[var(--radius-xl)] border border-[color-mix(in_oklch,var(--color-info)_35%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-info)_10%,var(--color-surface))] p-5 text-sm text-[var(--color-text)] shadow-[var(--shadow-sm)]">
+                {waitlistFlowNotice}
               </div>
             )}
 
@@ -450,11 +526,16 @@ function ApplyForm() {
 
                 <div className="mt-7">
                   <Button type="submit" disabled={submitting} className="w-full justify-center">
-                    {submitting ? "Redirecting to payment..." : "Continue to deposit ($100)"}
+                    {submitting
+                      ? "Redirecting to Stripe..."
+                      : seatInfo?.soldOut
+                        ? "Continue to waitlist setup"
+                        : "Continue to deposit ($100)"}
                   </Button>
                   <p className="mt-3 text-xs text-[var(--color-text-faint)] text-center">
-                    You&apos;ll be redirected to Stripe to pay the $100 deposit
-                    now. Full refund if unsatisfied by end of Day 2.
+                    {seatInfo?.soldOut
+                      ? "You'll be redirected to Stripe to set up card-on-file for waitlist processing. No immediate charge."
+                      : "You'll be redirected to Stripe to pay the $100 deposit now. Full refund if unsatisfied by end of Day 2."}
                   </p>
                   {submitting && redirectFallbackUrl && showRedirectHelp && (
                     <p className="mt-2 text-xs text-center text-[var(--color-text-muted)]">
@@ -485,12 +566,18 @@ function ApplyForm() {
                     d: "Basic details plus a short description of your workflow.",
                   },
                   {
-                    t: "Pay the $100 deposit via Stripe",
-                    d: "Secure checkout. The deposit reserves your seat immediately.",
+                    t: seatInfo?.soldOut
+                      ? "Set up card-on-file via Stripe"
+                      : "Pay the $100 deposit via Stripe",
+                    d: seatInfo?.soldOut
+                      ? "Secure setup. No immediate charge while you're on the waitlist."
+                      : "Secure checkout. The deposit reserves your seat immediately.",
                   },
                   {
                     t: "Get confirmation + prework",
-                    d: "You’ll receive next steps (what to bring, setup guidance, and prework).",
+                    d: seatInfo?.soldOut
+                      ? "You'll receive waitlist next steps and seat-release updates by email."
+                      : "You'll receive next steps (what to bring, setup guidance, and prework).",
                   },
                 ].map((s, idx) => (
                   <li key={s.t} className="flex gap-3">

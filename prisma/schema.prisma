@@ -43,6 +43,34 @@ enum ReferralCodeType {
   network
 }
 
+enum WaitlistStatus {
+  pending
+  seat_offered
+  converted
+  rolled_next_cohort
+  expired
+}
+
+enum WaitlistSource {
+  apply_overcap
+  direct_waitlist
+}
+
+enum EmailDispatchStatus {
+  pending
+  sending
+  sent
+  failed
+  skipped
+}
+
+enum EmailDispatchTemplate {
+  deposit_confirmation
+  prework
+  venue
+  day1_prep
+}
+
 model Attendee {
   id        String   @id @default(uuid()) @db.Uuid
   createdAt DateTime @default(now()) @map("created_at")
@@ -78,6 +106,8 @@ model Attendee {
 
   referralAttribution String? @map("referral_attribution")
   internalNotes      String? @db.Text @map("internal_notes")
+
+  emailDispatches EmailDispatch[]
 
   @@unique([email])
   @@map("attendees")
@@ -115,4 +145,74 @@ model StripeEvent {
   receivedAt    DateTime @default(now()) @map("received_at")
 
   @@map("stripe_events")
+}
+
+model Waitlist {
+  id        String   @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  firstName   String  @map("first_name")
+  lastName    String  @map("last_name")
+  email       String  @unique
+  roleTitle   String? @map("role_title")
+  company     String?
+  linkedinUrl String? @map("linkedin_url")
+  useCase     String? @db.Text @map("use_case")
+  networkCode String? @map("network_code")
+
+  status        WaitlistStatus @default(pending)
+  source        WaitlistSource @default(direct_waitlist)
+  priorityIndex Int            @unique @default(autoincrement()) @map("priority_index")
+  overCapReason String?        @db.Text @map("over_cap_reason")
+
+  setupIntentId      String?   @map("setup_intent_id")
+  setupIntentStatus  String?   @map("setup_intent_status")
+  setupCheckoutSessionId String? @map("setup_checkout_session_id")
+  setupCheckoutCompletedAt DateTime? @map("setup_checkout_completed_at")
+  stripeCustomerId   String?   @map("stripe_customer_id")
+  paymentMethodId    String?   @map("payment_method_id")
+  seatOfferedAt      DateTime? @map("seat_offered_at")
+  convertedAt        DateTime? @map("converted_at")
+  convertedCheckoutSessionId String? @map("converted_checkout_session_id")
+  convertedCheckoutUrl       String? @db.Text @map("converted_checkout_url")
+  attendeeId         String?  @db.Uuid @map("attendee_id")
+  notified           Boolean  @default(false)
+  lastNotifiedAt     DateTime? @map("last_notified_at")
+
+  @@map("waitlist")
+}
+
+model EmailSetting {
+  id        String   @id @default(uuid()) @db.Uuid
+  key       String   @unique
+  value     String   @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("email_settings")
+}
+
+model EmailDispatch {
+  id        String   @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  attendeeId String   @db.Uuid @map("attendee_id")
+  attendee   Attendee @relation(fields: [attendeeId], references: [id], onDelete: Cascade)
+
+  template EmailDispatchTemplate
+  status   EmailDispatchStatus @default(pending)
+
+  attemptCount Int      @default(0) @map("attempt_count")
+  lastAttemptAt DateTime? @map("last_attempt_at")
+  sentAt       DateTime? @map("sent_at")
+
+  providerMessageId String? @map("provider_message_id")
+  errorMessage      String? @db.Text @map("error_message")
+
+  @@unique([attendeeId, template])
+  @@index([template, status])
+  @@index([status, updatedAt])
+  @@map("email_dispatches")
 }

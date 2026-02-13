@@ -43,13 +43,13 @@ export async function POST(req: Request) {
   const data = parsed.data;
   const networkCode = data.networkCode?.trim() || null;
 
-  // Seat cap: enforce at the moment we create a deposit checkout session.
+  // Soft-cap policy:
+  // We keep accepting applications after seats are full, but over-cap
+  // applicants enter a waitlist flow (card on file via setup mode).
   const reservedCount = await prisma.attendee.count({
     where: { depositStatus: "paid" },
   });
-  if (reservedCount >= SEAT_CAP) {
-    return NextResponse.json({ error: "Sold out" }, { status: 409 });
-  }
+  const soldOut = reservedCount >= SEAT_CAP;
 
   const remainderAmount = LIST_REMAINDER_AMOUNT_CENTS;
 
@@ -63,6 +63,70 @@ export async function POST(req: Request) {
       { error: "A seat is already reserved for this email." },
       { status: 409 },
     );
+  }
+
+  if (soldOut) {
+    const waitlist = await prisma.waitlist.upsert({
+      where: { email: data.email },
+      update: {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        roleTitle: data.roleTitle || null,
+        company: data.company || null,
+        linkedinUrl: data.linkedinUrl || null,
+        useCase: data.useCase || null,
+        networkCode,
+        source: "apply_overcap",
+        overCapReason: "seat_cap_reached",
+        status: "pending",
+      },
+      create: {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        roleTitle: data.roleTitle || null,
+        company: data.company || null,
+        linkedinUrl: data.linkedinUrl || null,
+        useCase: data.useCase || null,
+        networkCode,
+        source: "apply_overcap",
+        overCapReason: "seat_cap_reached",
+        status: "pending",
+      },
+    });
+
+    const setupSession = await stripe.checkout.sessions.create({
+      mode: "setup",
+      success_url: `${env.APP_URL}/apply/success?session_id={CHECKOUT_SESSION_ID}&mode=waitlist`,
+      cancel_url: `${env.APP_URL}/apply?canceled=1&mode=waitlist`,
+      client_reference_id: waitlist.id,
+      customer_email: waitlist.email,
+      metadata: {
+        waitlist_id: waitlist.id,
+        payment_type: "waitlist_setup",
+        source: "apply_overcap",
+      },
+    });
+
+    if (!setupSession.url) {
+      return NextResponse.json(
+        { error: "Stripe Checkout session missing redirect URL" },
+        { status: 500 },
+      );
+    }
+
+    await prisma.waitlist.update({
+      where: { id: waitlist.id },
+      data: { setupCheckoutSessionId: setupSession.id },
+    });
+
+    return NextResponse.json({
+      checkoutUrl: setupSession.url,
+      mode: "waitlist_setup",
+      soldOut: true,
+      message:
+        "Current cohort is sold out. You're joining the waitlist and adding a card on file for seat-release offers.",
+    });
   }
 
   const attendee = existing
@@ -111,6 +175,7 @@ export async function POST(req: Request) {
       attendee_id: attendee.id,
       network_code: networkCode || "",
       persona: "PM_ADVANCED",
+      payment_type: "deposit",
     },
   });
 
@@ -126,5 +191,5 @@ export async function POST(req: Request) {
     data: { checkoutSessionId: session.id },
   });
 
-  return NextResponse.json({ checkoutUrl: session.url });
+  return NextResponse.json({ checkoutUrl: session.url, mode: "deposit", soldOut: false });
 }

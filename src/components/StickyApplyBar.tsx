@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/Button";
+import { SeatCounter } from "@/components/SeatCounter";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { trackEvent } from "@/lib/analytics";
 
@@ -96,7 +97,7 @@ export function StickyApplyBar() {
               Applications open now
             </span>
             <span className="hidden sm:inline text-sm text-[var(--color-text-faint)] truncate">
-              Feb 28 – Mar 1 · Toronto · 50 seats · $100 deposit
+              Feb 28 – Mar 1 · Toronto · <SeatCounter variant="inline" /> · $100 deposit
             </span>
           </div>
 

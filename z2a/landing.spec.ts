@@ -57,62 +57,85 @@ test.describe("Landing", () => {
     await expect(sticky).toHaveClass(hasClass("invisible"));
   });
 
-  test("outcomes crossfade keeps both center-tracked headings visible @prod-safe", async ({
+  test("outcomes title transition splits at page breaks @prod-safe", async ({
     page,
   }) => {
     await page.goto("/");
-    const readTransitionMetrics = async () =>
-      page.locator("#outcomes").evaluate((root) => {
-        const readHeading = (label: string) => {
-          const node = Array.from(root.querySelectorAll("h3")).find(
-            (el) => el.textContent?.trim() === label,
-          ) as HTMLElement | undefined;
-
-          if (!node) {
-            return { exists: false, opacity: 0, centerDeltaPct: 100 };
-          }
-
-          const rect = node.getBoundingClientRect();
-          const centerY = rect.top + rect.height / 2;
-          const centerDeltaPct =
-            (Math.abs(centerY - window.innerHeight / 2) / window.innerHeight) *
-            100;
-          const opacity = Number(window.getComputedStyle(node).opacity || "0");
-          return { exists: true, opacity, centerDeltaPct };
-        };
-
-        return {
-          oneWeekend: readHeading("One weekend"),
-          podsOfFive: readHeading("Pods of 5"),
-        };
-      });
 
     await page.locator("#outcomes").scrollIntoViewIfNeeded();
     await page.waitForTimeout(120);
 
-    let metrics = await readTransitionMetrics();
+    const readSplitHeadings = async () =>
+      page.locator("#outcomes").evaluate(() => {
+        const mask = document.querySelector(
+          "[data-testid='outcomes-title-mask']",
+        ) as HTMLElement | null;
 
-    for (let i = 0; i < 12; i += 1) {
-      await page.mouse.wheel(0, 220);
-      await page.waitForTimeout(120);
-      metrics = await readTransitionMetrics();
+        if (!mask) {
+          return { found: false, topText: "", bottomText: "" };
+        }
 
-      if (
-        metrics.oneWeekend.exists &&
-        metrics.podsOfFive.exists &&
-        metrics.oneWeekend.opacity > 0.15 &&
-        metrics.podsOfFive.opacity > 0.15
-      ) {
+        const rect = mask.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+
+        const readPoint = (y: number) => {
+          const node = document.elementFromPoint(centerX, y);
+          const heading = node?.closest("h3");
+          return (heading?.textContent ?? "").trim();
+        };
+
+        return {
+          found: true,
+          topText: readPoint(rect.top + rect.height * 0.25),
+          bottomText: readPoint(rect.top + rect.height * 0.75),
+        };
+      });
+
+    let sawOneWeekend = false;
+    let sawPodsSplit = false;
+    let sawFutureSplit = false;
+
+    for (let i = 0; i < 20; i += 1) {
+      const split = await readSplitHeadings();
+      if (!split.found) {
+        continue;
+      }
+
+      if (split.topText === "One weekend" && split.bottomText === "Pods of 5") {
+        sawPodsSplit = true;
+      }
+
+      if (split.topText === "Pods of 5" && split.bottomText === "Future-ready") {
+        sawFutureSplit = true;
+      }
+
+      if (split.topText === "One weekend" || split.topText === "Pods of 5") {
+        sawOneWeekend = true;
+      }
+
+      if (sawPodsSplit && sawFutureSplit) {
         break;
       }
+
+      await page.mouse.wheel(0, 200);
+      await page.waitForTimeout(120);
     }
 
-    expect(metrics.oneWeekend.exists).toBeTruthy();
-    expect(metrics.podsOfFive.exists).toBeTruthy();
-    expect(metrics.oneWeekend.opacity).toBeGreaterThan(0.15);
-    expect(metrics.podsOfFive.opacity).toBeGreaterThan(0.15);
-    expect(metrics.oneWeekend.centerDeltaPct).toBeLessThan(12);
-    expect(metrics.podsOfFive.centerDeltaPct).toBeLessThan(12);
+    expect(sawOneWeekend).toBeTruthy();
+    expect(sawPodsSplit).toBeTruthy();
+    expect(sawFutureSplit).toBeTruthy();
+
+    let sawFutureReady = false;
+    for (let i = 0; i < 12; i += 1) {
+      const text = (await page.locator("#outcomes").textContent()) ?? "";
+      if (text.includes("Future-ready")) {
+        sawFutureReady = true;
+        break;
+      }
+      await page.mouse.wheel(0, 220);
+      await page.waitForTimeout(120);
+    }
+    expect(sawFutureReady).toBeTruthy();
   });
 
   test("hero loop is present and ticket is lowered @prod-safe", async ({

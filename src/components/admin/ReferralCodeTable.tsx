@@ -9,12 +9,22 @@ interface ReferralCode {
   type: string;
   active: boolean;
   createdAt: string;
+  registeredCount: number;
+  paidCount: number;
   _count: { auditLogs: number };
 }
 
-export function ReferralCodeTable() {
+export function ReferralCodeTable({
+  onFilterByCode,
+}: {
+  onFilterByCode?: (code: string) => void;
+}) {
   const [codes, setCodes] = useState<ReferralCode[]>([]);
   const [loading, setLoading] = useState(true);
+  const [totals, setTotals] = useState<{
+    totalReferralRegistrations: number;
+    totalReferralPaid: number;
+  }>({ totalReferralRegistrations: 0, totalReferralPaid: 0 });
   const [newCode, setNewCode] = useState("");
   const [creating, setCreating] = useState(false);
   const [createError, setCreateError] = useState<string | null>(null);
@@ -30,6 +40,10 @@ export function ReferralCodeTable() {
       const res = await fetch("/api/admin/referral-codes");
       const data = await res.json();
       setCodes(data.referralCodes || []);
+      setTotals({
+        totalReferralRegistrations: data.totalReferralRegistrations || 0,
+        totalReferralPaid: data.totalReferralPaid || 0,
+      });
     } catch {
       // Handle error silently
     } finally {
@@ -132,6 +146,11 @@ export function ReferralCodeTable() {
         <p className="text-sm text-[var(--color-error)] mb-4">{createError}</p>
       )}
 
+      <p className="mb-4 text-sm text-[var(--color-text-300)]">
+        {totals.totalReferralRegistrations} total registrants via referral codes ·{" "}
+        {totals.totalReferralPaid} paid
+      </p>
+
       {loading ? (
         <p className="text-sm text-[var(--color-text-500)] py-8 text-center">
           Loading...
@@ -149,6 +168,8 @@ export function ReferralCodeTable() {
                 <th className="px-4 py-3 font-medium">Type</th>
                 <th className="px-4 py-3 font-medium">Status</th>
                 <th className="px-4 py-3 font-medium">Audit Logs</th>
+                <th className="px-4 py-3 font-medium">Registered</th>
+                <th className="px-4 py-3 font-medium">Paid</th>
                 <th className="px-4 py-3 font-medium">Created</th>
                 <th className="px-4 py-3 font-medium">Actions</th>
               </tr>
@@ -181,6 +202,32 @@ export function ReferralCodeTable() {
                     >
                       {code._count.auditLogs} entries
                     </button>
+                  </td>
+                  <td className="px-4 py-3">
+                    {code.registeredCount > 0 && onFilterByCode ? (
+                      <button
+                        type="button"
+                        onClick={() => onFilterByCode(code.code)}
+                        className="text-[var(--color-accent-500)] hover:underline cursor-pointer"
+                      >
+                        {code.registeredCount}
+                      </button>
+                    ) : (
+                      <span className="text-[var(--color-text-300)]">{code.registeredCount}</span>
+                    )}
+                  </td>
+                  <td className="px-4 py-3">
+                    {code.paidCount > 0 && onFilterByCode ? (
+                      <button
+                        type="button"
+                        onClick={() => onFilterByCode(code.code)}
+                        className="text-[var(--color-success)] hover:underline cursor-pointer"
+                      >
+                        {code.paidCount}
+                      </button>
+                    ) : (
+                      <span className="text-[var(--color-text-300)]">{code.paidCount}</span>
+                    )}
                   </td>
                   <td className="px-4 py-3 text-[var(--color-text-500)] text-xs">
                     {new Date(code.createdAt).toLocaleDateString()}

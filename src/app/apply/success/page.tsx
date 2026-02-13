@@ -30,12 +30,11 @@ export default function ApplySuccessPage() {
         </div>
 
         <h1 className="font-heading font-bold tracking-tight text-[clamp(28px,3vw,40px)] leading-[1.05] mb-3 text-[var(--color-text)]">
-          Deposit received. Seat reserved.
+          Application received. You&apos;re confirmed in the flow.
         </h1>
 
         <p className="text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed mb-8">
-          You&apos;ll receive a confirmation email shortly with next steps, including
-          prework and what to bring.
+          You&apos;ll receive an email shortly with your next steps.
         </p>
 
         <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[var(--radius-xl)] shadow-[var(--shadow-sm)] p-6 mb-8 text-left space-y-3">
@@ -45,7 +44,7 @@ export default function ApplySuccessPage() {
           <div className="space-y-2 text-sm text-[var(--color-text-muted)]">
             <p>
               <span className="text-[var(--color-accent-500)] font-medium">1.</span>{" "}
-              Check your email for a confirmation receipt.
+              Check your email for your confirmation and next-step details.
             </p>
             <p>
               <span className="text-[var(--color-accent-500)] font-medium">2.</span>{" "}
@@ -53,7 +52,7 @@ export default function ApplySuccessPage() {
             </p>
             <p>
               <span className="text-[var(--color-accent-500)] font-medium">3.</span>{" "}
-              Join us Feb 28 – Mar 1, 2026 in Toronto. Exact location will be shared after registration.
+              Join us Feb 28 - Mar 1, 2026 in Toronto. Exact location is shared by email.
             </p>
           </div>
         </div>

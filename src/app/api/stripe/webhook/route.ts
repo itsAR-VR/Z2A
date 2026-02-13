@@ -3,12 +3,26 @@ import { NextResponse } from "next/server";
 
 import { EARLY_BIRD_END_AT_ISO, EARLY_BIRD_REMAINDER_AMOUNT_CENTS } from "@/lib/config";
 import { prisma } from "@/lib/db";
+import {
+  getEmailSettingsMap,
+  POST_DEPOSIT_TEMPLATES,
+  runDispatchForAttendee,
+} from "@/lib/email-dispatch";
 import { env } from "@/lib/env";
 import { stripe } from "@/lib/stripe";
 
 export const runtime = "nodejs";
 
 function getPaymentIntentId(value: unknown): string | null {
+  if (!value) return null;
+  if (typeof value === "string") return value;
+  if (typeof value === "object" && "id" in value && typeof value.id === "string") {
+    return value.id;
+  }
+  return null;
+}
+
+function getSetupIntentId(value: unknown): string | null {
   if (!value) return null;
   if (typeof value === "string") return value;
   if (typeof value === "object" && "id" in value && typeof value.id === "string") {
@@ -33,13 +47,20 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: `Invalid signature: ${message}` }, { status: 400 });
   }
 
+  let postDepositAutomation:
+    | { attendeeId: string; firstName: string; email: string }
+    | null = null;
+
   // Idempotency + reliability:
   //
-  // Stripe will retry deliveries on 5xx/timeouts. We want duplicates to be safe
-  // AND we want retries to be able to re-attempt side effects if we fail mid-way.
-  // Use a transaction so `StripeEvent` creation and side effects are atomic.
+  // Stripe will retry deliveries on 5xx/timeouts. We want duplicate events to
+  // be safe, so we record each Stripe event ID exactly once in a transaction.
   try {
-    await prisma.$transaction(async (tx) => {
+    postDepositAutomation = await prisma.$transaction(async (tx) => {
+      let queuedPostDepositAutomation:
+        | { attendeeId: string; firstName: string; email: string }
+        | null = null;
+
       await tx.stripeEvent.create({
         data: { stripeEventId: event.id, eventType: event.type },
       });
@@ -103,8 +124,52 @@ export async function POST(req: Request) {
             break;
           }
 
-          const updated = await tx.attendee.updateMany({
+          if (paymentType === "waitlist_setup") {
+            const waitlistId = session.metadata?.waitlist_id || attendeeId;
+            if (!waitlistId) break;
+
+            const setupIntentId = getSetupIntentId(session.setup_intent);
+            const customerId =
+              typeof session.customer === "string" ? session.customer : null;
+
+            const updated = await tx.waitlist.updateMany({
+              where: { id: waitlistId },
+              data: {
+                setupIntentId,
+                setupIntentStatus: "succeeded",
+                setupCheckoutSessionId: session.id,
+                setupCheckoutCompletedAt: new Date(),
+                stripeCustomerId: customerId,
+                status: "pending",
+              },
+            });
+
+            if (updated.count === 0) {
+              console.error("[stripe-webhook] Waitlist entry not found for setup checkout", {
+                eventId: event.id,
+                sessionId: session.id,
+                waitlistId,
+              });
+            }
+            break;
+          }
+
+          const attendee = await tx.attendee.findUnique({
             where: { id: attendeeId },
+            select: { id: true, firstName: true, email: true },
+          });
+
+          if (!attendee) {
+            console.error("[stripe-webhook] Attendee not found for checkout.session.completed", {
+              eventId: event.id,
+              sessionId: session.id,
+              attendeeId,
+            });
+            break;
+          }
+
+          const updated = await tx.attendee.updateMany({
+            where: { id: attendeeId, depositStatus: { not: "paid" } },
             data: {
               depositStatus: "paid",
               checkoutSessionId: session.id,
@@ -113,12 +178,15 @@ export async function POST(req: Request) {
           });
 
           if (updated.count === 0) {
-            console.error("[stripe-webhook] Attendee not found for checkout.session.completed", {
-              eventId: event.id,
-              sessionId: session.id,
-              attendeeId,
-            });
+            // Already marked paid by an earlier event/session. Keep the webhook idempotent.
+            break;
           }
+
+          queuedPostDepositAutomation = {
+            attendeeId: attendee.id,
+            firstName: attendee.firstName,
+            email: attendee.email,
+          };
 
           // Lock-in Early Bird eligibility at deposit payment time.
           //
@@ -133,6 +201,18 @@ export async function POST(req: Request) {
             await tx.attendee.updateMany({
               where: { id: attendeeId, remainderStatus: "none" },
               data: { remainderAmount: EARLY_BIRD_REMAINDER_AMOUNT_CENTS },
+            });
+          }
+
+          const waitlistId = session.metadata?.waitlist_id || null;
+          if (waitlistId) {
+            await tx.waitlist.updateMany({
+              where: { id: waitlistId },
+              data: {
+                status: "converted",
+                convertedAt: new Date(),
+                attendeeId: attendee.id,
+              },
             });
           }
 
@@ -155,11 +235,32 @@ export async function POST(req: Request) {
           break;
         }
 
+        case "setup_intent.succeeded": {
+          const setupIntent = event.data.object as Stripe.SetupIntent;
+          if (!setupIntent.id) break;
+
+          const paymentMethodId =
+            typeof setupIntent.payment_method === "string"
+              ? setupIntent.payment_method
+              : null;
+
+          await tx.waitlist.updateMany({
+            where: { setupIntentId: setupIntent.id },
+            data: {
+              setupIntentStatus: setupIntent.status,
+              paymentMethodId,
+            },
+          });
+          break;
+        }
+
         default: {
           // Ignore unhandled event types for now.
           break;
         }
       }
+
+      return queuedPostDepositAutomation;
     });
   } catch (err) {
     const code =
@@ -171,6 +272,52 @@ export async function POST(req: Request) {
       return NextResponse.json({ received: true });
     }
     throw err;
+  }
+
+  if (postDepositAutomation) {
+    const settingsMap = await getEmailSettingsMap();
+
+    for (const template of POST_DEPOSIT_TEMPLATES) {
+      const result = await runDispatchForAttendee({
+        attendeeId: postDepositAutomation.attendeeId,
+        firstName: postDepositAutomation.firstName,
+        email: postDepositAutomation.email,
+        template,
+        settingsMap,
+      });
+
+      if (result.status === "sent") {
+        console.info("[stripe-webhook] Automated attendee email sent", {
+          attendeeId: postDepositAutomation.attendeeId,
+          template,
+          emailId: result.emailId,
+        });
+        continue;
+      }
+
+      if (result.status === "already_sent" || result.status === "already_skipped") {
+        console.info("[stripe-webhook] Automated attendee email not re-sent", {
+          attendeeId: postDepositAutomation.attendeeId,
+          template,
+          status: result.status,
+        });
+        continue;
+      }
+
+      if (result.status === "in_progress") {
+        console.info("[stripe-webhook] Automated attendee email currently in progress", {
+          attendeeId: postDepositAutomation.attendeeId,
+          template,
+        });
+        continue;
+      }
+
+      console.error("[stripe-webhook] Automated attendee email failed", {
+        attendeeId: postDepositAutomation.attendeeId,
+        template,
+        error: result.error || "Unknown dispatch error",
+      });
+    }
   }
 
   return NextResponse.json({ received: true });
