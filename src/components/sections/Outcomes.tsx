@@ -6,7 +6,6 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 type Slide = {
   title: string;
-  kicker: string;
   imageSrc: string;
   imageAlt: string;
 };
@@ -14,19 +13,16 @@ type Slide = {
 const slides: Slide[] = [
   {
     title: "One weekend",
-    kicker: "Format",
     imageSrc: "/program/one-weekend.jpg",
     imageAlt: "Participants and instructor building together in a workshop space",
   },
   {
     title: "Pods of 5",
-    kicker: "Build system",
     imageSrc: "/program/pods-of-5.jpg",
     imageAlt: "Small pod collaboration with laptops open during build time",
   },
   {
     title: "Future-ready",
-    kicker: "Outcome",
     imageSrc: "/program/future-ready.jpg",
     imageAlt: "Focused participant using a laptop while iterating on a workflow",
   },
@@ -89,17 +85,28 @@ export function Outcomes() {
 
   const stage = useMemo(() => {
     const segmentCount = slides.length - 1;
-    const rawPosition = progress * segmentCount;
-    const segment = Math.min(segmentCount - 1, Math.floor(rawPosition));
-    const local = clamp01(rawPosition - segment);
+    const rawPosition = progress * Math.max(segmentCount, 1);
+    const segment =
+      segmentCount > 0
+        ? Math.min(segmentCount - 1, Math.floor(rawPosition))
+        : 0;
+    const local = segmentCount > 0 ? clamp01(rawPosition - segment) : 0;
     const activeFloat = segment + local;
     const finalRelease = smoothStep(0.965, 0.998, progress);
+    const transitionT = smoothStep(0.28, 0.72, local);
+    const incomingIn = smoothStep(0.3, 0.55, local);
+    const outgoingOut = smoothStep(0.48, 0.78, local);
+    const firstEnter = smoothStep(0.04, 0.22, local);
 
     return {
       segment,
       local,
       activeFloat,
       finalRelease,
+      transitionT,
+      incomingIn,
+      outgoingOut,
+      firstEnter,
     };
   }, [progress]);
 
@@ -134,11 +141,8 @@ export function Outcomes() {
                     : "bg-[linear-gradient(180deg,color-mix(in_oklch,black_26%,transparent)_0%,color-mix(in_oklch,black_54%,transparent)_100%)]"
                 }`}
               />
-              <div className="absolute inset-x-6 bottom-[11svh] z-10 md:inset-x-12 md:bottom-[12svh]">
-                <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-white/80">
-                  {slide.kicker}
-                </p>
-                <h3 className="mt-3 font-heading font-bold text-white tracking-tight text-[clamp(58px,18vw,180px)] leading-[0.86]">
+              <div className="absolute inset-0 z-10 flex items-center justify-center px-6 text-center md:px-12">
+                <h3 className="font-heading font-bold text-white tracking-tight leading-[0.9] text-[clamp(56px,10.5vw,170px)]">
                   {slide.title}
                 </h3>
               </div>
@@ -154,6 +158,7 @@ export function Outcomes() {
       <div
         ref={trackRef}
         className="relative h-[360svh] md:h-[380svh]"
+        data-testid="outcomes-track"
         aria-label="Program structure sequence"
       >
         <div className="sticky top-0 h-[100svh] overflow-hidden bg-black">
@@ -167,42 +172,21 @@ export function Outcomes() {
             const currentIndex = stage.segment;
             const nextIndex = Math.min(slides.length - 1, currentIndex + 1);
             const transitionEnabled = currentIndex !== nextIndex;
-            const local = stage.local;
+            const transitionT = stage.transitionT;
 
             let panelShift = 100;
             if (index < currentIndex) {
               panelShift = -100;
             } else if (index === currentIndex) {
-              panelShift = transitionEnabled ? -100 * local : 0;
+              panelShift = transitionEnabled ? -100 * transitionT : 0;
             } else if (index === nextIndex) {
-              panelShift = transitionEnabled ? 100 - 100 * local : 0;
+              panelShift = transitionEnabled ? 100 - 100 * transitionT : 0;
             }
 
             const delta = index - stage.activeFloat;
             const focus = clamp01(1 - Math.abs(delta));
             const imageShift = delta * 5 + (index - 1) * 2;
             const imageScale = 1.08 - focus * 0.04;
-            const isCurrentText = index === currentIndex;
-            const isIncomingText = index === nextIndex;
-
-            let textOpacity = 0;
-            let textShift = 0;
-
-            if (!transitionEnabled && isCurrentText) {
-              textOpacity = 1;
-            } else if (transitionEnabled && isCurrentText) {
-              const fadeOut = smoothStep(0.4, 0.84, local);
-              textOpacity = 1 - fadeOut;
-              textShift = -fadeOut * 32;
-            } else if (transitionEnabled && isIncomingText) {
-              const fadeIn = smoothStep(0.16, 0.58, local);
-              textOpacity = fadeIn;
-              textShift = (1 - fadeIn) * 32;
-            }
-
-            if (index === slides.length - 1) {
-              textOpacity *= 1 - stage.finalRelease;
-            }
 
             const panelVisible = panelShift > -100 && panelShift < 100;
             const panelZ = index === nextIndex ? 40 : 20 + index;
@@ -215,6 +199,7 @@ export function Outcomes() {
                   opacity: panelVisible ? 1 : 0,
                   zIndex: panelZ,
                   transform: `translate3d(0, ${panelShift}%, 0)`,
+                  willChange: "transform, opacity",
                 }}
                 aria-hidden={!panelVisible}
               >
@@ -228,6 +213,7 @@ export function Outcomes() {
                     style={{
                       transform: `translate3d(0, ${imageShift}%, 0) scale(${imageScale})`,
                       transformOrigin: "50% 50%",
+                      willChange: "transform, opacity",
                     }}
                     onError={() =>
                       setImgFailures((prev) => ({ ...prev, [index]: true }))
@@ -245,43 +231,75 @@ export function Outcomes() {
                   }}
                 />
 
-                <div
-                  className="absolute inset-x-6 bottom-[max(12svh,84px)] z-30 md:inset-x-12 md:bottom-[max(13svh,96px)]"
-                  style={{
-                    opacity: textOpacity,
-                    transform: `translate3d(0, ${textShift}px, 0)`,
-                  }}
-                >
-                  <p className="font-mono text-[11px] md:text-[12px] tracking-[0.14em] uppercase text-white/82">
-                    {slide.kicker}
-                  </p>
-                  <h3 className="mt-3 font-heading font-bold text-white tracking-tight text-[clamp(58px,18vw,200px)] leading-[0.86]">
-                    {slide.title}
-                  </h3>
-                </div>
               </article>
             );
           })}
 
-          <div className="absolute right-5 top-1/2 z-50 -translate-y-1/2 flex flex-col gap-3 md:right-8">
-            {slides.map((slide, index) => {
-              const activity = clamp01(1 - Math.abs(index - stage.activeFloat));
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 z-40"
+          >
+            {(() => {
+              const travel = 22;
+              const currentIndex = stage.segment;
+              const nextIndex = Math.min(slides.length - 1, currentIndex + 1);
+              const transitionEnabled = currentIndex !== nextIndex;
+              const currentIsFirst = currentIndex === 0;
+              const currentIsLast = currentIndex === slides.length - 1;
+              const nextIsLast = nextIndex === slides.length - 1;
+
+              let currentOpacity = transitionEnabled
+                ? 1 - stage.outgoingOut
+                : 1;
+              let currentY = transitionEnabled ? -stage.outgoingOut * travel : 0;
+
+              if (currentIsFirst) {
+                currentOpacity *= stage.firstEnter;
+                currentY += (1 - stage.firstEnter) * travel;
+              }
+
+              if (currentIsLast) {
+                currentOpacity *= 1 - stage.finalRelease;
+                currentY += -stage.finalRelease * (travel * 0.35);
+              }
+
+              let nextOpacity = transitionEnabled ? stage.incomingIn : 0;
+              let nextY = transitionEnabled ? (1 - stage.incomingIn) * travel : 0;
+
+              if (nextIsLast) {
+                nextOpacity *= 1 - stage.finalRelease;
+                nextY += -stage.finalRelease * (travel * 0.35);
+              }
+
               return (
-                <div
-                  key={slide.title}
-                  className="h-14 w-1 rounded-full bg-white/20 overflow-hidden"
-                  aria-hidden="true"
-                >
-                  <div
-                    className="h-full w-full origin-bottom rounded-full bg-[color-mix(in_oklch,var(--color-accent)_82%,white)]"
+                <>
+                  <h3
+                    data-testid="outcomes-title-current"
+                    className="absolute left-1/2 top-1/2 w-[min(90vw,1200px)] text-center font-heading font-bold text-white tracking-tight leading-[0.9] text-[clamp(56px,10.5vw,170px)]"
                     style={{
-                      transform: `scaleY(${Math.max(0.12, activity)})`,
-                      opacity: 0.35 + activity * 0.65,
+                      opacity: currentOpacity,
+                      transform: `translate3d(-50%, calc(-50% + ${currentY}svh), 0)`,
+                      willChange: "transform, opacity",
                     }}
-                  />
-                </div>
+                  >
+                    {slides[currentIndex]?.title}
+                  </h3>
+                  {transitionEnabled ? (
+                    <h3
+                      data-testid="outcomes-title-next"
+                      className="absolute left-1/2 top-1/2 w-[min(90vw,1200px)] text-center font-heading font-bold text-white tracking-tight leading-[0.9] text-[clamp(56px,10.5vw,170px)]"
+                      style={{
+                        opacity: nextOpacity,
+                        transform: `translate3d(-50%, calc(-50% + ${nextY}svh), 0)`,
+                        willChange: "transform, opacity",
+                      }}
+                    >
+                      {slides[nextIndex]?.title}
+                    </h3>
+                  ) : null}
+                </>
               );
-            })}
+            })()}
           </div>
         </div>
       </div>

@@ -16,7 +16,6 @@ test.describe("Landing", () => {
     );
     await expect(page.locator("#outcomes")).toContainText("One weekend");
     await expect(page.locator("#outcomes")).toContainText("Pods of 5");
-    await expect(page.locator("#outcomes")).toContainText("Future-ready");
 
     const sticky = page.getByTestId("sticky-apply-bar");
     const hasClass = (className: string) =>
@@ -37,12 +36,83 @@ test.describe("Landing", () => {
       await expect(page.locator(`#${id}`)).toHaveCount(1);
     }
 
+    await page.locator("#outcomes").scrollIntoViewIfNeeded();
+    let sawFutureReady = false;
+    for (let i = 0; i < 16; i += 1) {
+      const text = (await page.locator("#outcomes").textContent()) ?? "";
+      if (text.includes("Future-ready")) {
+        sawFutureReady = true;
+        break;
+      }
+      await page.mouse.wheel(0, 220);
+      await page.waitForTimeout(120);
+    }
+    expect(sawFutureReady).toBeTruthy();
+
     // Sticky bar should show once we're past the hero and hide again near the final CTA.
     await page.locator("#how").scrollIntoViewIfNeeded();
     await expect(sticky).toHaveClass(hasClass("visible"));
 
     await page.locator("#apply").scrollIntoViewIfNeeded();
     await expect(sticky).toHaveClass(hasClass("invisible"));
+  });
+
+  test("outcomes crossfade keeps both center-tracked headings visible @prod-safe", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    const readTransitionMetrics = async () =>
+      page.locator("#outcomes").evaluate((root) => {
+        const readHeading = (label: string) => {
+          const node = Array.from(root.querySelectorAll("h3")).find(
+            (el) => el.textContent?.trim() === label,
+          ) as HTMLElement | undefined;
+
+          if (!node) {
+            return { exists: false, opacity: 0, centerDeltaPct: 100 };
+          }
+
+          const rect = node.getBoundingClientRect();
+          const centerY = rect.top + rect.height / 2;
+          const centerDeltaPct =
+            (Math.abs(centerY - window.innerHeight / 2) / window.innerHeight) *
+            100;
+          const opacity = Number(window.getComputedStyle(node).opacity || "0");
+          return { exists: true, opacity, centerDeltaPct };
+        };
+
+        return {
+          oneWeekend: readHeading("One weekend"),
+          podsOfFive: readHeading("Pods of 5"),
+        };
+      });
+
+    await page.locator("#outcomes").scrollIntoViewIfNeeded();
+    await page.waitForTimeout(120);
+
+    let metrics = await readTransitionMetrics();
+
+    for (let i = 0; i < 12; i += 1) {
+      await page.mouse.wheel(0, 220);
+      await page.waitForTimeout(120);
+      metrics = await readTransitionMetrics();
+
+      if (
+        metrics.oneWeekend.exists &&
+        metrics.podsOfFive.exists &&
+        metrics.oneWeekend.opacity > 0.15 &&
+        metrics.podsOfFive.opacity > 0.15
+      ) {
+        break;
+      }
+    }
+
+    expect(metrics.oneWeekend.exists).toBeTruthy();
+    expect(metrics.podsOfFive.exists).toBeTruthy();
+    expect(metrics.oneWeekend.opacity).toBeGreaterThan(0.15);
+    expect(metrics.podsOfFive.opacity).toBeGreaterThan(0.15);
+    expect(metrics.oneWeekend.centerDeltaPct).toBeLessThan(12);
+    expect(metrics.podsOfFive.centerDeltaPct).toBeLessThan(12);
   });
 
   test("hero loop is present and ticket is lowered @prod-safe", async ({
