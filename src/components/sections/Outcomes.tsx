@@ -78,7 +78,7 @@ export function Outcomes() {
   }, [prefersReduced]);
 
   const stage = useMemo(() => {
-    const transitionHalfWindow = 0.04;
+    const transitionHalfWindow = 0.02;
     const pageBreaks = Array.from(
       { length: Math.max(0, slides.length - 1) },
       (_, index) => (index + 1) / slides.length,
@@ -118,6 +118,21 @@ export function Outcomes() {
       transitionT,
     };
   }, [progress]);
+
+  const normalizedProgress = clamp01(progress);
+  const titleTravelEm = 1.8;
+
+  let outgoingTitleTranslateEm = 0;
+  let incomingTitleTranslateEm = titleTravelEm;
+
+  if (stage.transitionEnabled) {
+    outgoingTitleTranslateEm = -stage.transitionT * titleTravelEm;
+    incomingTitleTranslateEm = (1 - stage.transitionT) * titleTravelEm;
+  } else if (stage.segment === 0) {
+    const introWindow = 0.06;
+    const introT = clamp01(normalizedProgress / introWindow);
+    outgoingTitleTranslateEm = (1 - introT) * 0.8;
+  }
 
   if (prefersReduced) {
     return (
@@ -198,7 +213,7 @@ export function Outcomes() {
             return (
               <article
                 key={slide.title}
-                className="pointer-events-none absolute inset-0"
+                className="pointer-events-none absolute -top-px -bottom-px inset-x-0"
                 style={{
                   opacity: panelVisible ? 1 : 0,
                   zIndex: panelZ,
@@ -229,17 +244,62 @@ export function Outcomes() {
                     : "none",
                   }}
                 />
-                <div
-                  className="absolute inset-x-0 z-30 flex justify-center px-6 text-center md:px-12"
-                  style={{ top: "42svh" }}
-                >
-                  <h3 className="font-heading font-bold text-white tracking-tight leading-[0.9] text-[clamp(56px,10.5vw,170px)]">
-                    {slide.title}
-                  </h3>
-                </div>
               </article>
             );
           })}
+
+          <div className="pointer-events-none absolute inset-0 z-50">
+            <div
+              className="absolute left-1/2"
+              style={{
+                top: "42svh",
+                width: "min(90vw, 1200px)",
+                transform: "translateX(-50%)",
+              }}
+            >
+              <div
+                data-testid="outcomes-title-slot"
+                className="relative overflow-hidden text-[clamp(56px,10.5vw,170px)] leading-[0.9]"
+                style={{ height: "2.8em" }}
+              >
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-x-0 top-1/2 h-px bg-white transition-opacity duration-150 ease-out"
+                  style={{
+                    opacity: stage.transitionEnabled ? 0.12 : 0,
+                    transform: "translateY(-0.5px)",
+                  }}
+                />
+
+                <div
+                  className="absolute inset-0 flex items-center justify-center"
+                  style={{
+                    transform: `translate3d(0, ${outgoingTitleTranslateEm}em, 0)`,
+                    willChange: "transform",
+                  }}
+                >
+                  <h3 className="w-full text-center font-heading font-bold tracking-tight text-white">
+                    {slides[stage.segment]?.title}
+                  </h3>
+                </div>
+
+                {stage.transitionEnabled ? (
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 flex items-center justify-center"
+                    style={{
+                      transform: `translate3d(0, ${incomingTitleTranslateEm}em, 0)`,
+                      willChange: "transform",
+                    }}
+                  >
+                    <h3 className="w-full text-center font-heading font-bold tracking-tight text-white">
+                      {slides[stage.nextIndex]?.title}
+                    </h3>
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

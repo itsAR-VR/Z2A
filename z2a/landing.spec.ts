@@ -85,57 +85,75 @@ test.describe("Landing", () => {
       await page.waitForTimeout(180);
     };
 
-    const readVisibleHeadings = async () =>
-      page.locator("#outcomes").evaluate((section) => {
-        const headings = Array.from(
-          section.querySelectorAll("article[aria-hidden='false'] h3"),
-        )
-          .map((heading) => {
-            const rect = heading.getBoundingClientRect();
-            return {
-              text: (heading.textContent ?? "").trim(),
-              top: rect.top,
-              bottom: rect.bottom,
-              mid: (rect.top + rect.bottom) / 2,
-            };
-          })
-          .filter((heading) => heading.bottom > 0 && heading.top < window.innerHeight)
-          .sort((a, b) => a.mid - b.mid);
-
-        return {
-          viewportMid: window.innerHeight / 2,
-          headings,
-        };
-      });
-
     const assertBreakSplit = async (
       progress: number,
       upperText: string,
       lowerText: string,
     ) => {
       await scrollOutcomesToProgress(progress);
-      const snapshot = await readVisibleHeadings();
+      const snapshot = await page.locator("#outcomes").evaluate((section) => {
+        const slot = section.querySelector(
+          "[data-testid='outcomes-title-slot']",
+        ) as HTMLElement | null;
 
-      const upper = snapshot.headings.find((heading) => heading.text === upperText);
-      const lower = snapshot.headings.find((heading) => heading.text === lowerText);
-      if (!upper || !lower) {
-        throw new Error(
-          `Expected split "${upperText}" -> "${lowerText}" at progress ${progress}, got ${JSON.stringify(snapshot.headings)}`,
-        );
+        if (!slot) {
+          return { found: false, headings: [] as Array<{ text: string; mid: number }>, slotMid: 0 };
+        }
+
+        const rect = slot.getBoundingClientRect();
+        const slotMid = rect.top + rect.height / 2;
+
+        const headings = Array.from(slot.querySelectorAll("h3"))
+          .map((heading) => {
+            const hRect = heading.getBoundingClientRect();
+            return {
+              text: (heading.textContent ?? "").trim(),
+              mid: (hRect.top + hRect.bottom) / 2,
+            };
+          })
+          .sort((a, b) => a.mid - b.mid);
+
+        return { found: true, headings, slotMid };
+      });
+
+      if (!snapshot.found) {
+        throw new Error("Expected outcomes title slot to be present.");
       }
 
-      expect(upper.mid).toBeLessThan(snapshot.viewportMid);
-      expect(lower.mid).toBeGreaterThan(snapshot.viewportMid);
+      expect(snapshot.headings.length).toBe(2);
+      expect(snapshot.headings[0]?.text).toBe(upperText);
+      expect(snapshot.headings[1]?.text).toBe(lowerText);
+      expect(snapshot.headings[0]!.mid).toBeLessThan(snapshot.slotMid);
+      expect(snapshot.headings[1]!.mid).toBeGreaterThan(snapshot.slotMid);
     };
 
     await assertBreakSplit(1 / 3, "One weekend", "Pods of 5");
     await assertBreakSplit(2 / 3, "Pods of 5", "Future-ready");
 
     await scrollOutcomesToProgress(0.95);
-    const finalSnapshot = await readVisibleHeadings();
-    const finalTexts = finalSnapshot.headings.map((heading) => heading.text);
-    expect(finalTexts).toContain("Future-ready");
-    expect(finalTexts).not.toContain("Pods of 5");
+    const final = await page.locator("#outcomes").evaluate((section) => {
+      const slot = section.querySelector(
+        "[data-testid='outcomes-title-slot']",
+      ) as HTMLElement | null;
+
+      if (!slot) {
+        return { found: false, text: "", count: 0 };
+      }
+
+      const headings = Array.from(slot.querySelectorAll("h3")).map((heading) =>
+        (heading.textContent ?? "").trim(),
+      );
+
+      return {
+        found: true,
+        text: headings[0] ?? "",
+        count: headings.length,
+      };
+    });
+
+    expect(final.found).toBeTruthy();
+    expect(final.count).toBe(1);
+    expect(final.text).toBe("Future-ready");
   });
 
   test("hero loop is present and ticket is lowered @prod-safe", async ({
