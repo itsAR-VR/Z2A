@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/Button";
+import { Badge } from "@/components/Badge";
 import { SeatCounter } from "@/components/SeatCounter";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { trackEvent } from "@/lib/analytics";
@@ -9,19 +10,6 @@ import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 
-<<<<<<< Updated upstream
-=======
-const marqueeItems = [
-  "Applications open now",
-  "Feb 28 – Mar 1, 2026",
-  "Toronto",
-  "Seats update live",
-  "Pods of 3–4",
-  "Live build support",
-  "Deposit $100",
-];
-
->>>>>>> Stashed changes
 gsap.registerPlugin(MotionPathPlugin);
 
 export function Hero() {
@@ -171,24 +159,11 @@ export function Hero() {
           className="grid grid-cols-1 md:grid-cols-12 gap-x-10 gap-y-8 md:gap-x-12 md:gap-y-10 items-start"
         >
           <div className="md:col-span-7 md:col-start-1">
-<<<<<<< Updated upstream
-            <div data-hero="badge" className="mb-6 max-w-xl">
-              <div className="rounded-[var(--radius-lg)] border border-[color-mix(in_oklch,var(--color-accent)_32%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-accent)_10%,var(--color-surface))] px-4 py-3 shadow-[var(--shadow-sm)]">
-                <p className="font-mono text-[10px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
-                  Toronto pilot · in person
-                </p>
-                <p className="mt-1 font-heading text-[15px] md:text-base font-semibold text-[var(--color-text)]">
-                  Feb 28 – Mar 1, 2026 · Toronto · 50 seats
-                </p>
-              </div>
-              <span className="mt-3 inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-muted)] shadow-[var(--shadow-sm)]">
-=======
             <div data-hero="badge" className="flex flex-wrap items-center gap-3 mb-6">
               <Badge>
                 Feb 28 – Mar 1, 2026 · Toronto · <SeatCounter variant="badge" />
               </Badge>
               <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-muted)] shadow-[var(--shadow-sm)]">
->>>>>>> Stashed changes
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
                 Applications open now
               </span>
