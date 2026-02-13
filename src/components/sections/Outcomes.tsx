@@ -109,14 +109,13 @@ export function Outcomes() {
       segment = i + 1;
     }
 
-    segment = clamp01(Math.min(slides.length - 1, segment));
+    segment = Math.max(0, Math.min(slides.length - 1, segment));
 
     return {
       segment,
       nextIndex: Math.min(segment + 1, slides.length - 1),
       transitionEnabled,
       transitionT,
-      activeFloat: segment + (transitionEnabled ? transitionT : 0),
     };
   }, [progress]);
 
@@ -167,7 +166,7 @@ export function Outcomes() {
     <section id="outcomes" className="relative bg-black">
       <div
         ref={trackRef}
-        className="relative h-[200svh]"
+        className="relative h-[400svh]"
         data-testid="outcomes-track"
         aria-label="Program structure sequence"
       >
@@ -193,11 +192,6 @@ export function Outcomes() {
               panelShift = transitionEnabled ? 100 - 100 * transitionT : 100;
             }
 
-            const delta = index - stage.activeFloat;
-            const focus = clamp01(1 - Math.abs(delta));
-            const imageShift = delta * 5 + (index - 1) * 2;
-            const imageScale = 1.08 - focus * 0.04;
-
             const panelVisible = panelShift > -100 && panelShift < 100;
             const panelZ = index === nextIndex ? 40 : 20 + index;
 
@@ -220,11 +214,6 @@ export function Outcomes() {
                     alt={slide.imageAlt}
                     loading="lazy"
                     className="absolute inset-0 h-full w-full object-cover"
-                    style={{
-                      transform: `translate3d(0, ${imageShift}%, 0) scale(${imageScale})`,
-                      transformOrigin: "50% 50%",
-                      willChange: "transform, opacity",
-                    }}
                     onError={() =>
                       setImgFailures((prev) => ({ ...prev, [index]: true }))
                     }
@@ -237,53 +226,20 @@ export function Outcomes() {
                   style={{
                     backgroundImage: failed
                       ? "linear-gradient(145deg, color-mix(in oklch, var(--color-accent) 30%, var(--color-surface)) 0%, color-mix(in oklch, var(--color-accent-2) 24%, var(--color-surface)) 100%)"
-                      : "none",
+                    : "none",
                   }}
                 />
+                <div
+                  className="absolute inset-x-0 z-30 flex justify-center px-6 text-center md:px-12"
+                  style={{ top: "42svh" }}
+                >
+                  <h3 className="font-heading font-bold text-white tracking-tight leading-[0.9] text-[clamp(56px,10.5vw,170px)]">
+                    {slide.title}
+                  </h3>
+                </div>
               </article>
             );
           })}
-
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-            <div
-              data-testid="outcomes-title-mask"
-              className="absolute left-1/2 z-40 flex overflow-hidden"
-              style={{
-                top: "46svh",
-                height: "clamp(56px,10.5vw,170px)",
-                width: "min(90vw,1200px)",
-                transform: "translateX(-50%)",
-              }}
-            >
-              <div className="relative h-full w-full">
-                <div
-                  className="absolute inset-0 flex items-center justify-center"
-                  style={{
-                    transform: `translate3d(0, ${-stage.transitionT * 100}%, 0)`,
-                    willChange: "transform",
-                  }}
-                >
-                  <h3 className="w-full text-center font-heading font-bold text-white tracking-tight leading-[0.9] text-[clamp(56px,10.5vw,170px)]">
-                    {slides[stage.segment]?.title}
-                  </h3>
-                </div>
-
-                {stage.transitionEnabled ? (
-                  <div
-                    className="absolute inset-0 flex items-center justify-center"
-                    style={{
-                      transform: `translate3d(0, ${(1 - stage.transitionT) * 100}%, 0)`,
-                      willChange: "transform",
-                    }}
-                  >
-                    <h3 className="w-full text-center font-heading font-bold text-white tracking-tight leading-[0.9] text-[clamp(56px,10.5vw,170px)]">
-                      {slides[stage.nextIndex]?.title}
-                    </h3>
-                  </div>
-                ) : null}
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

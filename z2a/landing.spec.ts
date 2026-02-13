@@ -63,79 +63,79 @@ test.describe("Landing", () => {
     await page.goto("/");
 
     await page.locator("#outcomes").scrollIntoViewIfNeeded();
-    await page.waitForTimeout(120);
+    await page.waitForTimeout(160);
 
-    const readSplitHeadings = async () =>
-      page.locator("#outcomes").evaluate(() => {
-        const mask = document.querySelector(
-          "[data-testid='outcomes-title-mask']",
+    const scrollOutcomesToProgress = async (progress: number) => {
+      await page.locator("#outcomes").evaluate((section, rawProgress) => {
+        const track = section.querySelector(
+          "[data-testid='outcomes-track']",
         ) as HTMLElement | null;
+        if (!track) return;
 
-        if (!mask) {
-          return { found: false, topText: "", bottomText: "" };
-        }
+        const rect = track.getBoundingClientRect();
+        const scrollRange = rect.height - window.innerHeight;
+        const clamped = Math.max(0, Math.min(1, Number(rawProgress)));
+        const trackTop = window.scrollY + rect.top;
 
-        const rect = mask.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
+        window.scrollTo({
+          top: trackTop + scrollRange * clamped,
+          behavior: "auto",
+        });
+      }, progress);
+      await page.waitForTimeout(180);
+    };
 
-        const readPoint = (y: number) => {
-          const node = document.elementFromPoint(centerX, y);
-          const heading = node?.closest("h3");
-          return (heading?.textContent ?? "").trim();
-        };
+    const readVisibleHeadings = async () =>
+      page.locator("#outcomes").evaluate((section) => {
+        const headings = Array.from(
+          section.querySelectorAll("article[aria-hidden='false'] h3"),
+        )
+          .map((heading) => {
+            const rect = heading.getBoundingClientRect();
+            return {
+              text: (heading.textContent ?? "").trim(),
+              top: rect.top,
+              bottom: rect.bottom,
+              mid: (rect.top + rect.bottom) / 2,
+            };
+          })
+          .filter((heading) => heading.bottom > 0 && heading.top < window.innerHeight)
+          .sort((a, b) => a.mid - b.mid);
 
         return {
-          found: true,
-          topText: readPoint(rect.top + rect.height * 0.25),
-          bottomText: readPoint(rect.top + rect.height * 0.75),
+          viewportMid: window.innerHeight / 2,
+          headings,
         };
       });
 
-    let sawOneWeekend = false;
-    let sawPodsSplit = false;
-    let sawFutureSplit = false;
+    const assertBreakSplit = async (
+      progress: number,
+      upperText: string,
+      lowerText: string,
+    ) => {
+      await scrollOutcomesToProgress(progress);
+      const snapshot = await readVisibleHeadings();
 
-    for (let i = 0; i < 20; i += 1) {
-      const split = await readSplitHeadings();
-      if (!split.found) {
-        continue;
+      const upper = snapshot.headings.find((heading) => heading.text === upperText);
+      const lower = snapshot.headings.find((heading) => heading.text === lowerText);
+      if (!upper || !lower) {
+        throw new Error(
+          `Expected split "${upperText}" -> "${lowerText}" at progress ${progress}, got ${JSON.stringify(snapshot.headings)}`,
+        );
       }
 
-      if (split.topText === "One weekend" && split.bottomText === "Pods of 5") {
-        sawPodsSplit = true;
-      }
+      expect(upper.mid).toBeLessThan(snapshot.viewportMid);
+      expect(lower.mid).toBeGreaterThan(snapshot.viewportMid);
+    };
 
-      if (split.topText === "Pods of 5" && split.bottomText === "Future-ready") {
-        sawFutureSplit = true;
-      }
+    await assertBreakSplit(1 / 3, "One weekend", "Pods of 5");
+    await assertBreakSplit(2 / 3, "Pods of 5", "Future-ready");
 
-      if (split.topText === "One weekend" || split.topText === "Pods of 5") {
-        sawOneWeekend = true;
-      }
-
-      if (sawPodsSplit && sawFutureSplit) {
-        break;
-      }
-
-      await page.mouse.wheel(0, 200);
-      await page.waitForTimeout(120);
-    }
-
-    expect(sawOneWeekend).toBeTruthy();
-    expect(sawPodsSplit).toBeTruthy();
-    expect(sawFutureSplit).toBeTruthy();
-
-    let sawFutureReady = false;
-    for (let i = 0; i < 12; i += 1) {
-      const text = (await page.locator("#outcomes").textContent()) ?? "";
-      if (text.includes("Future-ready")) {
-        sawFutureReady = true;
-        break;
-      }
-      await page.mouse.wheel(0, 220);
-      await page.waitForTimeout(120);
-    }
-    expect(sawFutureReady).toBeTruthy();
+    await scrollOutcomesToProgress(0.95);
+    const finalSnapshot = await readVisibleHeadings();
+    const finalTexts = finalSnapshot.headings.map((heading) => heading.text);
+    expect(finalTexts).toContain("Future-ready");
+    expect(finalTexts).not.toContain("Pods of 5");
   });
 
   test("hero loop is present and ticket is lowered @prod-safe", async ({
