@@ -281,7 +281,7 @@ export function Hero() {
                 Refund
               </p>
               <p className="font-heading font-semibold text-sm text-[var(--color-text)]">
-                Full refund by end of Day 2
+                100% refund if you aren&apos;t satisfied
               </p>
             </div>
           </div>

@@ -42,7 +42,7 @@ export function CTAFooter() {
               <RevealOnScroll delay={140}>
                 <div className="mt-6 flex flex-wrap gap-2">
                   <Badge>Deposit $100</Badge>
-                  <Badge>Refund by end of Day 2</Badge>
+                  <Badge>100% refund if you aren&apos;t satisfied</Badge>
                   <Badge>Pods of 5</Badge>
                 </div>
               </RevealOnScroll>

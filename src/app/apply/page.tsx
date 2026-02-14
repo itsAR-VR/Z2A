@@ -257,7 +257,7 @@ function ApplyForm() {
               {seatInfo?.soldOut
                 ? " This cohort is sold out, so you'll join the waitlist path with card-on-file setup."
                 : " You'll pay the $100 deposit to reserve your seat."}{" "}
-              Full refund is available through the end of Day 2.
+              100% refund if you aren't satisfied.
             </p>
 
             <div className="mt-6 rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] p-5">
@@ -535,7 +535,7 @@ function ApplyForm() {
                   <p className="mt-3 text-xs text-[var(--color-text-faint)] text-center">
                     {seatInfo?.soldOut
                       ? "You'll be redirected to Stripe to set up card-on-file for waitlist processing. No immediate charge."
-                      : "You'll be redirected to Stripe to pay the $100 deposit now. Full refund if unsatisfied by end of Day 2."}
+                      : "You'll be redirected to Stripe to pay the $100 deposit now. 100% refund if you aren't satisfied."}
                   </p>
                   {submitting && redirectFallbackUrl && showRedirectHelp && (
                     <p className="mt-2 text-xs text-center text-[var(--color-text-muted)]">
@@ -601,7 +601,7 @@ function ApplyForm() {
                   Refund policy
                 </p>
                 <p className="mt-2 text-sm text-[var(--color-text-muted)]">
-                  Full refund if unsatisfied by end of Day 2. Refunds issued within 7 days.
+                  100% refund if you aren't satisfied. Refunds issued within 7 days.
                 </p>
               </div>
             </div>

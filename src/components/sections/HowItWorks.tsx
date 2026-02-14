@@ -33,7 +33,7 @@ const steps = [
     number: "5",
     title: "Ship and demo",
     description:
-      "Remainder is captured after the event for Day 1 attendees. Full refund if unsatisfied by end of Day 2.",
+      "Remainder is captured after the event for Day 1 attendees. 100% refund if you aren&apos;t satisfied.",
   },
 ];
 

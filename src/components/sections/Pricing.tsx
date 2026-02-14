@@ -77,8 +77,7 @@ export function Pricing() {
       <RevealOnScroll delay={100}>
         <p className="mx-auto max-w-2xl text-center text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed mb-12">
           Pay $100 now to reserve your seat. Stripe handles checkout. If
-          you&apos;re unsatisfied by the end of Day 2, we issue a full refund
-          within 7 days.
+          you&apos;re not satisfied, we issue a 100% refund within 7 days.
         </p>
       </RevealOnScroll>
 
@@ -160,8 +159,8 @@ export function Pricing() {
                 desc: "Secure payment flow.",
               },
               {
-                title: "Full refund (Day 2)",
-                desc: "If unsatisfied by end of Day 2.",
+                title: "100% refund if not satisfied",
+                desc: "Satisfaction guarantee during the workshop.",
               },
               {
                 title: "Venue shared after deposit",

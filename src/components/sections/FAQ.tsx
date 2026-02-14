@@ -23,7 +23,7 @@ const faqItems = [
   {
     question: "How do I know this isn’t a scam?",
     answer:
-      "Healthy skepticism is fair. We keep this concrete: in-person Toronto workshop, public agenda, explicit payment terms through Stripe, and full refund by end of Day 2 if you’re unsatisfied. No hype claims, no job guarantees, and no vague “AI magic” promises.",
+      "Healthy skepticism is fair. We keep this concrete: in-person Toronto workshop, public agenda, explicit payment terms through Stripe, and 100% refund if you aren’t satisfied. No hype claims, no job guarantees, and no vague “AI magic” promises.",
   },
   {
     question: "What if I’m busy and can’t commit much time?",
@@ -47,7 +47,7 @@ export function FAQ() {
     "Applications open now",
     "50 seats · Toronto",
     "$100 deposit via Stripe",
-    "Full refund by end of Day 2",
+    "100% refund if you aren’t satisfied",
     "Pods of 5",
   ];
 
