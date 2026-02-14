@@ -28,7 +28,7 @@ const speakers: Speaker[] = [
   {
     name: "Abdur Sajid",
     role: "Guest Operator · cold2close.ai",
-    bio: "Founder of Zero Risk Growth (cold2close.ai). Shares how he scales outbound and GTM workflows with AI systems.",
+    bio: "Head of AI at zeroriskgrowth.com. Launching a software suite of products focused on increasing gross profit through cold outbound (cold2close.ai).",
     badges: ["Operator", "cold2close.ai", "OpenAI 100B Tokens"],
     initials: "AS",
     headshotSrc: "/speakers/abdur-headshot.jpg",
