@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test.describe("Speakers", () => {
   test("speaker cards link to LinkedIn @prod-safe", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/individuals");
 
     const aadil = page.getByRole("link", {
       name: "Open Aadil Kazmi on LinkedIn",

@@ -4,13 +4,13 @@ import { PageViewTracker } from "@/components/analytics/PageViewTracker";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Zero-to-Agent | Automate Real Work in a Weekend — Toronto",
+  title: "Zero-to-Agent",
   description:
-    "Zero-to-Agent Toronto Pilot. Bring one recurring workflow and leave with a working automation system, deployment path, and reliability checklist. Feb 28 – Mar 1, 2026. 50 seats.",
+    "Zero-to-Agent helps individuals and businesses build practical agentic workflows with clear, measurable outcomes.",
   openGraph: {
-    title: "Zero-to-Agent Toronto Pilot",
+    title: "Zero-to-Agent",
     description:
-      "Automate real work in a weekend, in person. Feb 28 – Mar 1, 2026. 50 seats.",
+      "Agentic workflows for individuals and businesses.",
     type: "website",
   },
 };

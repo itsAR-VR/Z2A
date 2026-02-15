@@ -4,7 +4,7 @@ test.describe("Reduced Motion", () => {
   test.use({ contextOptions: { reducedMotion: "reduce" } });
 
   test("removes the old hero marquee @prod-safe", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/individuals");
 
     await expect(page.getByTestId("hero-marquee")).toHaveCount(0);
   });
@@ -12,7 +12,7 @@ test.describe("Reduced Motion", () => {
   test("RevealOnScroll content is visible and transitionless @prod-safe", async ({
     page,
   }) => {
-    await page.goto("/");
+    await page.goto("/individuals");
 
     const wrapper = page
       .getByRole("heading", { name: /The bottleneck isn't ideas/i })
@@ -39,7 +39,7 @@ test.describe("Reduced Motion", () => {
   });
 
   test("does not initialize Lenis smooth scroll @prod-safe", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/individuals");
     const marker = await page.evaluate(() => document.documentElement.dataset.z2aLenis);
     expect(marker).not.toBe("on");
   });
@@ -47,7 +47,7 @@ test.describe("Reduced Motion", () => {
   test("menu opens without transitions and locks scroll @prod-safe", async ({
     page,
   }) => {
-    await page.goto("/");
+    await page.goto("/individuals");
 
     const menuButton = page.getByRole("button", { name: "Open menu" });
     await menuButton.click();
@@ -55,7 +55,7 @@ test.describe("Reduced Motion", () => {
     const menu = page.getByRole("dialog", { name: "Navigate" });
     await expect(menu).toBeVisible();
 
-    await expect(menu.getByRole("link", { name: "Why" })).toBeFocused();
+    await expect(menu.getByRole("link", { name: "Home" })).toBeFocused();
     await expect(page.locator("body")).toHaveCSS("overflow", "hidden");
     await expect(menu).not.toHaveClass(/transition-opacity/);
 
@@ -66,7 +66,7 @@ test.describe("Reduced Motion", () => {
   });
 
   test("hero loop runner does not animate @prod-safe", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/individuals");
 
     const loop = page.getByTestId("hero-agent-loop");
     await expect(loop).toBeVisible();
