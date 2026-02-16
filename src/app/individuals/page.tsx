@@ -4,6 +4,7 @@ import { LenisProvider } from "@/components/motion/LenisProvider";
 import { StickyApplyBar } from "@/components/StickyApplyBar";
 import { Hero } from "@/components/sections/Hero";
 import { Why } from "@/components/sections/Why";
+import { Signals } from "@/components/sections/Signals";
 import { Speakers } from "@/components/sections/Speakers";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Agenda } from "@/components/sections/Agenda";
@@ -31,6 +32,7 @@ export default function IndividualsPage() {
       <main>
         <Hero />
         <Why />
+        <Signals variant="individuals" />
         <Speakers />
         <HowItWorks />
         <Agenda />

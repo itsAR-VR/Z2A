@@ -6,6 +6,7 @@ import { LenisProvider } from "@/components/motion/LenisProvider";
 import { StageTimeline } from "@/components/motion/StageTimeline";
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
+import { Signals } from "@/components/sections/Signals";
 import { BUSINESS_CALENDLY_URL } from "@/lib/config";
 
 const businessCtaHref = BUSINESS_CALENDLY_URL || "#contact";
@@ -79,15 +80,19 @@ export default function BusinessesPage() {
         <StageTimeline rootId="top" />
         <section id="top" className="relative overflow-hidden pt-32 pb-18 md:pt-44 md:pb-24">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-            <div className="hero-plane hero-plane--left animate-drift" />
-            <div className="hero-plane hero-plane--right animate-drift-slow" />
-            <div className="absolute -top-28 left-[40%] h-[360px] w-[360px] rounded-full bg-[color-mix(in_oklch,var(--color-accent)_16%,transparent)] blur-[80px]" />
-            <div className="absolute top-[26%] right-[-8%] h-[400px] w-[400px] rounded-full bg-[color-mix(in_oklch,var(--color-accent-2)_14%,transparent)] blur-[88px]" />
+            <div className="absolute inset-0 bg-[radial-gradient(122%_88%_at_2%_18%,color-mix(in_oklch,var(--color-accent)_13%,transparent)_0%,transparent_56%),radial-gradient(88%_80%_at_98%_10%,color-mix(in_oklch,var(--color-accent-2)_11%,transparent)_0%,transparent_64%)]" />
+            <div className="absolute -top-24 -left-20 h-[460px] w-[640px] rounded-full bg-[color-mix(in_oklch,var(--color-accent)_15%,transparent)] blur-[116px] opacity-74" />
+            <div className="absolute top-[16%] right-[-9%] h-[460px] w-[460px] rounded-full bg-[color-mix(in_oklch,var(--color-accent-2)_13%,transparent)] blur-[122px] opacity-66" />
+            <div className="absolute inset-x-0 top-[18%] h-[430px] bg-[linear-gradient(180deg,color-mix(in_oklch,var(--color-surface)_84%,transparent)_0%,color-mix(in_oklch,var(--color-bg)_96%,transparent)_100%)] blur-[1px]" />
           </div>
 
           <div className="container-content relative z-10">
             <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-14">
-              <div className="md:col-span-7">
+              <div className="relative md:col-span-7">
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -left-24 top-[-6%] -z-10 h-[520px] w-[620px] rounded-full bg-[color-mix(in_oklch,var(--color-surface)_90%,var(--color-accent)_10%)] blur-[82px]"
+                />
                 <p
                   data-stage="1"
                   className="stage-enter inline-flex items-center gap-2 rounded-full border border-[color-mix(in_oklch,var(--color-accent)_30%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-accent)_8%,var(--color-surface))] px-3 py-1 font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-accent)]"
@@ -203,6 +208,8 @@ export default function BusinessesPage() {
             </div>
           </div>
         </section>
+
+        <Signals variant="businesses" />
 
         <SectionWrapper id="who" alt className="pt-14 md:pt-18">
           <RevealOnScroll>

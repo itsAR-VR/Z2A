@@ -7,6 +7,7 @@ import { LenisProvider } from "@/components/motion/LenisProvider";
 import { StageTimeline } from "@/components/motion/StageTimeline";
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
+import { Signals } from "@/components/sections/Signals";
 
 export const metadata: Metadata = {
   title: "Zero-to-Agent | Agentic Workflows for Individuals and Businesses",
@@ -78,15 +79,19 @@ export default function HomePage() {
         <StageTimeline rootId="top" />
         <section id="top" className="relative overflow-hidden pt-32 pb-18 md:pt-44 md:pb-24">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-            <div className="hero-plane hero-plane--left animate-drift" />
-            <div className="hero-plane hero-plane--right animate-drift-slow" />
-            <div className="absolute -top-36 left-[34%] h-[420px] w-[420px] rounded-full bg-[color-mix(in_oklch,var(--color-accent)_16%,transparent)] blur-[86px]" />
-            <div className="absolute top-[28%] right-[-8%] h-[360px] w-[360px] rounded-full bg-[color-mix(in_oklch,var(--color-accent-2)_14%,transparent)] blur-[84px]" />
+            <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_4%_16%,color-mix(in_oklch,var(--color-accent)_12%,transparent)_0%,transparent_58%),radial-gradient(90%_78%_at_96%_8%,color-mix(in_oklch,var(--color-accent-2)_10%,transparent)_0%,transparent_62%)]" />
+            <div className="absolute -top-28 -left-16 h-[460px] w-[620px] rounded-full bg-[color-mix(in_oklch,var(--color-accent)_14%,transparent)] blur-[110px] opacity-72" />
+            <div className="absolute top-[20%] right-[-10%] h-[420px] w-[420px] rounded-full bg-[color-mix(in_oklch,var(--color-accent-2)_14%,transparent)] blur-[120px] opacity-68" />
+            <div className="absolute inset-x-0 top-[18%] h-[420px] bg-[linear-gradient(180deg,color-mix(in_oklch,var(--color-surface)_82%,transparent)_0%,color-mix(in_oklch,var(--color-bg)_96%,transparent)_100%)] blur-[1px]" />
           </div>
 
           <div className="container-content relative z-10">
             <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-14">
-              <div className="md:col-span-7">
+              <div className="relative md:col-span-7">
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -left-20 top-[-8%] -z-10 h-[520px] w-[620px] rounded-full bg-[color-mix(in_oklch,var(--color-surface)_92%,var(--color-accent)_8%)] blur-[78px]"
+                />
                 <p
                   data-stage="1"
                   className="stage-enter inline-flex items-center gap-2 rounded-full border border-[color-mix(in_oklch,var(--color-accent)_34%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-accent)_10%,var(--color-surface))] px-3 py-1 font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-accent)]"
@@ -247,6 +252,8 @@ export default function HomePage() {
             </RevealOnScroll>
           </div>
         </SectionWrapper>
+
+        <Signals variant="home" />
 
         <SectionWrapper id="programs" className="pt-14 md:pt-18">
           <RevealOnScroll>
