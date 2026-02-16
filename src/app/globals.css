@@ -159,3 +159,84 @@ section[id] {
   background: color-mix(in oklch, var(--color-accent) 24%, white);
   color: var(--color-text);
 }
+
+/* ─── Reusable Motion Utilities ─── */
+@keyframes drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes drift-slow {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, 14px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-drift {
+  animation: drift 7.5s var(--ease-expo) infinite;
+}
+
+.animate-drift-slow {
+  animation: drift-slow 11s var(--ease-expo) infinite;
+}
+
+.flip-label {
+  position: relative;
+  display: block;
+  height: 1.1em;
+  overflow: hidden;
+  line-height: 1.05;
+}
+
+.flip-label__primary,
+.flip-label__secondary {
+  display: block;
+  transition: transform var(--duration-default) var(--ease-expo);
+  will-change: transform;
+}
+
+.flip-label__secondary {
+  position: absolute;
+  inset: 0;
+  transform: translate3d(0, 118%, 0);
+}
+
+.group:hover .flip-label__primary,
+.group:focus-visible .flip-label__primary {
+  transform: translate3d(0, -118%, 0);
+}
+
+.group:hover .flip-label__secondary,
+.group:focus-visible .flip-label__secondary {
+  transform: translate3d(0, 0, 0);
+}
+
+.flip-label[data-flip-disabled="true"] .flip-label__secondary {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-drift,
+  .animate-drift-slow {
+    animation: none !important;
+  }
+
+  .flip-label__primary,
+  .flip-label__secondary {
+    transition: none !important;
+    transform: none !important;
+  }
+}
