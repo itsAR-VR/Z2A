@@ -54,13 +54,7 @@ export const DEFAULT_SIGNAL_QUOTES: SignalQuote[] = [
     href: "https://x.com/rough__sea/status/2013280952370573666",
   },
   {
-    quote: "Machines won't replace humans, but humans with machines will replace humans without machines.",
-    author: "Karim Lakhani",
-    role: "Harvard Business School",
-    href: "https://www.cnbc.com/2023/08/02/harvard-ai-guru-on-why-every-main-street-business-should-use-chatgpt.html",
-  },
-  {
-    quote: "The companies that are not set up to be able to adopt AI co-workers very quickly will be at a huge disadvantage.",
+    quote: "AI won't replace humans. But humans who use AI will replace those who don't.",
     author: "Sam Altman",
     role: "OpenAI",
     href: "https://www.pymnts.com/news/artificial-intelligence/2026/sam-altman-says-full-ai-companies-are-possible-but-businesses-are-not-ready/",

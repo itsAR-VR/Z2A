@@ -7,7 +7,7 @@ import { LenisProvider } from "@/components/motion/LenisProvider";
 import { StageTimeline } from "@/components/motion/StageTimeline";
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
-import { Signals } from "@/components/sections/Signals";
+import { ProofEvidence } from "@/components/sections/ProofEvidence";
 
 export const metadata: Metadata = {
   title: "Zero-to-Agent | Agentic Workflows for Individuals and Businesses",
@@ -68,6 +68,51 @@ const principles = [
     title: "Plain language first",
     detail:
       "If non-technical teams cannot explain or operate it, adoption stalls. Simplicity is a product requirement.",
+  },
+];
+
+const homeProofStats = [
+  {
+    value: "56%",
+    label: "AI skill premium",
+    detail: "Workers with AI skills earned materially higher pay versus the same role without that capability.",
+    sourceHref:
+      "https://www.pwc.com/gx/en/issues/data-and-analytics/publications/artificial-intelligence-study.html",
+  },
+  {
+    value: "3x",
+    label: "Revenue growth per employee",
+    detail: "Industries that adopted AI faster showed stronger per-employee growth trajectories.",
+    sourceHref: "https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-jobs-barometer.html",
+  },
+  {
+    value: "90%",
+    label: "Missed AI training",
+    detail: "A large share of the workforce still has not completed meaningful AI training.",
+    sourceHref:
+      "https://www.cornerstoneondemand.com/company/news-room/press-releases/hidden-ai-lack-of-training-keeps-ai-use-in-the-shadows-despite-ai-usage-encouragement-from-employers/",
+  },
+];
+
+const homeProofQuotes = [
+  {
+    quote:
+      "AI won't replace humans. But humans who use AI will replace those who don't.",
+    author: "Sam Altman",
+    role: "CEO and Co-Founder, OpenAI",
+    sourceHref: "https://x.com/sama/status/1751733984631882743",
+  },
+  {
+    quote: "The era of humans writing code is over.",
+    author: "Ryan Dahl",
+    role: "Creator of Node.js",
+    sourceHref: "https://x.com/rough__sea/status/2013280952370573666",
+  },
+  {
+    quote: "People who aren't keeping up even over the last 30 days already have a deprecated worldview on this topic.",
+    author: "Andrej Karpathy",
+    role: "Co-Founder, OpenAI",
+    sourceHref: "https://www.infoworld.com/article/4111829/ais-trust-tax-for-developers.html",
   },
 ];
 
@@ -253,7 +298,14 @@ export default function HomePage() {
           </div>
         </SectionWrapper>
 
-        <Signals variant="home" />
+        <ProofEvidence
+          id="proof"
+          eyebrow="Signal"
+          heading="The opportunity is real, and measurable."
+          lead="No single tactic is enough. Evidence has to compound across teams, quality, and momentum."
+          stats={homeProofStats}
+          quotes={homeProofQuotes}
+        />
 
         <SectionWrapper id="programs" className="pt-14 md:pt-18">
           <RevealOnScroll>

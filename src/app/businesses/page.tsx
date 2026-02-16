@@ -6,7 +6,7 @@ import { LenisProvider } from "@/components/motion/LenisProvider";
 import { StageTimeline } from "@/components/motion/StageTimeline";
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
-import { Signals } from "@/components/sections/Signals";
+import { ProofEvidence } from "@/components/sections/ProofEvidence";
 import { BUSINESS_CALENDLY_URL } from "@/lib/config";
 
 const businessCtaHref = BUSINESS_CALENDLY_URL || "#contact";
@@ -60,6 +60,40 @@ const operatingModel = [
     title: "Managed improvement loop",
     detail:
       "After launch, we monitor, optimize, and expand what works so value compounds instead of stalling.",
+  },
+];
+
+const businessesProofStats = [
+  {
+    value: "44%",
+    label: "Trained workforce",
+    detail: "Only a fraction of employees report meaningful AI training.",
+    sourceHref:
+      "https://www.cornerstoneondemand.com/company/news-room/press-releases/hidden-ai-lack-of-training-keeps-ai-use-in-the-shadows-despite-ai-usage-encouragement-from-employers/",
+  },
+  {
+    value: "3x",
+    label: "AI-relevant revenue growth",
+    detail: "Industries that operationalize AI workflows faster show stronger growth outcomes.",
+    sourceHref: "https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-jobs-barometer.html",
+  },
+];
+
+const businessesProofQuotes = [
+  {
+    quote:
+      "The companies that are not set up to be able to adopt AI co-workers, very quickly, will be at a huge disadvantage.",
+    author: "Sam Altman",
+    role: "CEO and Co-Founder, OpenAI",
+    sourceHref:
+      "https://www.pymnts.com/news/artificial-intelligence/2026/sam-altman-says-full-ai-companies-are-possible-but-businesses-are-not-ready/",
+  },
+  {
+    quote:
+      "AI won't replace humans. But humans who use AI will replace those who don't.",
+    author: "Sam Altman",
+    role: "CEO and Co-Founder, OpenAI",
+    sourceHref: "https://x.com/sama/status/1751733984631882743",
   },
 ];
 
@@ -209,7 +243,14 @@ export default function BusinessesPage() {
           </div>
         </section>
 
-        <Signals variant="businesses" />
+        <ProofEvidence
+          id="proof"
+          eyebrow="Signal"
+          heading="Commercial reality starts with operating discipline."
+          lead="Deployment is not the finish line. Teams win when they improve outcomes after launch."
+          stats={businessesProofStats}
+          quotes={businessesProofQuotes}
+        />
 
         <SectionWrapper id="who" alt className="pt-14 md:pt-18">
           <RevealOnScroll>
