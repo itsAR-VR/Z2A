@@ -193,45 +193,200 @@ section[id] {
   animation: drift-slow 11s var(--ease-expo) infinite;
 }
 
+@keyframes rail-run {
+  0% {
+    left: 0%;
+  }
+  24% {
+    left: 24%;
+  }
+  49% {
+    left: 49%;
+  }
+  74% {
+    left: 74%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.stage-enter {
+  opacity: 1;
+  transform: none;
+  will-change: transform, opacity;
+}
+
+.tilt-hover {
+  transform-style: preserve-3d;
+  transition:
+    transform var(--duration-default) var(--ease-expo),
+    box-shadow var(--duration-default) var(--ease-expo),
+    border-color var(--duration-default) var(--ease-expo),
+    background-color var(--duration-default) var(--ease-expo);
+}
+
+.tilt-hover:hover,
+.tilt-hover:focus-visible {
+  transform: perspective(900px) rotateX(1.5deg) rotateY(-2.6deg) translate3d(0, -2px, 0);
+}
+
 .flip-label {
   position: relative;
   display: block;
-  height: 1.1em;
+  height: 1.14em;
   overflow: hidden;
-  line-height: 1.05;
+  line-height: 1.12;
+  perspective: 540px;
+  transform-style: preserve-3d;
 }
 
 .flip-label__primary,
 .flip-label__secondary {
   display: block;
-  transition: transform var(--duration-default) var(--ease-expo);
+  transition:
+    transform var(--duration-default) var(--ease-expo),
+    opacity var(--duration-default) var(--ease-expo);
+  transform-origin: 50% 55%;
+  backface-visibility: hidden;
   will-change: transform;
 }
 
 .flip-label__secondary {
   position: absolute;
   inset: 0;
-  transform: translate3d(0, 118%, 0);
+  opacity: 0.9;
+  transform: translate3d(0, 64%, -8px) rotateX(-104deg);
 }
 
-.group:hover .flip-label__primary,
-.group:focus-visible .flip-label__primary {
-  transform: translate3d(0, -118%, 0);
+.group:hover .flip-label:not([data-flip-disabled="true"]) .flip-label__primary,
+.group:focus-visible .flip-label:not([data-flip-disabled="true"]) .flip-label__primary {
+  transform: translate3d(0, -56%, 8px) rotateX(104deg);
+  opacity: 0.92;
 }
 
-.group:hover .flip-label__secondary,
-.group:focus-visible .flip-label__secondary {
-  transform: translate3d(0, 0, 0);
+.group:hover .flip-label:not([data-flip-disabled="true"]) .flip-label__secondary,
+.group:focus-visible .flip-label:not([data-flip-disabled="true"]) .flip-label__secondary {
+  transform: translate3d(0, 0, 0) rotateX(0deg);
+  opacity: 1;
 }
 
 .flip-label[data-flip-disabled="true"] .flip-label__secondary {
   display: none;
 }
 
+.signature-rail {
+  position: relative;
+  height: 24px;
+}
+
+.signature-rail__track {
+  position: absolute;
+  top: 11px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  border-radius: 9999px;
+  background: color-mix(in oklch, var(--color-border) 76%, var(--color-accent) 24%);
+}
+
+.signature-rail__node {
+  position: absolute;
+  top: 7px;
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in oklch, var(--color-accent) 42%, var(--color-border));
+  background: color-mix(in oklch, var(--color-surface) 86%, var(--color-accent) 14%);
+  transform: translateX(-50%);
+}
+
+.signature-rail__node--1 {
+  left: 0%;
+}
+
+.signature-rail__node--2 {
+  left: 24%;
+}
+
+.signature-rail__node--3 {
+  left: 49%;
+}
+
+.signature-rail__node--4 {
+  left: 74%;
+}
+
+.signature-rail__node--5 {
+  left: 100%;
+}
+
+.signature-rail__runner {
+  position: absolute;
+  top: 5px;
+  left: 0%;
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in oklch, var(--color-accent) 58%, white);
+  background: color-mix(in oklch, var(--color-accent) 78%, white);
+  box-shadow: 0 0 0 6px color-mix(in oklch, var(--color-accent) 18%, transparent);
+  transform: translateX(-50%);
+  will-change: left, transform;
+}
+
+.hero-plane {
+  position: absolute;
+  border-radius: 30px;
+  pointer-events: none;
+  border: 1px solid color-mix(in oklch, var(--color-accent) 24%, var(--color-border));
+  background: linear-gradient(
+    130deg,
+    color-mix(in oklch, var(--color-accent) 16%, transparent) 0%,
+    color-mix(in oklch, var(--color-accent-2) 8%, transparent) 42%,
+    transparent 80%
+  );
+  box-shadow: var(--shadow-md);
+}
+
+.hero-plane--left {
+  width: min(52vw, 700px);
+  height: 420px;
+  top: 12%;
+  left: -12%;
+  transform: rotate(-9deg);
+}
+
+.hero-plane--right {
+  width: min(48vw, 640px);
+  height: 460px;
+  top: -2%;
+  right: -10%;
+  transform: rotate(7deg);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-drift,
   .animate-drift-slow {
     animation: none !important;
+  }
+
+  .stage-enter {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    will-change: auto !important;
+  }
+
+  .tilt-hover,
+  .tilt-hover:hover,
+  .tilt-hover:focus-visible {
+    transform: none !important;
+  }
+
+  .signature-rail__runner {
+    animation: none !important;
+    left: 0% !important;
   }
 
   .flip-label__primary,

@@ -1,30 +1,44 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Businesses", () => {
-  test("renders pricing tiers and conversion CTA @prod-safe", async ({
+  test("renders custom pricing workflow and conversion CTA @prod-safe", async ({
     page,
   }) => {
+    const isMobile = test.info().project.name.includes("mobile");
+
     await page.goto("/businesses");
 
     await expect(page.locator("#pricing")).toBeVisible();
-    await expect(page.locator("#pricing")).toContainText("Ongoing AI Partnership");
-    await expect(page.locator("#pricing")).toContainText("Implementation Sprint");
-    await expect(page.locator("#pricing")).toContainText("Discovery Workshop");
-    await expect(page.locator("#pricing")).toContainText(
-      "100% refund if you aren't satisfied",
-    );
-    await expect(page.getByRole("link", { name: "Book a call" }).first()).toBeVisible();
+    await expect(page.locator("#pricing")).toContainText("Custom scope, custom pricing");
+    await expect(page.locator("#pricing")).toContainText("Step 1");
+    await expect(page.locator("#pricing")).toContainText("Step 2");
+    await expect(page.locator("#pricing")).toContainText("Step 3");
+    await expect(page.locator("#pricing")).toContainText("Contact for pricing");
+    await expect(page.locator("#pricing")).not.toContainText("$");
+    await expect(
+      page.getByRole("link", { name: "Contact for pricing" }).first(),
+    ).toBeVisible();
+    await expect(page.locator(".flip-label__secondary[aria-hidden='true']").first()).toBeVisible();
 
-    const tierTitles = await page
-      .locator("#pricing h3")
-      .allTextContents();
-    const ongoingIdx = tierTitles.indexOf("Ongoing AI Partnership");
-    const sprintIdx = tierTitles.indexOf("Implementation Sprint");
-    const discoveryIdx = tierTitles.indexOf("Discovery Workshop");
-    expect(ongoingIdx).toBeGreaterThanOrEqual(0);
-    expect(sprintIdx).toBeGreaterThanOrEqual(0);
-    expect(discoveryIdx).toBeGreaterThanOrEqual(0);
-    expect(ongoingIdx).toBeLessThan(sprintIdx);
-    expect(sprintIdx).toBeLessThan(discoveryIdx);
+    const menuButton = page.locator('button[aria-controls="nav-menu"]');
+    await menuButton.click();
+    const menu = page.getByRole("dialog", { name: "Zero-to-Agent" });
+    await expect(menu).toBeVisible();
+
+    if (isMobile) {
+      await expect(menu.getByRole("button", { name: "Pages" })).toBeVisible();
+      await expect(menu.getByRole("button", { name: "On this page" })).toBeVisible();
+      await expect(menu.getByRole("link", { name: "Who" })).toHaveCount(0);
+      await menu.getByRole("button", { name: "On this page" }).click();
+      await expect(menu.getByRole("link", { name: "Who" })).toBeVisible();
+      await expect(menu.getByRole("link", { name: "What" })).toBeVisible();
+      await expect(menu.getByRole("link", { name: "Pricing" })).toBeVisible();
+      await expect(menu.getByRole("link", { name: "Contact" })).toBeVisible();
+    } else {
+      await expect(menu.getByRole("link", { name: "Who" })).toBeVisible();
+      await expect(menu.getByRole("link", { name: "What" })).toBeVisible();
+      await expect(menu.getByRole("link", { name: "Pricing" })).toBeVisible();
+      await expect(menu.getByRole("link", { name: "Contact" })).toBeVisible();
+    }
   });
 });

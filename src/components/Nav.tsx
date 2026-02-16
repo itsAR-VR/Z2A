@@ -1,12 +1,20 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback, type KeyboardEvent as ReactKeyboardEvent } from "react";
+import {
+  useState,
+  useEffect,
+  useRef,
+  useLayoutEffect,
+  type KeyboardEvent as ReactKeyboardEvent,
+} from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import gsap from "gsap";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { trackEvent } from "@/lib/analytics";
 import { BUSINESS_CALENDLY_URL } from "@/lib/config";
+import { DURATION, EASE, STAGGER } from "@/lib/motion-tokens";
 import { Button } from "./Button";
 
 type NavAnchor = {
@@ -26,6 +34,8 @@ type PageConfig = {
   ctaEventSource: string;
   menuNote: string;
 };
+
+type MobileMenuView = "pages" | "anchors";
 
 const pageLinks: PageLink[] = [
   { href: "/", label: "Home" },
@@ -75,7 +85,7 @@ function getPageConfig(pathname: string): PageConfig {
       ctaLabel: "Book a call",
       ctaHref: BUSINESS_CALENDLY_URL || fallbackBusinessCta,
       ctaEventSource: "nav_businesses",
-      menuNote: "Managed deployment plus ongoing improvement.",
+      menuNote: "Custom-scoped implementation and post-launch optimization.",
     };
   }
 
@@ -110,57 +120,28 @@ export function Nav() {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuRendered, setMenuRendered] = useState(false);
+  const [mobileMenuView, setMobileMenuView] = useState<MobileMenuView>("pages");
   const [ctaRedirecting, setCtaRedirecting] = useState(false);
+
   const menuButtonRef = useRef<HTMLButtonElement | null>(null);
   const overlayRef = useRef<HTMLDivElement | null>(null);
+  const menuCanvasRef = useRef<HTMLDivElement | null>(null);
   const firstOverlayLinkRef = useRef<HTMLAnchorElement | null>(null);
   const prevMenuOpenRef = useRef(false);
-  const closeTimeoutRef = useRef<number | null>(null);
-  const openRafRef = useRef<number | null>(null);
+  const menuTimelineRef = useRef<gsap.core.Timeline | null>(null);
 
-  const openMenu = useCallback(() => {
-    if (openRafRef.current) {
-      window.cancelAnimationFrame(openRafRef.current);
-      openRafRef.current = null;
-    }
-    if (closeTimeoutRef.current) {
-      window.clearTimeout(closeTimeoutRef.current);
-      closeTimeoutRef.current = null;
-    }
+  const openMenu = () => {
     setMenuRendered(true);
-    if (reducedMotion) {
-      setMenuOpen(true);
-      return;
-    }
+    setMenuOpen(true);
+    setMobileMenuView("pages");
+  };
 
-    openRafRef.current = window.requestAnimationFrame(() => {
-      openRafRef.current = null;
-      setMenuOpen(true);
-    });
-  }, [reducedMotion]);
-
-  const closeMenu = useCallback(() => {
-    if (openRafRef.current) {
-      window.cancelAnimationFrame(openRafRef.current);
-      openRafRef.current = null;
-    }
-    if (closeTimeoutRef.current) {
-      window.clearTimeout(closeTimeoutRef.current);
-      closeTimeoutRef.current = null;
-    }
-
+  const closeMenu = () => {
     setMenuOpen(false);
-
     if (reducedMotion) {
       setMenuRendered(false);
-      return;
     }
-
-    closeTimeoutRef.current = window.setTimeout(() => {
-      closeTimeoutRef.current = null;
-      setMenuRendered(false);
-    }, 420);
-  }, [reducedMotion]);
+  };
 
   const onCtaClick = () => {
     if (ctaRedirecting) return;
@@ -169,6 +150,67 @@ export function Nav() {
       setCtaRedirecting(true);
     }
   };
+
+  useLayoutEffect(() => {
+    if (!menuRendered) return;
+
+    const overlay = overlayRef.current;
+    const canvas = menuCanvasRef.current;
+    if (!overlay || !canvas) return;
+
+    menuTimelineRef.current?.kill();
+
+    const items = canvas.querySelectorAll<HTMLElement>("[data-menu-item]");
+
+    if (reducedMotion) {
+      gsap.set([overlay, canvas, items], { clearProps: "all" });
+      return;
+    }
+
+    if (menuOpen) {
+      gsap.set(overlay, { opacity: 0 });
+      gsap.set(canvas, { opacity: 0, y: 16, scale: 0.988 });
+      gsap.set(items, { opacity: 0, y: 12 });
+
+      menuTimelineRef.current = gsap
+        .timeline({ defaults: { ease: EASE.expo } })
+        .to(overlay, { opacity: 1, duration: DURATION.default }, 0)
+        .to(canvas, { opacity: 1, y: 0, scale: 1, duration: DURATION.slow }, 0.03)
+        .to(
+          items,
+          {
+            opacity: 1,
+            y: 0,
+            duration: DURATION.default,
+            stagger: STAGGER.step,
+            clearProps: "transform,opacity",
+          },
+          0.14,
+        );
+    } else {
+      menuTimelineRef.current = gsap.timeline({
+        defaults: { ease: EASE.quart },
+        onComplete: () => setMenuRendered(false),
+      });
+      menuTimelineRef.current
+        .to(
+          items,
+          {
+            opacity: 0,
+            y: 8,
+            duration: DURATION.fast,
+            stagger: { each: 0.03, from: "end" },
+          },
+          0,
+        )
+        .to(canvas, { opacity: 0, y: 10, scale: 0.994, duration: DURATION.fast }, 0.05)
+        .to(overlay, { opacity: 0, duration: DURATION.fast }, 0.08);
+    }
+
+    return () => {
+      menuTimelineRef.current?.kill();
+    };
+  }, [menuOpen, menuRendered, reducedMotion]);
 
   useEffect(() => {
     const wasOpen = prevMenuOpenRef.current;
@@ -201,22 +243,20 @@ export function Nav() {
   useEffect(() => {
     if (!menuOpen) return;
     function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") closeMenu();
+      if (e.key === "Escape") {
+        setMenuOpen(false);
+        if (reducedMotion) {
+          setMenuRendered(false);
+        }
+      }
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [menuOpen, closeMenu]);
+  }, [menuOpen, reducedMotion]);
 
   useEffect(() => {
     return () => {
-      if (openRafRef.current) {
-        window.cancelAnimationFrame(openRafRef.current);
-        openRafRef.current = null;
-      }
-      if (closeTimeoutRef.current) {
-        window.clearTimeout(closeTimeoutRef.current);
-        closeTimeoutRef.current = null;
-      }
+      menuTimelineRef.current?.kill();
     };
   }, []);
 
@@ -260,7 +300,7 @@ export function Nav() {
             >
               <span className="flip-label" data-flip-disabled="false">
                 <span className="flip-label__primary">Zero-to-Agent</span>
-                <span className="flip-label__secondary text-[var(--color-accent)]">
+                <span aria-hidden="true" className="flip-label__secondary text-[var(--color-accent)]">
                   Zero-to-Agent
                 </span>
               </span>
@@ -274,15 +314,15 @@ export function Nav() {
                     key={anchor.id}
                     href={`#${anchor.id}`}
                     aria-current={isActive ? "page" : undefined}
-                    className={`group rounded-full px-3.5 py-2 text-[13px] font-semibold transition-[background-color,transform] duration-300 [transition-timing-function:var(--ease-expo)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] ${
+                    className={`group tilt-hover rounded-full px-3.5 py-2 text-[13px] font-semibold transition-[background-color,color] duration-300 [transition-timing-function:var(--ease-expo)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] ${
                       isActive
                         ? "bg-[color-mix(in_oklch,var(--color-accent)_12%,var(--color-surface))] text-[var(--color-accent)]"
-                        : "text-[var(--color-text-muted)] hover:-translate-y-0.5 hover:bg-[color-mix(in_oklch,var(--color-accent)_8%,var(--color-surface))]"
+                        : "text-[var(--color-text-muted)] hover:bg-[color-mix(in_oklch,var(--color-accent)_8%,var(--color-surface))]"
                     }`}
                   >
                     <span className="flip-label" data-flip-disabled={isActive ? "true" : "false"}>
                       <span className="flip-label__primary">{anchor.label}</span>
-                      <span className="flip-label__secondary text-[var(--color-text)]">
+                      <span aria-hidden="true" className="flip-label__secondary text-[var(--color-text)]">
                         {anchor.label}
                       </span>
                     </span>
@@ -313,14 +353,28 @@ export function Nav() {
             >
               <span className="flip-label" data-flip-disabled={menuOpen ? "true" : "false"}>
                 <span className="flip-label__primary">Menu</span>
-                <span className="flip-label__secondary">Menu</span>
+                <span aria-hidden="true" className="flip-label__secondary">
+                  Menu
+                </span>
               </span>
               {menuOpen ? (
-                <svg className="h-4 w-4 transition-transform duration-300 group-hover:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <svg
+                  className="h-4 w-4 transition-transform duration-300 group-hover:rotate-90"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               ) : (
-                <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <svg
+                  className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               )}
@@ -337,133 +391,171 @@ export function Nav() {
           aria-modal="true"
           aria-labelledby="nav-menu-title"
           aria-hidden={!menuOpen}
-          className={`fixed inset-0 z-[60] bg-[color-mix(in_oklch,var(--color-bg)_82%,black)] backdrop-blur-sm ${
-            reducedMotion
-              ? ""
-              : "transition-opacity [transition-duration:var(--duration-slow)] [transition-timing-function:var(--ease-expo)]"
-          } ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+          className={`fixed inset-0 z-[60] bg-[color-mix(in_oklch,var(--color-bg)_84%,black)] backdrop-blur-sm ${
+            menuOpen ? "pointer-events-auto" : "pointer-events-none"
+          }`}
           onKeyDown={trapFocus}
         >
-          <div className="container-content pt-24 pb-10">
+          <div
+            ref={menuCanvasRef}
+            className="relative flex h-full w-full flex-col overflow-hidden bg-[color-mix(in_oklch,var(--color-surface)_94%,var(--color-bg)_6%)]"
+          >
             <div
-              className={`rounded-[var(--radius-xl)] border border-[color-mix(in_oklch,var(--color-border)_70%,var(--color-accent)_9%)] bg-[color-mix(in_oklch,var(--color-surface)_86%,var(--color-bg)_14%)] p-6 shadow-[var(--shadow-lg)] ${
-                reducedMotion
-                  ? ""
-                  : "transition-[transform,opacity] [transition-duration:var(--duration-slow)] [transition-timing-function:var(--ease-expo)]"
-              } ${menuOpen ? "opacity-100 translate-y-0 scale-100" : "opacity-0 -translate-y-6 scale-[0.985]"}`}
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_420px_at_8%_0%,color-mix(in_oklch,var(--color-accent)_12%,transparent),transparent_60%),radial-gradient(920px_420px_at_96%_24%,color-mix(in_oklch,var(--color-accent-2)_12%,transparent),transparent_64%)]"
+            />
+
+            <header
+              data-menu-item
+              className="relative border-b border-[color-mix(in_oklch,var(--color-border)_78%,var(--color-accent)_8%)] px-4 py-4 md:px-10 md:py-6"
             >
-              <div className="relative mb-6 flex items-center justify-end">
-                <p
-                  id="nav-menu-title"
-                  className="absolute left-1/2 -translate-x-1/2 font-heading text-[13px] font-semibold tracking-[0.14em] uppercase text-[var(--color-text-faint)]"
-                >
-                  Navigate
-                </p>
+              <div className="mx-auto flex w-full max-w-[1320px] items-center justify-between gap-3">
+                <div>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--color-text-faint)]">
+                    Navigate
+                  </p>
+                  <p id="nav-menu-title" className="mt-1 font-heading text-2xl font-semibold tracking-tight text-[var(--color-text)]">
+                    Zero-to-Agent
+                  </p>
+                </div>
                 <button
                   type="button"
-                  className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-[13px] font-medium text-[var(--color-text)] shadow-[var(--shadow-sm)] transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface)]"
+                  className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[var(--color-border-strong)] bg-[var(--color-surface)] px-4 text-sm font-semibold text-[var(--color-text)] shadow-[var(--shadow-sm)] transition-[transform,box-shadow,border-color] duration-200 [transition-timing-function:var(--ease-quart)] hover:-translate-y-0.5 hover:border-[color-mix(in_oklch,var(--color-accent)_42%,var(--color-border-strong))] hover:shadow-[var(--shadow-md)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
                   onClick={closeMenu}
                 >
                   Close
                 </button>
               </div>
+            </header>
 
-              <section>
-                <p className="mb-3 font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
-                  Pages
-                </p>
-                <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
-                  {pageLinks.map((link, idx) => {
-                    const isActive = isCurrentPage(pathname, link.href);
-                    return (
-                      <Link
-                        key={link.href}
-                        ref={idx === 0 ? firstOverlayLinkRef : undefined}
-                        href={link.href}
-                        aria-current={isActive ? "page" : undefined}
-                        className={`group rounded-[var(--radius-md)] border px-4 py-4 font-heading text-base font-semibold transition-[transform,background-color,border-color] duration-300 [transition-timing-function:var(--ease-expo)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface)] ${
-                          isActive
-                            ? "border-[color-mix(in_oklch,var(--color-accent)_40%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-accent)_12%,var(--color-surface))] text-[var(--color-accent)]"
-                            : "border-[var(--color-border)] text-[var(--color-text)] hover:-translate-y-1 hover:border-[color-mix(in_oklch,var(--color-accent)_40%,var(--color-border))] hover:bg-[color-mix(in_oklch,var(--color-accent)_8%,var(--color-surface))]"
-                        }`}
-                        onClick={closeMenu}
-                      >
-                        <span className="flex items-center justify-between gap-3">
-                          <span className="flip-label" data-flip-disabled={isActive ? "true" : "false"}>
-                            <span className="flip-label__primary">{link.label}</span>
-                            <span className="flip-label__secondary">{link.label}</span>
-                          </span>
-                          <svg
-                            className={`h-4 w-4 transition-transform duration-300 ${
-                              isActive ? "text-[var(--color-accent)]" : "group-hover:translate-x-0.5"
-                            }`}
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth={2}
-                          >
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                          </svg>
-                        </span>
-                      </Link>
-                    );
-                  })}
-                </div>
-              </section>
-
-              <section className="mt-6">
-                <p className="mb-3 font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
-                  On this page
-                </p>
-                {pageConfig.anchors.length > 0 ? (
-                  <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                    {pageConfig.anchors.map((anchor) => {
-                      const isActive = activeId === anchor.id;
-                      return (
-                        <a
-                          key={anchor.id}
-                          href={`#${anchor.id}`}
-                          aria-current={isActive ? "page" : undefined}
-                          className={`group rounded-[var(--radius-md)] border px-4 py-4 font-heading text-base font-semibold transition-[transform,background-color,border-color] duration-300 [transition-timing-function:var(--ease-expo)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-surface)] ${
-                            isActive
-                              ? "border-[color-mix(in_oklch,var(--color-accent)_40%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-accent)_12%,var(--color-surface))] text-[var(--color-accent)]"
-                              : "border-[var(--color-border)] text-[var(--color-text)] hover:-translate-y-1 hover:border-[color-mix(in_oklch,var(--color-accent)_40%,var(--color-border))] hover:bg-[color-mix(in_oklch,var(--color-accent)_8%,var(--color-surface))]"
-                          }`}
-                          onClick={closeMenu}
-                        >
-                          <span className="flip-label" data-flip-disabled={isActive ? "true" : "false"}>
-                            <span className="flip-label__primary">{anchor.label}</span>
-                            <span className="flip-label__secondary">{anchor.label}</span>
-                          </span>
-                        </a>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <p className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 text-sm text-[var(--color-text-muted)]">
-                    This page has no section anchors.
-                  </p>
-                )}
-              </section>
-
-              <div className="mt-6 flex flex-col gap-3 border-t border-[var(--color-border)] pt-6">
-                <Button
-                  href={pageConfig.ctaHref}
-                  onClick={() => {
-                    onCtaClick();
-                    closeMenu();
-                  }}
-                  disabled={ctaRedirecting}
-                  className="w-full justify-center"
+            <div className="relative flex-1 overflow-y-auto px-4 pb-6 pt-4 md:px-10 md:pb-8 md:pt-6">
+              <div className="mx-auto w-full max-w-[1320px]">
+                <div
+                  data-menu-item
+                  className="mb-6 grid grid-cols-2 gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] p-1 md:hidden"
                 >
-                  {ctaRedirecting ? "Redirecting..." : pageConfig.ctaLabel}
-                  {!ctaRedirecting && (
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  )}
-                </Button>
-                <p className="text-sm text-[var(--color-text-muted)]">{pageConfig.menuNote}</p>
+                  <button
+                    type="button"
+                    aria-pressed={mobileMenuView === "pages"}
+                    className={`min-h-11 rounded-full px-4 text-sm font-semibold transition-[background-color,color] duration-200 ${
+                      mobileMenuView === "pages"
+                        ? "bg-[color-mix(in_oklch,var(--color-accent)_14%,var(--color-surface))] text-[var(--color-accent)]"
+                        : "text-[var(--color-text-muted)]"
+                    }`}
+                    onClick={() => setMobileMenuView("pages")}
+                  >
+                    Pages
+                  </button>
+                  <button
+                    type="button"
+                    aria-pressed={mobileMenuView === "anchors"}
+                    className={`min-h-11 rounded-full px-4 text-sm font-semibold transition-[background-color,color] duration-200 ${
+                      mobileMenuView === "anchors"
+                        ? "bg-[color-mix(in_oklch,var(--color-accent)_14%,var(--color-surface))] text-[var(--color-accent)]"
+                        : "text-[var(--color-text-muted)]"
+                    }`}
+                    onClick={() => setMobileMenuView("anchors")}
+                  >
+                    On this page
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 gap-7 md:gap-8 lg:grid-cols-2 lg:gap-10">
+                  <section
+                    data-menu-item
+                    className={`${mobileMenuView === "pages" ? "block" : "hidden"} md:block`}
+                    aria-label="Pages"
+                  >
+                    <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--color-text-faint)]">
+                      Pages
+                    </p>
+                    <div className="mt-3 grid gap-3">
+                      {pageLinks.map((link, index) => {
+                        const isActive = isCurrentPage(pathname, link.href);
+                        return (
+                          <Link
+                            key={link.href}
+                            ref={index === 0 ? firstOverlayLinkRef : undefined}
+                            href={link.href}
+                            aria-current={isActive ? "page" : undefined}
+                            onClick={closeMenu}
+                            className={`group tilt-hover rounded-[var(--radius-lg)] border px-4 py-4 text-lg font-semibold transition-[background-color,color,border-color,box-shadow] duration-300 [transition-timing-function:var(--ease-expo)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] ${
+                              isActive
+                                ? "border-[color-mix(in_oklch,var(--color-accent)_48%,var(--color-border-strong))] bg-[color-mix(in_oklch,var(--color-accent)_14%,var(--color-surface))] text-[var(--color-accent)] shadow-[var(--shadow-sm)]"
+                                : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] hover:border-[color-mix(in_oklch,var(--color-accent)_36%,var(--color-border-strong))] hover:shadow-[var(--shadow-md)]"
+                            }`}
+                          >
+                            <span className="flip-label" data-flip-disabled={isActive ? "true" : "false"}>
+                              <span className="flip-label__primary">{link.label}</span>
+                              <span aria-hidden="true" className="flip-label__secondary">
+                                {link.label}
+                              </span>
+                            </span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </section>
+
+                  <section
+                    data-menu-item
+                    className={`${mobileMenuView === "anchors" ? "block" : "hidden"} md:block`}
+                    aria-label="On this page"
+                  >
+                    <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--color-text-faint)]">
+                      On this page
+                    </p>
+                    {pageConfig.anchors.length > 0 ? (
+                      <div className="mt-3 grid gap-3">
+                        {pageConfig.anchors.map((anchor) => {
+                          const isActive = activeId === anchor.id;
+                          return (
+                            <a
+                              key={anchor.id}
+                              href={`#${anchor.id}`}
+                              aria-current={isActive ? "page" : undefined}
+                              onClick={closeMenu}
+                              className={`group tilt-hover rounded-[var(--radius-lg)] border px-4 py-4 text-lg font-semibold transition-[background-color,color,border-color,box-shadow] duration-300 [transition-timing-function:var(--ease-expo)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] ${
+                                isActive
+                                  ? "border-[color-mix(in_oklch,var(--color-accent)_44%,var(--color-border-strong))] bg-[color-mix(in_oklch,var(--color-accent)_14%,var(--color-surface))] text-[var(--color-accent)] shadow-[var(--shadow-sm)]"
+                                  : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] hover:border-[color-mix(in_oklch,var(--color-accent)_32%,var(--color-border-strong))] hover:shadow-[var(--shadow-md)]"
+                              }`}
+                            >
+                              <span className="flip-label" data-flip-disabled={isActive ? "true" : "false"}>
+                                <span className="flip-label__primary">{anchor.label}</span>
+                                <span aria-hidden="true" className="flip-label__secondary">
+                                  {anchor.label}
+                                </span>
+                              </span>
+                            </a>
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <p className="mt-3 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-4 text-sm text-[var(--color-text-muted)]">
+                        No section links on this page.
+                      </p>
+                    )}
+                  </section>
+                </div>
+
+                <div
+                  data-menu-item
+                  className="mt-8 border-t border-[color-mix(in_oklch,var(--color-border)_78%,var(--color-accent)_8%)] pt-6"
+                >
+                  <Button
+                    href={pageConfig.ctaHref}
+                    className="w-full justify-center"
+                    disabled={ctaRedirecting}
+                    onClick={() => {
+                      onCtaClick();
+                      closeMenu();
+                    }}
+                  >
+                    {ctaRedirecting ? "Redirecting..." : pageConfig.ctaLabel}
+                  </Button>
+                  <p className="mt-3 text-sm text-[var(--color-text-faint)]">{pageConfig.menuNote}</p>
+                </div>
               </div>
             </div>
           </div>

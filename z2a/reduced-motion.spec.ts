@@ -52,7 +52,7 @@ test.describe("Reduced Motion", () => {
     const menuButton = page.getByRole("button", { name: "Open menu" });
     await menuButton.click();
 
-    const menu = page.getByRole("dialog", { name: "Navigate" });
+    const menu = page.getByRole("dialog", { name: "Zero-to-Agent" });
     await expect(menu).toBeVisible();
 
     await expect(menu.getByRole("link", { name: "Home" })).toBeFocused();
@@ -60,7 +60,7 @@ test.describe("Reduced Motion", () => {
     await expect(menu).not.toHaveClass(/transition-opacity/);
 
     await page.keyboard.press("Escape");
-    await expect(page.getByRole("dialog", { name: "Navigate" })).toHaveCount(0);
+    await expect(page.getByRole("dialog", { name: "Zero-to-Agent" })).toHaveCount(0);
     await expect(page.locator("body")).not.toHaveCSS("overflow", "hidden");
     await expect(menuButton).toBeFocused();
   });

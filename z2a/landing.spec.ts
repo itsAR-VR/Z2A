@@ -75,13 +75,13 @@ test.describe("Individuals Landing", () => {
     const menuButton = page.locator('button[aria-controls="nav-menu"]');
     await menuButton.click();
 
-    const menu = page.getByRole("dialog", { name: "Navigate" });
+    const menu = page.getByRole("dialog", { name: "Zero-to-Agent" });
     await expect(menu).toBeVisible();
     await expect(menu.getByRole("link", { name: "Home" })).toBeFocused();
     await expect(page.locator("body")).toHaveCSS("overflow", "hidden");
 
     await page.keyboard.press("Escape");
-    await expect(page.getByRole("dialog", { name: "Navigate" })).toHaveCount(0);
+    await expect(page.getByRole("dialog", { name: "Zero-to-Agent" })).toHaveCount(0);
     await expect(page.locator("body")).not.toHaveCSS("overflow", "hidden");
     await expect(menuButton).toBeFocused();
   });
