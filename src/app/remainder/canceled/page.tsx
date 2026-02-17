@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function RemainderCanceledPage() {
   return (
-    <div className="min-h-screen">
+    <main className="min-h-screen">
       <div className="container-content pt-28 pb-20">
         <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
           Payment
@@ -24,7 +24,7 @@ export default function RemainderCanceledPage() {
           </Link>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 

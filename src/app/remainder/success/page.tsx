@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function RemainderSuccessPage() {
   return (
-    <div className="min-h-screen">
+    <main className="min-h-screen">
       <div className="container-content pt-28 pb-20">
         <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
           Payment
@@ -27,7 +27,7 @@ export default function RemainderSuccessPage() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 

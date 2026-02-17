@@ -11,7 +11,7 @@ export default function ApplySuccessPage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <main className="min-h-screen flex items-center justify-center">
       <div className="container-content max-w-lg text-center py-20">
         <div className="mx-auto mb-6 w-16 h-16 rounded-full bg-[color-mix(in_oklch,var(--color-accent)_12%,var(--color-surface))] border border-[color-mix(in_oklch,var(--color-accent)_35%,var(--color-border))] shadow-[var(--shadow-sm)] flex items-center justify-center">
           <svg
@@ -67,6 +67,6 @@ export default function ApplySuccessPage() {
           </Link>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

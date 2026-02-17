@@ -140,9 +140,62 @@ body {
   padding-inline: clamp(16px, 3vw, 28px);
 }
 
+.frosted-layer {
+  position: relative;
+  isolation: isolate;
+  background-color: color-mix(in oklch, var(--color-surface) 78%, transparent);
+  box-shadow:
+    0 16px 40px color-mix(in oklch, black 8%, transparent),
+    inset 0 1px 0 color-mix(in oklch, white 50%, transparent);
+  border-color: color-mix(in oklch, var(--color-border) 76%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.frosted-layer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(
+    130% 100% at 20% 0%,
+    color-mix(in oklch, white 28%, transparent),
+    transparent
+  );
+  opacity: 0.4;
+}
+
 /* Anchor navigation should land below the sticky nav. */
 section[id] {
   scroll-margin-top: 96px;
+}
+
+main :where([class*="var(--color-surface)"]) {
+  position: relative;
+  isolation: isolate;
+  background-color: color-mix(in oklch, var(--color-surface) 76%, transparent);
+  overflow: hidden;
+  box-shadow:
+    0 16px 40px color-mix(in oklch, black 8%, transparent),
+    inset 0 1px 0 color-mix(in oklch, white 42%, transparent);
+  border-color: color-mix(in oklch, var(--color-border) 74%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+main :where([class*="var(--color-surface)"])::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(
+    130% 100% at 15% 0%,
+    color-mix(in oklch, white 20%, transparent) 0%,
+    transparent 55%
+  );
+  opacity: 0.4;
 }
 
 /* ─── Scrollbar Styling ─── */

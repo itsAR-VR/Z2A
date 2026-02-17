@@ -222,7 +222,7 @@ function ApplyForm() {
   }
 
   return (
-    <div className="min-h-screen">
+    <main className="min-h-screen">
       <div className="container-content pt-28 pb-20">
         <div className="flex items-center justify-between gap-4">
           <Link
@@ -608,7 +608,7 @@ function ApplyForm() {
           </aside>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 
@@ -673,9 +673,9 @@ export default function ApplyPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[var(--color-bg-900)] flex items-center justify-center">
+        <main className="min-h-screen bg-[var(--color-bg-900)] flex items-center justify-center">
           <p className="text-[var(--color-text-500)]">Loading...</p>
-        </div>
+        </main>
       }
     >
       <ApplyForm />
