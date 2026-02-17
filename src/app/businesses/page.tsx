@@ -292,6 +292,20 @@ export default function BusinessesPage() {
               We do not publish fixed pricing. Scope depends on workflow complexity, system integrations, governance
               requirements, and rollout speed.
             </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {[
+                "No rip-and-replace platform",
+                "Operator training included",
+                "Discovery before commercial scope",
+              ].map((item) => (
+                <span
+                  key={item}
+                  className="inline-flex items-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 text-xs text-[var(--color-text-muted)]"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
           </RevealOnScroll>
 
           <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
