@@ -391,6 +391,10 @@ export default function BusinessesPage() {
                 a: "Optional managed improvement cadence: tune prompts, expand workflows, and train new operators over time.",
               },
               {
+                q: "How quickly will we see a first result?",
+                a: "Most teams see a first production workflow after discovery + initial setup, then expand from that base in structured cycles.",
+              },
+              {
                 q: "Do you build custom software/tools?",
                 a: "No by default. We set up best-in-class tools inside your stack and teach your team to run them. If custom software is the right next step, we scope it separately.",
               },
