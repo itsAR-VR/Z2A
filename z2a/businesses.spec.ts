@@ -13,6 +13,10 @@ test.describe("Businesses", () => {
     await expect(page.locator("#pricing")).toContainText("Step 1");
     await expect(page.locator("#pricing")).toContainText("Step 2");
     await expect(page.locator("#pricing")).toContainText("Step 3");
+    await expect(page.locator("#pricing")).toContainText(/30-minute|30 min/i);
+    await expect(page.locator("#pricing")).toContainText("Discovery");
+    await expect(page.locator("#pricing")).toContainText("AI Enablement Workshop");
+    await expect(page.locator("#pricing")).toContainText("Done-for-you setup + enablement");
     await expect(page.locator("#pricing")).toContainText("Contact for pricing");
     await expect(page.locator("#pricing")).not.toContainText("$");
     await expect(

@@ -81,6 +81,27 @@ export function Pricing() {
         </p>
       </RevealOnScroll>
 
+      <RevealOnScroll delay={130}>
+        <div className="mx-auto mb-10 flex max-w-3xl flex-wrap justify-center gap-2">
+          <a
+            href="https://www.pwc.com/gx/en/issues/data-and-analytics/publications/artificial-intelligence-study.html"
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+          >
+            56% pay premium for AI-capable roles
+          </a>
+          <a
+            href="https://www.infoworld.com/article/4111829/ais-trust-tax-for-developers.html"
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+          >
+            Karpathy: 30-day lag already creates a deprecated worldview
+          </a>
+        </div>
+      </RevealOnScroll>
+
       <div className="max-w-4xl mx-auto">
         <RevealOnScroll className="flex justify-center">
           <Card className="h-full relative max-w-xl">

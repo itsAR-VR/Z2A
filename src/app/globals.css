@@ -90,9 +90,14 @@ html {
 body {
   font-family: var(--font-body);
   background:
-    radial-gradient(1100px 700px at 10% -20%, color-mix(in oklch, var(--color-accent) 14%, transparent) 0%, transparent 60%),
-    radial-gradient(900px 600px at 92% 12%, color-mix(in oklch, var(--color-accent-2) 12%, transparent) 0%, transparent 55%),
-    linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-2) 55%, var(--color-bg) 100%);
+    radial-gradient(960px 580px at 12% -22%, color-mix(in oklch, var(--color-accent) 8%, transparent) 0%, transparent 62%),
+    radial-gradient(760px 520px at 92% 8%, color-mix(in oklch, var(--color-accent-2) 6%, transparent) 0%, transparent 58%),
+    linear-gradient(
+      180deg,
+      var(--color-bg) 0%,
+      color-mix(in oklch, var(--color-bg-2) 86%, var(--color-bg) 14%) 56%,
+      var(--color-bg) 100%
+    );
   color: var(--color-text);
   line-height: 1.6;
   overflow-x: clip;

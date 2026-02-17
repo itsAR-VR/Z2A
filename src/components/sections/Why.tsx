@@ -44,6 +44,22 @@ export function Why() {
               loop you can use on Monday.
             </p>
           </RevealOnScroll>
+
+          <RevealOnScroll delay={130}>
+            <blockquote className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-surface)_84%,var(--color-accent)_8%)] px-4 py-3 text-sm leading-relaxed text-[var(--color-text)]">
+              “AI won&apos;t replace humans. But humans who use AI will replace those who don&apos;t.”
+            </blockquote>
+          </RevealOnScroll>
+          <RevealOnScroll delay={160}>
+            <a
+              href="https://x.com/sama/status/1751733984631882743"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-2 inline-flex text-xs text-[var(--color-accent)] hover:underline"
+            >
+              Sam Altman source
+            </a>
+          </RevealOnScroll>
         </div>
 
         <div className="md:col-span-7">

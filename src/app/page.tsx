@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { Nav } from "@/components/Nav";
 import { Button } from "@/components/Button";
@@ -7,7 +6,6 @@ import { LenisProvider } from "@/components/motion/LenisProvider";
 import { StageTimeline } from "@/components/motion/StageTimeline";
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
-import { ProofEvidence } from "@/components/sections/ProofEvidence";
 
 export const metadata: Metadata = {
   title: "Zero-to-Agent | Agentic Workflows for Individuals and Businesses",
@@ -25,20 +23,20 @@ const pathwayCards = [
   {
     id: "individuals",
     eyebrow: "For individuals",
-    title: "Build and ship your own workflow in a weekend.",
+    title: "Ship your first production workflow in a weekend.",
     description:
-      "Hands-on training for builders, PMs, and operators who want to leave with a working agent and a deployment plan.",
-    bullets: ["In-person cohort format", "Clear sprint structure", "Working output by the end"],
+      "Hands-on training for builders, PMs, and operators who want to leave with a working workflow and rollout plan.",
+    bullets: ["In-person cohort format", "Tight sprint structure", "Working output by the end"],
     href: "/individuals",
     cta: "Explore Individuals",
   },
   {
     id: "businesses",
     eyebrow: "For businesses",
-    title: "Deploy agentic workflows that keep improving after launch.",
+    title: "Deploy AI workflows without adding another platform.",
     description:
-      "Managed implementation for teams that need outcomes across operations, sales, support, and finance.",
-    bullets: ["Discovery to deployment", "Runs in your existing tools", "Ongoing optimization and governance"],
+      "A practical service model for teams that want setup, training, and adoption inside existing tools.",
+    bullets: ["Free 30-minute discovery", "3-hour in-person enablement", "Done-for-you setup in your stack"],
     href: "/businesses",
     cta: "Explore Businesses",
   },
@@ -71,51 +69,6 @@ const principles = [
   },
 ];
 
-const homeProofStats = [
-  {
-    value: "56%",
-    label: "AI skill premium",
-    detail: "Workers with AI skills earned materially higher pay versus the same role without that capability.",
-    sourceHref:
-      "https://www.pwc.com/gx/en/issues/data-and-analytics/publications/artificial-intelligence-study.html",
-  },
-  {
-    value: "3x",
-    label: "Revenue growth per employee",
-    detail: "Industries that adopted AI faster showed stronger per-employee growth trajectories.",
-    sourceHref: "https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-jobs-barometer.html",
-  },
-  {
-    value: "90%",
-    label: "Missed AI training",
-    detail: "A large share of the workforce still has not completed meaningful AI training.",
-    sourceHref:
-      "https://www.cornerstoneondemand.com/company/news-room/press-releases/hidden-ai-lack-of-training-keeps-ai-use-in-the-shadows-despite-ai-usage-encouragement-from-employers/",
-  },
-];
-
-const homeProofQuotes = [
-  {
-    quote:
-      "AI won't replace humans. But humans who use AI will replace those who don't.",
-    author: "Sam Altman",
-    role: "CEO and Co-Founder, OpenAI",
-    sourceHref: "https://x.com/sama/status/1751733984631882743",
-  },
-  {
-    quote: "The era of humans writing code is over.",
-    author: "Ryan Dahl",
-    role: "Creator of Node.js",
-    sourceHref: "https://x.com/rough__sea/status/2013280952370573666",
-  },
-  {
-    quote: "People who aren't keeping up even over the last 30 days already have a deprecated worldview on this topic.",
-    author: "Andrej Karpathy",
-    role: "Co-Founder, OpenAI",
-    sourceHref: "https://www.infoworld.com/article/4111829/ais-trust-tax-for-developers.html",
-  },
-];
-
 export default function HomePage() {
   return (
     <LenisProvider>
@@ -124,19 +77,13 @@ export default function HomePage() {
         <StageTimeline rootId="top" />
         <section id="top" className="relative overflow-hidden pt-32 pb-18 md:pt-44 md:pb-24">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-            <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_4%_16%,color-mix(in_oklch,var(--color-accent)_12%,transparent)_0%,transparent_58%),radial-gradient(90%_78%_at_96%_8%,color-mix(in_oklch,var(--color-accent-2)_10%,transparent)_0%,transparent_62%)]" />
-            <div className="absolute -top-28 -left-16 h-[460px] w-[620px] rounded-full bg-[color-mix(in_oklch,var(--color-accent)_14%,transparent)] blur-[110px] opacity-72" />
-            <div className="absolute top-[20%] right-[-10%] h-[420px] w-[420px] rounded-full bg-[color-mix(in_oklch,var(--color-accent-2)_14%,transparent)] blur-[120px] opacity-68" />
-            <div className="absolute inset-x-0 top-[18%] h-[420px] bg-[linear-gradient(180deg,color-mix(in_oklch,var(--color-surface)_82%,transparent)_0%,color-mix(in_oklch,var(--color-bg)_96%,transparent)_100%)] blur-[1px]" />
+            <div className="absolute -top-24 left-1/2 h-[420px] w-[700px] -translate-x-1/2 rounded-full bg-[color-mix(in_oklch,var(--color-accent)_8%,var(--color-bg))] opacity-40 blur-2xl" />
+            <div className="absolute top-20 right-[-10%] h-[280px] w-[280px] rounded-full bg-[color-mix(in_oklch,var(--color-accent-2)_6%,var(--color-bg))] opacity-38 blur-2xl" />
           </div>
 
           <div className="container-content relative z-10">
-            <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-14">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-12">
               <div className="relative md:col-span-7">
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -left-20 top-[-8%] -z-10 h-[520px] w-[620px] rounded-full bg-[color-mix(in_oklch,var(--color-surface)_92%,var(--color-accent)_8%)] blur-[78px]"
-                />
                 <p
                   data-stage="1"
                   className="stage-enter inline-flex items-center gap-2 rounded-full border border-[color-mix(in_oklch,var(--color-accent)_34%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-accent)_10%,var(--color-surface))] px-3 py-1 font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-accent)]"
@@ -146,16 +93,16 @@ export default function HomePage() {
                 </p>
                 <h1
                   data-stage="2"
-                  className="stage-enter mt-5 font-heading text-[clamp(46px,6vw,86px)] font-bold leading-[0.94] tracking-tight text-[var(--color-text)]"
+                  className="stage-enter mt-5 max-w-[14ch] font-heading text-[clamp(44px,5.8vw,78px)] font-bold leading-[0.95] tracking-tight text-[var(--color-text)] text-balance"
                 >
                   AI that actually ships.
-                  <span className="block text-[color-mix(in_oklch,var(--color-text)_84%,var(--color-accent)_16%)]">
+                  <span className="block text-[var(--color-text)]">
                     From first workflow to operating system.
                   </span>
                 </h1>
                 <p
                   data-stage="3"
-                  className="stage-enter mt-6 max-w-[65ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-lg"
+                  className="stage-enter mt-6 max-w-[58ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-lg text-pretty"
                 >
                   We help people and teams move from scattered experiments to production workflows with clear scope,
                   plain-language implementation, and measurable output.
@@ -169,35 +116,10 @@ export default function HomePage() {
                 <p data-stage="5" className="stage-enter mt-4 text-sm text-[var(--color-text-faint)]">
                   Two paths. One standard: practical outcomes over theory.
                 </p>
-
-                <div
-                  data-stage="6"
-                  className="stage-enter mt-8 rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-surface)_90%,transparent)] p-5 shadow-[var(--shadow-md)] backdrop-blur-sm"
-                >
-                  <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
-                    Signature sequence
-                  </p>
-                  <div className="mt-4 signature-rail">
-                    <div className="signature-rail__track" />
-                    <span className="signature-rail__node signature-rail__node--1" />
-                    <span className="signature-rail__node signature-rail__node--2" />
-                    <span className="signature-rail__node signature-rail__node--3" />
-                    <span className="signature-rail__node signature-rail__node--4" />
-                    <span className="signature-rail__node signature-rail__node--5" />
-                    <span className="signature-rail__runner" />
-                  </div>
-                  <div className="mt-3 grid grid-cols-5 text-[11px] uppercase tracking-[0.12em] text-[var(--color-text-faint)]">
-                    <span>Scope</span>
-                    <span className="text-center">Build</span>
-                    <span className="text-center">Deploy</span>
-                    <span className="text-center">Measure</span>
-                    <span className="text-right">Scale</span>
-                  </div>
-                </div>
               </div>
 
-              <div data-stage="7" className="stage-enter md:col-span-5">
-                <div className="rounded-[var(--radius-xl)] border border-[color-mix(in_oklch,var(--color-border)_74%,var(--color-accent)_16%)] bg-[color-mix(in_oklch,var(--color-surface)_86%,transparent)] p-6 shadow-[var(--shadow-lg)] backdrop-blur-sm">
+              <div data-stage="6" className="stage-enter md:col-span-5">
+                <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-surface)_92%,var(--color-bg)_8%)] p-6 shadow-[var(--shadow-sm)]">
                   <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
                     What this means in practice
                   </p>
@@ -208,7 +130,7 @@ export default function HomePage() {
                       "Track outcomes and improve continuously.",
                     ].map((item) => (
                       <li key={item} className="flex gap-3">
-                        <span className="mt-1 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[color-mix(in_oklch,var(--color-accent)_35%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-accent)_10%,var(--color-surface))] text-[var(--color-accent)]">
+                        <span className="mt-1 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-accent)]">
                           <svg className="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                           </svg>
@@ -217,49 +139,13 @@ export default function HomePage() {
                       </li>
                     ))}
                   </ul>
-                </div>
-
-                <div className="mt-4 grid grid-cols-2 gap-3">
-                  <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-4 shadow-[var(--shadow-sm)]">
-                    <p className="font-heading text-2xl font-semibold tracking-tight text-[var(--color-text)]">2</p>
-                    <p className="mt-1 text-xs uppercase tracking-[0.12em] text-[var(--color-text-faint)]">entry points</p>
-                  </div>
-                  <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-4 shadow-[var(--shadow-sm)]">
-                    <p className="font-heading text-2xl font-semibold tracking-tight text-[var(--color-text)]">1</p>
-                    <p className="mt-1 text-xs uppercase tracking-[0.12em] text-[var(--color-text-faint)]">execution standard</p>
-                  </div>
-                </div>
-
-                <div data-stage="8" className="stage-enter mt-4 grid grid-cols-12 gap-3">
-                  <div className="group relative col-span-7 overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)]">
-                    <Image
-                      src="/program/one-weekend.jpg"
-                      alt="Workshop planning table"
-                      width={1200}
-                      height={900}
-                      className="h-44 w-full object-cover transition-transform duration-700 [transition-timing-function:var(--ease-expo)] group-hover:scale-[1.04]"
-                    />
-                    <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_20%,color-mix(in_oklch,var(--color-text)_24%,transparent)_100%)]" />
-                  </div>
-                  <div className="col-span-5 grid gap-3">
-                    <div className="group relative overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)]">
-                      <Image
-                        src="/program/pods-of-5.jpg"
-                        alt="Small team collaboration"
-                        width={1200}
-                        height={900}
-                        className="h-[84px] w-full object-cover transition-transform duration-700 [transition-timing-function:var(--ease-expo)] group-hover:scale-[1.06]"
-                      />
-                    </div>
-                    <div className="group relative overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)]">
-                      <Image
-                        src="/program/future-ready.jpg"
-                        alt="Future-ready operations image"
-                        width={1200}
-                        height={900}
-                        className="h-[84px] w-full object-cover transition-transform duration-700 [transition-timing-function:var(--ease-expo)] group-hover:scale-[1.06]"
-                      />
-                    </div>
+                  <div className="mt-5 border-t border-[var(--color-border)] pt-4">
+                    <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
+                      One standard
+                    </p>
+                    <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-muted)] text-pretty">
+                      Practical outcomes over theory. Keep scope tight, ship quickly, and improve in cycles.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -267,7 +153,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <SectionWrapper id="vision" alt className="pt-14 md:pt-18">
+        <SectionWrapper id="vision" className="pt-14 md:pt-18">
           <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-12">
             <RevealOnScroll className="md:col-span-7">
               <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
@@ -276,36 +162,27 @@ export default function HomePage() {
               <h2 className="mt-3 font-heading text-[clamp(32px,4.2vw,56px)] font-bold leading-[1.02] tracking-tight text-[var(--color-text)]">
                 Build systems people can trust, not demos people forget.
               </h2>
-              <p className="mt-4 max-w-[65ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-lg">
+              <p className="mt-4 max-w-[65ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-lg text-pretty">
                 AI should reduce friction inside real workflows, not add another layer of complexity. We focus on
                 deployment quality, operational adoption, and measurable improvement over time.
               </p>
             </RevealOnScroll>
 
             <RevealOnScroll className="md:col-span-5" delay={120}>
-              <div className="rounded-[var(--radius-xl)] border border-[color-mix(in_oklch,var(--color-accent)_26%,var(--color-border))] bg-[var(--color-surface)] p-6 shadow-[var(--shadow-md)]">
+              <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-[var(--shadow-sm)]">
                 <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
                   Core belief
                 </p>
                 <p className="mt-3 font-heading text-[24px] leading-[1.18] tracking-tight text-[var(--color-text)]">
                   The winners will be the ones who remove complexity for the customer.
                 </p>
-                <p className="mt-3 text-sm leading-relaxed text-[var(--color-text-muted)]">
+                <p className="mt-3 text-sm leading-relaxed text-[var(--color-text-muted)] text-pretty">
                   This is why we bias toward plain language, visible delivery, and continuous servicing after launch.
                 </p>
               </div>
             </RevealOnScroll>
           </div>
         </SectionWrapper>
-
-        <ProofEvidence
-          id="proof"
-          eyebrow="Signal"
-          heading="The opportunity is real, and measurable."
-          lead="No single tactic is enough. Evidence has to compound across teams, quality, and momentum."
-          stats={homeProofStats}
-          quotes={homeProofQuotes}
-        />
 
         <SectionWrapper id="programs" className="pt-14 md:pt-18">
           <RevealOnScroll>
@@ -362,7 +239,7 @@ export default function HomePage() {
           </div>
         </SectionWrapper>
 
-        <SectionWrapper id="principles" alt>
+        <SectionWrapper id="principles">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-12">
             <RevealOnScroll className="md:col-span-4">
               <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">

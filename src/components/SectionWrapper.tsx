@@ -17,7 +17,7 @@ export function SectionWrapper({
       id={id}
       className={`section-padding ${
         alt
-          ? "bg-[color-mix(in_oklch,var(--color-accent)_3%,var(--color-bg))]"
+          ? "bg-[color-mix(in_oklch,var(--color-accent)_2%,var(--color-bg))]"
           : ""
       } ${className}`}
     >
