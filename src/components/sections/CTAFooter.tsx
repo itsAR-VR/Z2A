@@ -27,7 +27,7 @@ export function CTAFooter() {
             <div className="md:col-span-7">
               <RevealOnScroll>
                 <h2 className="font-heading font-semibold tracking-tight text-[clamp(30px,3.6vw,48px)] leading-[1.03] mb-4 text-[var(--color-text)]">
-                  Apply for the{" "}
+                  Apply now for the{" "}
                   <span className="text-[var(--color-accent)]">Toronto Pilot</span>.
                 </h2>
               </RevealOnScroll>
@@ -35,7 +35,8 @@ export function CTAFooter() {
               <RevealOnScroll delay={80}>
                 <p className="text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed">
                   Limited to 50 seats. We review applications so pods stay focused
-                  and each team ships real work by the end of the weekend.
+                  and each team ships real work by the end of the weekend. Most
+                  applications receive a decision within 48 hours.
                 </p>
               </RevealOnScroll>
 
@@ -55,8 +56,8 @@ export function CTAFooter() {
                     Ready when you are
                   </p>
                   <p className="mt-2 text-sm text-[var(--color-text-muted)]">
-                    You&apos;ll be redirected to Stripe for the deposit. Referral codes
-                    (optional) help us track how you found us.
+                    You&apos;ll be redirected to Stripe for the deposit with plain-language
+                    refund terms. Referral codes (optional) help us track how you found us.
                   </p>
                   <div className="mt-5">
                     <Button
@@ -74,6 +75,9 @@ export function CTAFooter() {
                     </Button>
                     <p className="mt-3 text-xs text-[var(--color-text-faint)]">
                       Questions? We typically respond within 24 hours.
+                    </p>
+                    <p className="mt-1 text-xs text-[var(--color-text-faint)]">
+                      Once accepted, seats are confirmed first-come by completed deposit.
                     </p>
                   </div>
                 </div>
