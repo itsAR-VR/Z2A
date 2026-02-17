@@ -13,7 +13,7 @@ const faqItems = [
   {
     question: "I’m not technical. Will I be lost?",
     answer:
-      "You don’t need to be a software engineer, but you do need to be comfortable following step-by-step instructions in a code editor. We provide clear prework, starter scaffolds, and live support in pods of 5 so you’re not stuck alone.",
+      "You do not need to be a software engineer. You do need to be comfortable editing text in tools like Cursor/Replit and following step-by-step build instructions. We provide prework, starter scaffolds, and live support in pods of 5 so you are never blocked alone.",
   },
   {
     question: "Will this actually help my job?",
@@ -28,7 +28,7 @@ const faqItems = [
   {
     question: "What if I’m busy and can’t commit much time?",
     answer:
-      "The format is intentionally short: one weekend, around six hours per day. If you’re overloaded right now, wait for another cohort. If you’re tired of postponing this, blocking one focused weekend is the fastest path to a shipped first version.",
+      "The format is intentionally short: one weekend, around six hours per day. If you cannot protect two focused days right now, wait for another cohort. If you can, this is the fastest path to a shipped first version.",
   },
   {
     question: "Can my company reimburse this?",
@@ -50,6 +50,11 @@ export function FAQ() {
     "100% refund if you aren’t satisfied",
     "Pods of 5",
   ];
+  const readinessFacts = [
+    "Bring one recurring workflow you own",
+    "Block two focused workshop days",
+    "Be comfortable with guided build steps",
+  ];
 
   return (
     <SectionWrapper id="faq" alt>
@@ -70,6 +75,24 @@ export function FAQ() {
               <span
                 key={fact}
                 className="inline-flex items-center rounded-full border border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-accent)_8%,var(--color-surface))] px-3 py-1 font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-muted)]"
+              >
+                {fact}
+              </span>
+            ))}
+          </div>
+        </div>
+      </RevealOnScroll>
+
+      <RevealOnScroll delay={120}>
+        <div className="max-w-3xl mx-auto mb-6 rounded-[var(--radius-xl)] border border-[color-mix(in_oklch,var(--color-accent)_24%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-accent)_6%,var(--color-surface))] shadow-[var(--shadow-sm)] p-4">
+          <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
+            Best fit if you can
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {readinessFacts.map((fact) => (
+              <span
+                key={fact}
+                className="inline-flex items-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 text-xs text-[var(--color-text-muted)]"
               >
                 {fact}
               </span>
