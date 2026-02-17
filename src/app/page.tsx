@@ -23,22 +23,24 @@ const pathwayCards = [
   {
     id: "individuals",
     eyebrow: "For individuals",
-    title: "Ship your first production workflow in a weekend.",
+    title: "Ship one production workflow by Sunday.",
     description:
-      "Hands-on training for builders, PMs, and operators who want to leave with a working workflow and rollout plan.",
-    bullets: ["In-person cohort format", "Tight sprint structure", "Working output by the end"],
+      "Hands-on weekend build sprint for PMs, operators, and builders who want shipped output, not passive lessons.",
+    fit: "Best fit if you want to build your own workflow and lead rollout internally.",
+    bullets: ["In-person cohort in Toronto", "Pods of 5 with live support", "Working demo plus rollout plan"],
     href: "/individuals",
-    cta: "Explore Individuals",
+    cta: "See Individuals Program",
   },
   {
     id: "businesses",
     eyebrow: "For businesses",
-    title: "Deploy AI workflows without adding another platform.",
+    title: "Install AI workflows into operations without platform sprawl.",
     description:
-      "A practical service model for teams that want setup, training, and adoption inside existing tools.",
-    bullets: ["Free 30-minute discovery", "3-hour in-person enablement", "Done-for-you setup in your stack"],
+      "Service model for teams that want setup, operator enablement, and measurable workflow improvement inside existing tools.",
+    fit: "Best fit if your team needs implementation ownership and a managed path after launch.",
+    bullets: ["Free 30-minute discovery", "In-person enablement workshop", "Done-for-you setup + training"],
     href: "/businesses",
-    cta: "Explore Businesses",
+    cta: "See Businesses Services",
   },
 ];
 
@@ -224,8 +226,11 @@ export default function HomePage() {
               Programs
             </p>
             <h2 className="mt-3 font-heading text-[clamp(32px,4.2vw,56px)] font-bold leading-[1.02] tracking-tight text-[var(--color-text)]">
-              Pick your pathway.
+              Pick your path fast.
             </h2>
+            <p className="mt-3 max-w-[58ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-base">
+              Choose based on ownership. Build it yourself in a weekend, or have us set it up and run enablement for your team.
+            </p>
           </RevealOnScroll>
 
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
@@ -248,6 +253,7 @@ export default function HomePage() {
                   <p className="mt-3 text-[15px] leading-relaxed text-[var(--color-text-muted)]">
                     {card.description}
                   </p>
+                  <p className="mt-3 text-sm leading-relaxed text-[var(--color-text-faint)]">{card.fit}</p>
                   <ul className="mt-5 space-y-2">
                     {card.bullets.map((item) => (
                       <li key={item} className="text-sm text-[var(--color-text-muted)]">
