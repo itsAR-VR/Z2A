@@ -182,10 +182,10 @@ export function Hero() {
               ref={subheadRef}
               className="mt-5 text-[15px] md:text-lg leading-relaxed text-[var(--color-text-muted)] max-w-[60ch]"
             >
-              You can learn the pieces online. The hard part is shipping.
-              Bring one recurring workflow and spend one focused weekend building
-              a working agent, a deployment path, and an evaluation workflow in
-              pods of 5.
+              You can learn the pieces online. The hard part is shipping under
+              constraints. Bring one recurring workflow and spend one focused
+              weekend building a production-ready first version, a deployment
+              path, and an evaluation loop in pods of 5.
             </p>
           </div>
 
@@ -210,7 +210,7 @@ export function Hero() {
               )}
             </Button>
             <p className="text-sm text-[var(--color-text-muted)]">
-              Limited to 50 seats in Toronto.
+              Limited to 50 seats in Toronto. Seats are confirmed by deposit.
             </p>
           </div>
 
