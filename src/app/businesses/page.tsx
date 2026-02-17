@@ -265,6 +265,16 @@ export default function BusinessesPage() {
                     </li>
                   ))}
                 </ul>
+                <div className="mt-5 border-t border-[var(--color-border)] pt-4">
+                  <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
+                    What we need from you
+                  </p>
+                  <ul className="mt-2 space-y-1.5 text-sm text-[var(--color-text-muted)]">
+                    <li>One workflow owner for decisions.</li>
+                    <li>Sample inputs and outputs from the current process.</li>
+                    <li>Access to the tools where work already happens.</li>
+                  </ul>
+                </div>
               </div>
             </RevealOnScroll>
           </div>
