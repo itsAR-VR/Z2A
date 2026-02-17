@@ -225,6 +225,34 @@ section[id] {
   }
 }
 
+@keyframes workflow-sheen {
+  0% {
+    transform: translate3d(-120%, 0, 0);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.8;
+  }
+  44% {
+    transform: translate3d(220%, 0, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(220%, 0, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes workflow-breathe {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 .stage-enter {
   opacity: 1;
   transform: none;
@@ -267,6 +295,42 @@ section[id] {
 .offer-ticker:hover .offer-ticker__track,
 .offer-ticker:focus-visible .offer-ticker__track {
   animation-play-state: paused;
+}
+
+.workflow-stage-card {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform var(--duration-default) var(--ease-expo),
+    box-shadow var(--duration-default) var(--ease-expo),
+    border-color var(--duration-default) var(--ease-expo);
+}
+
+.workflow-stage-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in oklch, var(--color-accent) 70%, transparent) 46%,
+    transparent 100%
+  );
+  animation: workflow-sheen 6.8s linear infinite;
+}
+
+.workflow-stage-card:hover,
+.workflow-stage-card:focus-within {
+  transform: translate3d(0, -3px, 0);
+  border-color: color-mix(in oklch, var(--color-accent) 38%, var(--color-border-strong));
+  box-shadow: var(--shadow-md);
+}
+
+.workflow-stage-card__eyebrow {
+  animation: workflow-breathe 3.2s var(--ease-expo) infinite;
 }
 
 .tilt-hover {
@@ -464,5 +528,17 @@ section[id] {
 
   .offer-ticker__track span::after {
     display: none;
+  }
+
+  .workflow-stage-card,
+  .workflow-stage-card:hover,
+  .workflow-stage-card:focus-within {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .workflow-stage-card::after,
+  .workflow-stage-card__eyebrow {
+    animation: none !important;
   }
 }

@@ -331,8 +331,10 @@ export default function BusinessesPage() {
 
           <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
             <RevealOnScroll className="h-full">
-              <article className="h-full rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
-                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-accent)]">Step 1</p>
+              <article className="workflow-stage-card h-full rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
+                <p className="workflow-stage-card__eyebrow font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-accent)]">
+                  Step 1
+                </p>
                 <h3 className="mt-2 font-heading text-2xl font-semibold tracking-tight text-[var(--color-text)]">
                   30-minute discovery (free)
                 </h3>
@@ -346,8 +348,10 @@ export default function BusinessesPage() {
             </RevealOnScroll>
 
             <RevealOnScroll className="h-full" delay={90}>
-              <article className="h-full rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
-                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-accent)]">Step 2</p>
+              <article className="workflow-stage-card h-full rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
+                <p className="workflow-stage-card__eyebrow font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-accent)]">
+                  Step 2
+                </p>
                 <h3 className="mt-2 font-heading text-2xl font-semibold tracking-tight text-[var(--color-text)]">
                   AI Enablement Workshop (3h, in-person)
                 </h3>
@@ -362,8 +366,10 @@ export default function BusinessesPage() {
             </RevealOnScroll>
 
             <RevealOnScroll className="h-full" delay={180}>
-              <article className="h-full rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
-                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-accent)]">Step 3</p>
+              <article className="workflow-stage-card h-full rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
+                <p className="workflow-stage-card__eyebrow font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-accent)]">
+                  Step 3
+                </p>
                 <h3 className="mt-2 font-heading text-2xl font-semibold tracking-tight text-[var(--color-text)]">
                   Done-for-you setup + enablement
                 </h3>
