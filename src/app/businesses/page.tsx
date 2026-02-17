@@ -101,13 +101,13 @@ export default function BusinessesPage() {
                       <span>Operator enablement included</span>
                       <span>Contact for pricing</span>
                       <span>Custom-scoped engagements only</span>
-                      <span>Book your call</span>
+                      <span>Book discovery call</span>
                       <span>Discovery calls open</span>
                       <span>Implementation inside your existing stack</span>
                       <span>Operator enablement included</span>
                       <span>Contact for pricing</span>
                       <span>Custom-scoped engagements only</span>
-                      <span>Book your call</span>
+                      <span>Book discovery call</span>
                     </div>
                     <span className="sr-only">
                       Discovery calls are open. We implement inside your existing stack with operator enablement and
@@ -146,7 +146,7 @@ export default function BusinessesPage() {
                   ))}
                 </div>
                 <div data-stage="4" className="stage-enter mt-8 flex flex-wrap items-center gap-3">
-                  <Button href={businessCtaHref}>Book a call</Button>
+                  <Button href={businessCtaHref}>Book discovery call</Button>
                   <Button href="#pricing" variant="secondary">
                     How pricing works
                   </Button>

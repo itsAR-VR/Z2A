@@ -134,9 +134,9 @@ export default function HomePage() {
                   language, and leave with a rollout path your team can actually run.
                 </p>
                 <div data-stage="4" className="stage-enter mt-8 flex flex-wrap items-center gap-3">
-                  <Button href="/individuals">Explore Individuals</Button>
+                  <Button href="/individuals">See Individuals Program</Button>
                   <Button href="/businesses" variant="secondary">
-                    Explore Businesses
+                    See Businesses Services
                   </Button>
                 </div>
                 <p data-stage="5" className="stage-enter mt-4 text-sm text-[var(--color-text-faint)]">

@@ -449,6 +449,7 @@ section[id] {
   box-shadow: 0 0 0 6px color-mix(in oklch, var(--color-accent) 18%, transparent);
   transform: translateX(-50%);
   will-change: left, transform;
+  animation: rail-run 5.4s var(--ease-quint) infinite;
 }
 
 .hero-plane {
