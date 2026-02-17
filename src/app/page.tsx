@@ -79,10 +79,12 @@ export default function HomePage() {
         <StageTimeline rootId="top" />
         <section id="top" className="relative overflow-hidden pt-32 pb-18 md:pt-44 md:pb-24">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-            <div className="absolute -top-24 left-1/2 h-[420px] w-[700px] -translate-x-1/2 rounded-full bg-[color-mix(in_oklch,var(--color-accent)_8%,var(--color-bg))] opacity-40 blur-2xl" />
-            <div className="absolute top-20 right-[-10%] h-[280px] w-[280px] rounded-full bg-[color-mix(in_oklch,var(--color-accent-2)_6%,var(--color-bg))] opacity-38 blur-2xl" />
-            <div className="hero-plane hero-plane--left animate-drift opacity-40" />
-            <div className="hero-plane hero-plane--right animate-drift-slow opacity-36" />
+            <div className="hero-orb hero-orb--left animate-drift" />
+            <div className="hero-orb hero-orb--right animate-drift-slow" />
+            <div className="hero-orb hero-orb--center animate-drift" />
+            <div className="hero-orb hero-orb--bottom animate-drift-slow" />
+            <div className="hero-plane hero-plane--left animate-drift opacity-70" />
+            <div className="hero-plane hero-plane--right animate-drift-slow opacity-62" />
           </div>
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1]">
             <div className="hero-frost-overlay hero-frost-overlay--horizon" />

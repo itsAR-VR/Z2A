@@ -149,8 +149,12 @@ export function Hero() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 overflow-hidden"
       >
-        <div className="absolute -top-44 left-1/2 h-[620px] w-[820px] -translate-x-1/2 rounded-full bg-[color-mix(in_oklch,var(--color-accent)_18%,transparent)] blur-[90px] opacity-70" />
-        <div className="absolute top-20 -right-40 h-[520px] w-[520px] rounded-full bg-[color-mix(in_oklch,var(--color-accent-2)_16%,transparent)] blur-[90px] opacity-70" />
+        <div className="hero-orb hero-orb--left animate-drift" />
+        <div className="hero-orb hero-orb--right animate-drift-slow" />
+        <div className="hero-orb hero-orb--center animate-drift" />
+        <div className="hero-orb hero-orb--bottom animate-drift-slow" />
+        <div className="hero-plane hero-plane--left animate-drift opacity-70" />
+        <div className="hero-plane hero-plane--right animate-drift-slow opacity-62" />
       </div>
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1]">
         <div className="hero-frost-overlay hero-frost-overlay--horizon" />
