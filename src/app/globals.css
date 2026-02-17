@@ -389,6 +389,7 @@ section[id] {
 
 .hero-plane {
   position: absolute;
+  display: none;
   border-radius: 30px;
   pointer-events: none;
   border: 1px solid color-mix(in oklch, var(--color-accent) 24%, var(--color-border));
@@ -415,6 +416,12 @@ section[id] {
   top: -2%;
   right: -10%;
   transform: rotate(7deg);
+}
+
+@media (min-width: 768px) {
+  .hero-plane {
+    display: block;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
