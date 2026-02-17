@@ -75,7 +75,7 @@ function getPageConfig(pathname: string): PageConfig {
       ctaLabel: "Apply",
       ctaHref: "/apply",
       ctaEventSource: "nav_individuals",
-      menuNote: "Limited to 50 seats in Toronto.",
+      menuNote: "Limited to 50 seats in Toronto. Most decisions land within 48 hours.",
     };
   }
 
@@ -85,7 +85,7 @@ function getPageConfig(pathname: string): PageConfig {
       ctaLabel: "Book a call",
       ctaHref: BUSINESS_CALENDLY_URL || fallbackBusinessCta,
       ctaEventSource: "nav_businesses",
-      menuNote: "Custom-scoped implementation and post-launch optimization.",
+      menuNote: "Start with discovery, then receive a scoped implementation + commercial plan.",
     };
   }
 
@@ -94,7 +94,7 @@ function getPageConfig(pathname: string): PageConfig {
     ctaLabel: "Explore Individuals",
     ctaHref: "/individuals",
     ctaEventSource: "nav_home",
-    menuNote: "Choose your path and ship quickly.",
+    menuNote: "Choose your path by scope: weekend build sprint or managed business implementation.",
   };
 }
 
