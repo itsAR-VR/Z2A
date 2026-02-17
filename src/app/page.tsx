@@ -203,6 +203,16 @@ export default function HomePage() {
                 <p className="mt-3 text-sm leading-relaxed text-[var(--color-text-muted)] text-pretty">
                   This is why we bias toward plain language, visible delivery, and continuous servicing after launch.
                 </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {["In-person execution", "Operator-first workflows", "Post-deploy improvement"].map((item) => (
+                    <span
+                      key={item}
+                      className="inline-flex items-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 text-[11px] text-[var(--color-text-muted)]"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
               </div>
             </RevealOnScroll>
           </div>
