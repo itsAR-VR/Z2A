@@ -154,6 +154,27 @@ export default function BusinessesPage() {
                 <p data-stage="5" className="stage-enter mt-4 text-sm text-[var(--color-text-faint)]">
                   Start with a free 30-minute discovery and leave with a scoped implementation path.
                 </p>
+                <div data-stage="6" className="stage-enter mt-5 max-w-[520px]">
+                  <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
+                    Orchestration loop
+                  </p>
+                  <div className="signature-rail mt-2">
+                    <div className="signature-rail__track" />
+                    <span className="signature-rail__node signature-rail__node--1" />
+                    <span className="signature-rail__node signature-rail__node--2" />
+                    <span className="signature-rail__node signature-rail__node--3" />
+                    <span className="signature-rail__node signature-rail__node--4" />
+                    <span className="signature-rail__node signature-rail__node--5" />
+                    <span className="signature-rail__runner" />
+                  </div>
+                  <div className="mt-2 grid grid-cols-5 gap-2 text-[10px] font-mono tracking-[0.12em] uppercase text-[var(--color-text-faint)]">
+                    <span>Intake</span>
+                    <span className="text-center">Route</span>
+                    <span className="text-center">Act</span>
+                    <span className="text-center">Verify</span>
+                    <span className="text-right">Improve</span>
+                  </div>
+                </div>
               </div>
 
               <div data-stage="7" className="stage-enter md:col-span-5">
