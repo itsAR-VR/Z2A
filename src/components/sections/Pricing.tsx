@@ -67,17 +67,18 @@ export function Pricing() {
     <SectionWrapper id="pricing">
       <RevealOnScroll>
         <h2 className="mx-auto max-w-3xl text-center font-heading font-semibold tracking-tight text-[clamp(28px,3.2vw,44px)] leading-[1.05] mb-4 text-[var(--color-text)]">
-          Reserve your seat with a deposit.{" "}
+          Reserve your seat with a $100 deposit.{" "}
           <span className="text-[var(--color-accent)]">
-            Pay the remainder after check-in.
+            Pay the remainder after Day 1 check-in.
           </span>
         </h2>
       </RevealOnScroll>
 
       <RevealOnScroll delay={100}>
         <p className="mx-auto max-w-2xl text-center text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed mb-12">
-          Pay $100 now to reserve your seat. Stripe handles checkout. If
-          you&apos;re not satisfied, we issue a 100% refund within 7 days.
+          Pay $100 now to reserve your seat. Stripe handles checkout, and most
+          applications are reviewed within 48 hours. If you&apos;re not satisfied,
+          we issue a 100% refund within 7 days.
         </p>
       </RevealOnScroll>
 
@@ -150,6 +151,9 @@ export function Pricing() {
                 <p className="text-xs text-[var(--color-text-faint)]">
                   The remainder is authorized at check-in and captured after the
                   event for Day 1 attendees.
+                </p>
+                <p className="text-xs text-[var(--color-text-faint)]">
+                  Includes guided build blocks, implementation templates, and post-workshop handoff checklists.
                 </p>
                 {earlyBirdActive ? (
                   <p className="text-xs text-[var(--color-text-faint)]">
