@@ -82,10 +82,10 @@ function getPageConfig(pathname: string): PageConfig {
   if (pathname.startsWith("/businesses")) {
     return {
       anchors: businessesAnchors,
-      ctaLabel: "Book a call",
+      ctaLabel: "Book discovery call",
       ctaHref: BUSINESS_CALENDLY_URL || fallbackBusinessCta,
       ctaEventSource: "nav_businesses",
-      menuNote: "Start with discovery, then receive a scoped implementation + commercial plan.",
+      menuNote: "Start with discovery. Most business inquiries receive scoped implementation + commercial terms within 48 hours.",
     };
   }
 

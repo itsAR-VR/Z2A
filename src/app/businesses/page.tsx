@@ -458,11 +458,28 @@ export default function BusinessesPage() {
               Scope your first AI workflow setup
             </h2>
             <p className="mt-4 max-w-[64ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-lg text-pretty">
-              Share your current bottlenecks and stack. We will map the fastest path to measurable output with a
-              realistic setup plan your team can actually run.
+              Share your current bottlenecks and stack. We map the fastest route to measurable output and return a
+              practical scope your team can execute without adding tool chaos.
             </p>
+            <ol className="mt-6 grid gap-3 sm:grid-cols-3">
+              {[
+                "Book a 30-minute discovery call",
+                "Receive scoped plan + commercial proposal within 48 hours",
+                "Confirm workshop date and setup kickoff",
+              ].map((step, index) => (
+                <li
+                  key={step}
+                  className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 text-sm text-[var(--color-text-muted)]"
+                >
+                  <span className="mr-2 font-mono text-[11px] tracking-[0.12em] text-[var(--color-accent)]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  {step}
+                </li>
+              ))}
+            </ol>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Button href={businessCtaHref}>Book a call</Button>
+              <Button href={businessCtaHref}>Book discovery call</Button>
             </div>
             <p className="mt-3 text-sm text-[var(--color-text-faint)]">Prefer email? hello@zerotoagent.com</p>
           </RevealOnScroll>
