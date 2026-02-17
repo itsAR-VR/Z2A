@@ -91,6 +91,28 @@ export default function HomePage() {
                   <span className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
                   Zero-to-Agent
                 </p>
+                <div data-stage="1.5" className="stage-enter mt-4">
+                  <Link href="/individuals" className="offer-ticker group block rounded-[var(--radius-md)]">
+                    <div className="offer-ticker__track" aria-hidden="true">
+                      <span>Admissions are live</span>
+                      <span>Toronto weekend cohort</span>
+                      <span>50 seats total</span>
+                      <span>$100 deposit via Stripe</span>
+                      <span>100% refund if you are not satisfied</span>
+                      <span>Apply now</span>
+                      <span>Admissions are live</span>
+                      <span>Toronto weekend cohort</span>
+                      <span>50 seats total</span>
+                      <span>$100 deposit via Stripe</span>
+                      <span>100% refund if you are not satisfied</span>
+                      <span>Apply now</span>
+                    </div>
+                    <span className="sr-only">
+                      Admissions are live for the Toronto weekend cohort. 50 seats total. $100 deposit via Stripe and
+                      100% refund if you are not satisfied.
+                    </span>
+                  </Link>
+                </div>
                 <h1
                   data-stage="2"
                   className="stage-enter mt-5 max-w-[14ch] font-heading text-[clamp(44px,5.8vw,78px)] font-bold leading-[0.95] tracking-tight text-[var(--color-text)] text-balance"
