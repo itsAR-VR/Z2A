@@ -66,9 +66,12 @@ export function Why() {
           <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] overflow-hidden">
             <ol>
               {reasons.map((reason, i) => (
-                <li key={reason.title} className="border-t border-[var(--color-border)] first:border-t-0">
+                <li
+                  key={reason.title}
+                  className="group border-t border-[var(--color-border)] first:border-t-0 transition-colors duration-300 hover:bg-[color-mix(in_oklch,var(--color-accent)_4%,var(--color-surface))]"
+                >
                   <RevealOnScroll delay={i * 80}>
-                    <div className="px-6 py-5 md:py-6 flex gap-6">
+                    <div className="tilt-hover px-6 py-5 md:py-6 flex gap-6 rounded-[var(--radius-lg)]">
                       <div className="shrink-0">
                         <div className="h-9 w-9 rounded-full border border-[color-mix(in_oklch,var(--color-accent)_30%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-accent)_8%,var(--color-surface))] flex items-center justify-center font-mono text-[11px] tracking-[0.14em] text-[var(--color-accent)]">
                           {reason.eyebrow}
