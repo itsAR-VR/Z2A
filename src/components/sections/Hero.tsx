@@ -152,6 +152,9 @@ export function Hero() {
         <div className="absolute -top-44 left-1/2 h-[620px] w-[820px] -translate-x-1/2 rounded-full bg-[color-mix(in_oklch,var(--color-accent)_18%,transparent)] blur-[90px] opacity-70" />
         <div className="absolute top-20 -right-40 h-[520px] w-[520px] rounded-full bg-[color-mix(in_oklch,var(--color-accent-2)_16%,transparent)] blur-[90px] opacity-70" />
       </div>
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1]">
+        <div className="hero-frost-overlay hero-frost-overlay--left-focus" />
+      </div>
 
       <div className="container-content relative z-10 pt-28 md:pt-40 pb-8 md:pb-10">
         <div

@@ -83,6 +83,9 @@ export default function BusinessesPage() {
             <div className="hero-plane hero-plane--left animate-drift opacity-36" />
             <div className="hero-plane hero-plane--right animate-drift-slow opacity-34" />
           </div>
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1]">
+            <div className="hero-frost-overlay hero-frost-overlay--left-focus" />
+          </div>
 
           <div className="container-content relative z-10">
             <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-14">

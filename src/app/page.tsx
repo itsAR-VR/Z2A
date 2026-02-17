@@ -84,6 +84,9 @@ export default function HomePage() {
             <div className="hero-plane hero-plane--left animate-drift opacity-40" />
             <div className="hero-plane hero-plane--right animate-drift-slow opacity-36" />
           </div>
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1]">
+            <div className="hero-frost-overlay hero-frost-overlay--left-focus" />
+          </div>
 
           <div className="container-content relative z-10">
             <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-12">
