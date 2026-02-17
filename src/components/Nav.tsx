@@ -477,6 +477,7 @@ export function Nav() {
                             key={link.href}
                             ref={index === 0 ? firstOverlayLinkRef : undefined}
                             href={link.href}
+                            aria-label={isActive ? `${link.label} (current page)` : link.label}
                             aria-current={isActive ? "page" : undefined}
                             onClick={closeMenu}
                             className={`group tilt-hover rounded-[var(--radius-lg)] border px-4 py-4 text-lg font-semibold transition-[background-color,color,border-color,box-shadow] duration-300 [transition-timing-function:var(--ease-expo)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] ${
@@ -485,11 +486,18 @@ export function Nav() {
                                 : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] hover:border-[color-mix(in_oklch,var(--color-accent)_36%,var(--color-border-strong))] hover:shadow-[var(--shadow-md)]"
                             }`}
                           >
-                            <span className="flip-label" data-flip-disabled={isActive ? "true" : "false"}>
-                              <span className="flip-label__primary">{link.label}</span>
-                              <span aria-hidden="true" className="flip-label__secondary">
-                                {link.label}
+                            <span className="flex items-center justify-between gap-3">
+                              <span className="flip-label" data-flip-disabled={isActive ? "true" : "false"}>
+                                <span className="flip-label__primary">{link.label}</span>
+                                <span aria-hidden="true" className="flip-label__secondary">
+                                  {link.label}
+                                </span>
                               </span>
+                              {isActive ? (
+                                <span className="rounded-full border border-[color-mix(in_oklch,var(--color-accent)_45%,var(--color-border-strong))] bg-[color-mix(in_oklch,var(--color-accent)_12%,var(--color-surface))] px-2 py-0.5 text-[10px] font-mono tracking-[0.1em] uppercase text-[var(--color-accent)]">
+                                  Current
+                                </span>
+                              ) : null}
                             </span>
                           </Link>
                         );
