@@ -153,7 +153,7 @@ export function Hero() {
         <div className="absolute top-20 -right-40 h-[520px] w-[520px] rounded-full bg-[color-mix(in_oklch,var(--color-accent-2)_16%,transparent)] blur-[90px] opacity-70" />
       </div>
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1]">
-        <div className="hero-frost-overlay hero-frost-overlay--left-focus" />
+        <div className="hero-frost-overlay hero-frost-overlay--horizon" />
       </div>
 
       <div className="container-content relative z-10 pt-28 md:pt-40 pb-8 md:pb-10">
@@ -183,7 +183,7 @@ export function Hero() {
 
             <p
               ref={subheadRef}
-              className="mt-5 text-[15px] md:text-lg leading-relaxed text-[var(--color-text-muted)] max-w-[60ch]"
+              className="mt-5 text-[15px] md:text-lg leading-relaxed text-[color-mix(in_oklch,var(--color-text-muted)_72%,var(--color-text)_28%)] max-w-[60ch]"
             >
               You can learn the pieces online. The hard part is shipping under
               constraints. Bring one recurring workflow and spend one focused
@@ -212,7 +212,7 @@ export function Hero() {
                 </svg>
               )}
             </Button>
-            <p className="text-sm text-[var(--color-text-muted)]">
+            <p className="text-sm text-[color-mix(in_oklch,var(--color-text-muted)_72%,var(--color-text)_28%)]">
               Limited to 50 seats in Toronto. Seats are confirmed by deposit.
             </p>
           </div>

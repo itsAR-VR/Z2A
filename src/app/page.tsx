@@ -85,7 +85,7 @@ export default function HomePage() {
             <div className="hero-plane hero-plane--right animate-drift-slow opacity-36" />
           </div>
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1]">
-            <div className="hero-frost-overlay hero-frost-overlay--left-focus" />
+            <div className="hero-frost-overlay hero-frost-overlay--horizon" />
           </div>
 
           <div className="container-content relative z-10">
@@ -131,7 +131,7 @@ export default function HomePage() {
                 </h1>
                 <p
                   data-stage="3"
-                  className="stage-enter mt-6 max-w-[58ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-lg text-pretty"
+                  className="stage-enter mt-6 max-w-[58ch] text-[15px] leading-relaxed text-[color-mix(in_oklch,var(--color-text-muted)_72%,var(--color-text)_28%)] md:text-lg text-pretty"
                 >
                   For builders, PMs, operators, and teams: pick one high-value workflow, implement it in plain
                   language, and leave with a rollout path your team can actually run.
@@ -142,7 +142,10 @@ export default function HomePage() {
                     See Businesses Services
                   </Button>
                 </div>
-                <p data-stage="5" className="stage-enter mt-4 text-sm text-[var(--color-text-faint)]">
+                <p
+                  data-stage="5"
+                  className="stage-enter mt-4 text-sm text-[color-mix(in_oklch,var(--color-text-faint)_72%,var(--color-text-muted)_28%)]"
+                >
                   Two paths. One standard: measurable outcomes over AI theater.
                 </p>
               </div>

@@ -84,7 +84,7 @@ export default function BusinessesPage() {
             <div className="hero-plane hero-plane--right animate-drift-slow opacity-34" />
           </div>
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1]">
-            <div className="hero-frost-overlay hero-frost-overlay--left-focus" />
+            <div className="hero-frost-overlay hero-frost-overlay--horizon" />
           </div>
 
           <div className="container-content relative z-10">
@@ -129,7 +129,7 @@ export default function BusinessesPage() {
                 </h1>
                 <p
                   data-stage="3"
-                  className="stage-enter mt-5 max-w-[58ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-lg text-pretty"
+                  className="stage-enter mt-5 max-w-[58ch] text-[15px] leading-relaxed text-[color-mix(in_oklch,var(--color-text-muted)_72%,var(--color-text)_28%)] md:text-lg text-pretty"
                 >
                   We map one high-friction workflow first, then implement inside your stack so operators can move
                   faster with fewer handoffs, fewer follow-up misses, and clearer reporting.
@@ -154,7 +154,10 @@ export default function BusinessesPage() {
                     How pricing works
                   </Button>
                 </div>
-                <p data-stage="5" className="stage-enter mt-4 text-sm text-[var(--color-text-faint)]">
+                <p
+                  data-stage="5"
+                  className="stage-enter mt-4 text-sm text-[color-mix(in_oklch,var(--color-text-faint)_72%,var(--color-text-muted)_28%)]"
+                >
                   Start with a free 30-minute discovery and leave with a scoped implementation path.
                 </p>
                 <div data-stage="6" className="stage-enter mt-5 max-w-[520px]">
