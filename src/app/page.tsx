@@ -119,17 +119,17 @@ export default function HomePage() {
                   data-stage="2"
                   className="stage-enter mt-5 max-w-[14ch] font-heading text-[clamp(44px,5.8vw,78px)] font-bold leading-[0.95] tracking-tight text-[var(--color-text)] text-balance"
                 >
-                  AI that actually ships.
+                  Ship one production workflow
                   <span className="block text-[var(--color-text)]">
-                    From first workflow to operating system.
+                    in a weekend. Then scale.
                   </span>
                 </h1>
                 <p
                   data-stage="3"
                   className="stage-enter mt-6 max-w-[58ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-lg text-pretty"
                 >
-                  We help people and teams move from scattered experiments to production workflows with clear scope,
-                  plain-language implementation, and measurable output.
+                  For builders, PMs, operators, and teams: pick one high-value workflow, implement it in plain
+                  language, and leave with a rollout path your team can actually run.
                 </p>
                 <div data-stage="4" className="stage-enter mt-8 flex flex-wrap items-center gap-3">
                   <Button href="/individuals">Explore Individuals</Button>
@@ -138,7 +138,7 @@ export default function HomePage() {
                   </Button>
                 </div>
                 <p data-stage="5" className="stage-enter mt-4 text-sm text-[var(--color-text-faint)]">
-                  Two paths. One standard: practical outcomes over theory.
+                  Two paths. One standard: measurable outcomes over AI theater.
                 </p>
               </div>
 
