@@ -117,18 +117,32 @@ export default function BusinessesPage() {
                   data-stage="2"
                   className="stage-enter mt-5 max-w-[12ch] font-heading text-[clamp(42px,5.6vw,74px)] font-bold leading-[0.96] tracking-tight text-[var(--color-text)] text-balance"
                 >
-                  AI setup that improves
+                  Put AI agents to work
                   <span className="block text-[var(--color-text)]">
-                    real business operations.
+                    across tools your team already uses.
                   </span>
                 </h1>
                 <p
                   data-stage="3"
                   className="stage-enter mt-5 max-w-[58ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-lg text-pretty"
                 >
-                  We don’t sell another platform. We configure proven tools inside your stack, train your team in
-                  person, and leave behind workflows operators can run on day one.
+                  We map one high-friction workflow first, then implement inside your stack so operators can move
+                  faster with fewer handoffs, fewer follow-up misses, and clearer reporting.
                 </p>
+                <div data-stage="3.5" className="stage-enter mt-4 flex flex-wrap gap-2">
+                  {[
+                    "CRM follow-up that does not slip",
+                    "Support triage with action paths",
+                    "Reporting and approval loops",
+                  ].map((item) => (
+                    <span
+                      key={item}
+                      className="inline-flex items-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 text-xs text-[var(--color-text-muted)]"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
                 <div data-stage="4" className="stage-enter mt-8 flex flex-wrap items-center gap-3">
                   <Button href={businessCtaHref}>Book a call</Button>
                   <Button href="#pricing" variant="secondary">
@@ -136,7 +150,7 @@ export default function BusinessesPage() {
                   </Button>
                 </div>
                 <p data-stage="5" className="stage-enter mt-4 text-sm text-[var(--color-text-faint)]">
-                  Book a free 30-minute discovery.
+                  Start with a free 30-minute discovery and leave with a scoped implementation path.
                 </p>
               </div>
 
