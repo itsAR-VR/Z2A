@@ -188,10 +188,9 @@ export function Hero() {
               ref={subheadRef}
               className="mt-5 text-[15px] md:text-lg leading-relaxed text-[color-mix(in_oklch,var(--color-text-muted)_72%,var(--color-text)_28%)] max-w-[60ch]"
             >
-              You can learn the pieces online. The hard part is finishing.
-              Bring one repeat task from work. In one focused weekend, you
-              build a first version you can use, a clear way to run it, and a
-              simple way to check it stays reliable — in a group of 5.
+              You can learn the basics online. The hard part is finishing. Bring one repeat task from work. In one
+              weekend, you&apos;ll build a first version you can run and a simple check to keep it reliable. You&apos;ll
+              build in a group of 5 with live help.
             </p>
           </div>
 
@@ -232,8 +231,8 @@ export function Hero() {
               <ul className="relative mt-4 space-y-3">
                 {[
                   {
-                    title: "A working agent",
-                    desc: "An AI helper built for your use case — not a toy demo.",
+                    title: "A working AI helper",
+                    desc: "Built for your use case, not a toy demo.",
                   },
                   {
                     title: "A plan to run it",

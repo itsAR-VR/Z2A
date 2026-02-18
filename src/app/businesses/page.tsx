@@ -11,13 +11,13 @@ import { BUSINESS_CALENDLY_URL } from "@/lib/config";
 const businessCtaHref = BUSINESS_CALENDLY_URL || "#contact";
 
 export const metadata: Metadata = {
-  title: "Zero-to-Agent for Businesses | AI Setup + Enablement",
+  title: "Zero-to-Agent for Businesses | AI Setup + Training",
   description:
     "Free 30-minute call, a 3-hour in-person AI workshop, and hands-on setup + team training inside the tools you already use.",
   openGraph: {
     title: "Zero-to-Agent for Businesses",
     description:
-      "We set up AI inside your current tools, train your team to use it, and keep improving what works.",
+      "We set up AI in the tools you already use, train your team, and keep improving what works.",
     type: "website",
   },
 };
@@ -46,19 +46,19 @@ const operatingModel = [
     number: "01",
     title: "Discovery (30 min)",
     detail:
-      "We pick one workflow. We review real examples (emails, sheets, docs). We agree on constraints and what success looks like for a live demo.",
+      "Pick one workflow. Review real examples: emails, sheets, docs. Agree on constraints and what success looks like for a live demo.",
   },
   {
     number: "02",
-    title: "AI Enablement Workshop (3h, in-person)",
+    title: "AI Workshop (3h, in-person)",
     detail:
-      "AI basics in plain English, which tool to use when (ChatGPT/Claude), a simple prompt template, and live practice on your real work.",
+      "AI basics in plain English. When to use ChatGPT vs Claude. A simple prompt template. Live practice on your real work.",
   },
   {
     number: "03",
-    title: "Done-for-you setup + enablement",
+    title: "Hands-on setup + training",
     detail:
-      "We set up accounts, connect Google Drive/Gmail/Calendar/Slack/CRM, create templates and step-by-step guides, and deliver a rollout plan.",
+      "Set up accounts. Connect Drive, Gmail, Calendar, Slack, and your CRM. Create templates and step-by-step guides. Deliver a rollout plan.",
   },
 ];
 
@@ -151,14 +151,14 @@ export default function BusinessesPage() {
                     {[
                       {
                         label: "30-min Discovery (free)",
-                        detail: "Pick one workflow, review real examples, and agree on what “good” looks like.",
+                        detail: "Pick one workflow, review real examples, and agree on what success looks like.",
                       },
                       {
-                        label: "AI Enablement Workshop (3h, in-person)",
+                        label: "AI Workshop (3h, in-person)",
                         detail: "Learn the basics in plain English and practice on your real work.",
                       },
                       {
-                        label: "Done-for-you setup + enablement",
+                        label: "Hands-on setup + training",
                         detail: "Set up access, connect tools, create templates, and train your team.",
                       },
                     ].map((item, index) => (
@@ -183,7 +183,7 @@ export default function BusinessesPage() {
                     Improvement loop
                   </p>
                   <p className="mt-1 text-sm text-[var(--color-text-muted)]">
-                    Pick one workflow, train your team, set it up in your tools, then improve it using real numbers.
+                    Pick one workflow. Train your team. Set it up. Improve it with real numbers.
                   </p>
                   <BusinessOrchestrationLoop className="mt-2" />
                 </div>
@@ -201,7 +201,7 @@ export default function BusinessesPage() {
               Built for teams with lots of repeat work.
             </h2>
             <p className="mt-4 max-w-[62ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-lg text-pretty">
-              If your work is spread across email, spreadsheets, tools, and approvals, AI can help right away.
+              If your work is spread across email, spreadsheets, apps, and approvals, AI can help right away.
             </p>
           </RevealOnScroll>
 
@@ -229,7 +229,7 @@ export default function BusinessesPage() {
                 AI that runs inside your current tools.
               </h2>
               <p className="mt-3 text-[15px] leading-relaxed text-[var(--color-text-muted)] text-pretty">
-                We start with simple helpers and automations. We use agents only where it’s safe to run day to day.
+                We start with simple helpers and automations. We only use agents when it’s safe day to day.
               </p>
               <div className="mt-6 space-y-3">
                 {operatingModel.map((step, index) => (
@@ -265,7 +265,7 @@ export default function BusinessesPage() {
                   </p>
                   <ul className="mt-2 space-y-1.5 text-sm text-[var(--color-text-muted)]">
                     <li>One owner to make decisions.</li>
-                    <li>Sample inputs and outputs from the current process.</li>
+                    <li>A few real examples from the current process.</li>
                     <li>Access to the tools where work already happens.</li>
                   </ul>
                 </div>
@@ -283,8 +283,8 @@ export default function BusinessesPage() {
               Pricing depends on scope
             </h2>
             <p className="mt-4 max-w-[72ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-lg">
-              We don’t publish a price list. Pricing depends on how hard the workflow is, which tools we connect,
-              your security and approval needs, and how fast you want to roll it out.
+              We don’t publish a price list. Price depends on how hard the workflow is, which tools we connect, your
+              security and approval needs, and how fast you want to roll it out.
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
               {[
@@ -326,7 +326,7 @@ export default function BusinessesPage() {
                   Step 2
                 </p>
                 <h3 className="mt-2 font-heading text-2xl font-semibold tracking-tight text-[var(--color-text)]">
-                  AI Enablement Workshop (3h, in-person)
+                  AI Workshop (3h, in-person)
                 </h3>
                 <ul className="mt-4 space-y-2 text-sm text-[var(--color-text-muted)]">
                   <li>AI basics in plain English</li>
@@ -344,7 +344,7 @@ export default function BusinessesPage() {
                   Step 3
                 </p>
                 <h3 className="mt-2 font-heading text-2xl font-semibold tracking-tight text-[var(--color-text)]">
-                  Done-for-you setup + enablement
+                  Hands-on setup + training
                 </h3>
                 <ul className="mt-4 space-y-2 text-sm text-[var(--color-text-muted)]">
                   <li>Set up accounts and access</li>
@@ -432,7 +432,7 @@ export default function BusinessesPage() {
             </h2>
             <p className="mt-4 max-w-[64ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-lg text-pretty">
               Tell us where work gets stuck and what tools you use today. We’ll map the simplest path to a workflow
-              that saves time — without adding a bunch of new tools.
+              that saves time, without adding new tools.
             </p>
             <ol className="mt-6 grid gap-3 sm:grid-cols-3">
               {[

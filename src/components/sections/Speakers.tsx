@@ -19,7 +19,7 @@ const speakers: Speaker[] = [
   {
     name: "Aadil Kazmi",
     role: "Instructor · Zero-to-Agent",
-    bio: "Head of AI at Infios. Previously co-founded Swyft (Shopify-backed) and worked at Amazon.",
+    bio: "Head of AI at Infios. Co-founded Swyft (Shopify-backed). Worked at Amazon.",
     badges: ["Instructor", "Head of AI · Infios", "Forbes 30 Under 30"],
     initials: "AK",
     headshotSrc: "/speakers/aadil-headshot.jpg",
@@ -27,9 +27,9 @@ const speakers: Speaker[] = [
   },
   {
     name: "Abdur Sajid",
-    role: "Guest Operator · cold2close.ai",
-    bio: "Head of AI at zeroriskgrowth.com. Building tools to improve outbound sales (cold2close.ai).",
-    badges: ["Operator", "cold2close.ai", "Built with OpenAI at scale"],
+    role: "Guest Speaker · cold2close.ai",
+    bio: "Head of AI at zeroriskgrowth.com. Builds tools for sales outreach (cold2close.ai).",
+    badges: ["Builder", "cold2close.ai", "Built with OpenAI tools"],
     initials: "AS",
     headshotSrc: "/speakers/abdur-headshot.jpg",
     linkedinUrl: "https://www.linkedin.com/in/abdur-sajid/",
@@ -41,15 +41,15 @@ export function Speakers() {
     <SectionWrapper id="speakers">
       <RevealOnScroll>
         <h2 className="font-heading font-semibold tracking-tight text-[clamp(28px,3.2vw,44px)] leading-[1.05] mb-4 text-[var(--color-text)]">
-          Learn from people{" "}
-          <span className="text-[var(--color-accent)]">who build for real.</span>
+          Learn from builders,{" "}
+          <span className="text-[var(--color-accent)]">not lecturers.</span>
         </h2>
       </RevealOnScroll>
 
       <RevealOnScroll delay={100}>
         <p className="text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed max-w-2xl mb-12">
-          You&apos;ll build with people who run real systems. The goal is
-          simple: pick a task, build it, test it, and launch.
+          You&apos;ll build with people who run real systems. The goal is simple: pick a task, build it, test it, and
+          demo it.
         </p>
       </RevealOnScroll>
 

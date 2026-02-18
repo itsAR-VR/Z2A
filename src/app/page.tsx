@@ -96,16 +96,15 @@ export default function HomePage() {
                   data-stage="1"
                   className="stage-enter max-w-[14ch] font-heading text-[clamp(44px,5.8vw,78px)] font-bold leading-[0.95] tracking-tight text-[var(--color-text)] text-balance"
                 >
-                  Build the skill to adapt.
-                  <span className="block text-[var(--color-text)]">Ship one workflow in a weekend.</span>
+                  Make AI useful at work.
+                  <span className="block text-[var(--color-text)]">Finish one workflow in a weekend.</span>
                 </h1>
                 <p
                   data-stage="2"
                   className="stage-enter mt-6 max-w-[58ch] text-[15px] leading-relaxed text-[color-mix(in_oklch,var(--color-text-muted)_72%,var(--color-text)_28%)] md:text-lg text-pretty"
                 >
-                  About 70M people in the U.S. work office jobs. Some forecasts expect a 20–50% reduction over the
-                  next several years, with the next 12–18 months moving fast. The teams that do best learn new
-                  tools quickly, redesign how work gets done, and keep delivering.
+                  Work is changing fast. The teams that do best learn new tools, improve how work gets done, and keep
+                  delivering.
                 </p>
                 <div data-stage="3" className="stage-enter mt-8 flex flex-wrap items-center gap-3">
                   <Button href="/individuals">See Individuals Program</Button>
@@ -128,7 +127,7 @@ export default function HomePage() {
                   </p>
                   <ul className="mt-4 space-y-3">
                     {[
-                      "Numbers: ~70M U.S. office workers; some forecasts expect a 20–50% reduction.",
+                      "Numbers: ~70M U.S. office workers. Some forecasts expect 20–50% fewer jobs over time.",
                       "Winners: teams that learn fast and keep improving.",
                       "Example: Blockbuster didn’t lose to better DVDs. It lost to Netflix and streaming.",
                       "We teach the tools and set them up so you can run the workflow yourself.",
