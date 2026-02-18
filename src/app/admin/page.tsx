@@ -46,97 +46,111 @@ export default function AdminPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg-900)]">
-      <div className="border-b border-[var(--color-border-700)]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
-          <div className="flex items-center justify-between">
-            <h1 className="font-heading font-bold text-xl text-[var(--color-text-100)]">
-              Zero-to-Agent Admin
-            </h1>
-          </div>
-        </div>
+    <div className="relative min-h-screen overflow-hidden">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        <div className="hero-orb hero-orb--left animate-drift opacity-85" />
+        <div className="hero-orb hero-orb--right animate-drift-slow opacity-85" />
+        <div className="hero-orb hero-orb--center animate-drift opacity-85" />
+        <div className="hero-orb hero-orb--bottom animate-drift-slow opacity-85" />
+        <div className="hero-plane hero-plane--left animate-drift opacity-55" />
+        <div className="hero-plane hero-plane--right animate-drift-slow opacity-55" />
+      </div>
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1] opacity-70">
+        <div className="hero-frost-overlay hero-frost-overlay--horizon" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
-        {/* Tabs */}
-        <div
-          role="tablist"
-          aria-label="Admin sections"
-          className="flex gap-1 mb-6 border-b border-[var(--color-border-700)]"
-        >
-          {tabs.map((t, idx) => (
-            <TabButton
-              key={t.value}
-              id={t.tabId}
-              controls={t.panelId}
-              active={activeTab === t.value}
-              onClick={() => setActiveTab(t.value)}
-              onKeyDown={(e) => {
-                const key = e.key;
-                if (
-                  key !== "ArrowLeft" &&
-                  key !== "ArrowRight" &&
-                  key !== "Home" &&
-                  key !== "End"
-                ) {
-                  return;
-                }
-                e.preventDefault();
+      <div className="relative z-10 min-h-screen bg-[var(--color-bg-900)]/80">
+        <div className="border-b border-[var(--color-border-700)]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+            <div className="flex items-center justify-between">
+              <h1 className="font-heading font-bold text-xl text-[var(--color-text-100)]">
+                Zero-to-Agent Admin
+              </h1>
+            </div>
+          </div>
+        </div>
 
-                let nextIdx = idx;
-                if (key === "ArrowLeft") nextIdx = (idx - 1 + tabs.length) % tabs.length;
-                if (key === "ArrowRight") nextIdx = (idx + 1) % tabs.length;
-                if (key === "Home") nextIdx = 0;
-                if (key === "End") nextIdx = tabs.length - 1;
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+          {/* Tabs */}
+          <div
+            role="tablist"
+            aria-label="Admin sections"
+            className="flex gap-1 mb-6 border-b border-[var(--color-border-700)]"
+          >
+            {tabs.map((t, idx) => (
+              <TabButton
+                key={t.value}
+                id={t.tabId}
+                controls={t.panelId}
+                active={activeTab === t.value}
+                onClick={() => setActiveTab(t.value)}
+                onKeyDown={(e) => {
+                  const key = e.key;
+                  if (
+                    key !== "ArrowLeft" &&
+                    key !== "ArrowRight" &&
+                    key !== "Home" &&
+                    key !== "End"
+                  ) {
+                    return;
+                  }
+                  e.preventDefault();
 
-                const next = tabs[nextIdx];
-                setActiveTab(next.value);
-                requestAnimationFrame(() => {
-                  document.getElementById(next.tabId)?.focus();
-                });
+                  let nextIdx = idx;
+                  if (key === "ArrowLeft") nextIdx = (idx - 1 + tabs.length) % tabs.length;
+                  if (key === "ArrowRight") nextIdx = (idx + 1) % tabs.length;
+                  if (key === "Home") nextIdx = 0;
+                  if (key === "End") nextIdx = tabs.length - 1;
+
+                  const next = tabs[nextIdx];
+                  setActiveTab(next.value);
+                  requestAnimationFrame(() => {
+                    document.getElementById(next.tabId)?.focus();
+                  });
+                }}
+              >
+                {t.label}
+              </TabButton>
+            ))}
+          </div>
+
+          <div
+            id={tabs[0].panelId}
+            role="tabpanel"
+            aria-labelledby={tabs[0].tabId}
+            hidden={activeTab !== tabs[0].value}
+          >
+            <AttendeeTable forcedNetworkCode={forcedNetworkCode} />
+          </div>
+          <div
+            id={tabs[1].panelId}
+            role="tabpanel"
+            aria-labelledby={tabs[1].tabId}
+            hidden={activeTab !== tabs[1].value}
+          >
+            <ReferralCodeTable
+              onFilterByCode={(code) => {
+                setForcedNetworkCode(code);
+                setActiveTab("attendees");
               }}
-            >
-              {t.label}
-            </TabButton>
-          ))}
-        </div>
-
-        <div
-          id={tabs[0].panelId}
-          role="tabpanel"
-          aria-labelledby={tabs[0].tabId}
-          hidden={activeTab !== tabs[0].value}
-        >
-          <AttendeeTable forcedNetworkCode={forcedNetworkCode} />
-        </div>
-        <div
-          id={tabs[1].panelId}
-          role="tabpanel"
-          aria-labelledby={tabs[1].tabId}
-          hidden={activeTab !== tabs[1].value}
-        >
-          <ReferralCodeTable
-            onFilterByCode={(code) => {
-              setForcedNetworkCode(code);
-              setActiveTab("attendees");
-            }}
-          />
-        </div>
-        <div
-          id={tabs[2].panelId}
-          role="tabpanel"
-          aria-labelledby={tabs[2].tabId}
-          hidden={activeTab !== tabs[2].value}
-        >
-          <WaitlistTable />
-        </div>
-        <div
-          id={tabs[3].panelId}
-          role="tabpanel"
-          aria-labelledby={tabs[3].tabId}
-          hidden={activeTab !== tabs[3].value}
-        >
-          <EmailSender />
+            />
+          </div>
+          <div
+            id={tabs[2].panelId}
+            role="tabpanel"
+            aria-labelledby={tabs[2].tabId}
+            hidden={activeTab !== tabs[2].value}
+          >
+            <WaitlistTable />
+          </div>
+          <div
+            id={tabs[3].panelId}
+            role="tabpanel"
+            aria-labelledby={tabs[3].tabId}
+            hidden={activeTab !== tabs[3].value}
+          >
+            <EmailSender />
+          </div>
         </div>
       </div>
     </div>

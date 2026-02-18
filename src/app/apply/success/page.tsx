@@ -11,8 +11,20 @@ export default function ApplySuccessPage() {
   }, []);
 
   return (
-    <main className="min-h-screen flex items-center justify-center">
-      <div className="container-content max-w-lg text-center py-20">
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        <div className="hero-orb hero-orb--left animate-drift" />
+        <div className="hero-orb hero-orb--right animate-drift-slow" />
+        <div className="hero-orb hero-orb--center animate-drift" />
+        <div className="hero-orb hero-orb--bottom animate-drift-slow" />
+        <div className="hero-plane hero-plane--left animate-drift opacity-70" />
+        <div className="hero-plane hero-plane--right animate-drift-slow opacity-62" />
+      </div>
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1]">
+        <div className="hero-frost-overlay hero-frost-overlay--horizon" />
+      </div>
+
+      <div className="container-content relative z-10 max-w-lg py-20 text-center">
         <div className="mx-auto mb-6 w-16 h-16 rounded-full bg-[color-mix(in_oklch,var(--color-accent)_12%,var(--color-surface))] border border-[color-mix(in_oklch,var(--color-accent)_35%,var(--color-border))] shadow-[var(--shadow-sm)] flex items-center justify-center">
           <svg
             className="w-8 h-8 text-[var(--color-accent-500)]"
