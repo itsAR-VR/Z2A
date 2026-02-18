@@ -106,10 +106,13 @@ export default function HomePage() {
                   Work is changing fast. The teams that do best learn new tools, improve how work gets done, and keep
                   delivering.
                 </p>
-                <div data-stage="3" className="stage-enter mt-8 flex flex-wrap items-center gap-3">
-                  <Button href="/individuals">See Individuals Program</Button>
+                <div
+                  data-stage="3"
+                  className="stage-enter mt-8 flex flex-wrap items-center gap-3 sm:flex-nowrap"
+                >
+                  <Button href="/individuals">for individuals</Button>
                   <Button href="/businesses" variant="secondary">
-                    See Businesses Services
+                    for businesses
                   </Button>
                 </div>
                 <p
