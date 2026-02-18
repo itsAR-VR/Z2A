@@ -8,11 +8,11 @@ import { getAllBlogs } from "@/lib/blogs-data";
 export const metadata: Metadata = {
   title: "Zero-to-Agent Blogs | Operator Playbooks for AI Execution",
   description:
-    "73 field-tested operator blog posts adapted for Zero-to-Agent. Practical AI execution frameworks for teams that need measurable outcomes.",
+    "Operator playbooks for the AI transition. Practical AI execution frameworks for teams that need measurable workflow outcomes.",
   openGraph: {
     title: "Zero-to-Agent Blogs",
     description:
-      "Operator-first AI execution posts adapted for teams that need practical workflow outcomes.",
+      "Operator-first AI execution posts for teams that need practical workflow outcomes.",
     type: "website",
   },
 };
@@ -51,8 +51,8 @@ export default function BlogsPage() {
               Real operator playbooks for the AI transition
             </h1>
             <p className="mt-5 max-w-[70ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-lg text-pretty">
-              This section delivers a full operator blog corpus rewritten for Zero-to-Agent with a direct execution
-              angle: lead with facts, identify winners, make the market claim, and show how teams can act now.
+              This library delivers operator playbooks with a direct execution angle: lead with facts, identify
+              winners, make the market claim, and show how teams can act now.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <div className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-2 text-sm text-[var(--color-text-muted)]">
@@ -62,7 +62,7 @@ export default function BlogsPage() {
                 Randomized earlier publication dates
               </div>
               <div className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-2 text-sm text-[var(--color-text-muted)]">
-                Adapted for Zero-to-Agent execution
+                Built for Zero-to-Agent execution
               </div>
             </div>
           </div>
@@ -124,16 +124,14 @@ export default function BlogsPage() {
           <div className="container-content">
             <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-[var(--shadow-sm)] md:p-8">
               <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
-                Adaptation Method
+                Operating Method
               </p>
               <h2 className="mt-3 font-heading text-[clamp(28px,3.4vw,44px)] font-bold leading-[1.04] tracking-tight text-[var(--color-text)]">
-                Source-grounded topics. Zero-to-Agent execution angle.
+                Facts-first narrative. Zero-to-Agent execution angle.
               </h2>
               <p className="mt-4 max-w-[72ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-base">
-                Every post was rewritten around the same four-step operating narrative: facts first, then the behavior
-                pattern of current winners, then the market-level claim, then a practical path to implementation. We
-                also fused insights from the local scraped-courses corpus to strengthen context-engineering, workflow
-                design, and execution guidance.
+                Every post follows the same four-step operating narrative: facts first, then the behavior pattern of
+                current winners, then the market-level claim, then a practical path to implementation.
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <Button href="/individuals">See Individuals Program</Button>
