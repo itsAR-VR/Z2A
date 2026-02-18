@@ -110,9 +110,9 @@ export default function HomePage() {
                   data-stage="3"
                   className="stage-enter mt-8 flex flex-wrap items-center gap-3 sm:flex-nowrap"
                 >
-                  <Button href="/individuals">for individuals</Button>
+                  <Button href="/individuals">For Individuals</Button>
                   <Button href="/businesses" variant="secondary">
-                    for businesses
+                    For Businesses
                   </Button>
                 </div>
                 <p
