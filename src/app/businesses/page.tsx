@@ -99,28 +99,6 @@ export default function BusinessesPage() {
                 >
                   For businesses
                 </p>
-                <div data-stage="1.5" className="stage-enter mt-4">
-                  <a href="#contact" className="offer-ticker group block rounded-[var(--radius-md)]">
-                    <div className="offer-ticker__track" aria-hidden="true">
-                      <span>Discovery calls open</span>
-                      <span>Implementation inside your existing stack</span>
-                      <span>Operator enablement included</span>
-                      <span>Contact for pricing</span>
-                      <span>Custom-scoped engagements only</span>
-                      <span>Book discovery call</span>
-                      <span>Discovery calls open</span>
-                      <span>Implementation inside your existing stack</span>
-                      <span>Operator enablement included</span>
-                      <span>Contact for pricing</span>
-                      <span>Custom-scoped engagements only</span>
-                      <span>Book discovery call</span>
-                    </div>
-                    <span className="sr-only">
-                      Discovery calls are open. We implement inside your existing stack with operator enablement and
-                      custom-scoped pricing.
-                    </span>
-                  </a>
-                </div>
                 <h1
                   data-stage="2"
                   className="stage-enter mt-5 max-w-[12ch] font-heading text-[clamp(42px,5.6vw,74px)] font-bold leading-[0.96] tracking-tight text-[var(--color-text)] text-balance"

@@ -257,15 +257,6 @@ section[id] {
   }
 }
 
-@keyframes ticker-scroll {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
 @keyframes workflow-sheen {
   0% {
     transform: translate3d(-120%, 0, 0);
@@ -298,44 +289,6 @@ section[id] {
   opacity: 1;
   transform: none;
   will-change: transform, opacity;
-}
-
-.offer-ticker {
-  border: 1px solid color-mix(in oklch, var(--color-accent) 24%, var(--color-border));
-  background: color-mix(in oklch, var(--color-accent) 8%, var(--color-surface));
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-}
-
-.offer-ticker__track {
-  display: flex;
-  gap: 2.4rem;
-  width: max-content;
-  min-width: 200%;
-  padding: 0.45rem 0.95rem;
-  font-family: var(--font-mono);
-  font-size: 0.63rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-  animation: ticker-scroll 18s linear infinite;
-}
-
-.offer-ticker__track span {
-  position: relative;
-  white-space: nowrap;
-}
-
-.offer-ticker__track span::after {
-  content: "•";
-  position: absolute;
-  right: -1.35rem;
-  color: var(--color-accent);
-}
-
-.offer-ticker:hover .offer-ticker__track,
-.offer-ticker:focus-visible .offer-ticker__track {
-  animation-play-state: paused;
 }
 
 .workflow-stage-card {
@@ -889,18 +842,6 @@ section[id] {
   .flip-label__secondary {
     transition: none !important;
     transform: none !important;
-  }
-
-  .offer-ticker__track {
-    animation: none !important;
-    transform: none !important;
-    min-width: 100%;
-    flex-wrap: wrap;
-    gap: 0.6rem 1.2rem;
-  }
-
-  .offer-ticker__track span::after {
-    display: none;
   }
 
   .workflow-stage-card,
