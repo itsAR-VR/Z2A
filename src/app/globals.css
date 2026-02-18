@@ -601,31 +601,31 @@ section[id] {
   position: absolute;
   border-radius: clamp(28px, 3vw, 44px);
   border: 1px solid color-mix(in oklch, white 76%, var(--color-border-strong));
-  --hero-frost-blur: blur(46px);
-  --hero-frost-brightness: brightness(0.9);
-  --hero-frost-contrast: contrast(132%);
-  --hero-frost-saturate: saturate(182%);
+  --hero-frost-blur: blur(44px);
+  --hero-frost-brightness: brightness(0.96);
+  --hero-frost-contrast: contrast(124%);
+  --hero-frost-saturate: saturate(170%);
   background:
     linear-gradient(
       180deg,
       color-mix(in oklch, white 6%, transparent) 0%,
-      color-mix(in oklch, white 1%, transparent) 34%,
-      color-mix(in oklch, black 18%, transparent) 100%
+      color-mix(in oklch, white 3%, transparent) 34%,
+      color-mix(in oklch, black 11%, transparent) 100%
     ),
     linear-gradient(
       98deg,
       color-mix(in oklch, white 16%, transparent) 0%,
       transparent 18%,
-      color-mix(in oklch, black 14%, transparent) 48%,
+      color-mix(in oklch, black 8%, transparent) 48%,
       transparent 84%,
       color-mix(in oklch, white 16%, transparent) 100%
     ),
-    color-mix(in oklch, var(--color-text) 7%, transparent);
+    color-mix(in oklch, var(--color-surface) 6%, transparent);
   box-shadow:
-    0 26px 62px color-mix(in oklch, black 18%, transparent),
-    0 10px 22px color-mix(in oklch, black 11%, transparent),
+    0 26px 62px color-mix(in oklch, black 14%, transparent),
+    0 10px 22px color-mix(in oklch, black 8%, transparent),
     inset 0 1px 0 color-mix(in oklch, white 66%, transparent),
-    inset 0 -1px 0 color-mix(in oklch, black 42%, transparent),
+    inset 0 -1px 0 color-mix(in oklch, black 32%, transparent),
     inset 0 0 0 1px color-mix(in oklch, white 12%, transparent);
   -webkit-backdrop-filter: var(--hero-frost-blur) var(--hero-frost-brightness) var(--hero-frost-contrast)
     var(--hero-frost-saturate);
@@ -668,7 +668,7 @@ section[id] {
       color-mix(in oklch, white 24%, transparent) 100%
     );
   mix-blend-mode: normal;
-  opacity: 0.5;
+  opacity: 0.44;
   filter: blur(14px) saturate(1.12);
   transform: translate3d(0, 0, 0);
 }
@@ -692,7 +692,7 @@ section[id] {
       180deg,
       color-mix(in oklch, white 14%, transparent) 0%,
       transparent 30%,
-      color-mix(in oklch, black 38%, transparent) 100%
+      color-mix(in oklch, black 24%, transparent) 100%
     ),
     radial-gradient(
       136% 84% at 50% -16%,
@@ -700,7 +700,7 @@ section[id] {
       transparent 64%
     );
   mix-blend-mode: normal;
-  opacity: 0.42;
+  opacity: 0.34;
 }
 
 .hero-frost-overlay--horizon {
@@ -752,19 +752,19 @@ section[id] {
   }
 
   .hero-frost-overlay {
-    --hero-frost-blur: blur(34px);
-    --hero-frost-brightness: brightness(0.92);
-    --hero-frost-contrast: contrast(122%);
-    --hero-frost-saturate: saturate(158%);
+    --hero-frost-blur: blur(32px);
+    --hero-frost-brightness: brightness(0.97);
+    --hero-frost-contrast: contrast(116%);
+    --hero-frost-saturate: saturate(150%);
   }
 
   .hero-frost-overlay::before {
-    opacity: 0.4;
+    opacity: 0.34;
     filter: blur(12px) saturate(1.08);
   }
 
   .hero-frost-overlay::after {
-    opacity: 0.3;
+    opacity: 0.25;
   }
 
   .hero-frost-overlay--horizon {
