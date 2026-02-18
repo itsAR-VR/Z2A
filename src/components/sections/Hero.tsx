@@ -179,9 +179,8 @@ export function Hero() {
               ref={headlineRef}
               className="font-heading font-bold tracking-tight text-[clamp(40px,5.2vw,74px)] leading-[0.98] text-[var(--color-text)]"
             >
-              Automate real work{" "}
-              <span className="text-[var(--color-accent)]">in a weekend</span>.
-              <br className="hidden sm:block" /> In person, with support.
+              We simplify AI for{" "}
+              <span className="text-[var(--color-accent)]">individuals & business owners</span> who don't have time to figure it out.
             </h1>
 
             <p
