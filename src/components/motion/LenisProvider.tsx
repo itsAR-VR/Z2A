@@ -13,6 +13,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 export function LenisProvider({ children }: { children: React.ReactNode }) {
   const prefersReduced = useReducedMotion();
   const lenisRef = useRef<Lenis | null>(null);
+  const rafIdRef = useRef<number | null>(null);
 
   useEffect(() => {
     function setLenisMarker(on: boolean) {
@@ -23,15 +24,24 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
       }
     }
 
+    function teardownLenis() {
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
+      lenisRef.current?.destroy();
+      lenisRef.current = null;
+    }
+
     // Skip on mobile/touch or reduced motion
     const isTouch = window.matchMedia("(pointer: coarse)").matches;
     if (prefersReduced || isTouch) {
       setLenisMarker(false);
-      lenisRef.current?.destroy();
-      lenisRef.current = null;
+      teardownLenis();
       return;
     }
 
+    teardownLenis();
     setLenisMarker(true);
     const lenis = new Lenis({
       duration: 1.2,
@@ -42,14 +52,13 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
 
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafIdRef.current = requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
+    rafIdRef.current = requestAnimationFrame(raf);
 
     return () => {
       setLenisMarker(false);
-      lenis.destroy();
-      lenisRef.current = null;
+      teardownLenis();
     };
   }, [prefersReduced]);
 

@@ -41,6 +41,7 @@ const pageLinks: PageLink[] = [
   { href: "/", label: "Home" },
   { href: "/individuals", label: "Individuals" },
   { href: "/businesses", label: "Businesses" },
+  { href: "/blogs", label: "Blogs" },
 ];
 
 const homeAnchors: NavAnchor[] = [
@@ -69,6 +70,16 @@ const businessesAnchors: NavAnchor[] = [
 const fallbackBusinessCta = "#contact";
 
 function getPageConfig(pathname: string): PageConfig {
+  if (pathname.startsWith("/blogs")) {
+    return {
+      anchors: [],
+      ctaLabel: "Apply",
+      ctaHref: "/apply",
+      ctaEventSource: "nav_blogs",
+      menuNote: "Read the execution playbooks, then apply when you are ready to build in a weekend.",
+    };
+  }
+
   if (pathname.startsWith("/individuals")) {
     return {
       anchors: individualsAnchors,

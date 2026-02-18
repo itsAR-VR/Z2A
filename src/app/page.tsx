@@ -8,13 +8,13 @@ import { SectionWrapper } from "@/components/SectionWrapper";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 
 export const metadata: Metadata = {
-  title: "Zero-to-Agent | Agentic Workflows for Individuals and Businesses",
+  title: "Zero-to-Agent | Learn AI Workflows You Can Run",
   description:
-    "A focused path to practical AI execution for individuals and businesses. Clear workflows, plain language, measurable outcomes.",
+    "Hands-on education and enablement for individuals and teams who want practical AI workflows, plain language, and measurable outcomes.",
   openGraph: {
     title: "Zero-to-Agent",
     description:
-      "Move from AI confusion to production workflows with clear implementation and ongoing improvement.",
+      "Move from AI confusion to practical workflows your team can run — with clear education, setup support, and ongoing improvement.",
     type: "website",
   },
 };
@@ -23,9 +23,9 @@ const pathwayCards = [
   {
     id: "individuals",
     eyebrow: "For individuals",
-    title: "Ship one production workflow by Sunday.",
+    title: "Learn the tools. Ship one workflow by Sunday.",
     description:
-      "Hands-on weekend build sprint for PMs, operators, and builders who want shipped output, not passive lessons.",
+      "Hands-on weekend sprint for PMs, operators, and builders who want to learn by shipping — not watching slides.",
     fit: "Best fit if you want to build your own workflow and lead rollout internally.",
     bullets: ["In-person cohort in Toronto", "Pods of 5 with live support", "Working demo plus rollout plan"],
     href: "/individuals",
@@ -34,11 +34,11 @@ const pathwayCards = [
   {
     id: "businesses",
     eyebrow: "For businesses",
-    title: "Install AI workflows into operations without platform sprawl.",
+    title: "Equip your team to run AI workflows inside your existing tools.",
     description:
-      "Service model for teams that want setup, operator enablement, and measurable workflow improvement inside existing tools.",
-    fit: "Best fit if your team needs implementation ownership and a managed path after launch.",
-    bullets: ["Free 30-minute discovery", "In-person enablement workshop", "Done-for-you setup + training"],
+      "Education + guided setup for teams who want internal ownership, clear operators, and measurable workflow improvement — without platform sprawl.",
+    fit: "Best fit if you want your operators to own the workflow — and keep improving without vendor dependency.",
+    bullets: ["Free 30-minute discovery", "In-person enablement workshop", "Tool setup with your operators"],
     href: "/businesses",
     cta: "See Businesses Services",
   },
@@ -93,75 +93,47 @@ export default function HomePage() {
           <div className="container-content relative z-10">
             <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-12">
               <div className="relative md:col-span-7">
-                <p
-                  data-stage="1"
-                  className="stage-enter inline-flex items-center gap-2 rounded-full border border-[color-mix(in_oklch,var(--color-accent)_34%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-accent)_10%,var(--color-surface))] px-3 py-1 font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-accent)]"
-                >
-                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
-                  Zero-to-Agent
-                </p>
-                <div data-stage="1.5" className="stage-enter mt-4">
-                  <Link href="/individuals" className="offer-ticker group block rounded-[var(--radius-md)]">
-                    <div className="offer-ticker__track" aria-hidden="true">
-                      <span>Admissions are live</span>
-                      <span>Toronto weekend cohort</span>
-                      <span>50 seats total</span>
-                      <span>$100 deposit via Stripe</span>
-                      <span>100% refund if you are not satisfied</span>
-                      <span>Apply now</span>
-                      <span>Admissions are live</span>
-                      <span>Toronto weekend cohort</span>
-                      <span>50 seats total</span>
-                      <span>$100 deposit via Stripe</span>
-                      <span>100% refund if you are not satisfied</span>
-                      <span>Apply now</span>
-                    </div>
-                    <span className="sr-only">
-                      Admissions are live for the Toronto weekend cohort. 50 seats total. $100 deposit via Stripe and
-                      100% refund if you are not satisfied.
-                    </span>
-                  </Link>
-                </div>
                 <h1
-                  data-stage="2"
-                  className="stage-enter mt-5 max-w-[14ch] font-heading text-[clamp(44px,5.8vw,78px)] font-bold leading-[0.95] tracking-tight text-[var(--color-text)] text-balance"
+                  data-stage="1"
+                  className="stage-enter max-w-[14ch] font-heading text-[clamp(44px,5.8vw,78px)] font-bold leading-[0.95] tracking-tight text-[var(--color-text)] text-balance"
                 >
-                  Ship one production workflow
-                  <span className="block text-[var(--color-text)]">
-                    in a weekend. Then scale.
-                  </span>
+                  Build the skill to adapt.
+                  <span className="block text-[var(--color-text)]">Ship one workflow in a weekend.</span>
                 </h1>
                 <p
-                  data-stage="3"
+                  data-stage="2"
                   className="stage-enter mt-6 max-w-[58ch] text-[15px] leading-relaxed text-[color-mix(in_oklch,var(--color-text-muted)_72%,var(--color-text)_28%)] md:text-lg text-pretty"
                 >
-                  For builders, PMs, operators, and teams: pick one high-value workflow, implement it in plain
-                  language, and leave with a rollout path your team can actually run.
+                  In the U.S., ~70M people work white-collar jobs, and some forecasts expect a 20–50% reduction
+                  over the next several years — with disruption accelerating in the next 12–18 months. The
+                  winners will be the people and teams who learn new tools fast, redesign workflows, and keep
+                  shipping.
                 </p>
-                <div data-stage="4" className="stage-enter mt-8 flex flex-wrap items-center gap-3">
+                <div data-stage="3" className="stage-enter mt-8 flex flex-wrap items-center gap-3">
                   <Button href="/individuals">See Individuals Program</Button>
                   <Button href="/businesses" variant="secondary">
                     See Businesses Services
                   </Button>
                 </div>
                 <p
-                  data-stage="5"
+                  data-stage="4"
                   className="stage-enter mt-4 text-sm text-[color-mix(in_oklch,var(--color-text-faint)_72%,var(--color-text-muted)_28%)]"
                 >
                   Two paths. One standard: measurable outcomes over AI theater.
                 </p>
               </div>
 
-              <div data-stage="6" className="stage-enter md:col-span-5">
+              <div data-stage="5" className="stage-enter md:col-span-5">
                 <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-surface)_92%,var(--color-bg)_8%)] p-6 shadow-[var(--shadow-sm)]">
                   <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
                     What this means in practice
                   </p>
                   <ul className="mt-4 space-y-3">
                     {[
-                      "Scope one high-value workflow first.",
-                      "Build with your current tools and team constraints.",
-                      "Track outcomes and improve continuously.",
+                      "Numbers: ~70M U.S. white-collar workers; forecasts expect 20–50% reduction.",
+                      "Winners: adaptable teams learning new skills quickly.",
+                      "Inflection: Blockbuster didn’t lose to better DVDs — it lost to Netflix and streaming.",
+                      "We help you learn the tools and set them up so you can run the workflow yourself.",
                     ].map((item) => (
                       <li key={item} className="flex gap-3">
                         <span className="mt-1 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-accent)]">
@@ -178,7 +150,8 @@ export default function HomePage() {
                       One standard
                     </p>
                     <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-muted)] text-pretty">
-                      Practical outcomes over theory. Keep scope tight, ship quickly, and improve in cycles.
+                      Practical outcomes over theory. Tight scope, clear operators, and workflows you can run
+                      without us.
                     </p>
                   </div>
                 </div>
@@ -194,11 +167,12 @@ export default function HomePage() {
                 Vision
               </p>
               <h2 className="mt-3 font-heading text-[clamp(32px,4.2vw,56px)] font-bold leading-[1.02] tracking-tight text-[var(--color-text)]">
-                Build systems people can trust, not demos people forget.
+                Build capability people can trust, not demos people forget.
               </h2>
               <p className="mt-4 max-w-[65ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-lg text-pretty">
-                AI should reduce friction inside real workflows, not add another layer of complexity. We focus on
-                deployment quality, operational adoption, and measurable improvement over time.
+                AI should reduce friction inside real workflows, not add another layer of complexity. We teach
+                the tools, help you set them up inside your existing stack, and make sure your team can operate
+                the workflow day one. That’s how you embrace the AI era: one owned workflow at a time.
               </p>
             </RevealOnScroll>
 
@@ -208,13 +182,15 @@ export default function HomePage() {
                   Core belief
                 </p>
                 <p className="mt-3 font-heading text-[24px] leading-[1.18] tracking-tight text-[var(--color-text)]">
-                  The winners will be the ones who remove complexity for the customer.
+                  You already have the context on your biggest problems. We equip you with the tools to solve
+                  them.
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--color-text-muted)] text-pretty">
-                  This is why we bias toward plain language, visible delivery, and continuous servicing after launch.
+                  This is education-first work. We build the skill inside your team, then help you set up the
+                  tools so you can keep improving without a vendor dependency.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {["In-person execution", "Operator-first workflows", "Post-deploy improvement"].map((item) => (
+                  {["Education-first", "Operator-owned workflows", "Guided setup"].map((item) => (
                     <span
                       key={item}
                       className="inline-flex items-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 text-[11px] text-[var(--color-text-muted)]"
@@ -237,7 +213,8 @@ export default function HomePage() {
               Pick your path fast.
             </h2>
             <p className="mt-3 max-w-[58ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-base">
-              Choose based on ownership. Build it yourself in a weekend, or have us set it up and run enablement for your team.
+              Choose based on ownership. Learn it yourself in a weekend, or run a team enablement sprint where
+              we set up the tools together.
             </p>
           </RevealOnScroll>
 
@@ -294,7 +271,7 @@ export default function HomePage() {
                 Principles
               </p>
               <h2 className="mt-3 font-heading text-[clamp(30px,3.8vw,48px)] font-bold leading-[1.04] tracking-tight text-[var(--color-text)]">
-                How we build.
+                How we work.
               </h2>
               <p className="mt-4 text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-base">
                 These operating rules keep the work grounded, credible, and useful for real teams.
