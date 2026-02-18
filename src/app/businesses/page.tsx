@@ -5,6 +5,7 @@ import { LenisProvider } from "@/components/motion/LenisProvider";
 import { StageTimeline } from "@/components/motion/StageTimeline";
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
+import { BusinessOrchestrationLoop } from "@/components/BusinessOrchestrationLoop";
 import { BUSINESS_CALENDLY_URL } from "@/lib/config";
 
 const businessCtaHref = BUSINESS_CALENDLY_URL || "#contact";
@@ -86,7 +87,7 @@ export default function BusinessesPage() {
             <div className="hero-plane hero-plane--right animate-drift-slow opacity-62" />
           </div>
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1]">
-            <div className="hero-frost-overlay hero-frost-overlay--horizon" />
+            <div className="hero-frost-overlay hero-frost-overlay--horizon hero-frost-overlay--soft-bottom" />
           </div>
 
           <div className="container-content relative z-10">
@@ -162,27 +163,6 @@ export default function BusinessesPage() {
                 >
                   Start with a free 30-minute discovery and leave with a scoped implementation path.
                 </p>
-                <div data-stage="6" className="stage-enter mt-5 max-w-[520px]">
-                  <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
-                    Orchestration loop
-                  </p>
-                  <div className="signature-rail mt-2">
-                    <div className="signature-rail__track" />
-                    <span className="signature-rail__node signature-rail__node--1" />
-                    <span className="signature-rail__node signature-rail__node--2" />
-                    <span className="signature-rail__node signature-rail__node--3" />
-                    <span className="signature-rail__node signature-rail__node--4" />
-                    <span className="signature-rail__node signature-rail__node--5" />
-                    <span className="signature-rail__runner" />
-                  </div>
-                  <div className="mt-2 grid grid-cols-5 gap-2 text-[10px] font-mono tracking-[0.12em] uppercase text-[var(--color-text-faint)]">
-                    <span>Intake</span>
-                    <span className="text-center">Route</span>
-                    <span className="text-center">Act</span>
-                    <span className="text-center">Verify</span>
-                    <span className="text-right">Improve</span>
-                  </div>
-                </div>
               </div>
 
               <div data-stage="7" className="stage-enter md:col-span-5">
@@ -220,6 +200,15 @@ export default function BusinessesPage() {
                     ))}
                   </ol>
                   <p className="mt-3 text-xs text-[var(--color-text-faint)]">Optional monthly improvement cadence after setup.</p>
+                </div>
+                <div data-stage="7.5" className="stage-enter mt-4 rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] p-4 shadow-[var(--shadow-sm)]">
+                  <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
+                    Business orchestration loop
+                  </p>
+                  <p className="mt-1 text-sm text-[var(--color-text-muted)]">
+                    Scope one workflow, enable operators, deploy inside your stack, and iterate with real metrics.
+                  </p>
+                  <BusinessOrchestrationLoop className="mt-2" />
                 </div>
               </div>
             </div>

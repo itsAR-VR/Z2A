@@ -40,7 +40,7 @@ export default function BlogsPage() {
             <div className="hero-plane hero-plane--right animate-drift-slow opacity-55" />
           </div>
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1]">
-            <div className="hero-frost-overlay hero-frost-overlay--horizon" />
+            <div className="hero-frost-overlay hero-frost-overlay--horizon hero-frost-overlay--soft-bottom" />
           </div>
           <div className="container-content relative z-10">
             <p className="inline-flex items-center gap-2 rounded-full border border-[color-mix(in_oklch,var(--color-accent)_34%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-accent)_10%,var(--color-surface))] px-3 py-1 font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-accent)]">

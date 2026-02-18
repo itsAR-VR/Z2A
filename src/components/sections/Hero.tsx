@@ -157,7 +157,7 @@ export function Hero() {
         <div className="hero-plane hero-plane--right animate-drift-slow opacity-62" />
       </div>
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1]">
-        <div className="hero-frost-overlay hero-frost-overlay--horizon" />
+        <div className="hero-frost-overlay hero-frost-overlay--horizon hero-frost-overlay--soft-bottom" />
       </div>
 
       <div className="container-content relative z-10 pt-28 md:pt-40 pb-8 md:pb-10">
