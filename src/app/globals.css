@@ -520,21 +520,6 @@ section[id] {
   );
 }
 
-.hero-orb--bottom {
-  width: min(34vw, 440px);
-  height: min(34vw, 440px);
-  right: 14%;
-  bottom: -16%;
-  background: radial-gradient(
-    circle at 50% 46%,
-    rgba(236, 244, 255, 0.94) 0%,
-    rgba(178, 198, 255, 0.8) 34%,
-    rgba(122, 146, 242, 0.64) 54%,
-    rgba(88, 110, 210, 0.42) 72%,
-    transparent 84%
-  );
-}
-
 .hero-orb--center {
   width: min(40vw, 560px);
   height: min(40vw, 560px);
@@ -733,13 +718,6 @@ section[id] {
     height: 62vw;
     top: -6%;
     right: -18%;
-  }
-
-  .hero-orb--bottom {
-    width: 58vw;
-    height: 58vw;
-    right: 12%;
-    bottom: -16%;
   }
 
   .hero-orb--center {

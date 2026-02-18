@@ -48,12 +48,11 @@ export default function AdminPage() {
   return (
     <div className="relative min-h-screen overflow-hidden">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="hero-orb hero-orb--left animate-drift opacity-85" />
-        <div className="hero-orb hero-orb--right animate-drift-slow opacity-85" />
-        <div className="hero-orb hero-orb--center animate-drift opacity-85" />
-        <div className="hero-orb hero-orb--bottom animate-drift-slow opacity-85" />
-        <div className="hero-plane hero-plane--left animate-drift opacity-55" />
-        <div className="hero-plane hero-plane--right animate-drift-slow opacity-55" />
+            <div className="hero-orb hero-orb--left animate-drift opacity-85" />
+            <div className="hero-orb hero-orb--right animate-drift-slow opacity-85" />
+            <div className="hero-orb hero-orb--center animate-drift opacity-85" />
+            <div className="hero-plane hero-plane--left animate-drift opacity-55" />
+            <div className="hero-plane hero-plane--right animate-drift-slow opacity-55" />
       </div>
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1] opacity-70">
         <div className="hero-frost-overlay hero-frost-overlay--horizon" />

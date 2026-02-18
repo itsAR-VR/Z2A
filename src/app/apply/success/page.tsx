@@ -13,12 +13,11 @@ export default function ApplySuccessPage() {
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="hero-orb hero-orb--left animate-drift" />
-        <div className="hero-orb hero-orb--right animate-drift-slow" />
-        <div className="hero-orb hero-orb--center animate-drift" />
-        <div className="hero-orb hero-orb--bottom animate-drift-slow" />
-        <div className="hero-plane hero-plane--left animate-drift opacity-70" />
-        <div className="hero-plane hero-plane--right animate-drift-slow opacity-62" />
+            <div className="hero-orb hero-orb--left animate-drift" />
+            <div className="hero-orb hero-orb--right animate-drift-slow" />
+            <div className="hero-orb hero-orb--center animate-drift" />
+            <div className="hero-plane hero-plane--left animate-drift opacity-70" />
+            <div className="hero-plane hero-plane--right animate-drift-slow opacity-62" />
       </div>
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1]">
         <div className="hero-frost-overlay hero-frost-overlay--horizon" />
