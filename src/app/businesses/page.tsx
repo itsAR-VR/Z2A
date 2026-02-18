@@ -13,7 +13,7 @@ const businessCtaHref = BUSINESS_CALENDLY_URL || "#contact";
 export const metadata: Metadata = {
   title: "Zero-to-Agent for Businesses | AI Setup + Enablement",
   description:
-    "Free 30-minute discovery, a 3-hour in-person AI Enablement Workshop, and done-for-you setup + operator training inside your existing tools.",
+    "Free 30-minute call, a 3-hour in-person AI workshop, and hands-on setup + team training inside the tools you already use.",
   openGraph: {
     title: "Zero-to-Agent for Businesses",
     description:
@@ -25,19 +25,19 @@ export const metadata: Metadata = {
 const fitSegments = [
   {
     title: "Operations and process teams",
-    detail: "Reduce manual handoffs, exception churn, and workflow lag across core operations.",
+    detail: "Cut handoffs, reduce rework, and keep operations moving.",
   },
   {
     title: "Revenue and support organizations",
-    detail: "Keep follow-up, triage, and customer workflows moving without adding headcount.",
+    detail: "Keep follow-ups and support moving without adding headcount.",
   },
   {
     title: "Finance and procurement functions",
-    detail: "Automate recurring reporting, document handling, reconciliations, and approval paths.",
+    detail: "Automate regular reports, document handling, reconciliations, and approvals.",
   },
   {
-    title: "Leadership teams scaling execution",
-    detail: "Turn scattered AI experimentation into a managed system tied to business KPIs.",
+    title: "Leadership teams scaling work",
+    detail: "Turn scattered AI tests into a clear system tied to business metrics.",
   },
 ];
 
@@ -46,29 +46,29 @@ const operatingModel = [
     number: "01",
     title: "Discovery (30 min)",
     detail:
-      "We pick one workflow, collect examples (emails, sheets, docs), constraints, and success criteria for a credible live demo.",
+      "We pick one workflow. We review real examples (emails, sheets, docs). We agree on constraints and what success looks like for a live demo.",
   },
   {
     number: "02",
     title: "AI Enablement Workshop (3h, in-person)",
     detail:
-      "AI basics, tool map (ChatGPT/Claude), prompt formula (Intent/Context/Process/Outcome), and live exercises on your real work.",
+      "AI basics in plain English, which tool to use when (ChatGPT/Claude), a simple prompt template, and live practice on your real work.",
   },
   {
     number: "03",
     title: "Done-for-you setup + enablement",
     detail:
-      "We set up accounts, connect Google Drive/Gmail/Calendar/Slack/CRM, build templates + SOPs, and ship a rollout plan.",
+      "We set up accounts, connect Google Drive/Gmail/Calendar/Slack/CRM, create templates and step-by-step guides, and deliver a rollout plan.",
   },
 ];
 
 const capabilities = [
-  "Tool selection + team setup (access, usage norms)",
-  "Prompt library + context docs (pricing rules, policies, voice)",
-  "Connectors to Google Drive/Gmail/Calendar/Slack/CRM",
-  "Quick-win workflows (email drafting, reporting, SOP generation)",
-  "Operator training + handoff documentation",
-  "Optional monthly improvement cadence (tune-ups)",
+  "Pick the right tools + set up team access",
+  "Prompt library + simple reference docs (rules, policies, tone)",
+  "Connect Drive, Gmail, Calendar, Slack, and your CRM",
+  "Quick wins: draft emails, create reports, write step-by-step guides",
+  "Team training + handoff docs",
+  "Optional monthly tune-ups",
 ];
 
 export default function BusinessesPage() {
@@ -102,23 +102,23 @@ export default function BusinessesPage() {
                   data-stage="2"
                   className="stage-enter mt-5 max-w-[12ch] font-heading text-[clamp(42px,5.6vw,74px)] font-bold leading-[0.96] tracking-tight text-[var(--color-text)] text-balance"
                 >
-                  Put AI agents to work
+                  Put AI to work
                   <span className="block text-[var(--color-text)]">
-                    across tools your team already uses.
+                    in the tools your team already uses.
                   </span>
                 </h1>
                 <p
                   data-stage="3"
                   className="stage-enter mt-5 max-w-[58ch] text-[15px] leading-relaxed text-[color-mix(in_oklch,var(--color-text-muted)_72%,var(--color-text)_28%)] md:text-lg text-pretty"
                 >
-                  We map one high-friction workflow first, then implement inside your stack so operators can move
-                  faster with fewer handoffs, fewer follow-up misses, and clearer reporting.
+                  We start with one process that wastes time. Then we set it up in your tools so your team moves
+                  faster, misses fewer follow-ups, and gets clearer reporting.
                 </p>
                 <div data-stage="3.5" className="stage-enter mt-4 flex flex-wrap gap-2">
                   {[
-                    "CRM follow-up that does not slip",
-                    "Support triage with action paths",
-                    "Reporting and approval loops",
+                    "Sales follow-up that doesn’t slip",
+                    "Support inbox sorted and routed",
+                    "Reports and approvals that move",
                   ].map((item) => (
                     <span
                       key={item}
@@ -138,7 +138,7 @@ export default function BusinessesPage() {
                   data-stage="5"
                   className="stage-enter mt-4 text-sm text-[color-mix(in_oklch,var(--color-text-faint)_72%,var(--color-text-muted)_28%)]"
                 >
-                  Start with a free 30-minute discovery and leave with a scoped implementation path.
+                  Start with a free 30-minute call and leave with a clear plan for one workflow.
                 </p>
               </div>
 
@@ -151,15 +151,15 @@ export default function BusinessesPage() {
                     {[
                       {
                         label: "30-min Discovery (free)",
-                        detail: "Map one workflow, collect sample inputs, and define demo success criteria.",
+                        detail: "Pick one workflow, review real examples, and agree on what “good” looks like.",
                       },
                       {
                         label: "AI Enablement Workshop (3h, in-person)",
-                        detail: "Teach AI clearly, demo current tools, and run live exercises on your actual work.",
+                        detail: "Learn the basics in plain English and practice on your real work.",
                       },
                       {
                         label: "Done-for-you setup + enablement",
-                        detail: "Configure access, connect tools, create SOPs/templates, and train operators.",
+                        detail: "Set up access, connect tools, create templates, and train your team.",
                       },
                     ].map((item, index) => (
                       <li
@@ -176,14 +176,14 @@ export default function BusinessesPage() {
                       </li>
                     ))}
                   </ol>
-                  <p className="mt-3 text-xs text-[var(--color-text-faint)]">Optional monthly improvement cadence after setup.</p>
+                  <p className="mt-3 text-xs text-[var(--color-text-faint)]">Optional monthly tune-ups after setup.</p>
                 </div>
                 <div data-stage="7.5" className="stage-enter mt-4 rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] p-4 shadow-[var(--shadow-sm)]">
                   <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
-                    Business orchestration loop
+                    Improvement loop
                   </p>
                   <p className="mt-1 text-sm text-[var(--color-text-muted)]">
-                    Scope one workflow, enable operators, deploy inside your stack, and iterate with real metrics.
+                    Pick one workflow, train your team, set it up in your tools, then improve it using real numbers.
                   </p>
                   <BusinessOrchestrationLoop className="mt-2" />
                 </div>
@@ -198,11 +198,10 @@ export default function BusinessesPage() {
               Who this is for
             </p>
             <h2 className="mt-3 font-heading text-[clamp(30px,4vw,52px)] font-bold leading-[1.03] tracking-tight text-[var(--color-text)]">
-              Built for teams running high-volume, multi-step work.
+              Built for teams with lots of repeat work.
             </h2>
             <p className="mt-4 max-w-[62ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-lg text-pretty">
-              If important workflows are split across inboxes, spreadsheets, SaaS tools, and approvals, this is where
-              agentic execution has immediate value.
+              If your work is spread across email, spreadsheets, tools, and approvals, AI can help right away.
             </p>
           </RevealOnScroll>
 
@@ -230,7 +229,7 @@ export default function BusinessesPage() {
                 AI that runs inside your current tools.
               </h2>
               <p className="mt-3 text-[15px] leading-relaxed text-[var(--color-text-muted)] text-pretty">
-                We focus on copilots + automations first, and use agents only where they are operationally safe.
+                We start with simple helpers and automations. We use agents only where it’s safe to run day to day.
               </p>
               <div className="mt-6 space-y-3">
                 {operatingModel.map((step, index) => (
@@ -250,7 +249,7 @@ export default function BusinessesPage() {
             <RevealOnScroll className="md:col-span-6" delay={120}>
               <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-[var(--shadow-sm)]">
                 <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
-                  Capability lanes
+                  What we can set up
                 </p>
                 <ul className="mt-4 space-y-3">
                   {capabilities.map((item) => (
@@ -265,7 +264,7 @@ export default function BusinessesPage() {
                     What we need from you
                   </p>
                   <ul className="mt-2 space-y-1.5 text-sm text-[var(--color-text-muted)]">
-                    <li>One workflow owner for decisions.</li>
+                    <li>One owner to make decisions.</li>
                     <li>Sample inputs and outputs from the current process.</li>
                     <li>Access to the tools where work already happens.</li>
                   </ul>
@@ -281,17 +280,17 @@ export default function BusinessesPage() {
               Engagement
             </p>
             <h2 className="mt-3 font-heading text-[clamp(30px,4vw,52px)] font-bold leading-[1.03] tracking-tight text-[var(--color-text)]">
-              Custom scope, custom pricing
+              Pricing depends on scope
             </h2>
             <p className="mt-4 max-w-[72ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-lg">
-              We do not publish fixed pricing. Scope depends on workflow complexity, system integrations, governance
-              requirements, and rollout speed.
+              We don’t publish a price list. Pricing depends on how hard the workflow is, which tools we connect,
+              your security and approval needs, and how fast you want to roll it out.
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
               {[
-                "No rip-and-replace platform",
-                "Operator training included",
-                "Discovery before commercial scope",
+                "No need to replace your tools",
+                "Training included",
+                "We scope it with you first",
               ].map((item) => (
                 <span
                   key={item}
@@ -313,10 +312,10 @@ export default function BusinessesPage() {
                   30-minute discovery (free)
                 </h3>
                 <ul className="mt-4 space-y-2 text-sm text-[var(--color-text-muted)]">
-                  <li>Workflow selection</li>
-                  <li>Sample collection</li>
-                  <li>Success criteria</li>
-                  <li>Demo prep</li>
+                  <li>Pick the workflow</li>
+                  <li>Gather examples</li>
+                  <li>Define success</li>
+                  <li>Prep the demo</li>
                 </ul>
               </article>
             </RevealOnScroll>
@@ -330,11 +329,11 @@ export default function BusinessesPage() {
                   AI Enablement Workshop (3h, in-person)
                 </h3>
                 <ul className="mt-4 space-y-2 text-sm text-[var(--color-text-muted)]">
-                  <li>AI landscape explained simply</li>
-                  <li>Prompt formula: Intent + Context + Process + Outcome</li>
-                  <li>Connect tools: ChatGPT/Claude + Google workspace + Slack + CRM</li>
-                  <li>Live exercises: email, reports, SOPs</li>
-                  <li>Quick-win use case list</li>
+                  <li>AI basics in plain English</li>
+                  <li>A simple prompt template you can reuse</li>
+                  <li>Connect tools: ChatGPT/Claude + Google Workspace + Slack + CRM</li>
+                  <li>Practice: emails, reports, step-by-step guides</li>
+                  <li>Quick-win list to try next</li>
                 </ul>
               </article>
             </RevealOnScroll>
@@ -348,11 +347,11 @@ export default function BusinessesPage() {
                   Done-for-you setup + enablement
                 </h3>
                 <ul className="mt-4 space-y-2 text-sm text-[var(--color-text-muted)]">
-                  <li>Configure tools</li>
-                  <li>Connectors across your stack</li>
-                  <li>Templates + SOPs</li>
-                  <li>Operator training</li>
-                  <li>Optional monthly improvement</li>
+                  <li>Set up accounts and access</li>
+                  <li>Connect your tools</li>
+                  <li>Templates + step-by-step guides</li>
+                  <li>Train your team</li>
+                  <li>Optional monthly tune-ups</li>
                 </ul>
               </article>
             </RevealOnScroll>
@@ -364,14 +363,14 @@ export default function BusinessesPage() {
                 Contact for pricing
               </h3>
               <p className="mt-2 max-w-[70ch] text-[15px] leading-relaxed text-[var(--color-text-muted)]">
-                After discovery, we provide a custom scope and commercial proposal based on your workflows, team
-                readiness, and setup depth.
+                After discovery, we send a clear scope and price based on your workflow, your team, and how much
+                setup you want.
               </p>
               <div className="mt-5">
                 <Button href={businessCtaHref}>Contact for pricing</Button>
               </div>
               <p className="mt-3 text-xs text-[var(--color-text-faint)]">
-                No public rate card. Every engagement is scoped to your operating context.
+                No public rate card. Every engagement is scoped to your context.
               </p>
             </div>
           </RevealOnScroll>
@@ -389,31 +388,31 @@ export default function BusinessesPage() {
             {[
               {
                 q: "What happens after setup?",
-                a: "Optional managed improvement cadence: tune prompts, expand workflows, and train new operators over time.",
+                a: "If you want, we can keep helping each month: improve prompts, add workflows, and train new team members.",
               },
               {
                 q: "How quickly will we see a first result?",
-                a: "Most teams see a first production workflow after discovery + initial setup, then expand from that base in structured cycles.",
+                a: "Most teams get a first workflow running after discovery and initial setup. Then you add more from that base.",
               },
               {
                 q: "Do you build custom software/tools?",
-                a: "No by default. We set up best-in-class tools inside your stack and teach your team to run them. If custom software is the right next step, we scope it separately.",
+                a: "Usually no. We set up proven tools inside what you already use and teach your team to run them. If custom software is the right next step, we plan it separately.",
               },
               {
                 q: "What do you need from us?",
-                a: "One workflow plus a few real examples (emails, reports, docs) and the tools you use today.",
+                a: "One workflow, a few real examples (emails, reports, docs), and access to the tools you use today.",
               },
               {
                 q: "How do we start?",
-                a: "Most teams start with a free 30-minute discovery, then an in-person AI Enablement Workshop, then done-for-you setup + enablement.",
+                a: "Most teams start with a free 30-minute call, then an in-person workshop, then hands-on setup + training.",
               },
               {
                 q: "Who owns workflows and documentation?",
-                a: "You do. Ownership and internal handoff are built into delivery.",
+                a: "You do. Ownership and handoff are built into delivery.",
               },
               {
                 q: "Is this a software license?",
-                a: "No. This is a setup + enablement partnership focused on workflows and measurable business outcomes.",
+                a: "No. This is a setup + training engagement focused on workflows and business results.",
               },
             ].map((item, index) => (
               <RevealOnScroll key={item.q} delay={index * 70}>
@@ -429,17 +428,17 @@ export default function BusinessesPage() {
         <SectionWrapper id="contact" alt>
           <RevealOnScroll>
             <h2 className="font-heading text-[clamp(30px,4vw,52px)] font-bold leading-[1.03] tracking-tight text-[var(--color-text)]">
-              Scope your first AI workflow setup
+              Plan your first AI workflow
             </h2>
             <p className="mt-4 max-w-[64ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-lg text-pretty">
-              Share your current bottlenecks and stack. We map the fastest route to measurable output and return a
-              practical scope your team can execute without adding tool chaos.
+              Tell us where work gets stuck and what tools you use today. We’ll map the simplest path to a workflow
+              that saves time — without adding a bunch of new tools.
             </p>
             <ol className="mt-6 grid gap-3 sm:grid-cols-3">
               {[
                 "Book a 30-minute discovery call",
-                "Receive scoped plan + commercial proposal within 48 hours",
-                "Confirm workshop date and setup kickoff",
+                "Get a clear plan + price within 48 hours",
+                "Pick a workshop date and start setup",
               ].map((step, index) => (
                 <li
                   key={step}

@@ -19,11 +19,11 @@ export default function RemainderSuccessPage() {
           Payment
         </p>
         <h1 className="mt-3 font-heading font-bold tracking-tight text-[clamp(30px,3.2vw,44px)] leading-[1.05] text-[var(--color-text)]">
-          Remainder authorized
+          Remaining payment set up
         </h1>
         <p className="mt-3 text-[15px] md:text-lg leading-relaxed text-[var(--color-text-muted)] max-w-[70ch]">
-          You completed checkout. Your card is authorized now and will be captured after Day 1.
-          You&apos;ll receive a receipt from Stripe when the charge is captured.
+          You completed checkout. Stripe placed a hold on your card for the remaining balance.
+          We&apos;ll charge it after Day 1. You&apos;ll receive a receipt from Stripe when the charge is made.
         </p>
 
         <div className="mt-8 flex flex-col sm:flex-row gap-3">

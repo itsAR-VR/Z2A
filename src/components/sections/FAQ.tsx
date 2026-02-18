@@ -8,37 +8,37 @@ const faqItems = [
   {
     question: "I can learn this for free online. Why pay?",
     answer:
-      "You can learn the pieces for free. You’re paying for speed and shipped output: two focused in-person days, live debugging, pod accountability, and a working agent demo by Day 2. Most people don’t lack information. They lack a structure that gets them to finished work.",
+      "You can learn the basics for free. You’re paying to finish faster: two focused in-person days, help when you’re stuck, a small group that keeps you moving, and a working demo by Day 2. Most people don’t lack information. They lack a structure that gets them to done.",
   },
   {
     question: "I’m not technical. Will I be lost?",
     answer:
-      "You do not need to be a software engineer. You do need to be comfortable editing text in tools like Cursor/Replit and following step-by-step build instructions. We provide prework, starter scaffolds, and live support in pods of 5 so you are never blocked alone.",
+      "You don’t need to be a software engineer. You do need to be okay following step-by-step instructions and typing in a code editor (like Cursor or Replit). We provide prework, starter files, and live help in a group of 5 so you’re not stuck alone.",
   },
   {
     question: "Will this actually help my job?",
     answer:
-      "That’s the point of the weekend. You leave with a working agent, a deployment path, and an evaluation workflow you can reuse with your team. We don’t promise promotions or guaranteed outcomes. We do help you ship faster and scope agent work realistically.",
+      "That’s the point of the weekend. You leave with a working first version for your job, a clear way to run it, and a simple way to check it stays correct. We don’t promise promotions. We help you build something real you can keep using.",
   },
   {
     question: "How do I know this isn’t a scam?",
     answer:
-      "Healthy skepticism is fair. We keep this concrete: in-person Toronto workshop, public agenda, explicit payment terms through Stripe, and 100% refund if you aren’t satisfied. No hype claims, no job guarantees, and no vague “AI magic” promises.",
+      "Fair question. We keep it concrete: in-person Toronto workshop, public agenda, Stripe checkout, and a 100% refund if you aren’t satisfied. No hype claims and no job guarantees.",
   },
   {
     question: "What if I’m busy and can’t commit much time?",
     answer:
-      "The format is intentionally short: one weekend, around six hours per day. If you cannot protect two focused days right now, wait for another cohort. If you can, this is the fastest path to a shipped first version.",
+      "The format is short: one weekend, about six hours per day. If you can’t protect two focused days right now, wait for another cohort. If you can, this is the fastest path to a finished first version.",
   },
   {
     question: "Can my company reimburse this?",
     answer:
-      "Many employers reimburse professional development. We provide an invoice and receipt suitable for reimbursement and keep the workshop description practical so finance teams can review it quickly.",
+      "Many employers reimburse training. We provide an invoice and receipt so your finance team can review it quickly.",
   },
   {
     question: "Why in-person instead of Zoom?",
     answer:
-      "Because the promise is a shipped outcome, not passive watching. In person gives you faster setup help, real-time debugging, and pod accountability. That compression is hard to reproduce on Zoom, especially if your goal is to leave with something running.",
+      "Because the promise is something that works, not passive watching. In person means faster setup help, quick fixes when you’re stuck, and a small group that keeps you moving. That’s hard to match on Zoom.",
   },
 ];
 
@@ -48,11 +48,11 @@ export function FAQ() {
     "50 seats · Toronto",
     "$100 deposit via Stripe",
     "100% refund if you aren’t satisfied",
-    "Pods of 5",
+    "Groups of 5",
   ];
   const readinessFacts = [
-    "Bring one recurring workflow you own",
-    "Block two focused workshop days",
+    "Bring one repeat task you own",
+    "Block two focused days",
     "Be comfortable with guided build steps",
   ];
 

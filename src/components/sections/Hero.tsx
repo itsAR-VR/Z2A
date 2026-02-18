@@ -188,10 +188,10 @@ export function Hero() {
               ref={subheadRef}
               className="mt-5 text-[15px] md:text-lg leading-relaxed text-[color-mix(in_oklch,var(--color-text-muted)_72%,var(--color-text)_28%)] max-w-[60ch]"
             >
-              You can learn the pieces online. The hard part is shipping under
-              constraints. Bring one recurring workflow and spend one focused
-              weekend building a production-ready first version, a deployment
-              path, and an evaluation loop in pods of 5.
+              You can learn the pieces online. The hard part is finishing.
+              Bring one repeat task from work. In one focused weekend, you
+              build a first version you can use, a clear way to run it, and a
+              simple way to check it stays reliable — in a group of 5.
             </p>
           </div>
 
@@ -233,15 +233,15 @@ export function Hero() {
                 {[
                   {
                     title: "A working agent",
-                    desc: "Built on your use case, not a toy demo.",
+                    desc: "An AI helper built for your use case — not a toy demo.",
                   },
                   {
-                    title: "A deployment path",
-                    desc: "A sane way to run it after the weekend.",
+                    title: "A plan to run it",
+                    desc: "A clear way to run it after the weekend.",
                   },
                   {
-                    title: "An evaluation loop",
-                    desc: "So it stays reliable as you iterate.",
+                    title: "A simple check",
+                    desc: "So it stays reliable as you improve it.",
                   },
                 ].map((item) => (
                   <li key={item.title} className="flex gap-3">
@@ -275,10 +275,10 @@ export function Hero() {
                 className="relative mt-6 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-4 shadow-[var(--shadow-sm)]"
               >
                 <p className="font-heading font-semibold text-sm text-[var(--color-text)]">
-                  Structure that forces momentum
+                  Structure that keeps you moving
                 </p>
                 <p className="mt-1 text-sm text-[var(--color-text-muted)]">
-                  Short instruction blocks. Long build blocks. Clear checkpoints.
+                  Short lessons. Long build time. Clear checkpoints.
                 </p>
               </div>
             </div>
@@ -303,7 +303,7 @@ export function Hero() {
               viewBox="0 0 520 92"
               fill="none"
               role="img"
-              aria-label="Plan, Build, Deploy, Evaluate loop"
+              aria-label="Plan, Build, Launch, Check loop"
             >
               <path
                 d="M72 26H448A12 12 0 0 1 448 50H72A12 12 0 0 1 72 26Z"
@@ -323,8 +323,8 @@ export function Hero() {
                 [
                   { key: "plan", label: "Plan", x: 96 },
                   { key: "build", label: "Build", x: 216 },
-                  { key: "deploy", label: "Deploy", x: 324 },
-                  { key: "evaluate", label: "Evaluate", x: 430 },
+                  { key: "deploy", label: "Launch", x: 324 },
+                  { key: "evaluate", label: "Check", x: 430 },
                 ] as const
               ).map((node) => (
                 <g key={node.key}>

@@ -11,34 +11,34 @@ const days = [
     blocks: [
       {
         time: "09:30 - 11:30",
-        label: "Project 1: Vibe code a complete app with Lovable",
+        label: "Project 1: Build a complete app with Lovable",
       },
       {
         time: "11:30 - 12:15",
         label:
-          "Project 1: job application tracker buildout (Kanban, detail view, dashboard, search/filter)",
+          "Project 1: job tracker buildout (board, details, dashboard, search)",
       },
       { time: "12:15 - 13:00", label: "Lunch" },
       {
         time: "13:00 - 14:00",
-        label: "Project 2: multi-turn chatbot foundation and setup",
+        label: "Project 2: chatbot setup (holds a conversation)",
       },
       {
         time: "14:00 - 15:00",
         label:
-          "Project 2: chatbot flow design + implementation sprint (topic TBD)",
+          "Project 2: design the chat flow + build sprint (topic TBD)",
       },
       {
         time: "15:00 - 16:00",
-        label: "Project 3: Replit + n8n web app foundation",
+        label: "Project 3: web app setup with Replit + n8n",
       },
       {
         time: "16:00 - 17:30",
-        label: "Project 3 + Project 4 planning + setup",
+        label: "Project 3 + Project 4: plan + setup",
       },
       {
         time: "17:30 - 18:00",
-        label: "Quick checkpoint + day-end debrief",
+        label: "Quick checkpoint + end-of-day recap",
       },
     ],
   },
@@ -48,30 +48,30 @@ const days = [
     blocks: [
       {
         time: "09:30 - 10:00",
-        label: "Day 1 fast wrap + priorities for full ship sprint",
+        label: "Day 1 recap + priorities for final build sprint",
       },
       {
         time: "10:00 - 11:30",
-        label: "Project 4: infrastructure, deployment, and scalability setup",
+        label: "Project 4: put it online + make it stable",
       },
       {
         time: "11:30 - 13:00",
-        label: "Project 4: payments integration + hardening",
+        label: "Project 4: add payments + safety checks",
       },
       { time: "13:00 - 13:45", label: "Lunch" },
       {
         time: "13:45 - 15:30",
         label:
-          "Project 4: shipping block — end-to-end demo path and monitoring",
+          "Project 4: finish the end-to-end demo + basic monitoring",
       },
       {
         time: "15:30 - 17:00",
-        label: "Project 3 finalization and polish as needed",
+        label: "Project 3: finish and polish as needed",
       },
       {
         time: "17:00 - 18:00",
         label:
-          "Project 4 final QA, public demo delivery, and post-workshop next steps",
+          "Project 4: final testing, live demo, and next steps",
       },
     ],
   },
@@ -89,7 +89,7 @@ export function Agenda() {
 
       <RevealOnScroll delay={100}>
         <p className="text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed max-w-2xl mb-12">
-          We prioritize shipped output: quick foundations first, then deep time for{" "}
+          We focus on finishing: quick setup first, then lots of time for{" "}
           <strong>Project 4</strong>.
         </p>
       </RevealOnScroll>

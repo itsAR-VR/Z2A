@@ -34,8 +34,8 @@ export function CTAFooter() {
 
               <RevealOnScroll delay={80}>
                 <p className="text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed">
-                  Limited to 50 seats. We review applications so pods stay focused
-                  and each team ships real work by the end of the weekend. Most
+                  Limited to 50 seats. We review applications so groups stay focused
+                  and each team finishes real work by the end of the weekend. Most
                   applications receive a decision within 48 hours.
                 </p>
               </RevealOnScroll>
@@ -44,7 +44,7 @@ export function CTAFooter() {
                 <div className="mt-6 flex flex-wrap gap-2">
                   <Badge>Deposit $100</Badge>
                   <Badge>100% refund if you aren&apos;t satisfied</Badge>
-                  <Badge>Pods of 5</Badge>
+                  <Badge>Groups of 5</Badge>
                 </div>
               </RevealOnScroll>
             </div>
@@ -56,8 +56,8 @@ export function CTAFooter() {
                     Ready when you are
                   </p>
                   <p className="mt-2 text-sm text-[var(--color-text-muted)]">
-                    You&apos;ll be redirected to Stripe for the deposit with plain-language
-                    refund terms. Referral codes (optional) help us track how you found us.
+                    You&apos;ll be redirected to Stripe to pay the deposit. Refund terms are
+                    shown in plain language. Referral codes (optional) only help us track how you found us.
                   </p>
                   <div className="mt-5">
                     <Button
@@ -77,7 +77,7 @@ export function CTAFooter() {
                       Questions? We typically respond within 24 hours.
                     </p>
                     <p className="mt-1 text-xs text-[var(--color-text-faint)]">
-                      Once accepted, seats are confirmed first-come by completed deposit.
+                      If accepted, your seat is held once the deposit is paid.
                     </p>
                   </div>
                 </div>

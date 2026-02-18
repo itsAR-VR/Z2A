@@ -76,7 +76,7 @@ function getPageConfig(pathname: string): PageConfig {
       ctaLabel: "Apply",
       ctaHref: "/apply",
       ctaEventSource: "nav_blogs",
-      menuNote: "Read the execution playbooks, then apply when you are ready to build in a weekend.",
+      menuNote: "Read the playbooks, then apply when you’re ready to build something in a weekend.",
     };
   }
 
@@ -86,7 +86,7 @@ function getPageConfig(pathname: string): PageConfig {
       ctaLabel: "Apply",
       ctaHref: "/apply",
       ctaEventSource: "nav_individuals",
-      menuNote: "Limited to 50 seats in Toronto. Most decisions land within 48 hours.",
+      menuNote: "Limited to 50 seats in Toronto. Most decisions come within 48 hours.",
     };
   }
 
@@ -96,7 +96,7 @@ function getPageConfig(pathname: string): PageConfig {
       ctaLabel: "Book discovery call",
       ctaHref: BUSINESS_CALENDLY_URL || fallbackBusinessCta,
       ctaEventSource: "nav_businesses",
-      menuNote: "Start with discovery. Most business inquiries receive scoped implementation + commercial terms within 48 hours.",
+      menuNote: "Start with a discovery call. Most teams get a clear scope and price within 48 hours.",
     };
   }
 
@@ -105,7 +105,7 @@ function getPageConfig(pathname: string): PageConfig {
     ctaLabel: "Explore Individuals",
     ctaHref: "/individuals",
     ctaEventSource: "nav_home",
-    menuNote: "Choose your path by scope: weekend build sprint or managed business implementation.",
+    menuNote: "Choose your path: weekend workshop for individuals, or team setup for businesses.",
   };
 }
 

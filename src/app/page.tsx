@@ -8,13 +8,13 @@ import { SectionWrapper } from "@/components/SectionWrapper";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 
 export const metadata: Metadata = {
-  title: "Zero-to-Agent | Learn AI Workflows You Can Run",
+  title: "Zero-to-Agent | Build AI workflows you can run",
   description:
-    "Hands-on education and enablement for individuals and teams who want practical AI workflows, plain language, and measurable outcomes.",
+    "Hands-on training and setup for people and teams who want AI workflows that are easy to explain and easy to run.",
   openGraph: {
     title: "Zero-to-Agent",
     description:
-      "Move from AI confusion to practical workflows your team can run — with clear education, setup support, and ongoing improvement.",
+      "Go from AI confusion to one workflow that works — with clear training, hands-on setup, and simple improvements over time.",
     type: "website",
   },
 };
@@ -23,22 +23,22 @@ const pathwayCards = [
   {
     id: "individuals",
     eyebrow: "For individuals",
-    title: "Learn the tools. Ship one workflow by Sunday.",
+    title: "Learn the tools. Finish one workflow by Sunday.",
     description:
-      "Hands-on weekend sprint for PMs, operators, and builders who want to learn by shipping — not watching slides.",
-    fit: "Best fit if you want to build your own workflow and lead rollout internally.",
-    bullets: ["In-person cohort in Toronto", "Pods of 5 with live support", "Working demo plus rollout plan"],
+      "Hands-on weekend workshop for PMs and builders who learn by building — not by watching slides.",
+    fit: "Best if you want to build one workflow yourself and roll it out at work.",
+    bullets: ["In-person cohort in Toronto", "Groups of 5 with live help", "Working workflow plus rollout plan"],
     href: "/individuals",
     cta: "See Individuals Program",
   },
   {
     id: "businesses",
     eyebrow: "For businesses",
-    title: "Equip your team to run AI workflows inside your existing tools.",
+    title: "Help your team use AI inside the tools you already use.",
     description:
-      "Education + guided setup for teams who want internal ownership, clear operators, and measurable workflow improvement — without platform sprawl.",
-    fit: "Best fit if you want your operators to own the workflow — and keep improving without vendor dependency.",
-    bullets: ["Free 30-minute discovery", "In-person enablement workshop", "Tool setup with your operators"],
+      "Training + hands-on setup so your team can run the workflow themselves — without buying a new platform.",
+    fit: "Best if you want your team to own the workflow and keep improving without relying on a vendor.",
+    bullets: ["Free 30-minute discovery call", "In-person workshop", "Tool setup with your team"],
     href: "/businesses",
     cta: "See Businesses Services",
   },
@@ -47,27 +47,27 @@ const pathwayCards = [
 const principles = [
   {
     number: "01",
-    title: "Abstract complexity",
+    title: "Less jargon",
     detail:
-      "Most teams do not need more tooling jargon. They need a workflow that runs reliably and is easy to operate.",
+      "Most teams don’t need more jargon. They need a workflow that runs and is easy to use.",
   },
   {
     number: "02",
-    title: "Value after deployment",
+    title: "Improve after launch",
     detail:
-      "Shipping is step one. The real win is improving quality, accuracy, and throughput month over month.",
+      "Launching is step one. The real win is improving quality and speed month over month.",
   },
   {
     number: "03",
-    title: "Demonstrate, then scale",
+    title: "Show it, then expand",
     detail:
-      "We prioritize practical demos tied to your workflows so decision-makers can see impact before expansion.",
+      "We start with a real demo tied to your workflow so leaders can see impact before you expand.",
   },
   {
     number: "04",
     title: "Plain language first",
     detail:
-      "If non-technical teams cannot explain or operate it, adoption stalls. Simplicity is a product requirement.",
+      "If your team can’t explain it and run it, it won’t stick. Simple is a requirement.",
   },
 ];
 
@@ -103,10 +103,9 @@ export default function HomePage() {
                   data-stage="2"
                   className="stage-enter mt-6 max-w-[58ch] text-[15px] leading-relaxed text-[color-mix(in_oklch,var(--color-text-muted)_72%,var(--color-text)_28%)] md:text-lg text-pretty"
                 >
-                  In the U.S., ~70M people work white-collar jobs, and some forecasts expect a 20–50% reduction
-                  over the next several years — with disruption accelerating in the next 12–18 months. The
-                  winners will be the people and teams who learn new tools fast, redesign workflows, and keep
-                  shipping.
+                  About 70M people in the U.S. work office jobs. Some forecasts expect a 20–50% reduction over the
+                  next several years, with the next 12–18 months moving fast. The teams that do best learn new
+                  tools quickly, redesign how work gets done, and keep delivering.
                 </p>
                 <div data-stage="3" className="stage-enter mt-8 flex flex-wrap items-center gap-3">
                   <Button href="/individuals">See Individuals Program</Button>
@@ -118,7 +117,7 @@ export default function HomePage() {
                   data-stage="4"
                   className="stage-enter mt-4 text-sm text-[color-mix(in_oklch,var(--color-text-faint)_72%,var(--color-text-muted)_28%)]"
                 >
-                  Two paths. One standard: measurable outcomes over AI theater.
+                  Two paths. One standard: real results over AI for show.
                 </p>
               </div>
 
@@ -129,10 +128,10 @@ export default function HomePage() {
                   </p>
                   <ul className="mt-4 space-y-3">
                     {[
-                      "Numbers: ~70M U.S. white-collar workers; forecasts expect 20–50% reduction.",
-                      "Winners: adaptable teams learning new skills quickly.",
-                      "Inflection: Blockbuster didn’t lose to better DVDs — it lost to Netflix and streaming.",
-                      "We help you learn the tools and set them up so you can run the workflow yourself.",
+                      "Numbers: ~70M U.S. office workers; some forecasts expect a 20–50% reduction.",
+                      "Winners: teams that learn fast and keep improving.",
+                      "Example: Blockbuster didn’t lose to better DVDs. It lost to Netflix and streaming.",
+                      "We teach the tools and set them up so you can run the workflow yourself.",
                     ].map((item) => (
                       <li key={item} className="flex gap-3">
                         <span className="mt-1 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-accent)]">
@@ -149,8 +148,7 @@ export default function HomePage() {
                       One standard
                     </p>
                     <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-muted)] text-pretty">
-                      Practical outcomes over theory. Tight scope, clear operators, and workflows you can run
-                      without us.
+                      Practical results over theory. Tight scope, clear owners, and workflows you can run without us.
                     </p>
                   </div>
                 </div>
@@ -169,9 +167,9 @@ export default function HomePage() {
                 Build capability people can trust, not demos people forget.
               </h2>
               <p className="mt-4 max-w-[65ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-lg text-pretty">
-                AI should reduce friction inside real workflows, not add another layer of complexity. We teach
-                the tools, help you set them up inside your existing stack, and make sure your team can operate
-                the workflow day one. That’s how you embrace the AI era: one owned workflow at a time.
+                AI should make real work easier, not harder. We teach the tools, help you set them up in what
+                you already use, and make sure your team can run the workflow on day one. That’s how you move
+                forward: one workflow you own at a time.
               </p>
             </RevealOnScroll>
 
@@ -181,15 +179,14 @@ export default function HomePage() {
                   Core belief
                 </p>
                 <p className="mt-3 font-heading text-[24px] leading-[1.18] tracking-tight text-[var(--color-text)]">
-                  You already have the context on your biggest problems. We equip you with the tools to solve
-                  them.
+                  You already know your biggest problems. We help you use the tools to solve them.
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--color-text-muted)] text-pretty">
-                  This is education-first work. We build the skill inside your team, then help you set up the
-                  tools so you can keep improving without a vendor dependency.
+                  We teach first. We build the skill in your team, then help you set up the tools so you can
+                  keep improving without relying on us.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {["Education-first", "Operator-owned workflows", "Guided setup"].map((item) => (
+                  {["Training first", "Team-owned workflows", "Guided setup"].map((item) => (
                     <span
                       key={item}
                       className="inline-flex items-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 text-[11px] text-[var(--color-text-muted)]"
@@ -212,8 +209,7 @@ export default function HomePage() {
               Pick your path fast.
             </h2>
             <p className="mt-3 max-w-[58ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-base">
-              Choose based on ownership. Learn it yourself in a weekend, or run a team enablement sprint where
-              we set up the tools together.
+              Choose based on ownership. Learn it yourself in a weekend, or bring your team and set it up together.
             </p>
           </RevealOnScroll>
 
@@ -273,7 +269,7 @@ export default function HomePage() {
                 How we work.
               </h2>
               <p className="mt-4 text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-base">
-                These operating rules keep the work grounded, credible, and useful for real teams.
+                These rules keep the work clear, practical, and easy to run.
               </p>
             </RevealOnScroll>
 

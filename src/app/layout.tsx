@@ -6,11 +6,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Zero-to-Agent",
   description:
-    "Zero-to-Agent helps individuals and businesses build practical agentic workflows with clear, measurable outcomes.",
+    "Zero-to-Agent helps people and teams build AI workflows that work in real life — in plain language, with clear outcomes.",
   openGraph: {
     title: "Zero-to-Agent",
     description:
-      "Agentic workflows for individuals and businesses.",
+      "AI workflows for people and teams.",
     type: "website",
   },
 };

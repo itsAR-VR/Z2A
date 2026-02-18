@@ -14,11 +14,11 @@ import { CTAFooter } from "@/components/sections/CTAFooter";
 export const metadata: Metadata = {
   title: "Zero-to-Agent for Individuals | Weekend Workshop",
   description:
-    "Build and ship a working AI agent in a focused in-person weekend workshop. Apply to reserve your seat.",
+    "Build a working AI agent in a focused in-person weekend workshop. Apply to reserve your seat.",
   openGraph: {
     title: "Zero-to-Agent for Individuals",
     description:
-      "Focused in-person weekend workshop for builders who want to ship real AI workflows.",
+      "Focused in-person weekend workshop for builders who want to finish real AI workflows.",
     type: "website",
   },
 };

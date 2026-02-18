@@ -15,25 +15,25 @@ const steps = [
     number: "2",
     title: "Complete short prework",
     description:
-      "Pick your workflow and prepare your setup so weekend build time is productive.",
+      "Pick your task and do a short setup so weekend build time is smooth.",
   },
   {
     number: "3",
-    title: "Build in pods of 5 with live support",
+    title: "Build in groups of 5 with live help",
     description:
-      "Work in groups of 5 with instructor help to ship your first version.",
+      "Work in a group of 5 with instructor help to finish your first version.",
   },
   {
     number: "4",
     title: "Check in on Day 1",
     description:
-      "Authorize the remainder payment at check-in, then spend Day 1 building.",
+      "At check-in, confirm the rest of the payment. Then spend Day 1 building.",
   },
   {
     number: "5",
-    title: "Ship and demo",
+    title: "Demo and wrap up",
     description:
-      "Remainder is captured after the event for Day 1 attendees. 100% refund if you aren&apos;t satisfied.",
+      "We charge the rest after the event for Day 1 attendees. 100% refund if you aren&apos;t satisfied.",
   },
 ];
 
@@ -52,9 +52,8 @@ export function HowItWorks() {
 
       <RevealOnScroll delay={70}>
         <p className="max-w-2xl text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed mb-10">
-          Two focused days, around six hours each. You build the whole time,
-          with short instruction blocks and guided work blocks so you keep
-          moving.
+          Two focused days, about six hours each. You build most of the time,
+          with short lessons and long work blocks so you keep moving.
         </p>
       </RevealOnScroll>
 

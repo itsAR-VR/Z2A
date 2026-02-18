@@ -8,19 +8,19 @@ const reasons = [
     eyebrow: "01",
     title: "Live help when you get blocked",
     description:
-      "No forum delays. No long async threads. Get unstuck in real time and keep momentum.",
+      "No waiting on forums. No long email threads. Get help right away and keep moving.",
   },
   {
     eyebrow: "02",
-    title: "Pods of 5 keep momentum up",
+    title: "Groups of 5 keep you moving",
     description:
-      "Small pods keep progress visible and scope realistic. You build beside people solving similar workflows.",
+      "Small groups keep progress visible and scope realistic. You build beside people solving similar tasks.",
   },
   {
     eyebrow: "03",
-    title: "A scope built to ship",
+    title: "A scope built to finish",
     description:
-      "This is a weekend sprint, not a lecture. You leave with running work, not another folder of notes.",
+      "This is a weekend build, not a lecture. You leave with something that works, not just notes.",
   },
 ];
 
@@ -31,17 +31,17 @@ export function Why() {
         <div className="md:col-span-5">
           <RevealOnScroll>
             <h2 className="font-heading font-semibold tracking-tight text-[clamp(28px,3.2vw,44px)] leading-[1.05] mb-4 text-[var(--color-text)]">
-              The bottleneck isn&apos;t ideas.{" "}
-              <span className="text-[var(--color-accent)]">It&apos;s execution time.</span>
+              The hard part isn&apos;t ideas.{" "}
+              <span className="text-[var(--color-accent)]">It&apos;s finishing.</span>
             </h2>
           </RevealOnScroll>
 
           <RevealOnScroll delay={80}>
             <p className="text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed mb-6">
               If free tutorials were enough, this wouldn&apos;t still be on your
-              backlog. Bring one repetitive workflow and leave with something
-              running: a working agent, a deployment path, and a reliability
-              loop you can use on Monday.
+              to-do list. Bring one repeat task and leave with something
+              running: a working agent, a clear way to run it, and a simple
+              check to keep it reliable on Monday.
             </p>
           </RevealOnScroll>
 

@@ -28,8 +28,8 @@ const speakers: Speaker[] = [
   {
     name: "Abdur Sajid",
     role: "Guest Operator · cold2close.ai",
-    bio: "Head of AI at zeroriskgrowth.com. Launching a software suite of products focused on increasing gross profit through cold outbound (cold2close.ai).",
-    badges: ["Operator", "cold2close.ai", "OpenAI 100B Tokens"],
+    bio: "Head of AI at zeroriskgrowth.com. Building tools to improve outbound sales (cold2close.ai).",
+    badges: ["Operator", "cold2close.ai", "Built with OpenAI at scale"],
     initials: "AS",
     headshotSrc: "/speakers/abdur-headshot.jpg",
     linkedinUrl: "https://www.linkedin.com/in/abdur-sajid/",
@@ -41,15 +41,15 @@ export function Speakers() {
     <SectionWrapper id="speakers">
       <RevealOnScroll>
         <h2 className="font-heading font-semibold tracking-tight text-[clamp(28px,3.2vw,44px)] leading-[1.05] mb-4 text-[var(--color-text)]">
-          Learn from operators{" "}
-          <span className="text-[var(--color-accent)]">who ship.</span>
+          Learn from people{" "}
+          <span className="text-[var(--color-accent)]">who build for real.</span>
         </h2>
       </RevealOnScroll>
 
       <RevealOnScroll delay={100}>
         <p className="text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed max-w-2xl mb-12">
           You&apos;ll build with people who run real systems. The goal is
-          practical output: scope, build, test, and launch.
+          simple: pick a task, build it, test it, and launch.
         </p>
       </RevealOnScroll>
 
@@ -79,7 +79,7 @@ export function Speakers() {
               </p>
 
               <p className="mb-2 font-mono text-[10px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
-                Proof points
+                Background
               </p>
               <div className="flex flex-wrap gap-2">
                 {speaker.badges.map((badge) => (

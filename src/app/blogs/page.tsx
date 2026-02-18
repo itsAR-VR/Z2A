@@ -6,13 +6,13 @@ import { LenisProvider } from "@/components/motion/LenisProvider";
 import { getAllBlogs } from "@/lib/blogs-data";
 
 export const metadata: Metadata = {
-  title: "Zero-to-Agent Blogs | Operator Playbooks for AI Execution",
+  title: "Zero-to-Agent Blog | Practical guides for AI at work",
   description:
-    "Operator playbooks for the AI transition. Practical AI execution frameworks for teams that need measurable workflow outcomes.",
+    "Practical guides for using AI at work. Clear steps and real examples.",
   openGraph: {
     title: "Zero-to-Agent Blogs",
     description:
-      "Operator-first AI execution posts for teams that need practical workflow outcomes.",
+      "Practical guides for using AI at work.",
     type: "website",
   },
 };
@@ -48,11 +48,10 @@ export default function BlogsPage() {
               Blog Library
             </p>
             <h1 className="mt-5 max-w-[16ch] font-heading text-[clamp(40px,5.2vw,70px)] font-bold leading-[0.96] tracking-tight text-[var(--color-text)] text-balance">
-              Real operator playbooks for the AI transition
+              Practical guides for using AI at work
             </h1>
             <p className="mt-5 max-w-[70ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-lg text-pretty">
-              This library delivers operator playbooks with a direct execution angle: lead with facts, identify
-              winners, make the market claim, and show how teams can act now.
+              This library shares practical guides: start with facts, show what works, and give teams clear next steps.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <div className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-2 text-sm text-[var(--color-text-muted)]">
@@ -127,11 +126,10 @@ export default function BlogsPage() {
                 Operating Method
               </p>
               <h2 className="mt-3 font-heading text-[clamp(28px,3.4vw,44px)] font-bold leading-[1.04] tracking-tight text-[var(--color-text)]">
-                Facts-first narrative. Zero-to-Agent execution angle.
+                Facts first. Clear next steps.
               </h2>
               <p className="mt-4 max-w-[72ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-base">
-                Every post follows the same four-step operating narrative: facts first, then the behavior pattern of
-                current winners, then the market-level claim, then a practical path to implementation.
+                Every post follows the same simple structure: facts, what’s working now, the claim, and steps you can use.
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <Button href="/individuals">See Individuals Program</Button>

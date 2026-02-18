@@ -174,7 +174,7 @@ function ApplyForm() {
             waitlistCount: prev?.waitlistCount || 0,
           }));
           setWaitlistFlowNotice(
-            "Seats are currently full. You'll continue through the waitlist path.",
+            "Seats are full right now. You’ll continue to the waitlist.",
           );
         }
         setServerError(data.error || "Something went wrong. Please try again.");
@@ -185,7 +185,7 @@ function ApplyForm() {
       if (data.mode === "waitlist_setup") {
         setWaitlistFlowNotice(
           data.message ||
-            "Current cohort is sold out. You're joining the waitlist with card-on-file setup.",
+            "This cohort is full. You’re joining the waitlist and adding a card (no charge now).",
         );
       }
 
@@ -263,11 +263,11 @@ function ApplyForm() {
               Apply in 2–3 minutes
             </h1>
             <p className="mt-3 text-[15px] md:text-lg leading-relaxed text-[var(--color-text-muted)] max-w-[60ch]">
-              Tell us what you want to automate. After you submit, you&apos;ll
-              be redirected to Stripe.
+              Tell us what you want help with. After you submit, you&apos;ll
+              go to Stripe.
               {seatInfo?.soldOut
-                ? " This cohort is sold out, so you will join the waitlist path with card-on-file setup."
-                : " You will pay the $100 deposit to reserve your seat."}{" "}
+                ? " This cohort is full, so you’ll join the waitlist and add a card. You won’t be charged now."
+                : " You will pay the $100 deposit to hold your seat."}{" "}
               100% refund if you are not satisfied.
             </p>
 
@@ -298,8 +298,8 @@ function ApplyForm() {
             {canceled && (
               <div className="mt-6 rounded-[var(--radius-xl)] border border-[color-mix(in_oklch,var(--color-warning)_40%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-warning)_10%,var(--color-surface))] p-5 text-sm text-[var(--color-text)] shadow-[var(--shadow-sm)]">
                 {canceledMode === "waitlist"
-                  ? "Waitlist setup was canceled. Your application is still saved. You can try again when you're ready."
-                  : "Payment was canceled. Your application is saved. You can try again when you're ready."}
+                  ? "Waitlist setup was canceled. Your application is saved. You can try again when you’re ready."
+                  : "Payment was canceled. Your application is saved. You can try again when you’re ready."}
               </div>
             )}
 
@@ -307,9 +307,9 @@ function ApplyForm() {
               <div className="mt-6 rounded-[var(--radius-xl)] border border-[color-mix(in_oklch,var(--color-warning)_40%,var(--color-border))] bg-[color-mix(in_oklch,var(--color-warning)_10%,var(--color-surface))] p-5 text-sm text-[var(--color-text)] shadow-[var(--shadow-sm)]">
                 <p className="font-medium">Sold out for this cohort.</p>
                 <p className="mt-2 text-[var(--color-text-muted)]">
-                  You can still apply now. We&apos;ll place you on the waitlist for
-                  this cohort fill-ins and next event planning. You&apos;ll complete card-on-file setup
-                  on Stripe after submission, but you won&apos;t be charged immediately.
+                  You can still apply. We&apos;ll add you to the waitlist for any
+                  open seats and the next event. After you submit, Stripe will
+                  ask for a card. You won&apos;t be charged right now.
                 </p>
                 <p className="mt-2 text-xs text-[var(--color-text-faint)]">
                   Current waitlist: {seatInfo.waitlistCount} applicant
@@ -444,14 +444,14 @@ function ApplyForm() {
                     <div className="mb-2 flex flex-wrap gap-2">
                       {[
                         {
-                          label: "Support triage",
+                          label: "Support inbox",
                           value:
-                            "Triage inbound support tickets and draft replies with guardrails.",
+                            "Sort new support tickets and draft replies with clear rules.",
                         },
                         {
-                          label: "Lead qualifying",
+                          label: "New lead routing",
                           value:
-                            "Qualify leads and route them to the right rep with clear rules.",
+                            "Check new leads and route them to the right person with clear rules.",
                         },
                         {
                           label: "Call follow-ups",
@@ -492,7 +492,7 @@ function ApplyForm() {
                           ? "border-[color-mix(in_oklch,var(--color-error)_55%,var(--color-border))]"
                           : "border-[var(--color-border)]"
                       }`}
-                      placeholder="Example: triage inbound support tickets, route them, and draft responses with guardrails."
+                      placeholder="Example: sort new support tickets, route them, and draft replies with clear rules."
                     />
                     {errors.useCase ? (
                       <p id="useCase-error" className="mt-1.5 text-xs text-[var(--color-error)]">
@@ -528,7 +528,7 @@ function ApplyForm() {
                           placeholder="Enter your code"
                         />
                         <p className="mt-2 text-xs text-[var(--color-text-faint)]">
-                          Referral codes help us track how you found us.
+                          Referral codes only help us track how you found us.
                         </p>
                       </div>
                     )}
@@ -545,8 +545,8 @@ function ApplyForm() {
                   </Button>
                   <p className="mt-3 text-xs text-[var(--color-text-faint)] text-center">
                     {seatInfo?.soldOut
-                      ? "You'll be redirected to Stripe to set up card-on-file for waitlist processing. No immediate charge."
-                      : "You'll be redirected to Stripe to pay the $100 deposit now. 100% refund if you aren't satisfied."}
+                      ? "You’ll go to Stripe to add a card for the waitlist. No charge now."
+                      : "You’ll go to Stripe to pay the $100 deposit now. 100% refund if you aren’t satisfied."}
                   </p>
                   {submitting && redirectFallbackUrl && showRedirectHelp && (
                     <p className="mt-2 text-xs text-center text-[var(--color-text-muted)]">
@@ -574,21 +574,21 @@ function ApplyForm() {
                 {[
                   {
                     t: "Submit your application",
-                    d: "Basic details plus a short description of your workflow.",
+                    d: "Basic details plus a short description of your task.",
                   },
                   {
                     t: seatInfo?.soldOut
-                      ? "Set up card-on-file via Stripe"
+                      ? "Add a card via Stripe (waitlist)"
                       : "Pay the $100 deposit via Stripe",
                     d: seatInfo?.soldOut
-                      ? "Secure setup. No immediate charge while you're on the waitlist."
-                      : "Secure checkout. The deposit reserves your seat immediately.",
+                      ? "Secure setup. No charge while you’re on the waitlist."
+                      : "Secure checkout. The deposit holds your seat.",
                   },
                   {
                     t: "Get confirmation + prework",
                     d: seatInfo?.soldOut
-                      ? "You'll receive waitlist next steps and seat-release updates by email."
-                      : "You'll receive next steps (what to bring, setup guidance, and prework).",
+                      ? "You’ll receive waitlist updates by email."
+                      : "You’ll receive next steps by email (what to bring, setup, and prework).",
                   },
                 ].map((s, idx) => (
                   <li key={s.t} className="flex gap-3">
@@ -612,7 +612,7 @@ function ApplyForm() {
                   Refund policy
                 </p>
                 <p className="mt-2 text-sm text-[var(--color-text-muted)]">
-                  100% refund if you are not satisfied. Refunds issued within 7 days.
+                  100% refund if you are not satisfied. Refunds are issued within 7 days.
                 </p>
               </div>
             </div>

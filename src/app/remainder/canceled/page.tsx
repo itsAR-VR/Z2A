@@ -22,7 +22,7 @@ export default function RemainderCanceledPage() {
           Checkout canceled
         </h1>
         <p className="mt-3 text-[15px] md:text-lg leading-relaxed text-[var(--color-text-muted)] max-w-[70ch]">
-          No payment was authorized. If you still need to complete the remainder, head back to
+          No payment was made. If you still need to pay the rest, head back to
           check-in and we&apos;ll restart checkout.
         </p>
 

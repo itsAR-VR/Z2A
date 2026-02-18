@@ -69,16 +69,16 @@ export function Pricing() {
         <h2 className="mx-auto max-w-3xl text-center font-heading font-semibold tracking-tight text-[clamp(28px,3.2vw,44px)] leading-[1.05] mb-4 text-[var(--color-text)]">
           Reserve your seat with a $100 deposit.{" "}
           <span className="text-[var(--color-accent)]">
-            Pay the remainder after Day 1 check-in.
+            Pay the rest at Day 1 check-in.
           </span>
         </h2>
       </RevealOnScroll>
 
       <RevealOnScroll delay={100}>
         <p className="mx-auto max-w-2xl text-center text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed mb-12">
-          Pay $100 now to reserve your seat. Stripe handles checkout, and most
+          Pay $100 now to hold your seat. Stripe handles checkout. Most
           applications are reviewed within 48 hours. If you&apos;re not satisfied,
-          we issue a 100% refund within 7 days.
+          we refund 100% within 7 days.
         </p>
       </RevealOnScroll>
 
@@ -98,7 +98,7 @@ export function Pricing() {
             rel="noreferrer"
             className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
           >
-            Karpathy: 30-day lag already creates a deprecated worldview
+            Karpathy: moving fast matters
           </a>
         </div>
       </RevealOnScroll>
@@ -149,16 +149,16 @@ export function Pricing() {
               </div>
               <div className="pt-2 space-y-2">
                 <p className="text-xs text-[var(--color-text-faint)]">
-                  The remainder is authorized at check-in and captured after the
-                  event for Day 1 attendees.
+                  Stripe places a hold for the rest at check-in. We charge it after
+                  the event for Day 1 attendees.
                 </p>
                 <p className="text-xs text-[var(--color-text-faint)]">
-                  Includes guided build blocks, implementation templates, and post-workshop handoff checklists.
+                  Includes hands-on build time, templates you can reuse, and a simple post-workshop checklist.
                 </p>
                 {earlyBirdActive ? (
                   <p className="text-xs text-[var(--color-text-faint)]">
                     Early Bird ends Feb 21, 2026 at 11:59pm (Toronto time). Discount
-                    applies to the remainder. The deposit stays{" "}
+                    applies to the remaining balance. The deposit stays{" "}
                     {formatUsd0FromCents(DEPOSIT_AMOUNT_CENTS)}.
                   </p>
                 ) : null}
@@ -180,12 +180,12 @@ export function Pricing() {
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-4xl">
             {[
               {
-                title: "Checkout via Stripe",
-                desc: "Secure payment flow.",
+                title: "Pay with Stripe",
+                desc: "Secure checkout.",
               },
               {
                 title: "100% refund if not satisfied",
-                desc: "Satisfaction guarantee during the workshop.",
+                desc: "Satisfaction guarantee.",
               },
               {
                 title: "Venue shared after deposit",
@@ -209,15 +209,15 @@ export function Pricing() {
       </div>
 
       <RevealOnScroll delay={400}>
-          <div className="mt-10 max-w-4xl mx-auto">
+        <div className="mt-10 max-w-4xl mx-auto">
           <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] p-6">
             <p className="font-heading font-semibold text-sm text-[var(--color-text)]">
               Reimbursement and referrals
             </p>
             <p className="mt-2 text-sm text-[var(--color-text-muted)]">
-              Many employers reimburse professional development. We provide an
-              invoice/receipt suitable for reimbursement. Referral code is
-              optional and used for source tracking only.
+              Many employers reimburse training. We provide an invoice and
+              receipt you can use for reimbursement. Referral codes are
+              optional and only help us track where you heard about us.
             </p>
           </div>
         </div>

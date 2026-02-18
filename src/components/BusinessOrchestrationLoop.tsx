@@ -9,9 +9,9 @@ import { EASE } from "@/lib/motion-tokens";
 gsap.registerPlugin(MotionPathPlugin);
 
 const LOOP_NODES = [
-  { key: "scope", label: "Scope", x: 96 },
-  { key: "enable", label: "Enable", x: 216 },
-  { key: "deploy", label: "Deploy", x: 324 },
+  { key: "scope", label: "Pick", x: 96 },
+  { key: "enable", label: "Train", x: 216 },
+  { key: "deploy", label: "Set up", x: 324 },
   { key: "improve", label: "Improve", x: 430 },
 ] as const;
 
@@ -89,7 +89,7 @@ export function BusinessOrchestrationLoop({ className }: BusinessOrchestrationLo
         viewBox="0 0 520 92"
         fill="none"
         role="img"
-        aria-label="Scope, Enable, Deploy, Improve loop"
+        aria-label="Pick, Train, Set up, Improve loop"
       >
         <path
           d="M72 26H448A12 12 0 0 1 448 50H72A12 12 0 0 1 72 26Z"

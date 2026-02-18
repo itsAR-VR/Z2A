@@ -41,7 +41,7 @@ export default function ApplySuccessPage() {
         </div>
 
         <h1 className="font-heading font-bold tracking-tight text-[clamp(28px,3vw,40px)] leading-[1.05] mb-3 text-[var(--color-text)]">
-          Application received. You&apos;re confirmed in the flow.
+          Deposit received. You&apos;re confirmed.
         </h1>
 
         <p className="text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed mb-8">
@@ -59,11 +59,11 @@ export default function ApplySuccessPage() {
             </p>
             <p>
               <span className="text-[var(--color-accent-500)] font-medium">2.</span>{" "}
-              Complete the prework: choose a workflow to automate, set up Node 20+, Python 3.11+, Git, and VS Code.
+              Complete the prework: choose a task to automate and install Node (20+), Python (3.11+), Git, and VS Code.
             </p>
             <p>
               <span className="text-[var(--color-accent-500)] font-medium">3.</span>{" "}
-              Join us Feb 28 - Mar 1, 2026 in Toronto. Exact location is shared by email.
+              Join us Feb 28 – Mar 1, 2026 in Toronto. We&apos;ll share the exact location by email.
             </p>
           </div>
         </div>
