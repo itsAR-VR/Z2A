@@ -152,7 +152,6 @@ export function Hero() {
         <div className="hero-orb hero-orb--left animate-drift" />
         <div className="hero-orb hero-orb--right animate-drift-slow" />
         <div className="hero-orb hero-orb--center animate-drift" />
-        <div className="hero-orb hero-orb--bottom animate-drift-slow" />
         <div className="hero-plane hero-plane--left animate-drift opacity-70" />
         <div className="hero-plane hero-plane--right animate-drift-slow opacity-62" />
       </div>
