@@ -42,7 +42,7 @@ export function Speakers() {
       <RevealOnScroll>
         <h2 className="font-heading font-semibold tracking-tight text-[clamp(28px,3.2vw,44px)] leading-[1.05] mb-4 text-[var(--color-text)]">
           Learn from builders,{" "}
-          <span className="text-[var(--color-accent)]">not lecturers.</span>
+          <span className="text-[var(--color-accent)]">not presenters.</span>
         </h2>
       </RevealOnScroll>
 
