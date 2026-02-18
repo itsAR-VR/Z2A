@@ -15,13 +15,13 @@ export default function RefundPolicyPage() {
   return (
     <LegalPageShell
       title="Refund Policy"
-      description="Our policy is simple: if you are not satisfied, we offer a 100% refund."
+      description="100% refund if you aren&apos;t satisfied."
       lastUpdated="February 18, 2026"
     >
       <section>
         <h2 className="font-heading text-[24px] font-semibold tracking-tight text-[var(--color-text)]">Guarantee</h2>
         <p className="mt-3">
-          If you are not satisfied with the workshop, you can request a 100% refund. We keep this policy plain on
+          100% refund if you aren&apos;t satisfied. We keep this policy plain on
           purpose to reduce risk for participants.
         </p>
       </section>

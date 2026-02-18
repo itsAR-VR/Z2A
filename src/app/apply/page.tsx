@@ -266,9 +266,9 @@ function ApplyForm() {
               Tell us what you want help with. After you submit, you&apos;ll
               go to Stripe.
               {seatInfo?.soldOut
-                ? " This cohort is full, so you’ll join the waitlist and add a card. You won’t be charged now."
+              ? " This cohort is full, so you’ll join the waitlist and add a card. You won’t be charged now."
                 : " You will pay the $100 deposit to hold your seat."}{" "}
-              100% refund if you are not satisfied.
+              100% refund if you aren&apos;t satisfied.
             </p>
 
             <div className="mt-6 rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] p-5">
@@ -612,7 +612,7 @@ function ApplyForm() {
                   Refund policy
                 </p>
                 <p className="mt-2 text-sm text-[var(--color-text-muted)]">
-                  100% refund if you are not satisfied. Refunds are issued within 7 days.
+                  100% refund if you aren&apos;t satisfied.
                 </p>
               </div>
             </div>

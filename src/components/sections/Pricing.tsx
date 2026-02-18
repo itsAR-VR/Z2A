@@ -77,8 +77,7 @@ export function Pricing() {
       <RevealOnScroll delay={100}>
         <p className="mx-auto max-w-2xl text-center text-[var(--color-text-muted)] text-[15px] md:text-lg leading-relaxed mb-12">
           Pay $100 now to hold your seat. Stripe handles checkout. Most
-          applications are reviewed within 48 hours. If you&apos;re not satisfied,
-          we refund 100% within 7 days.
+          applications are reviewed within 48 hours. 100% refund if you aren&apos;t satisfied.
         </p>
       </RevealOnScroll>
 
@@ -184,7 +183,7 @@ export function Pricing() {
                 desc: "Secure checkout.",
               },
               {
-                title: "100% refund if not satisfied",
+                title: "100% refund if you aren&apos;t satisfied",
                 desc: "Satisfaction guarantee.",
               },
               {
