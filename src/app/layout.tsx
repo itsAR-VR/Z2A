@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-page-custom-font */
 import type { Metadata } from "next";
 import { PageViewTracker } from "@/components/analytics/PageViewTracker";
+import { SiteFooter } from "@/components/SiteFooter";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -31,6 +32,7 @@ export default function RootLayout({
       <body className="antialiased">
         <PageViewTracker />
         {children}
+        <SiteFooter />
       </body>
     </html>
   );

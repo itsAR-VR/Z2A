@@ -86,12 +86,6 @@ export function CTAFooter() {
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="mt-14 pt-8 border-t border-[var(--color-border)] text-center">
-          <p className="text-sm text-[var(--color-text-faint)]">
-            &copy; {new Date().getFullYear()} Zero-to-Agent. All rights reserved.
-          </p>
-        </div>
       </div>
     </SectionWrapper>
   );
