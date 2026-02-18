@@ -1,0 +1,311 @@
+{
+  "community": {
+    "name": "Machines Lab",
+    "platform": "Whop",
+    "url": "https://whop.com/joined/machines-lab/",
+    "description": "AI automation and prompt engineering community focused on n8n, AI tools, and building profitable automation businesses"
+  },
+  "scraped_at": "2026-01-19",
+  "total_resources": 36,
+  "sections": [
+    {
+      "name": "7-Day Prompt Engineering Course",
+      "description": "Comprehensive course on prompt engineering fundamentals",
+      "type": "course",
+      "total_items": 8,
+      "items": [
+        {
+          "day": 0,
+          "title": "Start Here",
+          "slug": "day-0-start-here",
+          "file": "days/day-0-start-here.md",
+          "url": "https://whop.com/joined/machines-lab/day-0-start-here-4X2hjzPCAv6R1k/app/"
+        },
+        {
+          "day": 1,
+          "title": "The Thinking Revolution",
+          "slug": "day-1-the-thinking-revolution",
+          "file": "days/day-1-the-thinking-revolution.md",
+          "url": "https://whop.com/joined/machines-lab/day-1-the-thinking-revolution-AmnwKRnPwT4x47/app/"
+        },
+        {
+          "day": 2,
+          "title": "The Context Architecture",
+          "slug": "day-2-the-context-architecture",
+          "file": "days/day-2-the-context-architecture.md",
+          "url": "https://whop.com/joined/machines-lab/day-2-the-context-architecture-APCcyHx3p6dUW9/app/"
+        },
+        {
+          "day": 3,
+          "title": "The Clarity Framework",
+          "slug": "day-3-the-clarity-framework",
+          "file": "days/day-3-the-clarity-framework.md",
+          "url": "https://whop.com/joined/machines-lab/day-3-the-clarity-framework-AJvkHyB8kXvV2Z/app/"
+        },
+        {
+          "day": 4,
+          "title": "The Example Engine",
+          "slug": "day-4-the-example-engine",
+          "file": "days/day-4-the-example-engine.md",
+          "url": "https://whop.com/joined/machines-lab/day-4-the-example-engine-9m58LwH8VCR8qT/app/"
+        },
+        {
+          "day": 5,
+          "title": "The Role Revolution",
+          "slug": "day-5-the-role-revolution",
+          "file": "days/day-5-the-role-revolution.md",
+          "url": "https://whop.com/joined/machines-lab/day-5-the-role-revolution-N7wGLkPEmqFYwp/app/"
+        },
+        {
+          "day": 6,
+          "title": "The Output Orchestra",
+          "slug": "day-6-the-output-orchestra",
+          "file": "days/day-6-the-output-orchestra.md",
+          "url": "https://whop.com/joined/machines-lab/day-6-the-output-orchestra-xoYt0dFpLgFxRN/app/"
+        },
+        {
+          "day": 7,
+          "title": "The End",
+          "slug": "day-7-the-end",
+          "file": "days/day-7-the-end.md",
+          "url": "https://whop.com/joined/machines-lab/day-7-the-end-vfnMDr2VVwdYRT/app/"
+        }
+      ]
+    },
+    {
+      "name": "Tools",
+      "description": "AI-powered tools integrated into the Machines Lab platform",
+      "type": "tools",
+      "total_items": 4,
+      "items": [
+        {
+          "title": "Machines Hub",
+          "slug": "machines-hub",
+          "file": "tools/machines-hub.md",
+          "description": "Resource hub for n8n templates, automation ideas, and community resources",
+          "url": "https://whop.com/joined/machines-lab/machines-hub-6f2kLN4j4xWVwp/app/"
+        },
+        {
+          "title": "Composition AI",
+          "slug": "composition-ai",
+          "file": "tools/composition-ai.md",
+          "description": "AI writing assistant for composing marketing copy, emails, and content",
+          "url": "https://whop.com/joined/machines-lab/composition-ai-9c4vM2k8pQxWnr/app/"
+        },
+        {
+          "title": "AI Mentor",
+          "slug": "ai-mentor",
+          "file": "tools/ai-mentor.md",
+          "description": "Personalized AI coaching and mentorship for automation business building",
+          "url": "https://whop.com/joined/machines-lab/ai-mentor-7h3xK9m2rTyPqw/app/"
+        },
+        {
+          "title": "Send me a DM",
+          "slug": "send-me-a-dm",
+          "file": "tools/send-me-a-dm.md",
+          "description": "Direct message outreach tool with AI-assisted message generation",
+          "url": "https://whop.com/joined/machines-lab/send-me-a-dm-5n8wJ4k6vRsPmx/app/"
+        }
+      ]
+    },
+    {
+      "name": "n8n Automation Course",
+      "description": "Complete 12-module course on building automations with n8n",
+      "type": "course",
+      "total_items": 12,
+      "items": [
+        {
+          "module": 1,
+          "title": "Welcome to n8n",
+          "slug": "module-01-welcome-to-n8n",
+          "file": "courses/n8n-automation-course/module-01-welcome-to-n8n.md",
+          "url": "https://whop.com/joined/machines-lab/n8n-automation-course-EABCdEfG/app/"
+        },
+        {
+          "module": 2,
+          "title": "Mastering Triggers",
+          "slug": "module-02-mastering-triggers",
+          "file": "courses/n8n-automation-course/module-02-mastering-triggers.md",
+          "url": "https://whop.com/joined/machines-lab/n8n-automation-course-EABCdEfG/app/"
+        },
+        {
+          "module": 3,
+          "title": "Smart Workflows",
+          "slug": "module-03-smart-workflows",
+          "file": "courses/n8n-automation-course/module-03-smart-workflows.md",
+          "url": "https://whop.com/joined/machines-lab/n8n-automation-course-EABCdEfG/app/"
+        },
+        {
+          "module": 4,
+          "title": "HTTP Requests & API",
+          "slug": "module-04-http-requests-api",
+          "file": "courses/n8n-automation-course/module-04-http-requests-api.md",
+          "url": "https://whop.com/joined/machines-lab/n8n-automation-course-EABCdEfG/app/"
+        },
+        {
+          "module": 5,
+          "title": "Database Integrations",
+          "slug": "module-05-database-integrations",
+          "file": "courses/n8n-automation-course/module-05-database-integrations.md",
+          "url": "https://whop.com/joined/machines-lab/n8n-automation-course-EABCdEfG/app/"
+        },
+        {
+          "module": 6,
+          "title": "Email Marketing Automation",
+          "slug": "module-06-email-marketing-automation",
+          "file": "courses/n8n-automation-course/module-06-email-marketing-automation.md",
+          "url": "https://whop.com/joined/machines-lab/n8n-automation-course-EABCdEfG/app/"
+        },
+        {
+          "module": 7,
+          "title": "Advanced Workflow Control",
+          "slug": "module-07-advanced-workflow-control",
+          "file": "courses/n8n-automation-course/module-07-advanced-workflow-control.md",
+          "url": "https://whop.com/joined/machines-lab/n8n-automation-course-EABCdEfG/app/"
+        },
+        {
+          "module": 8,
+          "title": "Webhooks & Realtime",
+          "slug": "module-08-webhooks-realtime",
+          "file": "courses/n8n-automation-course/module-08-webhooks-realtime.md",
+          "url": "https://whop.com/joined/machines-lab/n8n-automation-course-EABCdEfG/app/"
+        },
+        {
+          "module": 9,
+          "title": "JavaScript & Expressions",
+          "slug": "module-09-javascript-expressions",
+          "file": "courses/n8n-automation-course/module-09-javascript-expressions.md",
+          "url": "https://whop.com/joined/machines-lab/n8n-automation-course-EABCdEfG/app/"
+        },
+        {
+          "module": 10,
+          "title": "AI Integrations",
+          "slug": "module-10-ai-integrations",
+          "file": "courses/n8n-automation-course/module-10-ai-integrations.md",
+          "url": "https://whop.com/joined/machines-lab/n8n-automation-course-EABCdEfG/app/"
+        },
+        {
+          "module": 11,
+          "title": "Optimization & Scaling",
+          "slug": "module-11-optimization-scaling",
+          "file": "courses/n8n-automation-course/module-11-optimization-scaling.md",
+          "url": "https://whop.com/joined/machines-lab/n8n-automation-course-EABCdEfG/app/"
+        },
+        {
+          "module": 12,
+          "title": "Advanced Business Applications",
+          "slug": "module-12-advanced-business-applications",
+          "file": "courses/n8n-automation-course/module-12-advanced-business-applications.md",
+          "url": "https://whop.com/joined/machines-lab/n8n-automation-course-EABCdEfG/app/"
+        }
+      ]
+    },
+    {
+      "name": "Prompts, Systems & Blueprints",
+      "description": "Collection of AI prompts, business systems, and step-by-step blueprints",
+      "type": "resources",
+      "total_items": 12,
+      "items": [
+        {
+          "title": "15 AI SEO Super-Prompts",
+          "slug": "15-ai-seo-super-prompts",
+          "file": "prompts-systems-blueprints/15-ai-seo-super-prompts.md",
+          "description": "15 comprehensive prompts for SEO content creation, keyword research, and optimization",
+          "url": "https://whop.com/joined/machines-lab/15-ai-seo-super-prompts-LK2mNpQrStUvWx/app/"
+        },
+        {
+          "title": "$500 for 45 Minutes System",
+          "slug": "500-for-45min-system",
+          "file": "prompts-systems-blueprints/500-for-45min-system.md",
+          "description": "System for selling high-ticket automation consulting sessions",
+          "url": "https://whop.com/joined/machines-lab/500-for-45-minutes-system-YzAbCdEfGhIj/app/"
+        },
+        {
+          "title": "Building an n8n Agency",
+          "slug": "building-an-n8n-agency",
+          "file": "prompts-systems-blueprints/building-an-n8n-agency.md",
+          "description": "Complete guide to starting and scaling an n8n automation agency",
+          "url": "https://whop.com/joined/machines-lab/building-an-n8n-agency-KlMnOpQrStUv/app/"
+        },
+        {
+          "title": "Automated Fiverr Blueprint",
+          "slug": "automated-fiverr-blueprint",
+          "file": "prompts-systems-blueprints/automated-fiverr-blueprint.md",
+          "description": "Blueprint for building automated Fiverr gigs using AI and n8n",
+          "url": "https://whop.com/joined/machines-lab/automated-fiverr-blueprint-WxYzAbCdEfGh/app/"
+        },
+        {
+          "title": "Perfect Copy Swipe File",
+          "slug": "perfect-copy-swipe-file",
+          "file": "prompts-systems-blueprints/perfect-copy-swipe-file.md",
+          "description": "Collection of high-converting copy templates and swipe files",
+          "url": "https://whop.com/joined/machines-lab/perfect-copy-swipe-file-IjKlMnOpQrSt/app/"
+        },
+        {
+          "title": "LinkedIn Ghostwriting Blueprint",
+          "slug": "linkedin-ghostwriting-blueprint",
+          "file": "prompts-systems-blueprints/linkedin-ghostwriting-blueprint.md",
+          "description": "System for building a LinkedIn ghostwriting business using AI",
+          "url": "https://whop.com/joined/machines-lab/linkedin-ghostwriting-blueprint-UvWxYzAbCdEf/app/"
+        },
+        {
+          "title": "Prompts to Learn n8n",
+          "slug": "prompts-to-learn-n8n",
+          "file": "prompts-systems-blueprints/prompts-to-learn-n8n.md",
+          "description": "Interactive Naval-style prompts for learning n8n automation through conversation",
+          "url": "https://whop.com/joined/machines-lab/prompts-to-learn-n8n-E64V2v9TNgearL/app/"
+        },
+        {
+          "title": "Find Clients on X",
+          "slug": "find-clients-on-x",
+          "file": "prompts-systems-blueprints/find-clients-on-x.md",
+          "description": "7-day AI-powered system for finding and closing clients on X (Twitter)",
+          "url": "https://whop.com/joined/machines-lab/how-to-find-clients-on-x-using-ai-qaGFdunEnqorYv/app/"
+        },
+        {
+          "title": "100+ Super-Prompts Pack",
+          "slug": "100-super-prompts-pack",
+          "file": "prompts-systems-blueprints/100-super-prompts-pack.md",
+          "description": "Collection of 100+ prompts for content creation, marketing, and business",
+          "url": "https://whop.com/joined/machines-lab/100-super-prompts-pack-GhIjKlMnOpQr/app/"
+        },
+        {
+          "title": "Claude 4 Content Prompts",
+          "slug": "claude-4-content-prompts",
+          "file": "prompts-systems-blueprints/claude-4-content-prompts.md",
+          "description": "10 comprehensive super-prompts optimized for Claude 4 content creation",
+          "url": "https://whop.com/joined/machines-lab/10-ai-content-creation-prompts-StUvWxYzAbCd/app/"
+        },
+        {
+          "title": "Zero to $10K Guide",
+          "slug": "zero-to-10k-guide",
+          "file": "prompts-systems-blueprints/zero-to-10k-guide.md",
+          "description": "Complete blueprint for going from zero to $10K/month with AI automation",
+          "url": "https://whop.com/joined/machines-lab/how-to-go-from-zero-to-10k-month-kRExB7eUrQ3GHK/app/"
+        },
+        {
+          "title": "Copy + Paste SaaS Guide",
+          "slug": "copy-paste-saas-guide",
+          "file": "prompts-systems-blueprints/copy-paste-saas-guide.md",
+          "description": "System for reverse-engineering and cloning any SaaS product using AI coding tools",
+          "url": "https://whop.com/joined/machines-lab/how-to-copy-paste-any-saa-s-for-yourself-BBkWEloBPVFTFD/app/"
+        }
+      ]
+    }
+  ],
+  "statistics": {
+    "total_courses": 2,
+    "total_tools": 4,
+    "total_resources": 12,
+    "total_lessons": 32,
+    "categories": [
+      "Prompt Engineering",
+      "n8n Automation",
+      "Business Building",
+      "AI Content Creation",
+      "Client Acquisition",
+      "Freelancing",
+      "SaaS Development"
+    ]
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "source": "clickup",
+  "hub": "kalm-hub",
+  "section": "growth-career",
+  "baseUrl": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b",
+  "createdAt": "2026-01-20",
+  "lastUpdated": "2026-01-20",
+  "totalPages": 11,
+  "completedPages": [
+    "8cj93gy-2291",
+    "8cj93gy-2331",
+    "8cj93gy-2471",
+    "8cj93gy-2411",
+    "8cj93gy-2531",
+    "8cj93gy-2491",
+    "8cj93gy-3031",
+    "8cj93gy-2311",
+    "8cj93gy-1511",
+    "8cj93gy-1531",
+    "8cj93gy-1551"
+  ],
+  "currentPageIndex": 11,
+  "sections": {
+    "growth-career": {
+      "pages": [
+        {
+          "id": "8cj93gy-2311",
+          "title": "AI X E-Commerce by Human Squared",
+          "url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-2311",
+          "file": "growth-career/ai-x-ecommerce-human-squared.md",
+          "status": "completed",
+          "externalLinks": 80
+        },
+        {
+          "id": "8cj93gy-1511",
+          "title": "Performance Lifecycle",
+          "url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-1511",
+          "file": "growth-career/performance-lifecycle.md",
+          "status": "completed",
+          "type": "template"
+        },
+        {
+          "id": "8cj93gy-1531",
+          "title": "Working With Me Docs",
+          "url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-1531",
+          "file": "growth-career/working-with-me-docs.md",
+          "status": "completed"
+        },
+        {
+          "id": "8cj93gy-1551",
+          "title": "Working With Me, [First Last Name]",
+          "url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-1551",
+          "file": "growth-career/working-with-me-template.md",
+          "status": "completed",
+          "type": "template"
+        }
+      ]
+    },
+    "learning": {
+      "pages": [
+        {
+          "id": "8cj93gy-2291",
+          "title": "AI Prompt & Guide for Blog Posts",
+          "url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-2291",
+          "file": "learning/01-ai-prompt-guide-blog-posts.md",
+          "status": "completed",
+          "externalLinks": []
+        },
+        {
+          "id": "8cj93gy-2331",
+          "title": "Links to learn",
+          "url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-2331",
+          "file": "learning/02-links-to-learn.md",
+          "status": "completed",
+          "externalLinks": []
+        },
+        {
+          "id": "8cj93gy-2471",
+          "title": "AI Training Login",
+          "url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-2471",
+          "file": "learning/03-ai-training-login.md",
+          "status": "completed",
+          "externalLinks": ["http://adcrate.teachable.com/"]
+        },
+        {
+          "id": "8cj93gy-2411",
+          "title": "AI Frontrunners",
+          "url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-2411",
+          "file": "learning/04-ai-frontrunners.md",
+          "status": "completed",
+          "externalLinks": ["http://character.ai/", "http://whop.com/ai", "http://app.frontrunning.ai/"]
+        },
+        {
+          "id": "8cj93gy-2531",
+          "title": "Session 1: Intro",
+          "url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-2531",
+          "file": "learning/05-session-1-intro.md",
+          "status": "completed",
+          "externalLinks": ["https://drive.google.com/drive/folders/1IuECL4hor-vvM0c7zgt9-qr3p5mshgSv?usp=sharing", "https://week-1-presentation.lovable.app/"]
+        },
+        {
+          "id": "8cj93gy-2491",
+          "title": "Session 2: Prompt Engineering",
+          "url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-2491",
+          "file": "learning/06-session-2-prompt-engineering.md",
+          "status": "completed",
+          "externalLinks": ["https://docs.google.com/presentation/d/1a_vZzKrOQ4KVu71UqoCVrr23XZd0l8pr6HqF1IHNhH4/edit?usp=sharing"]
+        },
+        {
+          "id": "8cj93gy-3031",
+          "title": "A to Z AI course",
+          "url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-3031",
+          "file": "learning/07-a-to-z-ai-course.md",
+          "status": "completed",
+          "externalLinks": ["https://deadpan-freon-8e5.notion.site/A-Z-AI-Curriculum-Resource-List-224109982e9a8001a282ed5c5b4be687"]
+        }
+      ]
+    }
+  },
+  "externalResources": [
+    {
+      "type": "notion",
+      "url": "https://deadpan-freon-8e5.notion.site/A-Z-AI-Curriculum-Resource-List-224109982e9a8001a282ed5c5b4be687",
+      "status": "completed",
+      "file": "external/notion-az-ai-curriculum.md"
+    },
+    {
+      "type": "google_drive",
+      "url": "https://drive.google.com/drive/folders/1IuECL4hor-vvM0c7zgt9-qr3p5mshgSv?usp=sharing",
+      "status": "documented",
+      "file": "external/drive-content.json"
+    },
+    {
+      "type": "lovable_app",
+      "url": "https://week-1-presentation.lovable.app/",
+      "status": "completed",
+      "file": "external/slides/session-1-slides.md"
+    },
+    {
+      "type": "google_slides",
+      "url": "https://docs.google.com/presentation/d/1a_vZzKrOQ4KVu71UqoCVrr23XZd0l8pr6HqF1IHNhH4/edit?usp=sharing",
+      "status": "completed",
+      "file": "external/slides/session-2-slides.md"
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "publication": {
+    "name": "The AI Corner",
+    "url": "https://www.the-ai-corner.com/",
+    "author": "Ruben Dominguez"
+  },
+  "scraped_at": "2026-01-19",
+  "total_posts": 16,
+  "posts": [
+    {
+      "title": "OpenAI's early pitch deck, broken down",
+      "subtitle": "How one of the most important companies in tech learned to explain itself",
+      "author": "Ruben Dominguez",
+      "date": "2026-01-18",
+      "url": "https://www.the-ai-corner.com/p/openai-pitch-deck-analysis",
+      "slug": "openai-pitch-deck-analysis",
+      "likes": 39,
+      "file": "posts/2026-01-18-openai-pitch-deck-analysis.md"
+    },
+    {
+      "title": "Stop using PowerPoint for serious decks",
+      "subtitle": "Lovable turns your deck into a web app. And it looks unfair.",
+      "author": "Ruben Dominguez",
+      "date": "2026-01-17",
+      "url": "https://www.the-ai-corner.com/p/stop-using-powerpoint-for-serious",
+      "slug": "stop-using-powerpoint-for-serious",
+      "likes": 43,
+      "file": "posts/2026-01-17-stop-using-powerpoint-for-serious.md"
+    },
+    {
+      "title": "R.I.P. Basic Prompting",
+      "subtitle": "MIT just dropped a technique that changes how AI actually reasons",
+      "author": "Ruben Dominguez",
+      "date": "2026-01-16",
+      "url": "https://www.the-ai-corner.com/p/recursive-language-models-rlm-mit",
+      "slug": "recursive-language-models-rlm-mit",
+      "likes": 56,
+      "file": "posts/2026-01-16-recursive-language-models-rlm-mit.md"
+    },
+    {
+      "title": "The Most Recent AI Startup Decks You Should Study Right Now",
+      "subtitle": "A curated library of Pre-Seed and Seed AI companies backed by serious investors",
+      "author": "Ruben Dominguez",
+      "date": "2026-01-15",
+      "url": "https://www.the-ai-corner.com/p/ai-startup-pitch-decks-library",
+      "slug": "ai-startup-pitch-decks-library",
+      "likes": 43,
+      "file": "posts/2026-01-15-ai-startup-pitch-decks-library.md"
+    },
+    {
+      "title": "How Serious Builders Co-Work With Claude",
+      "subtitle": "A practical, high-ROI playbook for founders, operators, and creatives",
+      "author": "Ruben Dominguez",
+      "date": "2026-01-14",
+      "url": "https://www.the-ai-corner.com/p/claude-co-work-system",
+      "slug": "claude-co-work-system",
+      "likes": 36,
+      "file": "posts/2026-01-14-claude-co-work-system.md"
+    },
+    {
+      "title": "Will the Consumer AI Vertical Dominate the Next Decade?",
+      "subtitle": "Consumer AI might be the biggest technological wave of this decade, as everyday usage is soaring",
+      "author": "Ruben Dominguez",
+      "date": "2026-01-07",
+      "url": "https://www.the-ai-corner.com/p/20k-growth-consultant-chatgpt-prompt",
+      "slug": "20k-growth-consultant-chatgpt-prompt",
+      "likes": 49,
+      "file": "posts/2026-01-07-20k-growth-consultant-chatgpt-prompt.md"
+    },
+    {
+      "title": "Sam Altman on Where AI Is Actually Going",
+      "subtitle": "What OpenAI's CEO revealed about memory, enterprise adoption, and the real opportunity most companies are missing.",
+      "author": "Ruben Dominguez",
+      "date": "2025-12-24",
+      "url": "https://www.the-ai-corner.com/p/sam-altman-openai-interview-ai-deployment-memory-enterprise",
+      "slug": "sam-altman-openai-interview-ai-deployment-memory-enterprise",
+      "likes": 49,
+      "file": "posts/2025-12-24-sam-altman-openai-interview-ai-deployment-memory-enterprise.md"
+    },
+    {
+      "title": "The Free Founder Templates Kit",
+      "subtitle": "A full-stack operating system for building, launching, fundraising, and scaling in the AI era",
+      "author": "Ruben Dominguez",
+      "date": "2025-12-18",
+      "url": "https://www.the-ai-corner.com/p/free-founder-templates-kit-notion",
+      "slug": "free-founder-templates-kit-notion",
+      "likes": 26,
+      "file": "posts/2025-12-18-free-founder-templates-kit-notion.md"
+    },
+    {
+      "title": "a16z Partners Just Laid Out the AI Playbook for 2026",
+      "subtitle": "the 15 biggest ideas shaping how software, work, and entire industries will change in 2026",
+      "author": "Ruben Dominguez",
+      "date": "2025-12-14",
+      "url": "https://www.the-ai-corner.com/p/a16z-ai-ideas-2026-partners",
+      "slug": "a16z-ai-ideas-2026-partners",
+      "likes": 142,
+      "file": "posts/2025-12-14-a16z-ai-ideas-2026-partners.md"
+    },
+    {
+      "title": "From 0 to $1M: How Atrios Used a16z Speedrun to Redefine AI-Era Go-To-Market",
+      "subtitle": "Inside Taylor Offer's 12-week sprint through a16z Speedrun, where he built a killer team, closed millions, and created one of the fastest-growing B2B AI startups of the year.",
+      "author": "Ruben Dominguez",
+      "date": "2025-12-04",
+      "url": "https://www.the-ai-corner.com/p/atrios-a16z-speedrun-ai-warm-intros-gtm-2025",
+      "slug": "atrios-a16z-speedrun-ai-warm-intros-gtm-2025",
+      "likes": 27,
+      "file": "posts/2025-12-04-atrios-a16z-speedrun-ai-warm-intros-gtm-2025.md"
+    },
+    {
+      "title": "Ilya Sutskever's New Playbook for AGI",
+      "subtitle": "What his rare interview with Dwarkesh Patel reveals about the future of AI, the end of scaling, Safe Superintelligence Inc., and why humans still win at learning",
+      "author": "Ruben Dominguez",
+      "date": "2025-11-29",
+      "url": "https://www.the-ai-corner.com/p/ilya-sutskever-safe-superintelligence-agi-2025",
+      "slug": "ilya-sutskever-safe-superintelligence-agi-2025",
+      "likes": 82,
+      "file": "posts/2025-11-29-ilya-sutskever-safe-superintelligence-agi-2025.md"
+    },
+    {
+      "title": "Hyperliquid: The 11-Person Exchange That Shows How Extreme AI-Era Efficiency Can Get",
+      "subtitle": "What a tiny crypto derivatives team can teach us about the future of AI, agents, and software leverage",
+      "author": "Ruben Dominguez",
+      "date": "2025-11-26",
+      "url": "https://www.the-ai-corner.com/p/hyperliquid-ai-efficiency-onchain-exchange-2025",
+      "slug": "hyperliquid-ai-efficiency-onchain-exchange-2025",
+      "likes": 29,
+      "file": "posts/2025-11-26-hyperliquid-ai-efficiency-onchain-exchange-2025.md"
+    },
+    {
+      "title": "The Ultimate AI Agent Project Roadmap for 2025",
+      "subtitle": "The most complete, curated list of AI agent projects, RAG workflows, memory apps, and MCP tools available today",
+      "author": "Ruben Dominguez",
+      "date": "2025-11-22",
+      "url": "https://www.the-ai-corner.com/p/ai-agents-roadmap-2025-best-projects-rag-mcp-memory",
+      "slug": "ai-agents-roadmap-2025-best-projects-rag-mcp-memory",
+      "likes": 38,
+      "file": "posts/2025-11-22-ai-agents-roadmap-2025-best-projects-rag-mcp-memory.md"
+    },
+    {
+      "title": "The Ultimate AI Agents Roadmap for 2025",
+      "subtitle": "A complete, curated guide to videos, repos, papers, and tools for building real agent systems.",
+      "author": "Ruben Dominguez",
+      "date": "2025-11-17",
+      "url": "https://www.the-ai-corner.com/p/the-ultimate-ai-agents-roadmap-2025",
+      "slug": "the-ultimate-ai-agents-roadmap-2025",
+      "likes": 131,
+      "file": "posts/2025-11-17-the-ultimate-ai-agents-roadmap-2025.md"
+    },
+    {
+      "title": "What YC's New Startup Wishlist Says About the Future of AI",
+      "subtitle": "YC's latest Requests for Startups outline six frontiers where AI is creating billion-dollar openings — and why timing has never been better to start.",
+      "author": "Ruben Dominguez",
+      "date": "2025-11-13",
+      "url": "https://www.the-ai-corner.com/p/yc-requests-for-startups-fall-2025-ai-trends",
+      "slug": "yc-requests-for-startups-fall-2025-ai-trends",
+      "likes": 65,
+      "file": "posts/2025-11-13-yc-requests-for-startups-fall-2025-ai-trends.md"
+    },
+    {
+      "title": "The Great AI Reset",
+      "subtitle": "What the data shows about who is building, where capital is moving, and how the cycle is shifting",
+      "author": "Ruben Dominguez",
+      "date": "2025-11-09",
+      "url": "https://www.the-ai-corner.com/p/the-great-ai-reset",
+      "slug": "the-great-ai-reset",
+      "likes": 43,
+      "file": "posts/2025-11-09-the-great-ai-reset.md"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "folder_url": "https://drive.google.com/drive/folders/1IuECL4hor-vvM0c7zgt9-qr3p5mshgSv",
+  "folder_name": "Session 1 Materials",
+  "scraped_at": "2026-01-20",
+  "total_files": 6,
+  "total_size": "1.09 GB",
+  "files": [
+    {
+      "name": "Session 1 Transcript - Main Session",
+      "type": "google_docs",
+      "size": "35 KB",
+      "modified": "2025-07-11",
+      "downloadable": true,
+      "notes": "Main session transcript in Google Docs format"
+    },
+    {
+      "name": "Session 1 Transcript - Main Session.pdf",
+      "type": "pdf",
+      "size": "360 KB",
+      "modified": "2025-07-04",
+      "downloadable": true,
+      "notes": "PDF version of main session transcript"
+    },
+    {
+      "name": "Session 1 Transcript - Q&A",
+      "type": "google_docs",
+      "size": "38 KB",
+      "modified": "2025-07-11",
+      "downloadable": true,
+      "notes": "Q&A session transcript in Google Docs format"
+    },
+    {
+      "name": "Session 1 Transcript - Q&A.pdf",
+      "type": "pdf",
+      "size": "381 KB",
+      "modified": "2025-07-04",
+      "downloadable": true,
+      "notes": "PDF version of Q&A transcript"
+    },
+    {
+      "name": "Week 1: AI Foundations & Overview (Audio Recording).m4a",
+      "type": "audio",
+      "size": "111.6 MB",
+      "modified": "2025-06-20",
+      "downloadable": true,
+      "notes": "Audio recording of Week 1 session - suitable for listening offline"
+    },
+    {
+      "name": "Week 1: AI Foundations & Overview.mov",
+      "type": "video",
+      "size": "944.6 MB",
+      "modified": "2025-06-20",
+      "downloadable": true,
+      "notes": "Full video recording of Week 1 session - large file, requires manual download"
+    }
+  ],
+  "download_instructions": {
+    "transcripts": "Can be downloaded directly from Google Drive or exported from Google Docs",
+    "audio": "Right-click > Download, or use Google Drive desktop app",
+    "video": "Large file (944MB) - recommend using Google Drive desktop app or download manager"
+  }
+}

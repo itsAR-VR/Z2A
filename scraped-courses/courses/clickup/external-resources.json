@@ -1,0 +1,72 @@
+{
+  "scraped_at": "2026-01-20",
+  "total_resources": 7,
+  "resources": [
+    {
+      "id": "notion-az-curriculum",
+      "title": "A-Z AI Curriculum Resource List",
+      "type": "notion",
+      "url": "https://deadpan-freon-8e5.notion.site/A-Z-AI-Curriculum-Resource-List-224109982e9a8001a282ed5c5b4be687",
+      "from_page": "A to Z AI course",
+      "status": "completed",
+      "local_file": "external/notion-az-ai-curriculum.md"
+    },
+    {
+      "id": "gdrive-session-1",
+      "title": "Session 1 Replay",
+      "type": "google_drive",
+      "url": "https://drive.google.com/drive/folders/1IuECL4hor-vvM0c7zgt9-qr3p5mshgSv?usp=sharing",
+      "from_page": "Session 1: Intro",
+      "status": "documented",
+      "local_file": "external/drive-content.json",
+      "notes": "Folder contents documented (6 files, 1.09GB total). Large video file (944MB) requires manual download."
+    },
+    {
+      "id": "lovable-session-1-slides",
+      "title": "Session 1 Slidedeck",
+      "type": "lovable_app",
+      "url": "https://week-1-presentation.lovable.app/",
+      "from_page": "Session 1: Intro",
+      "status": "completed",
+      "local_file": "external/slides/session-1-slides.md",
+      "notes": "61 slides extracted with full content"
+    },
+    {
+      "id": "gslides-session-2",
+      "title": "Session 2 Slides",
+      "type": "google_slides",
+      "url": "https://docs.google.com/presentation/d/1a_vZzKrOQ4KVu71UqoCVrr23XZd0l8pr6HqF1IHNhH4/edit?usp=sharing",
+      "from_page": "Session 2: Prompt Engineering",
+      "status": "completed",
+      "local_file": "external/slides/session-2-slides.md",
+      "notes": "12+ slides documented with key content"
+    },
+    {
+      "id": "teachable-adcrate",
+      "title": "AI Creative Strategist Blueprint",
+      "type": "teachable",
+      "url": "http://adcrate.teachable.com/",
+      "from_page": "AI Training Login",
+      "status": "requires_auth",
+      "notes": "Requires login - credentials in AI Training Login page"
+    },
+    {
+      "id": "frontrunners-app",
+      "title": "AI Frontrunners App",
+      "type": "web_app",
+      "url": "http://app.frontrunning.ai/",
+      "from_page": "AI Frontrunners",
+      "status": "external_reference",
+      "notes": "Web app - referenced in course content"
+    },
+    {
+      "id": "whop-ai",
+      "title": "Whop AI Access",
+      "type": "web_app",
+      "url": "http://whop.com/ai",
+      "from_page": "AI Frontrunners",
+      "status": "external_reference",
+      "notes": "Access portal for AI Frontrunners membership"
+    }
+  ]
+}

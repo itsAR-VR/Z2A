@@ -51,3 +51,9 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# scraped course media (store externally)
+scraped-courses/**/*.mp4
+
+# scraped course credentials (never commit)
+scraped-courses/courses/Scraper/scraper-*.json

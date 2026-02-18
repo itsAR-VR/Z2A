@@ -1,0 +1,181 @@
+{
+  "currentDay": 8,
+  "completedDays": [0, 1, 2, 3, 4, 5, 6, 7],
+  "completedLessons": [
+    "day-0/welcome-to-your-prompt-engineering-journey",
+    "day-0/prompt-1-what-is-an-llm",
+    "day-0/prompt-2-why-this-skill-is-so-important",
+    "day-0/prompt-3-what-is-an-mcp",
+    "day-1/why-your-prompts-fail-before-they-reach-the-ai",
+    "day-1/prompt-1-prompt-analyst",
+    "day-1/the-context-architecture",
+    "day-1/prompt-2-context-practice",
+    "day-2/lesson-1-the-token-economy",
+    "day-2/prompt-1-token-optimization",
+    "day-2/role-context-vs-task-context",
+    "day-2/prompt-2-context-layering",
+    "day-2/lesson-3-context-density-and-information-weighting",
+    "day-2/prompt-3-information-weighting",
+    "day-2/lesson-4-context-testing-and-optimization",
+    "day-2/prompt-4-systematic-context-optimization",
+    "day-3/lesson-1-the-ambiguity-audit",
+    "day-3/prompt-1-ambiguity-practice",
+    "day-3/lesson-2-constraint-design",
+    "day-3/prompt-2-constraint-design",
+    "day-3/lesson-3-success-criteria-engineering",
+    "day-3/prompt-3-success-criteria",
+    "day-3/lesson-4-instruction-sequencing",
+    "day-3/prompt-4-instruction-sequencing",
+    "day-4/lesson-1-example-selection-strategy",
+    "day-4/prompt-1-strategic-examples",
+    "day-4/lesson-2-few-shot-prompt-architecture",
+    "day-4/prompt-2-few-shot-architecture",
+    "day-4/lesson-3-example-variation-and-edge-cases",
+    "day-4/prompt-3-variation-design",
+    "day-4/lesson-4-zero-shot-vs-few-shot-decision-making",
+    "day-4/prompt-4-practice-decision-making",
+    "day-5/lesson-1-generic-vs-specific-role-definition",
+    "day-5/prompt-1-role-architecture",
+    "day-5/lesson-2-expertise-intersection-design",
+    "day-5/prompt-2-intersection-design",
+    "day-5/lesson-3-behavioral-role-programming",
+    "day-5/prompt-3-behavioral-role-programming",
+    "day-5/lesson-4-role-testing-and-refinement",
+    "day-5/prompt-4-role-validation-design",
+    "day-6/lesson-1-format-specification-design",
+    "day-6/prompt-1-format-architecture",
+    "day-6/lesson-2-structured-data-formats-and-technical-integration",
+    "day-6/prompt-2-structured-data-practice",
+    "day-6/lesson-3-dynamic-output-adaptation-and-quality-control",
+    "day-6/prompt-3-output-architecture",
+    "day-7/your-path-forward",
+    "day-7/prompt-the-end"
+  ],
+  "resources": [
+    {
+      "title": "Prompt 1 - What's an LLM?",
+      "url": "https://machina.notion.site/Prompt-1-What-s-an-LLM-269c6b3f8769801aa686e77c61aab35c",
+      "fromDay": 0
+    },
+    {
+      "title": "Prompt 2 - Why this skill is so important",
+      "url": "https://machina.notion.site/Prompt-2-Why-this-skill-is-so-important-269c6b3f87698076b067fc669582064f",
+      "fromDay": 0
+    },
+    {
+      "title": "Prompt 3 - What is an MCP?",
+      "url": "https://machina.notion.site/Prompt-3-What-is-an-MCP-269c6b3f876980aab3d0f142da0fa357",
+      "fromDay": 0
+    },
+    {
+      "title": "Prompt 1 - Prompt Analyst",
+      "url": "https://machina.notion.site/Prompt-1-Prompt-Analyst-269c6b3f876980cb956acf867f305d91",
+      "fromDay": 1
+    },
+    {
+      "title": "Prompt 2 - Context Practice",
+      "url": "https://machina.notion.site/Prompt-2-Prompt-2-Context-Practice-269c6b3f876980b5a6aff20243d540c9",
+      "fromDay": 1
+    },
+    {
+      "title": "Prompt 1 - Token Optimization",
+      "url": "https://machina.notion.site/Prompt-1-Token-Optimization-269c6b3f8769806d8d8cf26fc8c82957",
+      "fromDay": 2
+    },
+    {
+      "title": "Prompt 2 - Context Layering",
+      "url": "https://machina.notion.site/Prompt-2-Context-Layering-269c6b3f87698005ae03e2a1b97d62c6",
+      "fromDay": 2
+    },
+    {
+      "title": "Prompt 3 - Information Weighting",
+      "url": "https://machina.notion.site/Prompt-3-Information-Weighting-269c6b3f8769807dbee5ea8254b6ffaa",
+      "fromDay": 2
+    },
+    {
+      "title": "Prompt 4 - Systematic Context Optimization",
+      "url": "https://machina.notion.site/Prompt-4-Systematic-Context-Optimization-269c6b3f876980fa890dcad4e4e25bbc",
+      "fromDay": 2
+    },
+    {
+      "title": "Prompt 1 - Ambiguity Practice",
+      "url": "https://machina.notion.site/Prompt-1-26ac6b3f8769801cb1b8ed044f5257b4",
+      "fromDay": 3
+    },
+    {
+      "title": "Prompt 2 - Constraint Design",
+      "url": "https://machina.notion.site/Prompt-2-Constraint-Design-26ac6b3f876980789fb7d7187f025ec5",
+      "fromDay": 3
+    },
+    {
+      "title": "Prompt 3 - Success Criteria",
+      "url": "https://machina.notion.site/Prompt-3-Success-Critera-26ac6b3f87698088b59dd980a2973980",
+      "fromDay": 3
+    },
+    {
+      "title": "Prompt 4 - Instruction Sequencing",
+      "url": "https://machina.notion.site/Prompt-4-Instruction-Sequencing-26ac6b3f87698058b4a0f159636012bb",
+      "fromDay": 3
+    },
+    {
+      "title": "Prompt 1 - Strategic Examples",
+      "url": "https://machina.notion.site/Prompt-1-Strategic-Examples-26bc6b3f8769808c8b45c1d919d01b52",
+      "fromDay": 4
+    },
+    {
+      "title": "Prompt 2 - Few-Shot Architecture",
+      "url": "https://machina.notion.site/Prompt-2-Few-shot-Architecture-26bc6b3f876980b6a9f5e6fe0398ef1d",
+      "fromDay": 4
+    },
+    {
+      "title": "Prompt 3 - Variation Design",
+      "url": "https://machina.notion.site/Prompt-3-Variation-Design-26bc6b3f87698029a03edec870c34789",
+      "fromDay": 4
+    },
+    {
+      "title": "Prompt 4 - Practice Decision Making",
+      "url": "https://machina.notion.site/Prompt-4-Practice-Decision-Making-26bc6b3f87698082b9b2e13004e009c8",
+      "fromDay": 4
+    },
+    {
+      "title": "Prompt 1 - Role Architecture",
+      "url": "https://machina.notion.site/Day-5-Role-Architecture-26cc6b3f87698094beacdbfd60aef3f2",
+      "fromDay": 5
+    },
+    {
+      "title": "Prompt 2 - Intersection Design",
+      "url": "https://machina.notion.site/Prompt-2-Intersection-Design-26cc6b3f876980af9b6fe40a2cc72e99",
+      "fromDay": 5
+    },
+    {
+      "title": "Prompt 3 - Behavioral Role Programming",
+      "url": "https://machina.notion.site/Prompt-3-Behavioral-Role-Programming-26cc6b3f8769804fb215eceb838fce28",
+      "fromDay": 5
+    },
+    {
+      "title": "Prompt 4 - Role Validation Design",
+      "url": "https://machina.notion.site/Prompt-4-Role-Validation-Design-26cc6b3f876980adadf4dfb01ea4c987",
+      "fromDay": 5
+    },
+    {
+      "title": "Prompt 1 - Format Architecture",
+      "url": "https://machina.notion.site/Prompt-1-Format-Architecture-26dc6b3f876980af9a7ff0ecb3c2cc57",
+      "fromDay": 6
+    },
+    {
+      "title": "Prompt 2 - Structured Data Practice",
+      "url": "https://machina.notion.site/Prompt-2-Structured-Data-Practice-26dc6b3f87698079a2b6d52a5d0970b8",
+      "fromDay": 6
+    },
+    {
+      "title": "Prompt 3 - Output Architecture",
+      "url": "https://machina.notion.site/Prompt-3-Output-Architecture-26dc6b3f876980ff9358f684ea4c8279",
+      "fromDay": 6
+    },
+    {
+      "title": "Prompt - The End",
+      "url": "https://machina.notion.site/Prompt-The-End-26ec6b3f876980c2913cfba61681ef7b",
+      "fromDay": 7
+    }
+  ]
+}

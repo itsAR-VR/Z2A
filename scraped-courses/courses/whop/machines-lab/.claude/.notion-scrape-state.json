@@ -1,0 +1,231 @@
+{
+  "description": "State tracking for Notion page scraping",
+  "createdAt": "2026-01-20",
+  "completedPages": [],
+  "pages": [
+    {
+      "source": "days/day-0-start-here.md",
+      "folder": "days/day-0",
+      "url": "https://machina.notion.site/Prompt-1-What-s-an-LLM-269c6b3f8769801aa686e77c61aab35c",
+      "slug": "prompt-1-whats-an-llm",
+      "title": "Prompt 1 - What's an LLM?",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-0-start-here.md",
+      "folder": "days/day-0",
+      "url": "https://machina.notion.site/Prompt-2-Why-this-skill-is-so-important-269c6b3f87698076b067fc669582064f",
+      "slug": "prompt-2-why-this-skill-is-so-important",
+      "title": "Prompt 2 - Why this skill is so important",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-0-start-here.md",
+      "folder": "days/day-0",
+      "url": "https://machina.notion.site/Prompt-3-What-is-an-MCP-269c6b3f876980aab3d0f142da0fa357",
+      "slug": "prompt-3-what-is-an-mcp",
+      "title": "Prompt 3 - What is an MCP?",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-1-the-thinking-revolution.md",
+      "folder": "days/day-1",
+      "url": "https://machina.notion.site/Prompt-1-Prompt-Analyst-269c6b3f876980cb956acf867f305d91",
+      "slug": "prompt-1-prompt-analyst",
+      "title": "Prompt 1 - Prompt Analyst",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-1-the-thinking-revolution.md",
+      "folder": "days/day-1",
+      "url": "https://machina.notion.site/Prompt-2-Prompt-2-Context-Practice-269c6b3f876980b5a6aff20243d540c9",
+      "slug": "prompt-2-context-practice",
+      "title": "Prompt 2 - Context Practice",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-2-the-context-architecture.md",
+      "folder": "days/day-2",
+      "url": "https://machina.notion.site/Prompt-1-Token-Optimization-269c6b3f8769806d8d8cf26fc8c82957",
+      "slug": "prompt-1-token-optimization",
+      "title": "Prompt 1 - Token Optimization",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-2-the-context-architecture.md",
+      "folder": "days/day-2",
+      "url": "https://machina.notion.site/Prompt-2-Context-Layering-269c6b3f87698005ae03e2a1b97d62c6",
+      "slug": "prompt-2-context-layering",
+      "title": "Prompt 2 - Context Layering",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-2-the-context-architecture.md",
+      "folder": "days/day-2",
+      "url": "https://machina.notion.site/Prompt-3-Information-Weighting-269c6b3f8769807dbee5ea8254b6ffaa",
+      "slug": "prompt-3-information-weighting",
+      "title": "Prompt 3 - Information Weighting",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-2-the-context-architecture.md",
+      "folder": "days/day-2",
+      "url": "https://machina.notion.site/Prompt-4-Systematic-Context-Optimization-269c6b3f876980fa890dcad4e4e25bbc",
+      "slug": "prompt-4-systematic-context-optimization",
+      "title": "Prompt 4 - Systematic Context Optimization",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-3-the-clarity-framework.md",
+      "folder": "days/day-3",
+      "url": "https://machina.notion.site/Prompt-1-26ac6b3f8769801cb1b8ed044f5257b4",
+      "slug": "prompt-1-ambiguity-practice",
+      "title": "Prompt 1 - Ambiguity Practice",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-3-the-clarity-framework.md",
+      "folder": "days/day-3",
+      "url": "https://machina.notion.site/Prompt-2-Constraint-Design-26ac6b3f876980789fb7d7187f025ec5",
+      "slug": "prompt-2-constraint-design",
+      "title": "Prompt 2 - Constraint Design",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-3-the-clarity-framework.md",
+      "folder": "days/day-3",
+      "url": "https://machina.notion.site/Prompt-3-Success-Critera-26ac6b3f87698088b59dd980a2973980",
+      "slug": "prompt-3-success-criteria",
+      "title": "Prompt 3 - Success Criteria",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-3-the-clarity-framework.md",
+      "folder": "days/day-3",
+      "url": "https://machina.notion.site/Prompt-4-Instruction-Sequencing-26ac6b3f87698058b4a0f159636012bb",
+      "slug": "prompt-4-instruction-sequencing",
+      "title": "Prompt 4 - Instruction Sequencing",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-4-the-example-engine.md",
+      "folder": "days/day-4",
+      "url": "https://machina.notion.site/Prompt-1-Strategic-Examples-26bc6b3f8769808c8b45c1d919d01b52",
+      "slug": "prompt-1-strategic-examples",
+      "title": "Prompt 1 - Strategic Examples",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-4-the-example-engine.md",
+      "folder": "days/day-4",
+      "url": "https://machina.notion.site/Prompt-2-Few-shot-Architecture-26bc6b3f876980b6a9f5e6fe0398ef1d",
+      "slug": "prompt-2-few-shot-architecture",
+      "title": "Prompt 2 - Few-shot Architecture",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-4-the-example-engine.md",
+      "folder": "days/day-4",
+      "url": "https://machina.notion.site/Prompt-3-Variation-Design-26bc6b3f87698029a03edec870c34789",
+      "slug": "prompt-3-variation-design",
+      "title": "Prompt 3 - Variation Design",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-4-the-example-engine.md",
+      "folder": "days/day-4",
+      "url": "https://machina.notion.site/Prompt-4-Practice-Decision-Making-26bc6b3f87698082b9b2e13004e009c8",
+      "slug": "prompt-4-practice-decision-making",
+      "title": "Prompt 4 - Practice Decision Making",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-5-the-role-revolution.md",
+      "folder": "days/day-5",
+      "url": "https://machina.notion.site/Day-5-Role-Architecture-26cc6b3f87698094beacdbfd60aef3f2",
+      "slug": "prompt-1-role-architecture",
+      "title": "Prompt 1 - Role Architecture",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-5-the-role-revolution.md",
+      "folder": "days/day-5",
+      "url": "https://machina.notion.site/Prompt-2-Intersection-Design-26cc6b3f876980af9b6fe40a2cc72e99",
+      "slug": "prompt-2-intersection-design",
+      "title": "Prompt 2 - Intersection Design",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-5-the-role-revolution.md",
+      "folder": "days/day-5",
+      "url": "https://machina.notion.site/Prompt-3-Behavioral-Role-Programming-26cc6b3f8769804fb215eceb838fce28",
+      "slug": "prompt-3-behavioral-role-programming",
+      "title": "Prompt 3 - Behavioral Role Programming",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-5-the-role-revolution.md",
+      "folder": "days/day-5",
+      "url": "https://machina.notion.site/Prompt-4-Role-Validation-Design-26cc6b3f876980adadf4dfb01ea4c987",
+      "slug": "prompt-4-role-validation-design",
+      "title": "Prompt 4 - Role Validation Design",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-6-the-output-orchestra.md",
+      "folder": "days/day-6",
+      "url": "https://machina.notion.site/Prompt-1-Format-Architecture-26dc6b3f876980af9a7ff0ecb3c2cc57",
+      "slug": "prompt-1-format-architecture",
+      "title": "Prompt 1 - Format Architecture",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-6-the-output-orchestra.md",
+      "folder": "days/day-6",
+      "url": "https://machina.notion.site/Prompt-2-Structured-Data-Practice-26dc6b3f87698079a2b6d52a5d0970b8",
+      "slug": "prompt-2-structured-data-practice",
+      "title": "Prompt 2 - Structured Data Practice",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-6-the-output-orchestra.md",
+      "folder": "days/day-6",
+      "url": "https://machina.notion.site/Prompt-3-Output-Architecture-26dc6b3f876980ff9358f684ea4c8279",
+      "slug": "prompt-3-output-architecture",
+      "title": "Prompt 3 - Output Architecture",
+      "status": "pending"
+    },
+    {
+      "source": "days/day-7-the-end.md",
+      "folder": "days/day-7",
+      "url": "https://machina.notion.site/Prompt-The-End-26ec6b3f876980c2913cfba61681ef7b",
+      "slug": "prompt-the-end",
+      "title": "Prompt - The End",
+      "status": "pending"
+    },
+    {
+      "source": "tools/machines-hub.md",
+      "folder": "tools/machines-hub",
+      "url": "https://www.notion.so/The-AI-Image-Generation-Playbook-271c6b3f876980d59eafe875a8499ac3",
+      "slug": "ai-image-generation-playbook",
+      "title": "The AI Image Generation Playbook",
+      "status": "pending"
+    },
+    {
+      "source": "prompts-systems-blueprints/100-super-prompts-pack.md",
+      "folder": "prompts-systems-blueprints/100-super-prompts-pack",
+      "url": "https://machina.notion.site/Short-form-content-Tiktok-YT-Inst-205c6b3f8769802cb25ce9e38de4f808",
+      "slug": "short-form-content",
+      "title": "Short-form content (TikTok, YT, Inst)",
+      "status": "pending"
+    },
+    {
+      "source": "prompts-systems-blueprints/100-super-prompts-pack.md",
+      "folder": "prompts-systems-blueprints/100-super-prompts-pack",
+      "url": "https://machina.notion.site/Long-Form-Content-Youtube-205c6b3f876980cb97c6eed8cd19fef2",
+      "slug": "long-form-content-youtube",
+      "title": "Long-Form Content (Youtube)",
+      "status": "pending"
+    }
+  ]
+}

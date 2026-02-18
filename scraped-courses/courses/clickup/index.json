@@ -1,0 +1,249 @@
+{
+  "source": {
+    "platform": "clickup",
+    "hub": "kalm hub",
+    "base_url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b"
+  },
+  "scraped_at": "2026-01-20",
+  "sections": {
+    "growth-career": {
+      "title": "growth & career",
+      "total_pages": 11,
+      "pages": [
+        {
+          "order": 1,
+          "title": "AI X E-Commerce by Human Squared",
+          "slug": "ai-x-ecommerce-human-squared",
+          "id": "8cj93gy-2311",
+          "url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-2311",
+          "file": "growth-career/ai-x-ecommerce-human-squared.md",
+          "last_updated": "7/1/25",
+          "owner": "Mo",
+          "type": "resource_library",
+          "external_links_count": 80
+        },
+        {
+          "order": 2,
+          "title": "Performance Lifecycle",
+          "slug": "performance-lifecycle",
+          "id": "8cj93gy-1511",
+          "url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-1511",
+          "file": "growth-career/performance-lifecycle.md",
+          "last_updated": "6/21/25",
+          "owner": "Mo",
+          "type": "template"
+        },
+        {
+          "order": 3,
+          "title": "Working With Me Docs",
+          "slug": "working-with-me-docs",
+          "id": "8cj93gy-1531",
+          "url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-1531",
+          "file": "growth-career/working-with-me-docs.md",
+          "last_updated": "unknown",
+          "owner": "Mo",
+          "type": "parent",
+          "subpages": [
+            {
+              "title": "Working With Me, [First Last Name]",
+              "id": "8cj93gy-1551",
+              "url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-1551",
+              "file": "growth-career/working-with-me-template.md",
+              "type": "template"
+            }
+          ]
+        }
+      ]
+    },
+    "learning": {
+      "title": "growth & career > learning",
+      "parent_url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-2651",
+      "total_pages": 7,
+      "pages": [
+        {
+          "order": 1,
+          "title": "AI Prompt & Guide for Blog Posts",
+          "slug": "ai-prompt-guide-blog-posts",
+          "id": "8cj93gy-2291",
+          "url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-2291",
+          "file": "learning/01-ai-prompt-guide-blog-posts.md",
+          "last_updated": "7/1/25",
+          "owner": "Mo",
+          "external_links": []
+        },
+        {
+          "order": 2,
+          "title": "Links to learn",
+          "slug": "links-to-learn",
+          "id": "8cj93gy-2331",
+          "url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-2331",
+          "file": "learning/02-links-to-learn.md",
+          "last_updated": "6/21/25",
+          "owner": "Mo",
+          "external_links": [],
+          "embedded_content": "https://sharing.clickup.com/l/h/6-901111096749-1?hide-header=1&hide-branding=1"
+        },
+        {
+          "order": 3,
+          "title": "AI Training Login",
+          "slug": "ai-training-login",
+          "id": "8cj93gy-2471",
+          "url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-2471",
+          "file": "learning/03-ai-training-login.md",
+          "last_updated": "7/3/25",
+          "owner": "Mo",
+          "external_links": [
+            {
+              "text": "AI Creative Strategist Blueprint",
+              "url": "http://adcrate.teachable.com/"
+            }
+          ]
+        },
+        {
+          "order": 4,
+          "title": "AI Frontrunners",
+          "slug": "ai-frontrunners",
+          "id": "8cj93gy-2411",
+          "url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-2411",
+          "file": "learning/04-ai-frontrunners.md",
+          "last_updated": "7/8/25",
+          "owner": "Mo",
+          "external_links": [
+            {
+              "text": "Character.AI",
+              "url": "http://character.ai/"
+            },
+            {
+              "text": "whop.com/ai",
+              "url": "http://whop.com/ai"
+            },
+            {
+              "text": "app.frontrunning.ai",
+              "url": "http://app.frontrunning.ai/"
+            }
+          ]
+        },
+        {
+          "order": 5,
+          "title": "Session 1: Intro",
+          "slug": "session-1-intro",
+          "id": "8cj93gy-2531",
+          "url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-2531",
+          "file": "learning/05-session-1-intro.md",
+          "last_updated": "6/28/25",
+          "owner": "Mo",
+          "external_links": [
+            {
+              "text": "Watch the session replay",
+              "url": "https://drive.google.com/drive/folders/1IuECL4hor-vvM0c7zgt9-qr3p5mshgSv?usp=sharing"
+            },
+            {
+              "text": "Slidedeck",
+              "url": "https://week-1-presentation.lovable.app/"
+            }
+          ]
+        },
+        {
+          "order": 6,
+          "title": "Session 2: Prompt Engineering",
+          "slug": "session-2-prompt-engineering",
+          "id": "8cj93gy-2491",
+          "url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-2491",
+          "file": "learning/06-session-2-prompt-engineering.md",
+          "last_updated": "6/28/25",
+          "owner": "Mo",
+          "external_links": [
+            {
+              "text": "Week 2 Slides",
+              "url": "https://docs.google.com/presentation/d/1a_vZzKrOQ4KVu71UqoCVrr23XZd0l8pr6HqF1IHNhH4/edit?usp=sharing"
+            }
+          ]
+        },
+        {
+          "order": 7,
+          "title": "A to Z AI course",
+          "slug": "a-to-z-ai-course",
+          "id": "8cj93gy-3031",
+          "url": "https://doc.clickup.com/9011760670/d/h/8cj93gy-2211/81ee099da023f2b/8cj93gy-3031",
+          "file": "learning/07-a-to-z-ai-course.md",
+          "last_updated": "7/16/25",
+          "owner": "Mo",
+          "external_links": [
+            {
+              "text": "A-Z AI Curriculum Resource List",
+              "url": "https://deadpan-freon-8e5.notion.site/A-Z-AI-Curriculum-Resource-List-224109982e9a8001a282ed5c5b4be687"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "external_resources": [
+    {
+      "id": "notion-az-curriculum",
+      "title": "A-Z AI Curriculum Resource List",
+      "type": "notion",
+      "url": "https://deadpan-freon-8e5.notion.site/A-Z-AI-Curriculum-Resource-List-224109982e9a8001a282ed5c5b4be687",
+      "from_page": "A to Z AI course",
+      "status": "completed",
+      "local_file": "external/notion-az-ai-curriculum.md"
+    },
+    {
+      "id": "gdrive-session-1",
+      "title": "Session 1 Replay",
+      "type": "google_drive",
+      "url": "https://drive.google.com/drive/folders/1IuECL4hor-vvM0c7zgt9-qr3p5mshgSv?usp=sharing",
+      "from_page": "Session 1: Intro",
+      "status": "documented",
+      "local_file": "external/drive-content.json"
+    },
+    {
+      "id": "lovable-session-1",
+      "title": "Session 1 Slidedeck",
+      "type": "lovable_app",
+      "url": "https://week-1-presentation.lovable.app/",
+      "from_page": "Session 1: Intro",
+      "status": "completed",
+      "local_file": "external/slides/session-1-slides.md"
+    },
+    {
+      "id": "gslides-session-2",
+      "title": "Session 2 Slides",
+      "type": "google_slides",
+      "url": "https://docs.google.com/presentation/d/1a_vZzKrOQ4KVu71UqoCVrr23XZd0l8pr6HqF1IHNhH4/edit?usp=sharing",
+      "from_page": "Session 2: Prompt Engineering",
+      "status": "completed",
+      "local_file": "external/slides/session-2-slides.md"
+    },
+    {
+      "id": "teachable-adcrate",
+      "title": "AI Creative Strategist Blueprint",
+      "type": "teachable",
+      "url": "http://adcrate.teachable.com/",
+      "from_page": "AI Training Login",
+      "status": "requires_auth"
+    },
+    {
+      "id": "frontrunners-app",
+      "title": "AI Frontrunners App",
+      "type": "web_app",
+      "url": "http://app.frontrunning.ai/",
+      "from_page": "AI Frontrunners",
+      "status": "external_reference"
+    },
+    {
+      "id": "whop-ai",
+      "title": "Whop AI Access",
+      "type": "web_app",
+      "url": "http://whop.com/ai",
+      "from_page": "AI Frontrunners",
+      "status": "external_reference"
+    }
+  ],
+  "stats": {
+    "total_clickup_pages": 11,
+    "total_external_resources": 7,
+    "total_files_created": 14,
+    "sections_covered": ["growth & career", "learning"]
+  }
+}

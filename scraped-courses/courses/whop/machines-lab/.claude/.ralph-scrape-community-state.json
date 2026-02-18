@@ -1,0 +1,32 @@
+{
+  "currentResourceIndex": 4,
+  "completedResources": [
+    "machines-hub",
+    "composition-ai",
+    "ai-mentor",
+    "send-me-a-dm"
+  ],
+  "tools": [
+    {
+      "name": "Machines Hub",
+      "type": "forum",
+      "file": "tools/machines-hub.md"
+    },
+    {
+      "name": "Composition AI",
+      "type": "ai-tool",
+      "file": "tools/composition-ai.md"
+    },
+    {
+      "name": "Machines Lab AI Mentor",
+      "type": "ai-tool",
+      "file": "tools/ai-mentor.md"
+    },
+    {
+      "name": "Send me a DM",
+      "type": "messaging",
+      "file": "tools/send-me-a-dm.md"
+    }
+  ],
+  "resources": []
+}

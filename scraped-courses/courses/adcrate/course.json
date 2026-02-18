@@ -1,0 +1,187 @@
+{
+  "title": "AI Creative Strategist Blueprint",
+  "source": "https://adcrate.teachable.com/courses/ai-creative-strategist-blueprint",
+  "scraped_at": "2026-01-20",
+  "status": "complete",
+  "sections": [
+    {
+      "name": "Session 1",
+      "folder": "Session-1",
+      "lectures": [
+        {"title": "AI Foundations & Overview", "duration": "56:54", "type": "video", "file": "01-AI-Foundations-Overview.mp4", "url": "/lectures/62046552"},
+        {"title": "Deep Dive (Q&A Session)", "duration": "59:48", "type": "video", "file": "02-Deep-Dive-QA-Session.mp4", "url": "/lectures/62092544"},
+        {"title": "Presentation Slides", "type": "resource", "file": "slides/slides.md", "note": "External web presentation at https://week-1-presentation.lovable.app/", "url": "/lectures/62113604"},
+        {"title": "Assignment", "type": "assignment", "file": "assignment.md", "url": "/lectures/62092551"},
+        {"title": "Extra Resources", "type": "resource", "file": "resources.md", "url": "/lectures/62113611"}
+      ]
+    },
+    {
+      "name": "Session 2",
+      "folder": "Session-2",
+      "lectures": [
+        {"title": "Prompting Engineering", "duration": "57:00", "type": "video", "file": "01-Prompting-Engineering.mp4", "url": "/lectures/62046553"},
+        {"title": "Deep Dive (Q&A Session)", "duration": "58:01", "type": "video", "file": "02-Deep-Dive-QA-Session.mp4", "url": "/lectures/62046554"},
+        {"title": "Presentation Slides", "type": "resource", "file": "slides/Week-2-Prompting-Fundamentals.pdf", "url": "/lectures/62113587"},
+        {"title": "Assignment #1", "type": "assignment", "file": "assignment-1.md", "url": "/lectures/62046555"},
+        {"title": "Assignment #2", "type": "assignment", "file": "assignment-2.md", "url": "/lectures/62092694"},
+        {"title": "Extra Resources", "type": "resource", "file": "resources.md", "url": "/lectures/62113614"}
+      ]
+    },
+    {
+      "name": "Bonus: Arcads with Romain",
+      "folder": "Bonus-Arcads",
+      "lectures": [
+        {"title": "Arcads: How to Generate AI UGC That Actually Converts", "duration": "45:26", "type": "video", "file": "01-Arcads-How-to-Generate-AI-UGC.mp4", "url": "/lectures/62092571"},
+        {"title": "Deep Dive (Q&A Session)", "duration": "16:29", "type": "video", "file": "02-Deep-Dive-QA-Session.mp4", "url": "/lectures/62145693"},
+        {"title": "Extra Resources", "type": "resource", "file": "resources.md", "url": "/lectures/62237327"}
+      ]
+    },
+    {
+      "name": "Session 3",
+      "folder": "Session-3",
+      "lectures": [
+        {"title": "Context Engineering", "duration": "51:32", "type": "video", "file": "01-Context-Engineering.mp4", "url": "/lectures/62092597"},
+        {"title": "Deep Dive (Q&A Session)", "duration": "30:28", "type": "video", "file": "02-Deep-Dive-QA-Session.mp4", "url": "/lectures/62092598"},
+        {"title": "Presentation Slides", "type": "resource", "file": "slides/Week-3-Context-Engineering.pdf", "url": "/lectures/62179835"},
+        {"title": "Assignment", "type": "assignment", "file": "assignment.md", "url": "/lectures/62092599"},
+        {"title": "Extra Resources", "type": "resource", "file": "resources.md", "url": "/lectures/62178309"},
+        {"title": "Session 2 Prompt Challenge Winners", "duration": "4:52", "type": "video", "note": "Missing from downloads", "url": "/lectures/62178313"},
+        {"title": "New Competition", "type": "content", "file": "competition.md", "url": "/lectures/62179618"}
+      ]
+    },
+    {
+      "name": "Bonus: Veo3 with PJ",
+      "folder": "Bonus-Veo3",
+      "lectures": [
+        {"title": "Veo 3: How to Become a Prompting Master", "duration": "61:07", "type": "video", "file": "01-How-to-Become-a-Prompting-Master.mp4", "url": "/lectures/62092604"},
+        {"title": "Extra Resources", "type": "resource", "file": "resources.md", "url": "/lectures/62236982"}
+      ]
+    },
+    {
+      "name": "Session 4",
+      "folder": "Session-4",
+      "lectures": [
+        {"title": "Prompting for Image Gen, Google AI Studio & DeepResearch", "duration": "51:18", "type": "video", "file": "01-Prompting-for-Image-Gen.mp4", "url": "/lectures/62092633"},
+        {"title": "Deep Dive (Q&A Session)", "duration": "49:20", "type": "video", "file": "02-Deep-Dive-QA-Session.mp4", "url": "/lectures/62092634"},
+        {"title": "Presentation Slides", "type": "resource", "file": "slides/Week-4-Advanced-Prompt-Engineering.pdf", "url": "/lectures/62261838"},
+        {"title": "Extra Resources", "type": "resource", "file": "resources.md", "url": "/lectures/62261090"},
+        {"title": "Assignment", "type": "assignment", "file": "assignment.md", "url": "/lectures/62092635"}
+      ]
+    },
+    {
+      "name": "Bonus: Poppy AI with Amaanath",
+      "folder": "Bonus-Poppy",
+      "lectures": [
+        {"title": "Poppy: How to Automate Your Creative Workflow", "duration": "66:50", "type": "video", "file": "01-How-to-Automate-Your-Creative-Workflow.mp4", "url": "/lectures/62092662"},
+        {"title": "Extra Resources", "type": "resource", "file": "resources.md", "url": "/lectures/62320367"}
+      ]
+    },
+    {
+      "name": "Session 5",
+      "folder": "Session-5",
+      "lectures": [
+        {"title": "Poppy Deep Dive", "duration": "58:31", "type": "video", "file": "01-Poppy-Deep-Dive.mp4", "url": "/lectures/62092639"},
+        {"title": "Deep Dive (Q&A Session)", "duration": "41:52", "type": "video", "file": "02-Deep-Dive-QA-Session.mp4", "url": "/lectures/62092640"},
+        {"title": "Assignment", "type": "assignment", "file": "assignment.md", "url": "/lectures/62092641"},
+        {"title": "Extra Resources", "type": "resource", "file": "resources.md", "url": "/lectures/62351390"}
+      ]
+    },
+    {
+      "name": "Bonus: Funnel Congruence with Chase",
+      "folder": "Bonus-Funnel",
+      "lectures": [
+        {"title": "Funnel Congruence with AI", "duration": "55:38", "type": "video", "file": "01-Funnel-Congruence-with-AI.mp4", "url": "/lectures/62388873"},
+        {"title": "Extra Resources", "type": "resource", "file": "resources.md", "url": "/lectures/62427610"}
+      ]
+    },
+    {
+      "name": "Bonus: Gumloop with Aron",
+      "folder": "Bonus-Gumloop",
+      "lectures": [
+        {"title": "Gumloop: How to Create Multi-Step Workflows", "duration": "60:36", "type": "video", "file": "01-How-to-Create-Multi-Step-Workflows.mp4", "url": "/lectures/62092666"},
+        {"title": "Deep Dive (Q&A Session with Jimmy)", "duration": "20:26", "type": "video", "file": "02-Deep-Dive-QA-Session-with-Jimmy.mp4", "url": "/lectures/62457604"},
+        {"title": "Extra Resources", "type": "resource", "file": "resources.md", "url": "/lectures/62457628"}
+      ]
+    },
+    {
+      "name": "Bonus: AI SEO with Chirag",
+      "folder": "Bonus-SEO",
+      "lectures": [
+        {"title": "SEO: How to Master AI SEO", "duration": "35:05", "type": "video", "file": "01-How-to-Master-AI-SEO.mp4", "url": "/lectures/62092667"},
+        {"title": "Deep Dive (Q&A Session)", "duration": "18:41", "type": "video", "file": "02-Deep-Dive-QA-Session.mp4", "url": "/lectures/62525428"},
+        {"title": "Extra Resources", "type": "resource", "file": "resources.md", "url": "/lectures/62525433"}
+      ]
+    },
+    {
+      "name": "Session 6",
+      "folder": "Session-6",
+      "lectures": [
+        {"title": "Building AI Workflows - Gumloop", "duration": "55:10", "type": "video", "file": "01-Building-AI-Workflows-Gumloop.mp4", "url": "/lectures/62092646"},
+        {"title": "Deep Dive (Q&A Session)", "duration": "34:58", "type": "video", "file": "02-Deep-Dive-QA-Session.mp4", "url": "/lectures/62092647"},
+        {"title": "Assignment", "type": "assignment", "file": "assignment.md", "url": "/lectures/62092648"},
+        {"title": "Extra Resources", "type": "resource", "file": "resources.md", "url": "/lectures/62560532"}
+      ]
+    },
+    {
+      "name": "Session 7",
+      "folder": "Session-7",
+      "lectures": [
+        {"title": "AI-Driven Creative Strategy: Crafting Persona-Based Ads", "duration": "60:02", "type": "video", "file": "01-AI-Driven-Creative-Strategy.mp4", "url": "/lectures/62092650"},
+        {"title": "Deep Dive (Q&A Session)", "duration": "27:50", "type": "video", "file": "02-Deep-Dive-QA-Session.mp4", "url": "/lectures/62092651"},
+        {"title": "Extra Resources", "type": "resource", "file": "resources.md", "url": "/lectures/62646238"}
+      ]
+    },
+    {
+      "name": "Bonus: Midjourney Video with Ali",
+      "folder": "Bonus-Midjourney",
+      "lectures": [
+        {"title": "Midjourney: Using Midjourney to create stunning visuals", "duration": "64:52", "type": "video", "file": "01-Using-Midjourney-for-Ads.mp4", "url": "/lectures/62092669"},
+        {"title": "Extra Resources", "type": "resource", "file": "resources.md", "url": "/lectures/62712108"}
+      ]
+    },
+    {
+      "name": "Bonus: Live Creative Strategy for B2B with Alex Cooper",
+      "folder": "Bonus-B2B",
+      "lectures": [
+        {"title": "Live Creative Strategy for B2B", "duration": "60:16", "type": "video", "file": "01-Live-Creative-Strategy-for-B2B.mp4", "url": "/lectures/62740009"},
+        {"title": "Extra Resources", "type": "resource", "file": "resources.md", "url": "/lectures/62788796"}
+      ]
+    },
+    {
+      "name": "Bonus: AI in Advertising with Barry Hott",
+      "folder": "Bonus-Barry",
+      "lectures": [
+        {"title": "How Barry Hott Uses AI in Advertising", "duration": "76:13", "type": "video", "file": "01-How-Barry-Hott-Uses-AI-in-Advertising.mp4", "url": "/lectures/62605071"},
+        {"title": "Extra Resources", "type": "resource", "file": "resources.md", "url": "/lectures/62802394"}
+      ]
+    },
+    {
+      "name": "Bonus: N8n with J.B.",
+      "folder": "Bonus-N8n",
+      "lectures": [
+        {"title": "How to Build Advanced AI Workflows in N8n", "duration": "60:19", "type": "video", "file": "01-How-to-Build-Advanced-AI-Workflows.mp4", "url": "/lectures/62740013"},
+        {"title": "Extra Resources", "type": "resource", "file": "resources.md", "url": "/lectures/62820925"}
+      ]
+    },
+    {
+      "name": "Session 8",
+      "folder": "Session-8",
+      "lectures": [
+        {"title": "Tying Everything Together: Becoming an AI Creative Strategist", "duration": "56:52", "type": "video", "file": "01-Tying-Everything-Together.mp4", "url": "/lectures/62092653"},
+        {"title": "Deep Dive (Q&A Session)", "duration": "31:41", "type": "video", "file": "02-Deep-Dive-QA-Session.mp4", "url": "/lectures/62092654"},
+        {"title": "Extra Resources", "type": "resource", "file": "resources.md", "url": "/lectures/62092655"}
+      ]
+    }
+  ],
+  "stats": {
+    "total_sessions": 8,
+    "total_bonus_sections": 10,
+    "total_videos": 29,
+    "videos_downloaded": 29,
+    "missing_videos": ["Session 2 Prompt Challenge Winners (4:52)"],
+    "pdfs_downloaded": 3,
+    "web_presentations": 1,
+    "assignments_scraped": 8,
+    "resources_scraped": 18
+  }
+}
