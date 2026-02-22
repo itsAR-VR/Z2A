@@ -5,7 +5,7 @@ import { Badge } from "@/components/Badge";
 import { SeatCounter } from "@/components/SeatCounter";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { trackEvent } from "@/lib/analytics";
-import { DURATION, EASE } from "@/lib/motion-tokens";
+import { DURATION, EASE, STAGGER } from "@/lib/motion-tokens";
 import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
@@ -16,12 +16,8 @@ export function Hero() {
   const prefersReduced = useReducedMotion();
   const [ctaRedirecting, setCtaRedirecting] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
-  const headlineRef = useRef<HTMLHeadingElement | null>(null);
-  const subheadRef = useRef<HTMLParagraphElement | null>(null);
   const loopRef = useRef<HTMLDivElement | null>(null);
   const loopSvgRef = useRef<SVGSVGElement | null>(null);
-  const ctasRef = useRef<HTMLDivElement | null>(null);
-  const artRef = useRef<HTMLDivElement | null>(null);
 
   const onCtaClick = () => {
     if (ctaRedirecting) return;
@@ -29,48 +25,44 @@ export function Hero() {
     trackEvent("cta_click", { source: "hero" });
   };
 
+  /* ── Vibemarketer-style staggered intro ── */
   useLayoutEffect(() => {
     if (prefersReduced) return;
     const root = rootRef.current;
     if (!root) return;
 
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: EASE.expo } });
+    // Collect all stagger targets in order
+    const staggerEls = Array.from(
+      root.querySelectorAll<HTMLElement>("[data-hero-stagger]"),
+    ).sort(
+      (a, b) =>
+        Number(a.dataset.heroStagger ?? "0") -
+        Number(b.dataset.heroStagger ?? "0"),
+    );
 
-      tl.fromTo(
-        root.querySelectorAll("[data-hero='badge']"),
-        { opacity: 0.95, y: 4 },
-        { opacity: 1, y: 0, duration: DURATION.default },
-      )
-        .fromTo(
-          headlineRef.current,
-          { opacity: 0.96, y: 6 },
-          { opacity: 1, y: 0, duration: DURATION.slow },
-          "-=0.2",
-        )
-        .fromTo(
-          subheadRef.current,
-          { opacity: 0.96, y: 6 },
-          { opacity: 1, y: 0, duration: DURATION.default },
-          "-=0.5",
-        )
-        .fromTo(
-          ctasRef.current,
-          { opacity: 0.96, y: 6 },
-          { opacity: 1, y: 0, duration: DURATION.default },
-          "-=0.25",
-        )
-        .fromTo(
-          artRef.current,
-          { opacity: 0.96, y: 10, rotate: -0.8 },
-          { opacity: 1, y: 0, rotate: 0, duration: DURATION.cinematic },
-          "-=0.35",
-        );
+    if (staggerEls.length === 0) return;
+
+    const ctx = gsap.context(() => {
+      // Set initial hidden state
+      gsap.set(staggerEls, { opacity: 0, y: 32, scale: 0.97 });
+
+      // Dramatic staggered reveal — clean, fast, Vibemarketer feel
+      gsap.to(staggerEls, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: DURATION.slow,
+        ease: EASE.expo,
+        stagger: STAGGER.step + 0.02, // ~0.08s between each element
+        delay: 0.15,
+        clearProps: "transform,opacity,scale",
+      });
     }, root);
 
     return () => ctx.revert();
   }, [prefersReduced]);
 
+  /* ── Agent loop orbit animation ── */
   useLayoutEffect(() => {
     if (prefersReduced) return;
     const loop = loopRef.current;
@@ -82,7 +74,6 @@ export function Hero() {
       const track = svg.querySelector<SVGPathElement>("[data-loop-track='path']");
       if (!runner || !track) return;
 
-      // Hint the browser that this element will be transformed every frame.
       runner.style.willChange = "transform";
       gsap.set(runner, { force3D: true });
 
@@ -111,7 +102,6 @@ export function Hero() {
           .to(label, { opacity: 0.78, duration: 0.36, ease: EASE.expo }, at + 0.08);
       };
 
-      // Smooth loop: a single constant-velocity lap around the track + scheduled pulses.
       const lapDuration = 6.4;
       const introDelay = 1.05;
 
@@ -128,7 +118,6 @@ export function Hero() {
         duration: lapDuration,
       });
 
-      // Pulse each node as the runner reaches it on the top rail.
       for (const node of nodes) {
         const distance = Math.max(0, node.x - startX);
         const at = (distance / totalLen) * lapDuration;
@@ -140,11 +129,8 @@ export function Hero() {
   }, [prefersReduced]);
 
   return (
-    <section
-      id="top"
-      className="relative"
-    >
-      {/* hero background accents (clipped without clipping foreground content) */}
+    <section id="top" className="relative">
+      {/* hero background accents */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 overflow-hidden"
@@ -164,8 +150,9 @@ export function Hero() {
           ref={rootRef}
           className="grid grid-cols-1 md:grid-cols-12 gap-x-10 gap-y-8 md:gap-x-12 md:gap-y-10 items-start"
         >
+          {/* ── Left column: badges → headline → subcopy ── */}
           <div className="md:col-span-7 md:col-start-1">
-            <div data-hero="badge" className="flex flex-wrap items-center gap-3 mb-6">
+            <div data-hero-stagger="1" className="flex flex-wrap items-center gap-3 mb-6">
               <Badge>
                 Feb 28 – Mar 1, 2026 · Toronto · <SeatCounter variant="badge" />
               </Badge>
@@ -176,15 +163,15 @@ export function Hero() {
             </div>
 
             <h1
-              ref={headlineRef}
+              data-hero-stagger="2"
               className="font-heading font-bold tracking-tight text-[clamp(40px,5.2vw,74px)] leading-[0.98] text-[var(--color-text)]"
             >
               We simplify AI for{" "}
-              <span className="text-[var(--color-accent)]">individuals & business owners</span> who don't have time to figure it out.
+              <span className="text-[var(--color-accent)]">individuals &amp; business owners</span> who don&apos;t have time to figure it out.
             </h1>
 
             <p
-              ref={subheadRef}
+              data-hero-stagger="3"
               className="mt-5 text-[15px] md:text-lg leading-relaxed text-[color-mix(in_oklch,var(--color-text-muted)_72%,var(--color-text)_28%)] max-w-[60ch]"
             >
               You can learn the basics online. The hard part is finishing. Bring one repeat task from work. In one
@@ -193,8 +180,9 @@ export function Hero() {
             </p>
           </div>
 
+          {/* ── CTA row ── */}
           <div
-            ref={ctasRef}
+            data-hero-stagger="4"
             className="flex flex-col gap-3 md:col-span-4 md:col-start-1 md:row-start-2 md:self-end"
           >
             <Button href="/apply" disabled={ctaRedirecting} onClick={onCtaClick}>
@@ -218,8 +206,9 @@ export function Hero() {
             </p>
           </div>
 
+          {/* ── Right column: "What you leave with" card ── */}
           <div
-            ref={artRef}
+            data-hero-stagger="5"
             className="md:col-span-5 md:col-start-8 md:pt-14 md:row-start-1 relative"
           >
             <div className="relative z-10 rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-surface)_70%,transparent)] backdrop-blur-md shadow-[var(--shadow-lg)] p-6 overflow-hidden">
@@ -290,8 +279,10 @@ export function Hero() {
             </div>
           </div>
 
+          {/* ── Agent loop SVG ── */}
           <div
             ref={loopRef}
+            data-hero-stagger="6"
             data-testid="hero-agent-loop"
             className="relative z-10 md:col-span-6 md:col-start-4 md:row-start-2 md:self-end"
           >
@@ -361,21 +352,15 @@ export function Hero() {
               ))}
 
               <g data-loop-runner="group" transform="translate(96 26)">
-                <circle
-                  r={9}
-                  fill="var(--color-accent)"
-                  opacity={0.14}
-                />
-                <circle
-                  data-testid="hero-agent-loop-runner"
-                  r={3.75}
-                  fill="var(--color-accent)"
-                />
+                <circle r={9} fill="var(--color-accent)" opacity={0.14} />
+                <circle data-testid="hero-agent-loop-runner" r={3.75} fill="var(--color-accent)" />
               </g>
             </svg>
           </div>
 
+          {/* ── Floating "Toronto pilot" ticket ── */}
           <div
+            data-hero-stagger="7"
             data-testid="hero-ticket-toronto"
             className="hidden md:block pointer-events-none md:col-span-3 md:col-start-9 md:row-start-2 md:self-end md:justify-self-end relative -bottom-4 md:mr-2 rotate-[-6deg] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-md)] px-4 py-3"
           >
@@ -388,7 +373,6 @@ export function Hero() {
           </div>
         </div>
       </div>
-
     </section>
   );
 }

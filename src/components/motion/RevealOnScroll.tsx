@@ -40,7 +40,7 @@ export function RevealOnScroll({
         };
       case "cinematic":
         return {
-          offsetPx: 24,
+          offsetPx: 36,
           durationVar: "var(--duration-cinematic)",
           easeVar: "var(--ease-quint)",
           durationMs: 1000,
@@ -48,7 +48,7 @@ export function RevealOnScroll({
       case "soft":
       default:
         return {
-          offsetPx: 18,
+          offsetPx: 28,
           durationVar: "var(--duration-slow)",
           easeVar: "var(--ease-expo)",
           durationMs: 720,
