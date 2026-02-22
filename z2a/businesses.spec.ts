@@ -8,15 +8,16 @@ test.describe("Businesses", () => {
 
     await page.goto("/businesses");
 
+    await expect(page.locator("#top [data-stage]")).toHaveCount(8);
     await expect(page.locator("#pricing")).toBeVisible();
-    await expect(page.locator("#pricing")).toContainText("Custom scope, custom pricing");
+    await expect(page.locator("#pricing")).toContainText("Pricing depends on scope");
     await expect(page.locator("#pricing")).toContainText("Step 1");
     await expect(page.locator("#pricing")).toContainText("Step 2");
     await expect(page.locator("#pricing")).toContainText("Step 3");
     await expect(page.locator("#pricing")).toContainText(/30-minute|30 min/i);
-    await expect(page.locator("#pricing")).toContainText("Discovery");
-    await expect(page.locator("#pricing")).toContainText("AI Enablement Workshop");
-    await expect(page.locator("#pricing")).toContainText("Done-for-you setup + enablement");
+    await expect(page.locator("#pricing")).toContainText(/discovery/i);
+    await expect(page.locator("#pricing")).toContainText("AI Workshop");
+    await expect(page.locator("#pricing")).toContainText("Hands-on setup + training");
     await expect(page.locator("#pricing")).toContainText("Contact for pricing");
     await expect(page.locator("#pricing")).not.toContainText("$");
     await expect(
