@@ -9,14 +9,15 @@ test.describe("Home", () => {
     await page.goto("/");
 
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
-      "AI that actually ships.",
+      "Make AI useful at work.",
     );
     await expect(
-      page.locator("#top").getByRole("link", { name: "Explore Individuals" }),
+      page.locator("#top").getByRole("link", { name: "For Individuals" }),
     ).toBeVisible();
     await expect(
-      page.locator("#top").getByRole("link", { name: "Explore Businesses" }),
+      page.locator("#top").getByRole("link", { name: "For Businesses" }),
     ).toBeVisible();
+    await expect(page.locator("#top [data-stage]")).toHaveCount(5);
 
     const menuButton = page.locator('button[aria-controls="nav-menu"]');
     await menuButton.click();

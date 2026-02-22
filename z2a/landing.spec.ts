@@ -5,7 +5,7 @@ test.describe("Individuals Landing", () => {
     await page.goto("/individuals");
 
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
-      "Automate real work",
+      "We simplify AI for",
     );
     await expect(page.locator("#top")).toContainText("Applications open now");
     await expect(page.locator("#top")).toContainText(
@@ -14,6 +14,7 @@ test.describe("Individuals Landing", () => {
     await expect(page.locator("#top")).toContainText(
       "Limited to 50 seats in Toronto",
     );
+    await expect(page.locator("#top [data-hero-stagger]")).toHaveCount(7);
 
     const sticky = page.getByTestId("sticky-apply-bar");
     const hasClass = (className: string) =>
@@ -55,10 +56,10 @@ test.describe("Individuals Landing", () => {
     );
     await expect(
       loop.locator('text[data-loop-node-label="deploy"]'),
-    ).toHaveText("Deploy");
+    ).toHaveText("Launch");
     await expect(
       loop.locator('text[data-loop-node-label="evaluate"]'),
-    ).toHaveText("Evaluate");
+    ).toHaveText("Check");
 
     const torontoTicket = page.getByTestId("hero-ticket-toronto");
     await expect(torontoTicket).toHaveCount(1);
