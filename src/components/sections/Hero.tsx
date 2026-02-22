@@ -44,7 +44,7 @@ export function Hero() {
 
     const ctx = gsap.context(() => {
       // Set initial hidden state
-      gsap.set(staggerEls, { opacity: 0, y: 32, scale: 0.97 });
+      gsap.set(staggerEls, { opacity: 0, y: 32, scale: 0.97, willChange: "transform,opacity" });
 
       // Dramatic staggered reveal — clean, fast, Vibemarketer feel
       gsap.to(staggerEls, {
@@ -55,7 +55,7 @@ export function Hero() {
         ease: EASE.expo,
         stagger: STAGGER.step + 0.02, // ~0.08s between each element
         delay: 0.15,
-        clearProps: "transform,opacity,scale",
+        clearProps: "transform,opacity,scale,willChange",
       });
     }, root);
 

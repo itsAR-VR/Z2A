@@ -39,6 +39,7 @@ export function StageTimeline({ rootId }: StageTimelineProps) {
 
     const ctx = gsap.context(() => {
       if (stageItems.length > 0) {
+        gsap.set(stageItems, { willChange: "transform,opacity" });
         gsap.fromTo(
           stageItems,
           { opacity: 0, y: 32, scale: 0.97 },
@@ -50,7 +51,7 @@ export function StageTimeline({ rootId }: StageTimelineProps) {
             ease: EASE.expo,
             stagger: STAGGER.step + 0.02,
             delay: 0.15,
-            clearProps: "transform,opacity,scale",
+            clearProps: "transform,opacity,scale,willChange",
           },
         );
       }
