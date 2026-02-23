@@ -29,7 +29,7 @@ const parsedEnv = envSchema.parse({
   STRIPE_EARLY_BIRD_PROMOTION_CODE_ID: process.env.STRIPE_EARLY_BIRD_PROMOTION_CODE_ID,
   STRIPE_EARLY_BIRD_COUPON_ID: process.env.STRIPE_EARLY_BIRD_COUPON_ID,
   DATABASE_URL: process.env.DATABASE_URL,
-  DIRECT_URL: process.env.DIRECT_URL,
+  DIRECT_URL: process.env.DIRECT_URL ?? process.env.DATABASE_URL,
   ADMIN_BASIC_AUTH_USER: process.env.ADMIN_BASIC_AUTH_USER,
   // Support both env var spellings (PASS preferred; PASSWORD accepted).
   ADMIN_BASIC_AUTH_PASS:

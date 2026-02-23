@@ -57,3 +57,4 @@ scraped-courses/**/*.mp4
 
 # scraped course credentials (never commit)
 scraped-courses/courses/Scraper/scraper-*.json
+.env*.local
