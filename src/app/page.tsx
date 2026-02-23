@@ -77,7 +77,7 @@ export default function HomePage() {
       <Nav />
       <main>
         <StageTimeline rootId="top" />
-        <section id="top" className="relative overflow-hidden pt-32 pb-18 md:pt-44 md:pb-24">
+        <section id="top" className="hero-terminal-boot relative overflow-hidden pt-32 pb-18 md:pt-44 md:pb-24">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0">
             <div className="hero-orb hero-orb--left animate-drift" />
             <div className="hero-orb hero-orb--right animate-drift-slow" />

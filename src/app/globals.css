@@ -291,6 +291,101 @@ section[id] {
   will-change: transform, opacity;
 }
 
+@keyframes terminal-boot-shutter {
+  0% {
+    clip-path: inset(0 0 0 0 round clamp(22px, 3vw, 38px));
+    opacity: 0.94;
+  }
+  55% {
+    clip-path: inset(0 0 82% 0 round clamp(22px, 3vw, 38px));
+    opacity: 0.84;
+  }
+  100% {
+    clip-path: inset(0 0 100% 0 round clamp(22px, 3vw, 38px));
+    opacity: 0;
+  }
+}
+
+@keyframes terminal-boot-scan {
+  0% {
+    transform: translate3d(-16%, -14%, 0) skewY(-1.4deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.64;
+  }
+  100% {
+    transform: translate3d(14%, 128%, 0) skewY(-1.4deg);
+    opacity: 0;
+  }
+}
+
+@keyframes terminal-boot-frame {
+  0% {
+    opacity: 0;
+    transform: scale(0.988) translate3d(0, 10px, 0);
+    box-shadow: 0 0 0 0 color-mix(in oklch, var(--color-accent) 0%, transparent);
+  }
+  28% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translate3d(0, 0, 0);
+    box-shadow: 0 22px 52px color-mix(in oklch, var(--color-accent) 20%, transparent);
+  }
+}
+
+.hero-terminal-boot {
+  isolation: isolate;
+}
+
+.hero-terminal-boot::before,
+.hero-terminal-boot::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: 8;
+}
+
+.hero-terminal-boot::before {
+  inset: clamp(10px, 1.6vw, 20px) clamp(10px, 1.6vw, 20px) clamp(6px, 1vw, 14px);
+  border-radius: clamp(22px, 3vw, 38px);
+  border: 1px solid color-mix(in oklch, var(--color-accent) 48%, var(--color-border));
+  background: linear-gradient(
+      180deg,
+      color-mix(in oklch, var(--color-bg) 62%, black) 0%,
+      color-mix(in oklch, var(--color-bg) 34%, black) 48%,
+      color-mix(in oklch, var(--color-bg) 16%, black) 100%
+    ),
+    repeating-linear-gradient(
+      180deg,
+      color-mix(in oklch, white 7%, transparent) 0 1px,
+      transparent 1px 3px
+    );
+  mix-blend-mode: multiply;
+  animation: terminal-boot-shutter 1.02s var(--ease-expo) 120ms both;
+}
+
+.hero-terminal-boot::after {
+  inset: clamp(14px, 2vw, 22px) clamp(12px, 1.8vw, 18px) auto;
+  height: clamp(70px, 13vw, 154px);
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--color-accent) 0%, transparent) 0%,
+    color-mix(in oklch, var(--color-accent) 65%, white) 52%,
+    color-mix(in oklch, var(--color-accent) 0%, transparent) 100%
+  );
+  filter: blur(10px);
+  opacity: 0;
+  animation: terminal-boot-scan 1.12s var(--ease-quart) 90ms both;
+}
+
+.hero-terminal-boot .container-content {
+  animation: terminal-boot-frame 0.86s var(--ease-expo) 90ms both;
+}
+
 .workflow-stage-card {
   position: relative;
   overflow: hidden;
@@ -832,5 +927,21 @@ section[id] {
   .workflow-stage-card::after,
   .workflow-stage-card__eyebrow {
     animation: none !important;
+  }
+
+  .hero-terminal-boot::before,
+  .hero-terminal-boot::after,
+  .hero-terminal-boot .container-content {
+    animation: none !important;
+  }
+
+  .hero-terminal-boot::before,
+  .hero-terminal-boot::after {
+    opacity: 0 !important;
+  }
+
+  .hero-terminal-boot .container-content {
+    transform: none !important;
+    box-shadow: none !important;
   }
 }
