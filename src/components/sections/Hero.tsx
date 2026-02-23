@@ -129,7 +129,7 @@ export function Hero() {
   }, [prefersReduced]);
 
   return (
-    <section id="top" className="relative">
+    <section id="top" className="hero-terminal-boot relative">
       {/* hero background accents */}
       <div
         aria-hidden="true"
