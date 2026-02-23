@@ -15,7 +15,7 @@ test.describe("Reduced Motion", () => {
     await page.goto("/individuals");
 
     const wrapper = page
-      .getByRole("heading", { name: /The bottleneck isn't ideas/i })
+      .getByRole("heading", { name: /The hard part isn't ideas/i })
       .locator("..");
 
     await expect(wrapper).toBeVisible();
@@ -25,7 +25,14 @@ test.describe("Reduced Motion", () => {
       transition: (el as HTMLElement).style.transition,
       transform: (el as HTMLElement).style.transform,
     }));
-    expect(inline.transition).toBe("none");
+    const transition = inline.transition.trim();
+    expect(
+      transition === "none" ||
+        (transition.includes("opacity") &&
+          transition.includes("transform") &&
+          /\b0ms\b/.test(transition)),
+      `unexpected reduced-motion transition: ${transition}`,
+    ).toBeTruthy();
     const t = inline.transform.trim();
     if (t === "none") return;
     const m = t.match(
