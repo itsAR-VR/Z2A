@@ -129,11 +129,11 @@ export function Hero() {
   }, [prefersReduced]);
 
   return (
-    <section id="top" className="hero-terminal-boot relative">
+    <section id="top" className="hero-terminal-boot relative overflow-hidden">
       {/* hero background accents */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 overflow-hidden"
+        className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
       >
         <div className="hero-orb hero-orb--left animate-drift" />
         <div className="hero-orb hero-orb--right animate-drift-slow" />
@@ -141,7 +141,7 @@ export function Hero() {
         <div className="hero-plane hero-plane--left animate-drift opacity-70" />
         <div className="hero-plane hero-plane--right animate-drift-slow opacity-62" />
       </div>
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1]">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[2]">
         <div className="hero-frost-overlay hero-frost-overlay--horizon hero-frost-overlay--soft-bottom" />
       </div>
 
