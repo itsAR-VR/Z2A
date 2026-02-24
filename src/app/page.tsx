@@ -6,6 +6,7 @@ import { LenisProvider } from "@/components/motion/LenisProvider";
 import { StageTimeline } from "@/components/motion/StageTimeline";
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
+import { TerminalHero } from "@/components/sections/TerminalHero";
 
 export const metadata: Metadata = {
   title: "Zero-to-Agent | Build AI workflows you can run",
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Zero-to-Agent",
     description:
-      "Go from AI confusion to one workflow that works — with clear training, hands-on setup, and simple improvements over time.",
+      "Go from AI confusion to one workflow that works - with clear training, hands-on setup, and simple improvements over time.",
     type: "website",
   },
 };
@@ -25,7 +26,7 @@ const pathwayCards = [
     eyebrow: "For individuals",
     title: "Learn the tools. Finish one workflow by Sunday.",
     description:
-      "Hands-on weekend workshop for PMs and builders who learn by building — not by watching slides.",
+      "Hands-on weekend workshop for PMs and builders who learn by building - not by watching slides.",
     fit: "Best if you want to build one workflow yourself and roll it out at work.",
     bullets: ["In-person cohort in Toronto", "Groups of 5 with live help", "Working workflow plus rollout plan"],
     href: "/individuals",
@@ -36,7 +37,7 @@ const pathwayCards = [
     eyebrow: "For businesses",
     title: "Help your team use AI inside the tools you already use.",
     description:
-      "Training + hands-on setup so your team can run the workflow themselves — without buying a new platform.",
+      "Training + hands-on setup so your team can run the workflow themselves - without buying a new platform.",
     fit: "Best if you want your team to own the workflow and keep improving without relying on a vendor.",
     bullets: ["Free 30-minute discovery call", "In-person workshop", "Tool setup with your team"],
     href: "/businesses",
@@ -49,7 +50,7 @@ const principles = [
     number: "01",
     title: "Less jargon",
     detail:
-      "Most teams don’t need more jargon. They need a workflow that runs and is easy to use.",
+      "Most teams don't need more jargon. They need a workflow that runs and is easy to use.",
   },
   {
     number: "02",
@@ -67,7 +68,7 @@ const principles = [
     number: "04",
     title: "Plain language first",
     detail:
-      "If your team can’t explain it and run it, it won’t stick. Simple is a requirement.",
+      "If your team can't explain it and run it, it won't stick. Simple is a requirement.",
   },
 ];
 
@@ -104,7 +105,7 @@ export default function HomePage() {
                   data-stage="2"
                   className="stage-enter mt-6 max-w-[58ch] text-[15px] leading-relaxed text-[color-mix(in_oklch,var(--color-text-muted)_72%,var(--color-text)_28%)] md:text-lg text-pretty"
                 >
-                  Most teams have seen the demos. Few have workflows that actually work every day. We fix that —
+                  Most teams have seen the demos. Few have workflows that actually work every day. We fix that -
                   training, setup, and a team that knows how to keep it going.
                 </p>
                 <div
@@ -125,36 +126,7 @@ export default function HomePage() {
               </div>
 
               <div data-stage="5" className="stage-enter md:col-span-5">
-                <div>
-                  <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
-                    What this means in practice
-                  </p>
-                  <ul className="mt-4 space-y-3">
-                    {[
-                      "Numbers: ~70M U.S. office workers. Some forecasts expect 20–50% fewer jobs over time.",
-                      "Winners: teams that learn fast and keep improving.",
-                      "Example: Blockbuster didn’t lose to better DVDs. It lost to Netflix and streaming.",
-                      "We teach the tools and set them up so you can run the workflow yourself.",
-                    ].map((item) => (
-                      <li key={item} className="flex gap-3">
-                        <span className="mt-1 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-accent)]">
-                          <svg className="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                          </svg>
-                        </span>
-                        <span className="text-sm text-[var(--color-text-muted)]">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-5 border-t border-[var(--color-border)] pt-4">
-                    <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
-                      One standard
-                    </p>
-                    <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-muted)] text-pretty">
-                      Practical results over theory. Tight scope, clear owners, and workflows you can run without us.
-                    </p>
-                  </div>
-                </div>
+                <TerminalHero />
               </div>
             </div>
           </div>
@@ -167,7 +139,7 @@ export default function HomePage() {
                 Vision
               </p>
               <h2 className="mt-3 font-heading text-[clamp(32px,4.2vw,56px)] font-bold leading-[1.02] tracking-tight text-[var(--color-text)]">
-                Build something your team can trust — not a demo they&apos;ll forget.
+                Build something your team can trust - not a demo they&apos;ll forget.
               </h2>
               <div className="mt-4 max-w-[65ch] space-y-4 text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-lg text-pretty">
                 <p>Most AI projects look great in a presentation and die in the first week back at work.</p>
@@ -219,7 +191,7 @@ export default function HomePage() {
               Two ways in. Both end with something real.
             </h2>
             <p className="mt-3 max-w-[58ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-base">
-              Whether you want to learn by doing, or your team needs a working system fast — every program ends with
+              Whether you want to learn by doing, or your team needs a working system fast - every program ends with
               something running. No theory for its own sake.
             </p>
           </RevealOnScroll>
@@ -276,15 +248,15 @@ export default function HomePage() {
               Built on OpenClaw
             </p>
             <h2 className="mt-3 max-w-[20ch] font-heading text-[clamp(30px,4vw,52px)] font-bold leading-[1.03] tracking-tight text-[var(--color-text)]">
-              The infrastructure your AI runs on — we set it up for you.
+              The infrastructure your AI runs on - we set it up for you.
             </h2>
           </RevealOnScroll>
 
           <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-12 md:gap-6">
             {[
-              "The biggest reason AI projects fail at work isn&apos;t the AI. It&apos;s the plumbing. AI models are smart, but on their own they can&apos;t open your CRM, send an email, or update a spreadsheet. They need to be connected to your real tools. OpenClaw is the open-source system that does that. Think of it as the wiring that lets your AI actually act on things — instead of just describing them.",
-              "Most AI tools are closed boxes. You rent access, follow their rules, and if they change the terms, you start over. OpenClaw is open-source — your business owns it. No per-seat fee for the infrastructure. No data going to a third party you didn&apos;t choose. You control what it connects to, what it does, and what it doesn&apos;t touch. For a business that takes data seriously, that matters.",
-              "We don&apos;t hand you OpenClaw and wish you luck. We set it up, connect it to your tools, build your first workflows, and train your team to run it and build on it. In the weekend workshop, we walk through setup from scratch — so you understand how it works, not just that it works. Either way, you leave with something running and the knowledge to keep it going.",
+              "The biggest reason AI projects fail at work isn&apos;t the AI. It&apos;s the plumbing. AI models are smart, but on their own they can&apos;t open your CRM, send an email, or update a spreadsheet. They need to be connected to your real tools. OpenClaw is the open-source system that does that. Think of it as the wiring that lets your AI actually act on things - instead of just describing them.",
+              "Most AI tools are closed boxes. You rent access, follow their rules, and if they change the terms, you start over. OpenClaw is open-source - your business owns it. No per-seat fee for the infrastructure. No data going to a third party you didn&apos;t choose. You control what it connects to, what it does, and what it doesn&apos;t touch. For a business that takes data seriously, that matters.",
+              "We don&apos;t hand you OpenClaw and wish you luck. We set it up, connect it to your tools, build your first workflows, and train your team to run it and build on it. In the weekend workshop, we walk through setup from scratch - so you understand how it works, not just that it works. Either way, you leave with something running and the knowledge to keep it going.",
             ].map((paragraph, index) => (
               <RevealOnScroll key={paragraph} className="md:col-span-4" delay={index * 90}>
                 <article className="h-full rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-5 shadow-[var(--shadow-sm)]">
