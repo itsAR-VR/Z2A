@@ -78,7 +78,7 @@ export default function HomePage() {
       <Nav />
       <main>
         <StageTimeline rootId="top" />
-        <section id="top" className="hero-terminal-boot relative overflow-hidden pt-32 pb-18 md:pt-44 md:pb-24">
+        <section id="top" className="hero-terminal-boot relative overflow-hidden pt-24 pb-16 md:pt-32 md:pb-20">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
             <div className="hero-orb hero-orb--left animate-drift" />
             <div className="hero-orb hero-orb--right animate-drift-slow" />
@@ -91,43 +91,31 @@ export default function HomePage() {
           </div>
 
           <div className="container-content relative z-10">
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-12">
-              <div className="relative md:col-span-7">
-                <h1
-                  data-stage="1"
-                  className="stage-enter max-w-[14ch] font-heading text-[clamp(44px,5.8vw,78px)] font-bold leading-[0.95] tracking-tight text-[var(--color-text)] text-balance"
-                >
-                  We simplify AI for{" "}
-                  <span className="text-[var(--color-accent)]">individuals &amp; business owners</span>{" "}
-                  who don&apos;t have time to figure it out.
-                </h1>
-                <p
-                  data-stage="2"
-                  className="stage-enter mt-6 max-w-[58ch] text-[15px] leading-relaxed text-[color-mix(in_oklch,var(--color-text-muted)_72%,var(--color-text)_28%)] md:text-lg text-pretty"
-                >
-                  Most teams have seen the demos. Few have workflows that actually work every day. We fix that -
-                  training, setup, and a team that knows how to keep it going.
-                </p>
-                <div
-                  data-stage="3"
-                  className="stage-enter mt-8 flex flex-wrap items-center gap-3 sm:flex-nowrap"
-                >
-                  <Button href="/individuals">For Individuals</Button>
-                  <Button href="/businesses" variant="secondary">
-                    For Businesses
-                  </Button>
-                </div>
-                <p
-                  data-stage="4"
-                  className="stage-enter mt-4 text-sm text-[color-mix(in_oklch,var(--color-text-faint)_72%,var(--color-text-muted)_28%)]"
-                >
-                  Two paths. One standard: real results over AI for show.
-                </p>
-              </div>
+            {/* ── Terminal plays first ── */}
+            <div className="mx-auto max-w-[640px]">
+              <TerminalHero />
+            </div>
 
-              <div data-stage="5" className="stage-enter md:col-span-5">
-                <TerminalHero />
+            {/* ── Page content loads in after terminal ── */}
+            <div className="hero-content-reveal mt-10 text-center">
+              <h1 className="hero-reveal hero-reveal--1 mx-auto max-w-[18ch] font-heading text-[clamp(38px,5.2vw,72px)] font-bold leading-[0.95] tracking-tight text-[var(--color-text)] text-balance">
+                We simplify AI for{" "}
+                <span className="text-[var(--color-accent)]">individuals &amp; business owners</span>{" "}
+                who don&apos;t have time to figure it out.
+              </h1>
+              <p className="hero-reveal hero-reveal--2 mx-auto mt-6 max-w-[52ch] text-[15px] leading-relaxed text-[color-mix(in_oklch,var(--color-text-muted)_72%,var(--color-text)_28%)] md:text-lg text-pretty">
+                Most teams have seen the demos. Few have workflows that actually work every day. We fix
+                that — training, setup, and a team that knows how to keep it going.
+              </p>
+              <div className="hero-reveal hero-reveal--3 mt-8 flex flex-wrap items-center justify-center gap-3 sm:flex-nowrap">
+                <Button href="/individuals">For Individuals</Button>
+                <Button href="/businesses" variant="secondary">
+                  For Businesses
+                </Button>
               </div>
+              <p className="hero-reveal hero-reveal--4 mt-4 text-sm text-[color-mix(in_oklch,var(--color-text-faint)_72%,var(--color-text-muted)_28%)]">
+                Two paths. One standard: real results over AI for show.
+              </p>
             </div>
           </div>
         </section>
