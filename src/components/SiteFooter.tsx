@@ -18,7 +18,7 @@ const legalLinks = [
 ];
 
 function shouldHideFooter(pathname: string): boolean {
-  return pathname.startsWith("/admin");
+  return pathname.startsWith("/admin") || pathname.startsWith("/openclaw");
 }
 
 export function SiteFooter() {

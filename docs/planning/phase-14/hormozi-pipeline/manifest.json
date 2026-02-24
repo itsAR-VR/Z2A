@@ -1,0 +1,725 @@
+{
+  "generatedAt": "2026-02-23T14:15:25-0500",
+  "pipeline": "pdftotext -layout -> markdown scaffold summaries + model OCR refresh for low-text scans",
+  "totalPdfs": 19,
+  "items": [
+    {
+      "sourcePdf": "Z2A/Hormozi/$100M Leads_ How to Get Strangers To Want To Buy Your Stuff -- Alex Hormozi -- 2023 -- 2838100a1fc52d31f3b73b56369d76ba -- Anna\u2019s Archive.pdf",
+      "textOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/text/100m-leads-how-to-get-strangers-to-want-to-buy-your-stuff-alex-hormozi-2023-2838100a1fc52d31f3b73b56369d76ba-anna-s-archive.txt",
+      "summaryOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/summaries/100m-leads-how-to-get-strangers-to-want-to-buy-your-stuff-alex-hormozi-2023-2838100a1fc52d31f3b73b56369d76ba-anna-s-archive.md",
+      "pages": 393,
+      "nonWhitespaceChars": 304012,
+      "status": "ok",
+      "topKeywords": [
+        [
+          "lead",
+          570
+        ],
+        [
+          "offer",
+          174
+        ],
+        [
+          "market",
+          28
+        ],
+        [
+          "hook",
+          25
+        ],
+        [
+          "close",
+          24
+        ],
+        [
+          "bonus",
+          16
+        ],
+        [
+          "dream outcome",
+          16
+        ],
+        [
+          "guarantee",
+          11
+        ]
+      ]
+    },
+    {
+      "sourcePdf": "Z2A/Hormozi/$100M Playbook Branding 2025.pdf",
+      "textOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/text/100m-playbook-branding-2025.txt",
+      "summaryOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/summaries/100m-playbook-branding-2025.md",
+      "pages": 36,
+      "nonWhitespaceChars": 42850,
+      "status": "ok",
+      "topKeywords": [
+        [
+          "market",
+          26
+        ],
+        [
+          "close",
+          5
+        ],
+        [
+          "offer",
+          3
+        ],
+        [
+          "guarantee",
+          3
+        ],
+        [
+          "pricing",
+          3
+        ],
+        [
+          "ltv",
+          1
+        ]
+      ]
+    },
+    {
+      "sourcePdf": "Z2A/Hormozi/$100M Playbook Closing Alex Hormozi 2025.pdf",
+      "textOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/text/100m-playbook-closing-alex-hormozi-2025.txt",
+      "summaryOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/summaries/100m-playbook-closing-alex-hormozi-2025.md",
+      "pages": 56,
+      "nonWhitespaceChars": 74556,
+      "status": "ok",
+      "topKeywords": [
+        [
+          "close",
+          94
+        ],
+        [
+          "guarantee",
+          10
+        ],
+        [
+          "objection",
+          10
+        ],
+        [
+          "offer",
+          9
+        ],
+        [
+          "lead",
+          3
+        ],
+        [
+          "market",
+          3
+        ],
+        [
+          "bonus",
+          1
+        ],
+        [
+          "urgency",
+          1
+        ]
+      ]
+    },
+    {
+      "sourcePdf": "Z2A/Hormozi/$100M Playbook Hooks by Alex Hormozi.pdf",
+      "textOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/text/100m-playbook-hooks-by-alex-hormozi.txt",
+      "summaryOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/summaries/100m-playbook-hooks-by-alex-hormozi.md",
+      "pages": 26,
+      "nonWhitespaceChars": 29471,
+      "status": "ok",
+      "topKeywords": [
+        [
+          "hook",
+          100
+        ],
+        [
+          "lead",
+          8
+        ],
+        [
+          "market",
+          5
+        ],
+        [
+          "guarantee",
+          4
+        ],
+        [
+          "offer",
+          2
+        ],
+        [
+          "close",
+          2
+        ],
+        [
+          "bonus",
+          2
+        ],
+        [
+          "niche",
+          1
+        ]
+      ]
+    },
+    {
+      "sourcePdf": "Z2A/Hormozi/$100M Playbook Lead Nurture.pdf",
+      "textOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/text/100m-playbook-lead-nurture.txt",
+      "summaryOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/summaries/100m-playbook-lead-nurture.md",
+      "pages": 45,
+      "nonWhitespaceChars": 61428,
+      "status": "ok",
+      "topKeywords": [
+        [
+          "lead",
+          173
+        ],
+        [
+          "close",
+          29
+        ],
+        [
+          "proof",
+          12
+        ],
+        [
+          "offer",
+          8
+        ],
+        [
+          "guarantee",
+          7
+        ],
+        [
+          "market",
+          5
+        ],
+        [
+          "objection",
+          2
+        ]
+      ]
+    },
+    {
+      "sourcePdf": "Z2A/Hormozi/$100M Playbook Lifetime Value.pdf",
+      "textOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/text/100m-playbook-lifetime-value.txt",
+      "summaryOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/summaries/100m-playbook-lifetime-value.md",
+      "pages": 27,
+      "nonWhitespaceChars": 30860,
+      "status": "ok",
+      "topKeywords": [
+        [
+          "offer",
+          31
+        ],
+        [
+          "ltv",
+          21
+        ],
+        [
+          "guarantee",
+          6
+        ],
+        [
+          "pricing",
+          5
+        ],
+        [
+          "market",
+          5
+        ],
+        [
+          "lead",
+          2
+        ],
+        [
+          "close",
+          2
+        ],
+        [
+          "bonus",
+          1
+        ]
+      ]
+    },
+    {
+      "sourcePdf": "Z2A/Hormozi/$100M Playbook Pricing 2025.pdf",
+      "textOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/text/100m-playbook-pricing-2025.txt",
+      "summaryOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/summaries/100m-playbook-pricing-2025.md",
+      "pages": 61,
+      "nonWhitespaceChars": 67337,
+      "status": "ok",
+      "topKeywords": [
+        [
+          "pricing",
+          129
+        ],
+        [
+          "ltv",
+          22
+        ],
+        [
+          "guarantee",
+          19
+        ],
+        [
+          "offer",
+          18
+        ],
+        [
+          "close",
+          10
+        ],
+        [
+          "market",
+          10
+        ],
+        [
+          "anchor",
+          7
+        ],
+        [
+          "lead",
+          1
+        ]
+      ]
+    },
+    {
+      "sourcePdf": "Z2A/Hormozi/$100M Playbook Proof Checklist.pdf",
+      "textOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/text/100m-playbook-proof-checklist.txt",
+      "summaryOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/summaries/100m-playbook-proof-checklist.md",
+      "pages": 24,
+      "nonWhitespaceChars": 31286,
+      "status": "ok-model-ocr",
+      "topKeywords": [],
+      "ocrModel": "gpt-4.1-mini",
+      "ocrChunkSizePages": 5,
+      "ocrAt": "2026-02-23T13:49:19-0500"
+    },
+    {
+      "sourcePdf": "Z2A/Hormozi/100M Leads Bonus Chapters.pdf",
+      "textOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/text/100m-leads-bonus-chapters.txt",
+      "summaryOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/summaries/100m-leads-bonus-chapters.md",
+      "pages": 24,
+      "nonWhitespaceChars": 32619,
+      "status": "ok",
+      "topKeywords": [
+        [
+          "offer",
+          127
+        ],
+        [
+          "lead",
+          39
+        ],
+        [
+          "market",
+          17
+        ],
+        [
+          "close",
+          9
+        ],
+        [
+          "bonus",
+          4
+        ],
+        [
+          "guarantee",
+          2
+        ],
+        [
+          "pricing",
+          2
+        ]
+      ]
+    },
+    {
+      "sourcePdf": "Z2A/Hormozi/100M Offers Volume 1 by Alex Hormozi.pdf",
+      "textOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/text/100m-offers-volume-1-by-alex-hormozi.txt",
+      "summaryOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/summaries/100m-offers-volume-1-by-alex-hormozi.md",
+      "pages": 138,
+      "nonWhitespaceChars": 208435,
+      "status": "ok",
+      "topKeywords": [
+        [
+          "offer",
+          339
+        ],
+        [
+          "market",
+          152
+        ],
+        [
+          "guarantee",
+          145
+        ],
+        [
+          "bonus",
+          80
+        ],
+        [
+          "scarcity",
+          45
+        ],
+        [
+          "urgency",
+          39
+        ],
+        [
+          "pricing",
+          37
+        ],
+        [
+          "lead",
+          25
+        ]
+      ]
+    },
+    {
+      "sourcePdf": "Z2A/Hormozi/100M Playbook Fast Cash Alex Hormozi 2025.pdf",
+      "textOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/text/100m-playbook-fast-cash-alex-hormozi-2025.txt",
+      "summaryOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/summaries/100m-playbook-fast-cash-alex-hormozi-2025.md",
+      "pages": 29,
+      "nonWhitespaceChars": 37754,
+      "status": "ok",
+      "topKeywords": [
+        [
+          "offer",
+          66
+        ],
+        [
+          "bonus",
+          34
+        ],
+        [
+          "lead",
+          12
+        ],
+        [
+          "guarantee",
+          7
+        ],
+        [
+          "close",
+          5
+        ],
+        [
+          "urgency",
+          5
+        ],
+        [
+          "scarcity",
+          3
+        ],
+        [
+          "market",
+          3
+        ]
+      ]
+    },
+    {
+      "sourcePdf": "Z2A/Hormozi/100M Playbook GOATed Ads.pdf",
+      "textOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/text/100m-playbook-goated-ads.txt",
+      "summaryOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/summaries/100m-playbook-goated-ads.md",
+      "pages": 29,
+      "nonWhitespaceChars": 26709,
+      "status": "ok",
+      "topKeywords": [
+        [
+          "hook",
+          57
+        ],
+        [
+          "offer",
+          13
+        ],
+        [
+          "market",
+          12
+        ],
+        [
+          "lead",
+          7
+        ],
+        [
+          "proof",
+          5
+        ],
+        [
+          "guarantee",
+          4
+        ],
+        [
+          "urgency",
+          3
+        ],
+        [
+          "bonus",
+          2
+        ]
+      ]
+    },
+    {
+      "sourcePdf": "Z2A/Hormozi/100M Playbook Marketing Machine.pdf",
+      "textOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/text/100m-playbook-marketing-machine.txt",
+      "summaryOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/summaries/100m-playbook-marketing-machine.md",
+      "pages": 30,
+      "nonWhitespaceChars": 32653,
+      "status": "ok",
+      "topKeywords": [
+        [
+          "market",
+          38
+        ],
+        [
+          "proof",
+          16
+        ],
+        [
+          "bonus",
+          12
+        ],
+        [
+          "close",
+          6
+        ],
+        [
+          "lead",
+          3
+        ],
+        [
+          "hook",
+          3
+        ],
+        [
+          "offer",
+          2
+        ],
+        [
+          "guarantee",
+          2
+        ]
+      ]
+    },
+    {
+      "sourcePdf": "Z2A/Hormozi/100M Playbook Price Raise 2025.pdf",
+      "textOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/text/100m-playbook-price-raise-2025.txt",
+      "summaryOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/summaries/100m-playbook-price-raise-2025.md",
+      "pages": 28,
+      "nonWhitespaceChars": 38463,
+      "status": "ok",
+      "topKeywords": [
+        [
+          "ltv",
+          8
+        ],
+        [
+          "pricing",
+          5
+        ],
+        [
+          "close",
+          4
+        ],
+        [
+          "market",
+          4
+        ],
+        [
+          "offer",
+          3
+        ],
+        [
+          "guarantee",
+          3
+        ],
+        [
+          "lead",
+          1
+        ],
+        [
+          "bonus",
+          1
+        ]
+      ]
+    },
+    {
+      "sourcePdf": "Z2A/Hormozi/100M Playbook Retention.pdf",
+      "textOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/text/100m-playbook-retention.txt",
+      "summaryOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/summaries/100m-playbook-retention.md",
+      "pages": 35,
+      "nonWhitespaceChars": 38742,
+      "status": "ok",
+      "topKeywords": [
+        [
+          "retention",
+          14
+        ],
+        [
+          "ltv",
+          8
+        ],
+        [
+          "pricing",
+          7
+        ],
+        [
+          "market",
+          6
+        ],
+        [
+          "lead",
+          4
+        ],
+        [
+          "offer",
+          3
+        ],
+        [
+          "close",
+          3
+        ],
+        [
+          "bonus",
+          3
+        ]
+      ]
+    },
+    {
+      "sourcePdf": "Z2A/Hormozi/100M Series Lost Chapters.pdf",
+      "textOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/text/100m-series-lost-chapters.txt",
+      "summaryOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/summaries/100m-series-lost-chapters.md",
+      "pages": 164,
+      "nonWhitespaceChars": 218148,
+      "status": "ok",
+      "topKeywords": [
+        [
+          "offer",
+          401
+        ],
+        [
+          "lead",
+          153
+        ],
+        [
+          "bonus",
+          68
+        ],
+        [
+          "market",
+          63
+        ],
+        [
+          "close",
+          21
+        ],
+        [
+          "guarantee",
+          11
+        ],
+        [
+          "pricing",
+          11
+        ],
+        [
+          "urgency",
+          9
+        ]
+      ]
+    },
+    {
+      "sourcePdf": "Z2A/Hormozi/ACQ Advertising Handbook copy1 (1).pdf",
+      "textOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/text/acq-advertising-handbook-copy1-1.txt",
+      "summaryOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/summaries/acq-advertising-handbook-copy1-1.md",
+      "pages": 103,
+      "nonWhitespaceChars": 246125,
+      "status": "ok-model-ocr",
+      "topKeywords": [],
+      "ocrModel": "gpt-4.1-mini",
+      "ocrChunkSizePages": 5,
+      "ocrAt": "2026-02-23T14:15:25-0500"
+    },
+    {
+      "sourcePdf": "Z2A/Hormozi/ACQ Closer Handbook  (1).pdf",
+      "textOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/text/acq-closer-handbook-1.txt",
+      "summaryOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/summaries/acq-closer-handbook-1.md",
+      "pages": 148,
+      "nonWhitespaceChars": 135117,
+      "status": "ok",
+      "topKeywords": [
+        [
+          "close",
+          131
+        ],
+        [
+          "objection",
+          81
+        ],
+        [
+          "offer",
+          38
+        ],
+        [
+          "lead",
+          38
+        ],
+        [
+          "market",
+          11
+        ],
+        [
+          "guarantee",
+          7
+        ],
+        [
+          "dream outcome",
+          1
+        ]
+      ]
+    },
+    {
+      "sourcePdf": "Z2A/Hormozi/Money Models How To Make Money.pdf",
+      "textOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/text/money-models-how-to-make-money.txt",
+      "summaryOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/summaries/money-models-how-to-make-money.md",
+      "pages": 183,
+      "nonWhitespaceChars": 207184,
+      "status": "ok",
+      "topKeywords": [
+        [
+          "offer",
+          768
+        ],
+        [
+          "bonus",
+          102
+        ],
+        [
+          "lead",
+          52
+        ],
+        [
+          "guarantee",
+          46
+        ],
+        [
+          "anchor",
+          37
+        ],
+        [
+          "close",
+          24
+        ],
+        [
+          "market",
+          14
+        ],
+        [
+          "pricing",
+          10
+        ]
+      ]
+    }
+  ]
+}

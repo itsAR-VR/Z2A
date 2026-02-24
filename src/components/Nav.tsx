@@ -41,12 +41,14 @@ const pageLinks: PageLink[] = [
   { href: "/", label: "Home" },
   { href: "/individuals", label: "Individuals" },
   { href: "/businesses", label: "Businesses" },
+  { href: "/openclaw", label: "OpenClaw" },
   { href: "/blogs", label: "Blogs" },
 ];
 
 const homeAnchors: NavAnchor[] = [
   { id: "vision", label: "Vision" },
   { id: "programs", label: "Programs" },
+  { id: "openclaw", label: "OpenClaw" },
   { id: "principles", label: "Principles" },
 ];
 

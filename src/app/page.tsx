@@ -96,15 +96,15 @@ export default function HomePage() {
                   data-stage="1"
                   className="stage-enter max-w-[14ch] font-heading text-[clamp(44px,5.8vw,78px)] font-bold leading-[0.95] tracking-tight text-[var(--color-text)] text-balance"
                 >
-                  Make AI useful at work.
-                  <span className="block text-[var(--color-text)]">Finish one workflow in a weekend.</span>
+                  Stop demoing AI.
+                  <span className="block text-[var(--color-text)]">Start running it.</span>
                 </h1>
                 <p
                   data-stage="2"
                   className="stage-enter mt-6 max-w-[58ch] text-[15px] leading-relaxed text-[color-mix(in_oklch,var(--color-text-muted)_72%,var(--color-text)_28%)] md:text-lg text-pretty"
                 >
-                  Work is changing fast. The teams that do best learn new tools, improve how work gets done, and keep
-                  delivering.
+                  Most teams have seen the demos. Few have workflows that actually work every day. We fix that —
+                  training, setup, and a team that knows how to keep it going.
                 </p>
                 <div
                   data-stage="3"
@@ -166,13 +166,20 @@ export default function HomePage() {
                 Vision
               </p>
               <h2 className="mt-3 font-heading text-[clamp(32px,4.2vw,56px)] font-bold leading-[1.02] tracking-tight text-[var(--color-text)]">
-                Build capability people can trust, not demos people forget.
+                Build something your team can trust — not a demo they&apos;ll forget.
               </h2>
-              <p className="mt-4 max-w-[65ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-lg text-pretty">
-                AI should make real work easier, not harder. We teach the tools, help you set them up in what
-                you already use, and make sure your team can run the workflow on day one. That’s how you move
-                forward: one workflow you own at a time.
-              </p>
+              <div className="mt-4 max-w-[65ch] space-y-4 text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-lg text-pretty">
+                <p>Most AI projects look great in a presentation and die in the first week back at work.</p>
+                <p>
+                  That happens when the setup is too complex, the training didn&apos;t stick, or nobody owns it after the
+                  consultant leaves.
+                </p>
+                <p>
+                  We do it differently. You finish with a workflow that runs, a team that understands it, and a clear
+                  path to build on it. No black boxes. No depending on us to keep it alive.
+                </p>
+                <p>That&apos;s the only version of "useful" that matters.</p>
+              </div>
             </RevealOnScroll>
 
             <RevealOnScroll className="md:col-span-5" delay={120}>
@@ -184,8 +191,8 @@ export default function HomePage() {
                   You already know your biggest problems. We help you use the tools to solve them.
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--color-text-muted)] text-pretty">
-                  We teach first. We build the skill in your team, then help you set up the tools so you can
-                  keep improving without relying on us.
+                  We teach first. We build the skill in your team, then help you set up the tools so you can keep
+                  improving without relying on us.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {["Training first", "Team-owned workflows", "Guided setup"].map((item) => (
@@ -208,10 +215,11 @@ export default function HomePage() {
               Programs
             </p>
             <h2 className="mt-3 font-heading text-[clamp(32px,4.2vw,56px)] font-bold leading-[1.02] tracking-tight text-[var(--color-text)]">
-              Pick your path fast.
+              Two ways in. Both end with something real.
             </h2>
             <p className="mt-3 max-w-[58ch] text-[15px] leading-relaxed text-[var(--color-text-muted)] md:text-base">
-              Choose based on ownership. Learn it yourself in a weekend, or bring your team and set it up together.
+              Whether you want to learn by doing, or your team needs a working system fast — every program ends with
+              something running. No theory for its own sake.
             </p>
           </RevealOnScroll>
 
@@ -259,6 +267,40 @@ export default function HomePage() {
               </RevealOnScroll>
             ))}
           </div>
+        </SectionWrapper>
+
+        <SectionWrapper id="openclaw" className="pt-14 md:pt-18">
+          <RevealOnScroll>
+            <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
+              Built on OpenClaw
+            </p>
+            <h2 className="mt-3 max-w-[20ch] font-heading text-[clamp(30px,4vw,52px)] font-bold leading-[1.03] tracking-tight text-[var(--color-text)]">
+              The infrastructure your AI runs on — we set it up for you.
+            </h2>
+          </RevealOnScroll>
+
+          <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-12 md:gap-6">
+            {[
+              "The biggest reason AI projects fail at work isn&apos;t the AI. It&apos;s the plumbing. AI models are smart, but on their own they can&apos;t open your CRM, send an email, or update a spreadsheet. They need to be connected to your real tools. OpenClaw is the open-source system that does that. Think of it as the wiring that lets your AI actually act on things — instead of just describing them.",
+              "Most AI tools are closed boxes. You rent access, follow their rules, and if they change the terms, you start over. OpenClaw is open-source — your business owns it. No per-seat fee for the infrastructure. No data going to a third party you didn&apos;t choose. You control what it connects to, what it does, and what it doesn&apos;t touch. For a business that takes data seriously, that matters.",
+              "We don&apos;t hand you OpenClaw and wish you luck. We set it up, connect it to your tools, build your first workflows, and train your team to run it and build on it. In the weekend workshop, we walk through setup from scratch — so you understand how it works, not just that it works. Either way, you leave with something running and the knowledge to keep it going.",
+            ].map((paragraph, index) => (
+              <RevealOnScroll key={paragraph} className="md:col-span-4" delay={index * 90}>
+                <article className="h-full rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-5 shadow-[var(--shadow-sm)]">
+                  <p className="text-[15px] leading-relaxed text-[var(--color-text-muted)] text-pretty">{paragraph}</p>
+                </article>
+              </RevealOnScroll>
+            ))}
+          </div>
+
+          <RevealOnScroll delay={180}>
+            <Link
+              href="/openclaw"
+              className="mt-6 inline-flex items-center gap-2 font-heading text-sm font-semibold text-[var(--color-accent)] transition-colors hover:text-[color-mix(in_oklch,var(--color-accent)_82%,white)]"
+            >
+              Learn more about OpenClaw →
+            </Link>
+          </RevealOnScroll>
         </SectionWrapper>
 
         <SectionWrapper id="principles">

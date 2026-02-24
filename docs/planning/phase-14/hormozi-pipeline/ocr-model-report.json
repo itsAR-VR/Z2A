@@ -1,0 +1,24 @@
+{
+  "results": [
+    {
+      "sourcePdf": "Z2A/Hormozi/$100M Playbook Proof Checklist.pdf",
+      "textOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/text/100m-playbook-proof-checklist.txt",
+      "pages": 24,
+      "nonWhitespaceChars": 31286,
+      "status": "ok-model-ocr",
+      "ocrModel": "gpt-4.1-mini",
+      "ocrChunkSizePages": 5,
+      "ocrAt": "2026-02-23T13:49:19-0500"
+    },
+    {
+      "sourcePdf": "Z2A/Hormozi/ACQ Advertising Handbook copy1 (1).pdf",
+      "textOut": "Z2A/docs/planning/phase-14/hormozi-pipeline/text/acq-advertising-handbook-copy1-1.txt",
+      "pages": 103,
+      "nonWhitespaceChars": 246125,
+      "status": "ok-model-ocr",
+      "ocrModel": "gpt-4.1-mini",
+      "ocrChunkSizePages": 5,
+      "ocrAt": "2026-02-23T14:15:25-0500"
+    }
+  ]
+}
