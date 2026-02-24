@@ -91,31 +91,33 @@ export default function HomePage() {
           </div>
 
           <div className="container-content relative z-10">
-            {/* ── Terminal plays first ── */}
-            <div className="mx-auto max-w-[640px]">
-              <TerminalHero />
-            </div>
-
-            {/* ── Page content loads in after terminal ── */}
-            <div className="hero-content-reveal mt-10 text-center">
-              <h1 className="hero-reveal hero-reveal--1 mx-auto max-w-[18ch] font-heading text-[clamp(38px,5.2vw,72px)] font-bold leading-[0.95] tracking-tight text-[var(--color-text)] text-balance">
-                We simplify AI for{" "}
-                <span className="text-[var(--color-accent)]">individuals &amp; business owners</span>{" "}
-                who don&apos;t have time to figure it out.
-              </h1>
-              <p className="hero-reveal hero-reveal--2 mx-auto mt-6 max-w-[52ch] text-[15px] leading-relaxed text-[color-mix(in_oklch,var(--color-text-muted)_72%,var(--color-text)_28%)] md:text-lg text-pretty">
-                Most teams have seen the demos. Few have workflows that actually work every day. We fix
-                that — training, setup, and a team that knows how to keep it going.
-              </p>
-              <div className="hero-reveal hero-reveal--3 mt-8 flex flex-wrap items-center justify-center gap-3 sm:flex-nowrap">
-                <Button href="/individuals">For Individuals</Button>
-                <Button href="/businesses" variant="secondary">
-                  For Businesses
-                </Button>
+            <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:items-center md:gap-12">
+              {/* ── Left: headline + CTAs — order-2 mobile, order-1 desktop ── */}
+              <div className="hero-content-reveal order-2 text-center md:order-1 md:col-span-7 md:text-left">
+                <h1 className="hero-reveal hero-reveal--1 mx-auto max-w-[20ch] font-heading text-[clamp(34px,4.4vw,64px)] font-bold leading-[0.95] tracking-tight text-[var(--color-text)] text-balance md:mx-0 md:max-w-none">
+                  We simplify AI for{" "}
+                  <span className="text-[var(--color-accent)]">individuals &amp; business owners</span>{" "}
+                  who don&apos;t have time to figure it out.
+                </h1>
+                <p className="hero-reveal hero-reveal--2 mx-auto mt-6 max-w-[52ch] text-[15px] leading-relaxed text-[color-mix(in_oklch,var(--color-text-muted)_72%,var(--color-text)_28%)] text-pretty md:mx-0 md:text-lg">
+                  Most teams have seen the demos. Few have workflows that actually work every day. We fix
+                  that — training, setup, and a team that knows how to keep it going.
+                </p>
+                <div className="hero-reveal hero-reveal--3 mt-8 flex flex-wrap items-center justify-center gap-3 sm:flex-nowrap md:justify-start">
+                  <Button href="/individuals">For Individuals</Button>
+                  <Button href="/businesses" variant="secondary">
+                    For Businesses
+                  </Button>
+                </div>
+                <p className="hero-reveal hero-reveal--4 mt-4 text-sm text-[color-mix(in_oklch,var(--color-text-faint)_72%,var(--color-text-muted)_28%)]">
+                  Two paths. One standard: real results over AI for show.
+                </p>
               </div>
-              <p className="hero-reveal hero-reveal--4 mt-4 text-sm text-[color-mix(in_oklch,var(--color-text-faint)_72%,var(--color-text-muted)_28%)]">
-                Two paths. One standard: real results over AI for show.
-              </p>
+
+              {/* ── Right: terminal — order-1 mobile, order-2 desktop ── */}
+              <div className="order-1 md:order-2 md:col-span-5">
+                <TerminalHero />
+              </div>
             </div>
           </div>
         </section>
