@@ -899,14 +899,14 @@ section[id] {
    Terminal Hero Widget
    ─────────────────────────────────────────────── */
 .terminal-hero {
-  background: color-mix(in oklch, var(--color-surface) 80%, transparent);
-  border: 1px solid var(--color-border);
+  background: #0a0a0f;
+  border: 1px solid rgba(255,255,255,0.08);
   border-radius: 14px;
   overflow: hidden;
   box-shadow:
-    0 0 0 1px rgba(255,255,255,0.03),
-    0 40px 80px -16px rgba(0,0,0,0.4),
-    0 0 50px color-mix(in oklch, var(--color-accent) 6%, transparent);
+    0 0 0 1px rgba(255,255,255,0.04),
+    0 40px 80px -16px rgba(0,0,0,0.6),
+    0 0 60px color-mix(in oklch, var(--color-accent) 10%, transparent);
   animation: terminalFadeIn 0.7s cubic-bezier(0.22,1,0.36,1) 0.2s both;
 }
 
@@ -917,8 +917,8 @@ section[id] {
 
 /* ── Chrome bar ── */
 .terminal-hero__header {
-  background: color-mix(in oklch, var(--color-surface-raised) 90%, transparent);
-  border-bottom: 1px solid var(--color-border);
+  background: #111118;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
   padding: 12px 16px;
   display: flex;
   align-items: center;
@@ -934,7 +934,7 @@ section[id] {
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  background: color-mix(in oklch, var(--color-border) 120%, transparent);
+  background: #333;
 }
 .terminal-hero__dot--red    { background: #ff5f57; }
 .terminal-hero__dot--yellow { background: #febc2e; }
@@ -945,13 +945,13 @@ section[id] {
   text-align: center;
   font-family: var(--font-mono);
   font-size: 11px;
-  color: var(--color-text-faint);
+  color: rgba(255,255,255,0.25);
   letter-spacing: 0.04em;
 }
 
 /* ── Body ── */
 .terminal-hero__body {
-  padding: 28px 28px 32px;
+  padding: 24px 24px 28px;
 }
 
 /* ── Command line ── */
@@ -967,7 +967,7 @@ section[id] {
 }
 
 .terminal-hero__prompt {
-  color: var(--color-text-faint);
+  color: rgba(255,255,255,0.25);
   flex-shrink: 0;
 }
 
@@ -1014,7 +1014,7 @@ section[id] {
   gap: 8px;
   font-family: var(--font-mono);
   font-size: 12px;
-  color: var(--color-text-muted);
+  color: rgba(255,255,255,0.55);
   opacity: 0;
   animation: termLineFade 0.35s ease-out forwards;
 }
@@ -1025,7 +1025,7 @@ section[id] {
 }
 
 .terminal-hero__arrow {
-  color: var(--color-text-faint);
+  color: rgba(255,255,255,0.18);
   flex-shrink: 0;
 }
 
@@ -1058,10 +1058,12 @@ section[id] {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--color-accent);
-  background: color-mix(in oklch, var(--color-accent) 8%, transparent);
-  border: 1px solid color-mix(in oklch, var(--color-accent) 20%, transparent);
+  background: color-mix(in oklch, var(--color-accent) 10%, transparent);
+  border: 1px solid color-mix(in oklch, var(--color-accent) 22%, transparent);
   border-radius: 6px;
   padding: 7px 12px;
   opacity: 0;
   animation: termLineFade 0.4s ease-out 4.6s forwards;
 }
+
+/* (colors handled by inherited accent variable) */
