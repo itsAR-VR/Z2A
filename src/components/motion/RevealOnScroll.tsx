@@ -2,7 +2,7 @@
 
 import { useReveal } from "@/hooks/useReveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 interface RevealOnScrollProps {
   children: React.ReactNode;
@@ -28,6 +28,13 @@ export function RevealOnScroll({
 }: RevealOnScrollProps) {
   const { ref, isVisible } = useReveal<HTMLDivElement>();
   const prefersReduced = useReducedMotion();
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  const shouldReveal = hasMounted ? isVisible : true;
 
   const tokens = useMemo(() => {
     switch (variant) {
@@ -68,10 +75,10 @@ export function RevealOnScroll({
       ref={ref}
       className={className}
       style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translate3d(0, 0, 0)" : translateMap[direction],
+        opacity: shouldReveal ? 1 : 0,
+        transform: shouldReveal ? "translate3d(0, 0, 0)" : translateMap[direction],
         willChange:
-          prefersReduced || isVisible ? undefined : "transform, opacity",
+          prefersReduced || shouldReveal ? undefined : "transform, opacity",
         transition: prefersReduced
           ? "none"
           : `opacity ${tokens.durationVar} ${tokens.easeVar} ${delay}ms, transform ${tokens.durationVar} ${tokens.easeVar} ${delay}ms`,

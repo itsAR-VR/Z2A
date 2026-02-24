@@ -44,6 +44,23 @@ export function StageTimeline({ rootId }: StageTimelineProps) {
       return;
     }
 
+    const fallbackTimer = window.setTimeout(() => {
+      gsap.set(stageItems, {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        rotateX: 0,
+        rotateY: 0,
+        scale: 1,
+        filter: "blur(0px)",
+        clearProps: "transform,opacity,filter,willChange,transformPerspective,transformOrigin,force3D",
+      });
+      if (railRunner) {
+        gsap.set(railRunner, { opacity: 1, scale: 1, clearProps: "transform,opacity" });
+      }
+      gsap.set(railNodes, { scale: 1, clearProps: "transform" });
+    }, 2600);
+
     const ctx = gsap.context(() => {
       if (stageItems.length > 0) {
         gsap.set(stageItems, {
@@ -139,6 +156,7 @@ export function StageTimeline({ rootId }: StageTimelineProps) {
     }, root);
 
     return () => {
+      window.clearTimeout(fallbackTimer);
       ctx.revert();
     };
   }, [rootId, reducedMotion]);
