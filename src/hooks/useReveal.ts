@@ -5,7 +5,7 @@ import { useSyncExternalStore } from "react";
 import { useReducedMotion } from "./useReducedMotion";
 
 interface UseRevealOptions {
-  /** Viewport fraction required to trigger (0–1). Default: 0.15 */
+  /** Viewport fraction required to trigger (0–1). Default: 0.05 */
   threshold?: number;
   /** If true, re-triggers when element leaves and re-enters. Default: false (reveal once) */
   repeat?: boolean;
@@ -20,7 +20,7 @@ interface UseRevealOptions {
 export function useReveal<T extends HTMLElement = HTMLDivElement>(
   options: UseRevealOptions = {},
 ) {
-  const { threshold = 0.15, repeat = false } = options;
+  const { threshold = 0.05, repeat = false } = options;
   const ref = useRef<T>(null);
   const prefersReduced = useReducedMotion();
   const visibleRef = useRef(true);
@@ -49,12 +49,7 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
     const completelyOut =
       rect.bottom < 0 || rect.top > vh || rect.right < 0 || rect.left > vw;
 
-    // We use a generous "activation band" so above-the-fold content stays
-    // visible even before the IntersectionObserver callback fires.
-    const bandTop = vh * 0.1;
-    const bandBottom = vh * 0.9;
-    const intersectsBand =
-      rect.bottom > bandTop + vh * threshold && rect.top < bandBottom;
+    const intersectsBand = !completelyOut;
 
     const nextVisible = completelyOut ? false : intersectsBand;
     if (visibleRef.current !== nextVisible) {

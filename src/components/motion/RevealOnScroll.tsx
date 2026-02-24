@@ -29,12 +29,18 @@ export function RevealOnScroll({
   const { ref, isVisible } = useReveal<HTMLDivElement>();
   const prefersReduced = useReducedMotion();
   const [hasMounted, setHasMounted] = useState(false);
+  const [forceShow, setForceShow] = useState(false);
 
   useEffect(() => {
     setHasMounted(true);
   }, []);
 
-  const shouldReveal = hasMounted ? isVisible : true;
+  useEffect(() => {
+    const t = setTimeout(() => setForceShow(true), 1800);
+    return () => clearTimeout(t);
+  }, []);
+
+  const shouldReveal = forceShow || (hasMounted ? isVisible : true);
 
   const tokens = useMemo(() => {
     switch (variant) {

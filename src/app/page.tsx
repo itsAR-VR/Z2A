@@ -96,8 +96,9 @@ export default function HomePage() {
                   data-stage="1"
                   className="stage-enter max-w-[14ch] font-heading text-[clamp(44px,5.8vw,78px)] font-bold leading-[0.95] tracking-tight text-[var(--color-text)] text-balance"
                 >
-                  Stop demoing AI.
-                  <span className="block text-[var(--color-text)]">Start running it.</span>
+                  We simplify AI for{" "}
+                  <span className="text-[var(--color-accent)]">individuals &amp; business owners</span>{" "}
+                  who don&apos;t have time to figure it out.
                 </h1>
                 <p
                   data-stage="2"
@@ -124,7 +125,7 @@ export default function HomePage() {
               </div>
 
               <div data-stage="5" className="stage-enter md:col-span-5">
-                <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[color-mix(in_oklch,var(--color-surface)_92%,var(--color-bg)_8%)] p-6 shadow-[var(--shadow-sm)]">
+                <div>
                   <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-faint)]">
                     What this means in practice
                   </p>
